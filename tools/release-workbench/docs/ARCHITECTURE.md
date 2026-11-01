@@ -1,6 +1,6 @@
-# ARCHITECTURE — private candidate source preparation
+# ARCHITECTURE — source edition preparation
 
-Private candidate. **No license grant or public publication approval.**
+Part of AI Stack, licensed under the Apache License 2.0 (see the repository `LICENSE`).
 Native integration evidence is pending. This workbench prepares and checks
 source; the exported original stack remains responsible for its real native
 Graph/Fleet/Office/Hub/RSI behavior. No hosted service is provided.

@@ -1,6 +1,6 @@
 # SUPPORT — private maintainer handoff
 
-Private candidate. **No license grant or public publication approval.**
+Part of AI Stack, licensed under the Apache License 2.0 (see the repository `LICENSE`).
 Native integration evidence is pending. This repository supplies local source
 preparation tools; there is no SLA, hosted service, public issue endpoint or
 response-time commitment. The original RSI mechanism is an integration target,

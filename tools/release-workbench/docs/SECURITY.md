@@ -1,6 +1,6 @@
 # SECURITY — local precheck, not clearance
 
-Private candidate. **No license grant or public publication approval.**
+Part of AI Stack, licensed under the Apache License 2.0 (see the repository `LICENSE`).
 Native integration evidence is pending. A local `PASS`, matching hashes, test
 counts or new Git history do not establish complete secret/security clearance,
 rights ownership, safe native execution or permission to publish.

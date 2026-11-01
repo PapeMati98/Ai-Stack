@@ -1,4 +1,4 @@
-# AI Stack release workbench — PRIVATE CANDIDATE
+# AI Stack release workbench
 
 This local workbench prepares a private, complete reusable source candidate
 from explicitly selected, pinned Git snapshots. Python 3.11+ and the standard
@@ -6,9 +6,9 @@ library provide export verification, privacy/configuration prechecks, rights
 inventory, a maintainer CLI, an offline demo, and a parent-operated native-UAT
 driver. Local Git is required for the synthetic export demo.
 
-**No license grant or public publication approval.** License, publisher and
-public push require separate owner approval. There is no public remote or
-authorized deployment. `public_ready` remains **false**.
+Part of AI Stack, licensed under the Apache License 2.0 (see the repository `LICENSE`). The workbench's
+own `public_ready` gate is a tool output for the candidate you prepare with it;
+it does not describe this repository.
 
 ## Current evidence and remaining work
 

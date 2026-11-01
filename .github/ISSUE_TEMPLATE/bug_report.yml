@@ -1,0 +1,36 @@
+name: Bug report
+description: Something in AI Stack does not work as documented
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Security problems: do not open an issue. Use **Security → Report a vulnerability** (see SECURITY.md).
+        Never paste tokens, keys or personal data.
+  - type: input
+    id: component
+    attributes:
+      label: Component
+      description: For example a skill name, Fleet, Agent Office, Knowledge Hub, RSI Helpdesk
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened and what you expected
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Exact commands and the shortest input that shows the problem
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      description: OS, Python version, coding CLI and its version
+    validations:
+      required: true

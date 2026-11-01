@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/PapeMati98/Ai-Stack/discussions
+    about: Ask questions and share how you use AI Stack
+  - name: Security vulnerability
+    url: https://github.com/PapeMati98/Ai-Stack/security/advisories/new
+    about: Report security problems privately

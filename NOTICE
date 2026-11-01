@@ -6,3 +6,8 @@ This product is licensed under the Apache License, Version 2.0 (see LICENSE).
 This product includes TypeScript, Copyright Microsoft Corporation, licensed
 under the Apache License, Version 2.0. Its license, third-party notices and
 provenance are kept in fleet-suite/payload/agent-fleet/scripts/vendor/typescript/.
+
+The skill global/codex/skills/creating-mermaid-diagrams/ is adapted from
+mermaid-skill by Agents365-ai (https://github.com/Agents365-ai/365-skills),
+Copyright (c) 2026 Agents365-ai, licensed under the MIT License. Its license
+and attribution are kept in that folder.

@@ -1,0 +1,18 @@
+name: Feature or skill idea
+description: Suggest an improvement, a new skill or a new CLI adapter
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What are you trying to do, and what gets in the way today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What should AI Stack do? How would you check that it works?
+    validations:
+      required: true

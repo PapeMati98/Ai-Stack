@@ -1,8 +1,8 @@
-# Getting started with a source candidate
+# Getting started
 
-These instructions describe the actual source layout. A source candidate is
-private until its licensing, confidentiality review and publication approval
-are complete. Use explicit task-owned directories for evaluation.
+These instructions describe the actual source layout of the full stack. To
+use individual skills only, see the quick start in the [README](../README.md).
+Use explicit task-owned directories for evaluation.
 
 ## Prerequisites
 

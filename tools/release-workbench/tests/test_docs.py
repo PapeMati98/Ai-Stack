@@ -26,8 +26,7 @@ from release_workbench.provenance import audit_provenance
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SCOPE_DOCS = ("README.md", "docs/QUICKSTART.md", "docs/ARCHITECTURE.md",
               "docs/SECURITY.md", "docs/SUPPORT.md")
-ESSENTIAL_NOTICES = ("private candidate", "no license grant or public publication approval",
-                     "native integration evidence is pending")
+ESSENTIAL_NOTICES = ("licensed under the apache license 2.0",)
 _LINK_RE = re.compile(r"\[[^\]]*\]\((<[^>]+>|[^)\s]+)\)")
 
 

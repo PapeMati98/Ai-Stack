@@ -1,4 +1,4 @@
-# Manifest schema — private candidate exporter
+# Manifest schema — source edition exporter
 
 Private release-preparation contract only. Not a publication, licensing, or
 rights clearance decision. Actual source export and native UAT are handled by

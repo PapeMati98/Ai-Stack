@@ -1,9 +1,81 @@
-# AI Stack — coordinated work across native coding assistants
+<div align="center">
 
-Source edition of a private, single-operator agent stack, published under the
-[Apache License 2.0](LICENSE). It is an engineering release, not a supported
-product: read [Validation status](docs/VALIDATION_STATUS.md) for what was
-actually tested.
+# AI Stack
+
+**One model builds. A different model reviews. Nothing ships on a single model's word.**
+
+A multi-model agent stack that runs the coding CLIs you already pay for —
+Claude Code, Codex, Gemini (Antigravity), Grok, Kimi, Qwen, Mistral, OpenCode,
+local models and more — as one team, with task graphs, 60+ skills,
+agent-to-agent messaging and shared memory.
+
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+[![Skills](https://img.shields.io/badge/skills-60%2B-7b5cff.svg)](global/codex/skills)
+[![CLI adapters](https://img.shields.io/badge/CLI%20adapters-13-d63cff.svg)](fleet-suite)
+[![Security policy](https://img.shields.io/badge/security-policy-0b1630.svg)](SECURITY.md)
+
+From the team at [Synaptivo](https://synaptivo.eu).
+
+</div>
+
+## Why it exists
+
+Single-agent coding tools grade their own homework. AI Stack never does:
+
+- **Cross-lineage review by default.** Every task is a maker/reviewer pair from
+  different model families (for example Claude builds, Gemini or Grok reviews).
+  A failed review triggers a targeted repair, not a rewrite.
+- **Your subscriptions, not surprise API bills.** The native Fleet drives the
+  official CLIs headless with their own authentication, verifies which model
+  actually answered, and never falls back to pay-as-you-go silently.
+- **Task graphs for real parallel work.** Small jobs use one pair; larger jobs
+  run as a dependency graph with independent reviewers per node.
+- **Agents that talk to each other.** Agent Office is a local, durable message
+  bus with presence and handoffs between sessions of different tools.
+- **Shared memory.** Knowledge Hub is a source-grounded wiki every agent reads
+  before work and records to after it.
+- **A stack that reports its own bugs.** RSI Helpdesk lets agents file defects in
+  the stack itself and run bounded, reviewed repairs.
+
+```mermaid
+flowchart LR
+    T[TODO] --> G{Graph}
+    G --> M1["Maker<br/>(e.g. Claude Code)"]
+    G --> M2["Maker<br/>(e.g. Codex)"]
+    M1 --> C1[Real checks]
+    M2 --> C2[Real checks]
+    C1 --> R1["Reviewer<br/>(other lineage, e.g. Gemini)"]
+    C2 --> R2["Reviewer<br/>(other lineage, e.g. Grok)"]
+    R1 -- REPAIR --> M1
+    R2 -- REPAIR --> M2
+    R1 -- ACCEPT --> D[Delivered]
+    R2 -- ACCEPT --> D
+    O[(Agent Office)] -.- G
+    K[(Knowledge Hub)] -.- G
+```
+
+## Quick start: use the skills today
+
+Each folder in [`global/codex/skills/`](global/codex/skills) is a skill in the
+`SKILL.md` format. Many are self-contained and work in any client that loads
+skill folders. For example, with Claude Code:
+
+```sh
+git clone https://github.com/PapeMati98/Ai-Stack.git
+cp -r Ai-Stack/global/codex/skills/html-video ~/.claude/skills/
+```
+
+Good standalone starting points: `html-video`, `video-gen`, `voice-gen`,
+`audio-bed-gen`, `operations-playbook`, `growth-experiments`,
+`search-visibility`, `simulation-and-optimization`. Orchestration skills such as
+`agent-graph`, `plan-delivery`, `model-council` and `clone-thread` need the Fleet,
+Agent Office or Knowledge Hub. Some skill instructions are written in Polish;
+English translations are welcome (see [CONTRIBUTING](CONTRIBUTING.md)).
+
+The full stack (Fleet, Office, Hub) is Windows-first and tested by one
+operator. Read [Getting started](docs/GETTING_STARTED.md) before installing it.
+
+## What's inside
 
 AI Stack combines reusable skills, native CLI execution, a dependency scheduler,
 durable inter-agent coordination, shared project knowledge and a repair helpdesk.
@@ -12,8 +84,7 @@ checks run, and a reviewer from another model lineage accepts it or requests a
 targeted repair. A Graph is useful when tasks have real parallel branches or
 dependencies; a small task uses one maker/reviewer pair.
 
-This candidate collects the original implementation while its independent
-installation is being validated. The release boundary excludes private Git history, operator accounts, transcripts,
+The release excludes private Git history, operator accounts, transcripts,
 mail, wiki contents, customer records, runtime state, model weights and CLI
 binaries. A source edition does not transfer anyone's subscription or access.
 

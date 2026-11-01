@@ -1,6 +1,6 @@
 # QUICKSTART — executable offline synthetic lifecycle
 
-Private candidate. **No license grant or public publication approval.**
+Part of AI Stack, licensed under the Apache License 2.0 (see the repository `LICENSE`).
 Native integration evidence is pending. This offline walkthrough uses Python
 3.11+, local Git and synthetic data only. No packages or model accounts are
 required. Run the Python block from the checkout root, in a normal Python
