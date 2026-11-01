@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Loop"
+  short_description: "Run bounded L1 reports, L2 repairs, or L2 searches"
+  default_prompt: "Define or run Agent Loop 0.3 through Agent Fleet. Default to L1 report-only; use L2-thin for one candidate plus one repair, and L2-search only for several frozen isolated hypotheses after exact contract-hash approval, trusted verification, independent quality gates, strict budgets, and parent acceptance."

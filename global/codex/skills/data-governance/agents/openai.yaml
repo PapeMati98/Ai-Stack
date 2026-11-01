@@ -1,0 +1,4 @@
+interface:
+  display_name: "Data Governance"
+  short_description: "Kontrakt danych, lineage, quality, privacy i migracje"
+  default_prompt: "Zbuduj i wyegzekwuj kontrakt data governance dla tej zmiany przed mutacja danych."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Remote Computer Use"
+  short_description: "Run browser or bounded desktop UAT on the AI Lab Windows VM"
+  default_prompt: "Use the remote Windows VM for a bounded browser or desktop test, enforce the capability and side-effect policy, and return evidence for reachability, perceived action feedback, and visible failure recovery when the workflow is user-facing."

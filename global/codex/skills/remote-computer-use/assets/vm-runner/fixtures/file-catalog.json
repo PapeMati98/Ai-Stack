@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "fixtures": [
+    {
+      "id": "revolut-synthetic-2026-07",
+      "file_name": "revolut-synthetic-2026-07.txt",
+      "classification": "synthetic",
+      "size_bytes": 346,
+      "sha256": "a2cf7f55e61c341ff9db75ef6fd23cae1018164fcd201beb5c324832e3c7223a"
+    },
+    {
+      "id": "revolut-synthetic-2026-08",
+      "file_name": "revolut-synthetic-2026-08.txt",
+      "classification": "synthetic",
+      "size_bytes": 349,
+      "sha256": "ac1f3cad8bde4bcf3303ff21a0ba67c10ee808d43f61a29a5de868e749fc87cc"
+    },
+    {
+      "id": "revolut-synthetic-disguised-pdf",
+      "file_name": "revolut-synthetic-disguised-pdf.txt",
+      "classification": "synthetic",
+      "size_bytes": 38,
+      "sha256": "4232c0f0c89c0219d96fe8f0c74e2ad34d2452a240b90f4ad7f8484527ff3468"
+    }
+  ]
+}

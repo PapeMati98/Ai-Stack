@@ -1,0 +1,342 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-stack.invalid/schemas/remote-computer-use/0.3/task-contract.schema.json",
+  "title": "Remote Computer Use task",
+  "oneOf": [
+    {"$ref": "#/$defs/browserContract"},
+    {"$ref": "#/$defs/browserOriginUatContract"},
+    {"$ref": "#/$defs/desktopContract"}
+  ],
+  "$defs": {
+    "browserContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "task_id", "mode", "headless", "side_effects", "timeout_seconds", "target", "actions"],
+      "properties": {
+        "schema_version": {"const": 1},
+        "task_id": {"$ref": "#/$defs/taskId"},
+        "mode": {"const": "browser"},
+        "headless": {"const": true},
+        "side_effects": {"const": "none"},
+        "timeout_seconds": {"$ref": "#/$defs/timeout"},
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "value"],
+          "properties": {
+            "kind": {"enum": ["fixture", "url"]},
+            "value": {"type": "string", "minLength": 1, "maxLength": 2048}
+          }
+        },
+        "actions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "oneOf": [
+              {"$ref": "#/$defs/assertTitle"},
+              {"$ref": "#/$defs/assertText"},
+              {"$ref": "#/$defs/selectorOnly"},
+              {"$ref": "#/$defs/fill"},
+              {"$ref": "#/$defs/browserPress"},
+              {"$ref": "#/$defs/screenshot"}
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "target": {"properties": {"kind": {"const": "url"}}}
+            }
+          },
+          "then": {
+            "properties": {
+              "actions": {
+                "items": {
+                  "oneOf": [
+                    {"$ref": "#/$defs/assertTitle"},
+                    {"$ref": "#/$defs/assertText"},
+                    {"$ref": "#/$defs/assertVisible"},
+                    {"$ref": "#/$defs/screenshot"}
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "browserOriginUatContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "task_id", "mode", "headless", "side_effects", "capability", "timeout_seconds", "target", "actions"],
+      "properties": {
+        "schema_version": {"const": 3},
+        "task_id": {"$ref": "#/$defs/taskId"},
+        "mode": {"const": "browser"},
+        "headless": {"const": true},
+        "side_effects": {"const": "test-only"},
+        "capability": {"const": "origin-uat"},
+        "timeout_seconds": {"$ref": "#/$defs/timeout"},
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "value"],
+          "properties": {
+            "kind": {"const": "url"},
+            "value": {"type": "string", "minLength": 8, "maxLength": 2048}
+          }
+        },
+        "actions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "oneOf": [
+              {"$ref": "#/$defs/assertTitle"},
+              {"$ref": "#/$defs/assertText"},
+              {"$ref": "#/$defs/selectorOnly"},
+              {"$ref": "#/$defs/setFixtureFile"}
+            ]
+          }
+        }
+      }
+    },
+    "desktopContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "task_id", "mode", "headless", "side_effects", "capability", "timeout_seconds", "target", "actions"],
+      "properties": {
+        "schema_version": {"const": 2},
+        "task_id": {"$ref": "#/$defs/taskId"},
+        "mode": {"const": "desktop"},
+        "headless": {"const": false},
+        "side_effects": {"enum": ["none", "test-only"]},
+        "capability": {"enum": ["observe", "uat"]},
+        "timeout_seconds": {"$ref": "#/$defs/timeout"},
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "app_id"],
+          "properties": {
+            "kind": {"enum": ["desktop", "app"]},
+            "app_id": {"type": "string", "pattern": "^(desktop|[a-z0-9][a-z0-9-]{1,31})$"}
+          }
+        },
+        "actions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "oneOf": [
+              {"$ref": "#/$defs/screenshot"},
+              {"$ref": "#/$defs/wait"},
+              {"$ref": "#/$defs/launch"},
+              {"$ref": "#/$defs/move"},
+              {"$ref": "#/$defs/desktopClick"},
+              {"$ref": "#/$defs/text"},
+              {"$ref": "#/$defs/desktopKey"},
+              {"$ref": "#/$defs/closeTarget"}
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"capability": {"const": "observe"}}},
+          "then": {
+            "properties": {
+              "side_effects": {"const": "none"},
+              "target": {
+                "type": "object",
+                "properties": {
+                  "kind": {"const": "desktop"},
+                  "app_id": {"const": "desktop"}
+                }
+              },
+              "actions": {
+                "items": {
+                  "oneOf": [
+                    {"$ref": "#/$defs/screenshot"},
+                    {"$ref": "#/$defs/wait"}
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {"properties": {"capability": {"const": "uat"}}},
+          "then": {
+            "properties": {
+              "side_effects": {"const": "test-only"},
+              "target": {
+                "type": "object",
+                "properties": {
+                  "kind": {"const": "app"},
+                  "app_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,31}$"}
+                }
+              },
+              "actions": {
+                "contains": {"$ref": "#/$defs/launch"},
+                "minContains": 1,
+                "maxContains": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "taskId": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{2,63}$"},
+    "timeout": {"type": "integer", "minimum": 10, "maximum": 300},
+    "assertTitle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "contains"],
+      "properties": {
+        "type": {"const": "assert_title_contains"},
+        "contains": {"type": "string", "minLength": 1, "maxLength": 1000}
+      }
+    },
+    "assertText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "selector", "contains"],
+      "properties": {
+        "type": {"const": "assert_text"},
+        "selector": {"type": "string", "minLength": 1, "maxLength": 512},
+        "contains": {"type": "string", "minLength": 1, "maxLength": 1000}
+      }
+    },
+    "selectorOnly": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "selector"],
+      "properties": {
+        "type": {"enum": ["assert_visible", "click"]},
+        "selector": {"type": "string", "minLength": 1, "maxLength": 512}
+      }
+    },
+    "assertVisible": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "selector"],
+      "properties": {
+        "type": {"const": "assert_visible"},
+        "selector": {"type": "string", "minLength": 1, "maxLength": 512}
+      }
+    },
+    "fill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "selector", "value"],
+      "properties": {
+        "type": {"const": "fill"},
+        "selector": {"type": "string", "minLength": 1, "maxLength": 512},
+        "value": {"type": "string", "maxLength": 1000}
+      }
+    },
+    "browserPress": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "selector", "key"],
+      "properties": {
+        "type": {"const": "press"},
+        "selector": {"type": "string", "minLength": 1, "maxLength": 512},
+        "key": {"enum": ["Tab", "Escape", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"]}
+      }
+    },
+    "setFixtureFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "selector", "fixture_id", "fixture_sha256"],
+      "properties": {
+        "type": {"const": "set_fixture_file"},
+        "selector": {"type": "string", "minLength": 1, "maxLength": 512},
+        "fixture_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{2,63}$"},
+        "fixture_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "screenshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "name"],
+      "properties": {
+        "type": {"const": "screenshot"},
+        "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$"}
+      }
+    },
+    "wait": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "milliseconds"],
+      "properties": {
+        "type": {"const": "wait"},
+        "milliseconds": {"type": "integer", "minimum": 0, "maximum": 5000}
+      }
+    },
+    "launch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "app_id"],
+      "properties": {
+        "type": {"const": "launch"},
+        "app_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,31}$"}
+      }
+    },
+    "move": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "x", "y"],
+      "properties": {
+        "type": {"const": "move"},
+        "x": {"type": "integer", "minimum": -16384, "maximum": 16384},
+        "y": {"type": "integer", "minimum": -16384, "maximum": 16384}
+      }
+    },
+    "desktopClick": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "x", "y", "button", "count"],
+      "properties": {
+        "type": {"const": "click"},
+        "x": {"type": "integer", "minimum": -16384, "maximum": 16384},
+        "y": {"type": "integer", "minimum": -16384, "maximum": 16384},
+        "button": {"enum": ["left", "right"]},
+        "count": {"enum": [1, 2]}
+      }
+    },
+    "text": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "value"],
+      "properties": {
+        "type": {"const": "text"},
+        "value": {"type": "string", "maxLength": 2000}
+      }
+    },
+    "desktopKey": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "key", "modifiers"],
+      "properties": {
+        "type": {"const": "key"},
+        "key": {"enum": ["TAB", "ENTER", "ESCAPE", "BACKSPACE", "DELETE", "SPACE", "HOME", "END", "PAGEUP", "PAGEDOWN", "ARROWUP", "ARROWDOWN", "ARROWLEFT", "ARROWRIGHT", "F5"]},
+        "modifiers": {
+          "type": "array",
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {"enum": ["CTRL", "SHIFT", "ALT"]}
+        }
+      }
+    },
+    "closeTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {"type": {"const": "close_target"}}
+    }
+  }
+}

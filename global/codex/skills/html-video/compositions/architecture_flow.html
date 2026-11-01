@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture Flow (Illustrative)</title>
+  <style>
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-base: #080a0f;
+      --bg-card: rgba(18, 22, 34, 0.75);
+      --bg-card-border: rgba(56, 189, 248, 0.2);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #475569;
+      --accent-cyan: #00f0ff;
+      --accent-violet: #a855f7;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --glow-cyan: 0 0 25px rgba(0, 240, 255, 0.35);
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg-base);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .viewport-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(168, 85, 247, 0.08) 0%, transparent 45%),
+        linear-gradient(to bottom, #090c14, #05070a);
+    }
+
+    .grid-lines {
+      position: absolute;
+      inset: 0;
+      background-size: 60px 60px;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      pointer-events: none;
+    }
+
+    .content-frame {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    body.aspect-16-9 .content-frame { padding: 64px 80px; }
+    body.aspect-9-16 .content-frame { padding: 80px 64px; }
+    body.aspect-1-1 .content-frame { padding: 48px; }
+
+    /* Header */
+    .header-block {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .badge-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .live-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-amber);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-amber);
+      box-shadow: 0 0 10px var(--accent-amber);
+    }
+
+    .system-tag {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .main-title {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    body.aspect-16-9 .main-title { font-size: 44px; }
+    body.aspect-9-16 .main-title { font-size: 40px; }
+    body.aspect-1-1 .main-title { font-size: 34px; }
+
+    .sub-title {
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.4;
+      max-width: 760px;
+    }
+
+    body.aspect-16-9 .sub-title { font-size: 19px; }
+    body.aspect-9-16 .sub-title { font-size: 19px; line-height: 1.45; max-width: 920px; }
+    body.aspect-1-1 .sub-title { font-size: 16px; }
+
+    body.aspect-9-16 .live-indicator { font-size: 12px; padding: 5px 12px; }
+    body.aspect-9-16 .system-tag { font-size: 12px; }
+    body.aspect-1-1 .live-indicator { font-size: 11px; padding: 4px 10px; }
+    body.aspect-1-1 .system-tag { font-size: 11px; }
+
+    /* Main layout */
+    .body-layout {
+      flex: 1;
+      display: flex;
+      margin: 30px 0;
+      gap: 36px;
+      min-height: 0;
+    }
+
+    body.aspect-16-9 .body-layout { flex-direction: row; align-items: stretch; }
+    body.aspect-9-16 .body-layout { flex-direction: column; gap: 22px; margin: 24px 0; }
+    body.aspect-1-1 .body-layout { flex-direction: column; gap: 16px; margin: 18px 0; }
+
+    .metrics-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    body.aspect-16-9 .metrics-col { width: 34%; }
+    body.aspect-9-16 .metrics-col { width: 100%; gap: 16px; justify-content: flex-start; }
+    body.aspect-1-1 .metrics-col { width: 100%; gap: 14px; justify-content: flex-start; }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    body.aspect-9-16 .kpi-grid { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    body.aspect-1-1 .kpi-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 16px;
+      padding: 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+
+    body.aspect-9-16 .kpi-card { padding: 14px 16px; border-radius: 14px; gap: 4px; }
+    body.aspect-1-1 .kpi-card { padding: 12px 14px; border-radius: 14px; gap: 3px; }
+
+    .kpi-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+      opacity: 0.6;
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    body.aspect-9-16 .kpi-label { font-size: 13px; }
+    body.aspect-1-1 .kpi-label { font-size: 11.5px; }
+
+    .kpi-value {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      font-variant-numeric: tabular-nums;
+    }
+
+    body.aspect-9-16 .kpi-value { font-size: 28px; }
+    body.aspect-1-1 .kpi-value { font-size: 23px; }
+
+    .kpi-sub {
+      font-size: 12px;
+      color: var(--accent-amber);
+      letter-spacing: 0.04em;
+    }
+
+    body.aspect-9-16 .kpi-sub { font-size: 13px; }
+    body.aspect-1-1 .kpi-sub { font-size: 12px; }
+
+    /* Log card */
+    .log-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      backdrop-filter: blur(12px);
+      min-height: 118px;
+    }
+
+    body.aspect-9-16 .log-card { padding: 12px 18px; min-height: 0; gap: 6px; }
+    body.aspect-1-1 .log-card { padding: 10px 16px; min-height: 0; gap: 5px; }
+
+    .log-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    body.aspect-9-16 .log-title { font-size: 14px; }
+    body.aspect-1-1 .log-title { font-size: 12px; }
+
+    .log-line {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-height: 17px;
+    }
+
+    body.aspect-9-16 .log-line { font-size: 16px; min-height: 20px; }
+    body.aspect-1-1 .log-line { font-size: 14px; min-height: 18px; }
+
+    /* Diagram card */
+    .chart-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+      min-height: 0;
+    }
+
+    .chart-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 20px;
+      padding: 24px 24px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 240px;
+      position: relative;
+      backdrop-filter: blur(12px);
+    }
+
+    body.aspect-9-16 .chart-card { padding: 22px 22px 18px 22px; min-height: 0; }
+    body.aspect-1-1 .chart-card { padding: 16px 16px 14px 16px; min-height: 0; }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .chart-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-main);
+    }
+
+    body.aspect-9-16 .chart-title { font-size: 19px; }
+    body.aspect-1-1 .chart-title { font-size: 15px; }
+
+    .chart-legend {
+      display: flex;
+      gap: 14px;
+      font-size: 12px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    body.aspect-9-16 .chart-legend { font-size: 15px; gap: 14px; }
+    body.aspect-1-1 .chart-legend { font-size: 12.5px; gap: 12px; }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-bullet {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    body.aspect-9-16 .legend-bullet { width: 11px; height: 11px; }
+
+    .chart-viewport {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      min-height: 0;
+    }
+
+    svg.flow-diagram {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .node-rect {
+      fill: rgba(18, 22, 34, 0.9);
+      stroke-width: 1.2;
+    }
+
+    .node-kind {
+      font-weight: 700;
+      letter-spacing: 0.16em;
+    }
+
+    .node-label {
+      fill: var(--text-main);
+      font-weight: 600;
+    }
+
+    .edge-label {
+      fill: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* Footer */
+    .timeline-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    body.aspect-9-16 .timeline-footer { padding-top: 14px; gap: 10px; }
+    body.aspect-1-1 .timeline-footer { padding-top: 12px; gap: 9px; }
+
+    .footer-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    body.aspect-9-16 .footer-meta { font-size: 17px; }
+    body.aspect-1-1 .footer-meta { font-size: 14px; }
+
+    .timecode-display {
+      color: var(--accent-cyan);
+      font-weight: 700;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    body.aspect-9-16 .progress-track { height: 8px; }
+
+    .progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
+      border-radius: 9999px;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    }
+  </style>
+</head>
+<body class="aspect-16-9">
+  <div class="viewport-container">
+    <div class="grid-lines"></div>
+
+    <div class="content-frame">
+      <header class="header-block">
+        <div class="badge-row">
+          <div class="live-indicator">
+            <span class="pulse-dot"></span>
+            <span id="badge-text">ILUSTRACYJNE</span>
+          </div>
+          <span class="system-tag">architecture flow · wartości pokazowe, nie telemetria produkcyjna</span>
+        </div>
+        <h1 class="main-title" id="flow-title">Przepływ architektury</h1>
+        <p class="sub-title" id="flow-subtitle"></p>
+      </header>
+
+      <div class="body-layout">
+        <div class="metrics-col">
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <span class="kpi-label">Ilustr. rekordy przetworzone</span>
+              <span class="kpi-value" id="kpi-records">0</span>
+              <span class="kpi-sub">licznik pokazowy</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Ilustr. błędy</span>
+              <span class="kpi-value" id="kpi-errors">0</span>
+              <span class="kpi-sub">budżet pokazowy</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Ilustr. kolejka</span>
+              <span class="kpi-value" id="kpi-queue">0</span>
+              <span class="kpi-sub">stan pokazowy</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Postęp osi czasu</span>
+              <span class="kpi-value" id="kpi-progress">0%</span>
+              <span class="kpi-sub">deterministyczny</span>
+            </div>
+          </div>
+
+          <div class="log-card">
+            <span class="log-title">Dziennik przepływu (ilustracyjny)</span>
+            <div id="log-lines"></div>
+          </div>
+        </div>
+
+        <div class="chart-col">
+          <div class="chart-card">
+            <div class="chart-header">
+              <span class="chart-title">Diagram przepływu</span>
+              <div class="chart-legend" id="diagram-legend"></div>
+            </div>
+            <div class="chart-viewport" id="diagram-viewport"></div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="timeline-footer">
+        <div class="progress-track">
+          <div class="progress-fill" id="timeline-progress-bar"></div>
+        </div>
+        <div class="footer-meta">
+          <span id="frame-counter-display">FRAME: 000000 / 000000</span>
+          <span class="timecode-display" id="timecode-display">00:00.000</span>
+          <span id="fps-badge">DETERMINISTYCZNY SEEK [ILUSTRACYJNY]</span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script id="af-config" type="application/json">{"badge":"ILUSTRACYJNE · DANE POKAZOWE","counters":{"error_budget":3,"queue_max":96,"records_target":1280},"duration_sec":6.0,"edges":[{"from":"ingest","id":"e-ing-wal","kind":"data","label":"surowe rekordy","to":"walidacja"},{"from":"ingest","id":"e-ing-nor","kind":"data","label":"strumień wejściowy","to":"normalizacja"},{"from":"walidacja","id":"e-wal-bra","kind":"control","label":"wynik walidacji","to":"bramka"},{"from":"normalizacja","id":"e-nor-bra","kind":"data","label":"rekordy znormalizowane","to":"bramka"},{"from":"bramka","id":"e-bra-mag","kind":"data","label":"zatwierdzone pakiety","to":"magazyn"},{"from":"bramka","id":"e-bra-eks","kind":"event","label":"zdarzenie eksportu","to":"eksport"},{"from":"magazyn","id":"e-mag-eks","kind":"data","label":"odczyt magazynu","to":"eksport"}],"fps":30,"grid":{"cols":4,"rows":3},"log_messages":["ingest: pakiet wejściowy przyjęty do bufora","walidacja: schemat rekordu zgodny z kontraktem","normalizacja: ujednolicone kodowanie pól tekstowych","bramka: próbka jakości powyżej progu akceptacji","magazyn: zapis partii wyników pośrednich","eksport: pakiet wynikowy gotowy do odbioru"],"nodes":[{"col":0,"id":"ingest","kind":"source","label":"Wejście danych źródłowych","row":1},{"col":1,"id":"walidacja","kind":"process","label":"Walidacja schematu rekordów","row":0},{"col":1,"id":"normalizacja","kind":"process","label":"Normalizacja pól i kodowania","row":2},{"col":2,"id":"bramka","kind":"gate","label":"Bramka jakości danych","row":1},{"col":3,"id":"magazyn","kind":"store","label":"Magazyn wyników pośrednich","row":0},{"col":3,"id":"eksport","kind":"sink","label":"Eksport pakietów wynikowych","row":2}],"packets_per_edge":3,"schema_version":1,"subtitle":"Ilustracyjny diagram przepływu rekordów między warstwami: wejście, walidacja, normalizacja, bramka jakości, magazyn i eksport.","telemetry_mode":"illustrative","title":"Przepływ architektury przetwarzania"}</script>
+  <script>
+    (function () {
+      'use strict';
+      var SVG_NS = 'http://www.w3.org/2000/svg';
+      var CFG = JSON.parse(document.getElementById('af-config').textContent);
+
+      var params = new URLSearchParams(window.location.search);
+      var aspect = params.get('aspect') || '16:9';
+      var defaultW = aspect === '9:16' ? 1080 : (aspect === '1:1' ? 1080 : 1920);
+      var defaultH = aspect === '9:16' ? 1920 : 1080;
+      var width = parseInt(params.get('w') || String(defaultW), 10);
+      var height = parseInt(params.get('h') || String(defaultH), 10);
+
+      if (aspect === '9:16') {
+        document.body.className = 'aspect-9-16';
+      } else if (aspect === '1:1') {
+        document.body.className = 'aspect-1-1';
+      } else {
+        document.body.className = 'aspect-16-9';
+      }
+
+      var DURATION = CFG.duration_sec;
+      var FPS = CFG.fps;
+      var TOTAL_FRAMES = Math.round(DURATION * FPS);
+      var TRAVERSALS = 3;
+
+      var NODE_COLORS = {
+        source: '#00f0ff',
+        process: '#a855f7',
+        sink: '#10b981',
+        store: '#f59e0b',
+        gate: '#38bdf8'
+      };
+      var EDGE_COLORS = { data: '#00f0ff', control: '#a855f7', event: '#10b981' };
+      var EDGE_DASH = { data: '', control: '7 5', event: '2 6' };
+      var KIND_LABELS = {
+        source: 'ŹRÓDŁO',
+        process: 'PROCES',
+        sink: 'UJŚCIE',
+        store: 'MAGAZYN',
+        gate: 'BRAMKA'
+      };
+
+      document.getElementById('badge-text').textContent = CFG.badge;
+      document.getElementById('flow-title').textContent = CFG.title;
+      document.getElementById('flow-subtitle').textContent = CFG.subtitle;
+
+      var COLS = CFG.grid.cols;
+      var ROWS = CFG.grid.rows;
+
+      // Viewport-aware layout: the diagram is the primary product, so the SVG
+      // is laid out directly in rendered pixel space of the card viewport.
+      // viewBox == container pixels keeps the scale at 1 and font sizes are
+      // computed in real pixels, which keeps labels legible in every aspect.
+      var host = document.getElementById('diagram-viewport');
+      var vbW = Math.max(320, Math.floor(host.clientWidth) || 640);
+      var vbH = Math.max(240, Math.floor(host.clientHeight) || 480);
+
+      var cellW = vbW / COLS;
+      var cellH = vbH / ROWS;
+      var NODE_W = Math.min(260, Math.floor(cellW * 0.8));
+      var NODE_H = Math.min(150, Math.floor(cellH * 0.66));
+      var F_NODE = Math.max(16, Math.min(26, Math.floor(Math.min(cellW / 12, cellH / 7))));
+      var F_EDGE = Math.max(14, F_NODE - 4);
+      var F_KIND = Math.max(12, F_NODE - 7);
+      var LINE_NODE = Math.round(F_NODE * 1.22);
+      var LINE_EDGE = Math.round(F_EDGE * 1.2);
+      var PACKET_R = Math.max(4.5, Math.round(F_NODE * 3) / 10);
+
+      var nodeMaxChars = Math.max(8, Math.floor((NODE_W - 20) / (F_NODE * 0.56)));
+      var nodeMaxLines = Math.max(1, Math.min(3, Math.floor((NODE_H - F_KIND - 16) / LINE_NODE)));
+
+      var nodeById = {};
+      CFG.nodes.forEach(function (n) { nodeById[n.id] = n; });
+
+      function nodeCenter(n) {
+        return { x: (n.col + 0.5) * cellW, y: (n.row + 0.5) * cellH };
+      }
+
+      function wrapLabel(text, maxChars, maxLines) {
+        var words = String(text).split(/\s+/).filter(function (w) { return w.length > 0; });
+        var lines = [];
+        var cur = '';
+        for (var wi = 0; wi < words.length; wi++) {
+          var w = words[wi];
+          while (w.length > maxChars) {
+            if (cur !== '') { lines.push(cur); cur = ''; }
+            lines.push(w.slice(0, maxChars - 1) + '-');
+            w = w.slice(maxChars - 1);
+          }
+          if (cur === '') {
+            cur = w;
+          } else if ((cur + ' ' + w).length <= maxChars) {
+            cur = cur + ' ' + w;
+          } else {
+            lines.push(cur);
+            cur = w;
+          }
+        }
+        if (cur !== '') { lines.push(cur); }
+        if (lines.length === 0) { lines.push(''); }
+        if (lines.length > maxLines) {
+          lines = lines.slice(0, maxLines);
+          lines[maxLines - 1] = lines[maxLines - 1].slice(0, Math.max(1, maxChars - 1)) + '…';
+        }
+        return lines;
+      }
+
+      function el(name, attrs) {
+        var node = document.createElementNS(SVG_NS, name);
+        if (attrs) {
+          for (var key in attrs) { node.setAttribute(key, attrs[key]); }
+        }
+        return node;
+      }
+
+      var svg = el('svg', {
+        'class': 'flow-diagram',
+        viewBox: '0 0 ' + vbW + ' ' + vbH,
+        preserveAspectRatio: 'xMidYMid meet',
+        role: 'img'
+      });
+
+      var defs = el('defs');
+      Object.keys(EDGE_COLORS).forEach(function (kind) {
+        var marker = el('marker', {
+          id: 'arrow-' + kind,
+          viewBox: '0 0 10 10',
+          refX: '9',
+          refY: '5',
+          markerWidth: '7',
+          markerHeight: '7',
+          orient: 'auto-start-reverse'
+        });
+        marker.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: EDGE_COLORS[kind] }));
+        defs.appendChild(marker);
+      });
+      svg.appendChild(defs);
+
+      var edgeLayer = el('g', { 'class': 'edge-layer' });
+      var nodeLayer = el('g', { 'class': 'node-layer' });
+      var packetLayer = el('g', { 'class': 'packet-layer' });
+      svg.appendChild(edgeLayer);
+      svg.appendChild(nodeLayer);
+      svg.appendChild(packetLayer);
+
+      var fitTargets = [];
+
+      function rectReach(ux, uy) {
+        var tx = ux !== 0 ? (NODE_W / 2 + 8) / Math.abs(ux) : Infinity;
+        var ty = uy !== 0 ? (NODE_H / 2 + 8) / Math.abs(uy) : Infinity;
+        return Math.min(tx, ty);
+      }
+
+      var edgeViews = [];
+      CFG.edges.forEach(function (e) {
+        var a = nodeCenter(nodeById[e.from]);
+        var b = nodeCenter(nodeById[e.to]);
+        var dx = b.x - a.x;
+        var dy = b.y - a.y;
+        var len = Math.sqrt(dx * dx + dy * dy) || 1;
+        var ux = dx / len;
+        var uy = dy / len;
+        var reach = rectReach(ux, uy);
+        var x1 = a.x + ux * reach;
+        var y1 = a.y + uy * reach;
+        var x2 = b.x - ux * reach;
+        var y2 = b.y - uy * reach;
+        var lineLen = Math.max(40, len - 2 * reach);
+
+        var line = el('line', {
+          x1: x1.toFixed(2),
+          y1: y1.toFixed(2),
+          x2: x2.toFixed(2),
+          y2: y2.toFixed(2),
+          stroke: EDGE_COLORS[e.kind],
+          'stroke-width': '2.2',
+          'stroke-opacity': '0.4',
+          'marker-end': 'url(#arrow-' + e.kind + ')'
+        });
+        if (EDGE_DASH[e.kind]) { line.setAttribute('stroke-dasharray', EDGE_DASH[e.kind]); }
+        edgeLayer.appendChild(line);
+
+        if (e.label) {
+          var mx = (x1 + x2) / 2;
+          var my = (y1 + y2) / 2;
+          var lx = mx + (-uy) * (F_EDGE + 8);
+          var ly = my + ux * (F_EDGE + 8);
+          var edgeMaxChars = Math.max(14, Math.min(24, Math.floor((lineLen + cellW * 0.5) / (F_EDGE * 0.55))));
+          var labelText = el('text', {
+            x: lx.toFixed(2),
+            y: ly.toFixed(2),
+            'class': 'edge-label',
+            'font-size': String(F_EDGE),
+            'text-anchor': 'middle'
+          });
+          wrapLabel(e.label, edgeMaxChars, 2).forEach(function (ln, li) {
+            var span = el('tspan', { x: lx.toFixed(2), dy: li === 0 ? '0' : String(LINE_EDGE) });
+            span.textContent = ln;
+            labelText.appendChild(span);
+          });
+          edgeLayer.appendChild(labelText);
+          fitTargets.push({ el: labelText, maxWidth: Math.max(90, (lineLen + cellW * 0.5) * 0.95), minSize: 10 });
+        }
+
+        var packets = [];
+        for (var pi = 0; pi < CFG.packets_per_edge; pi++) {
+          var c = el('circle', {
+            r: String(PACKET_R),
+            fill: EDGE_COLORS[e.kind],
+            'fill-opacity': '0.45',
+            stroke: '#ffffff',
+            'stroke-width': '1.2'
+          });
+          packetLayer.appendChild(c);
+          packets.push(c);
+        }
+
+        edgeViews.push({ def: e, line: line, x1: x1, y1: y1, x2: x2, y2: y2, packets: packets });
+      });
+
+      var nodeViews = {};
+      CFG.nodes.forEach(function (n) {
+        var c = nodeCenter(n);
+        var g = el('g', { 'class': 'flow-node', id: 'node-' + n.id });
+        var rect = el('rect', {
+          x: (c.x - NODE_W / 2).toFixed(2),
+          y: (c.y - NODE_H / 2).toFixed(2),
+          width: String(NODE_W),
+          height: String(NODE_H),
+          rx: '14',
+          'class': 'node-rect',
+          stroke: NODE_COLORS[n.kind]
+        });
+        g.appendChild(rect);
+
+        var kindBaseline = c.y - NODE_H / 2 + F_KIND + 6;
+        var kindTag = el('text', {
+          x: c.x.toFixed(2),
+          y: kindBaseline.toFixed(2),
+          'class': 'node-kind',
+          'font-size': String(F_KIND),
+          'text-anchor': 'middle',
+          fill: NODE_COLORS[n.kind]
+        });
+        kindTag.textContent = KIND_LABELS[n.kind];
+        g.appendChild(kindTag);
+        fitTargets.push({ el: kindTag, maxWidth: NODE_W - 24, minSize: 9 });
+
+        var lines = wrapLabel(n.label, nodeMaxChars, nodeMaxLines);
+        var areaTop = kindBaseline + 6;
+        var areaBottom = c.y + NODE_H / 2 - 8;
+        var blockH = lines.length * LINE_NODE;
+        var startBase = areaTop + Math.max(0, (areaBottom - areaTop - blockH) / 2) + F_NODE * 0.85;
+        var label = el('text', {
+          x: c.x.toFixed(2),
+          y: startBase.toFixed(2),
+          'class': 'node-label',
+          'font-size': String(F_NODE),
+          'text-anchor': 'middle'
+        });
+        lines.forEach(function (ln, li) {
+          var span = el('tspan', { x: c.x.toFixed(2), dy: li === 0 ? '0' : String(LINE_NODE) });
+          span.textContent = ln;
+          label.appendChild(span);
+        });
+        g.appendChild(label);
+        fitTargets.push({ el: label, maxWidth: NODE_W - 16, minSize: 11 });
+        nodeLayer.appendChild(g);
+        nodeViews[n.id] = { def: n, rect: rect, group: g };
+      });
+
+      document.getElementById('diagram-viewport').appendChild(svg);
+
+      var legendHost = document.getElementById('diagram-legend');
+      var seenKinds = [];
+      CFG.nodes.forEach(function (n) {
+        if (seenKinds.indexOf(n.kind) < 0) { seenKinds.push(n.kind); }
+      });
+      seenKinds.forEach(function (k) {
+        var item = document.createElement('div');
+        item.className = 'legend-item';
+        var bullet = document.createElement('span');
+        bullet.className = 'legend-bullet';
+        bullet.style.background = NODE_COLORS[k];
+        var txt = document.createElement('span');
+        txt.textContent = KIND_LABELS[k].toLowerCase();
+        item.appendChild(bullet);
+        item.appendChild(txt);
+        legendHost.appendChild(item);
+      });
+
+      var logDivs = [];
+      var logHost = document.getElementById('log-lines');
+      for (var li2 = 0; li2 < 3; li2++) {
+        var d = document.createElement('div');
+        d.className = 'log-line';
+        d.textContent = '';
+        logHost.appendChild(d);
+        logDivs.push(d);
+      }
+
+      var kpiRecords = document.getElementById('kpi-records');
+      var kpiErrors = document.getElementById('kpi-errors');
+      var kpiQueue = document.getElementById('kpi-queue');
+      var kpiProgress = document.getElementById('kpi-progress');
+      var timecodeDisplay = document.getElementById('timecode-display');
+      var frameCounterDisplay = document.getElementById('frame-counter-display');
+      var progressBar = document.getElementById('timeline-progress-bar');
+
+      function easeInOutCubic(x) {
+        return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+      }
+
+      function formatTime(seconds) {
+        var m = Math.floor(seconds / 60);
+        var s = Math.floor(seconds % 60);
+        var ms = Math.floor((seconds % 1) * 1000);
+        return String(m).padStart(2, '0') + ':' +
+               String(s).padStart(2, '0') + '.' +
+               String(ms).padStart(3, '0');
+      }
+
+      function seek(t) {
+        var clampedT = Math.max(0, Math.min(t, DURATION));
+        // The renderer samples frames at t = i/fps, so the last sampled frame
+        // is strictly before duration. Any seek inside the final frame
+        // interval snaps to the completed flow state (full log prefix, 100%,
+        // full counters); the mapping stays a pure function of t, so
+        // forward/backward/random seeks and fresh browsers still agree.
+        var endSnapT = DURATION - 1 / FPS;
+        var progress = endSnapT > 0 && clampedT >= endSnapT - 1e-9 ? 1 : clampedT / DURATION;
+        var eased = easeInOutCubic(progress);
+
+        var edgeCount = edgeViews.length;
+        var activeIdx = progress >= 1 ? edgeCount - 1 : Math.min(edgeCount - 1, Math.floor(progress * edgeCount));
+
+        var traversalBase = progress * TRAVERSALS;
+        for (var ei = 0; ei < edgeCount; ei++) {
+          var ev = edgeViews[ei];
+          var isActive = ei === activeIdx;
+          var isPast = ei < activeIdx;
+          ev.line.setAttribute('stroke-width', isActive ? '4.2' : '2.2');
+          ev.line.setAttribute('stroke-opacity', isActive ? '0.95' : (isPast ? '0.75' : '0.4'));
+          for (var pi = 0; pi < ev.packets.length; pi++) {
+            var phase = (traversalBase + pi / ev.packets.length) % 1;
+            var cx = ev.x1 + (ev.x2 - ev.x1) * phase;
+            var cy = ev.y1 + (ev.y2 - ev.y1) * phase;
+            var pk = ev.packets[pi];
+            pk.setAttribute('cx', cx.toFixed(2));
+            pk.setAttribute('cy', cy.toFixed(2));
+            pk.setAttribute('fill-opacity', isActive ? '0.95' : '0.45');
+          }
+        }
+
+        var activeEdge = CFG.edges[activeIdx];
+        for (var nid in nodeViews) {
+          var nv = nodeViews[nid];
+          var involved = activeEdge !== undefined && (activeEdge.from === nid || activeEdge.to === nid);
+          nv.rect.setAttribute('stroke-width', involved ? '2.6' : '1.2');
+          nv.group.setAttribute('opacity', involved ? '1' : '0.88');
+        }
+
+        var msgs = CFG.log_messages;
+        var visibleCount = msgs.length === 0 ? 0 : Math.min(msgs.length, Math.floor(progress * msgs.length));
+        var start = Math.max(0, visibleCount - logDivs.length);
+        for (var ld = 0; ld < logDivs.length; ld++) {
+          var mi = start + ld;
+          logDivs[ld].textContent = mi < visibleCount ? msgs[mi] : '';
+        }
+
+        var counters = CFG.counters;
+        kpiRecords.textContent = Math.round(eased * counters.records_target).toLocaleString('en-US') +
+          ' / ' + counters.records_target.toLocaleString('en-US');
+        kpiErrors.textContent = String(Math.floor(progress * counters.error_budget));
+        kpiQueue.textContent = String(Math.round(counters.queue_max * 4 * progress * (1 - progress)));
+        kpiProgress.textContent = Math.floor(progress * 100) + '%';
+
+        progressBar.style.width = (progress * 100).toFixed(2) + '%';
+        timecodeDisplay.textContent = formatTime(clampedT) + ' / ' + formatTime(DURATION);
+        var currentFrame = Math.min(TOTAL_FRAMES, Math.round(clampedT * FPS));
+        frameCounterDisplay.textContent = 'FRAME: ' +
+          String(currentFrame).padStart(6, '0') + ' / ' +
+          String(TOTAL_FRAMES).padStart(6, '0');
+      }
+
+      function snapshot() {
+        var packets = [];
+        var edges = [];
+        for (var ei = 0; ei < edgeViews.length; ei++) {
+          var ev = edgeViews[ei];
+          edges.push([
+            ev.line.getAttribute('stroke-width'),
+            ev.line.getAttribute('stroke-opacity')
+          ]);
+          for (var pi = 0; pi < ev.packets.length; pi++) {
+            packets.push([
+              ev.packets[pi].getAttribute('cx'),
+              ev.packets[pi].getAttribute('cy'),
+              ev.packets[pi].getAttribute('fill-opacity')
+            ]);
+          }
+        }
+        var nodes = {};
+        for (var nid in nodeViews) {
+          nodes[nid] = [
+            nodeViews[nid].rect.getAttribute('stroke-width'),
+            nodeViews[nid].group.getAttribute('opacity')
+          ];
+        }
+        return {
+          records: kpiRecords.textContent,
+          errors: kpiErrors.textContent,
+          queue: kpiQueue.textContent,
+          progress: kpiProgress.textContent,
+          bar: progressBar.style.width,
+          timecode: timecodeDisplay.textContent,
+          frame: frameCounterDisplay.textContent,
+          edges: edges,
+          packets: packets,
+          nodes: nodes,
+          log: logDivs.map(function (d) { return d.textContent; })
+        };
+      }
+
+      window.renderTimeline = {
+        duration: DURATION,
+        fps: FPS,
+        width: width,
+        height: height,
+        aspectRatio: aspect,
+        assets: [],
+        seek: seek,
+        snapshot: snapshot
+      };
+      window.seek = seek;
+
+      seek(0.0);
+
+      Promise.all([
+        document.fonts ? document.fonts.ready : Promise.resolve(),
+        new Promise(function (resolve) {
+          if (document.readyState === 'complete') {
+            resolve();
+          } else {
+            window.addEventListener('load', resolve);
+          }
+        })
+      ]).then(function () {
+        // Final label fit pass with real font metrics, before the readiness
+        // marker, so geometry audits observe the definitive rendered sizes.
+        for (var fi = 0; fi < fitTargets.length; fi++) {
+          var ft = fitTargets[fi];
+          var size = parseFloat(ft.el.getAttribute('font-size'));
+          var guard = 32;
+          while (guard > 0 && size > ft.minSize) {
+            var tspans = ft.el.getElementsByTagName('tspan');
+            var tooWide = false;
+            if (tspans.length === 0) {
+              tooWide = ft.el.getComputedTextLength() > ft.maxWidth;
+            } else {
+              for (var ti = 0; ti < tspans.length; ti++) {
+                if (tspans[ti].getComputedTextLength() > ft.maxWidth) { tooWide = true; break; }
+              }
+            }
+            if (!tooWide) { break; }
+            size -= 1;
+            ft.el.setAttribute('font-size', String(size));
+            guard -= 1;
+          }
+        }
+        document.documentElement.setAttribute('data-timeline-ready', 'true');
+      });
+    })();
+  </script>
+</body>
+</html>

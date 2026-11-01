@@ -1,0 +1,19 @@
+{
+  "skill": "growth-experiments",
+  "positive": [
+    "Design an A/B test for this onboarding hypothesis with guardrails.",
+    "Audit our attribution and tracking plan before the next experiment.",
+    "Analyze these experiment results and recommend ship, iterate or stop."
+  ],
+  "negative_anti_trigger": [
+    "Launch the test or change the campaign budget now.",
+    "Pick the winning variant from a tiny sample with no uncertainty.",
+    "Optimize vanity metrics without a defined user outcome or guardrail."
+  ],
+  "sensitive_actions": [
+    "changing ad spend, bids, targeting or campaign state",
+    "deploying experiments, tracking code or production copy",
+    "using identifiable user data or joining restricted datasets",
+    "declaring a winner or rollout without the stated gate"
+  ]
+}

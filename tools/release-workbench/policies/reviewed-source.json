@@ -1,0 +1,826 @@
+{
+  "allowlist": [
+    {
+      "content_sha256": "3ae902c92cc44dace175c0e69e13a4b0899f6983c6121d76b9ab8dd5795e7675",
+      "path": "fleet-suite/payload/agent-fleet/scripts/vendor/typescript/typescript.js",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "a36747bd58d9202bd43c418ed06669299a46608b469867a747d7852f7e86e9fa",
+      "path": "global/tools/chrome-relay/owner_start.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "0adb0cecc39819d4d64c87e7771dd8e5e7842693a7a3180eec8be410bc3becd9",
+      "path": "shared/agent-office/coordfs/office_cli_remote.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "0bc8e7d75342b0955aa2bc9f89b88476233de013617bea3f21a1c31b0d1f9b03",
+      "path": "fleet-suite/payload/agent-fleet/scripts/kimi_usage.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "3d21b90970a4505ea42f94180bbbe227194ec6c7342f5ded6a2d3f6752fb79b9",
+      "path": "global/codex/skills/agent-graph/scripts/jev_client.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "59b72e2a04f7f228d7ce62470449af1faa48de3ce62b9ce031b58cbd1f6b3980",
+      "path": "global/codex/skills/home-assistant/scripts/ha_client.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "9a42be7dbcb00a4bc127c65c43cf8c067a261024eec558b0c8b424811e8ec2e3",
+      "path": "global/tools/browser-worker/browser_worker.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "10bb1a5275a24d87ec423a08b55ef07b74239c9563fa22462dbe581f538212d6",
+      "path": "global/tools/chrome-relay/mcp.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "7414d526de91f5642acf51b3529f0e4f78f38a48634aeaafd8a50200f9af10ae",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/caretaker/repaired_retry.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "56471f0ce088934e94c80f10c8de2a3deab63169114c277d80917d389aada4d0",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/maintenance.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "67d87e3323c1f135a684629ead0c2867aeda61b134c4d9b1bfd74df6e8da03f7",
+      "path": "shared/mcp/gcp-readonly/test_adc_entry.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "603987508a709c34bd1ba25092eee055cebc522afec5c1bdfa66ac13e303b859",
+      "path": "global/codex/skills/delivery-audit/tests/test_producer.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "ffc8dc958b3b1d78cad80c80493882460aed8273243ba67f01195cf0524da5c7",
+      "path": "shared/agent-office/tests/test_codex_relay_large_transport.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "ba8f82770e3f7212292cd0d7cf300c0facaa96bdd181c8db46dde22f056d56c2",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_grok_denial_projection.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "dd24c1de2807d23a503a5e7ab79ebdef5a1d605dc7ccdc15346ddd02bc802ae0",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_repair_prompt_contract.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "1313fd29f17d45653e773b4187382615d7bd781cd97fe4a269ceb3cace8d7d0f",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_privacy_boundary.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "8b76e12f2d1765feaaa1aac6adf0979912f18a63035f40767bb8de57965c8aea",
+      "path": "shared/agent-office/tests/test_codex_relay_cycle.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "6430bfd4eb0bf0b83cf79a65b48f1a6ecbb817dfaf29b73eab6eac84ccaedd8d",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_fleet_transport.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "f4a38b34bad4e3a5eabc2ebe6ad028c1ac5230fc0b0ca88884c51a2ea5f93cd3",
+      "path": "shared/openclaw-desktop-control/releases/0.1.2/runtime/tests/test_claude_sessions.py",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "09ad529ddcead2367849f152a1d354cfa4fe01991ee455821ce80c97a4045ec8",
+      "path": "shared/openclaw-desktop-control/releases/0.1.2/runtime/tests/test_stall_detector.py",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "287ad7b23c4ae885c31b23240600b7c73eac4fbafb01f5b30c7cdc4118766a40",
+      "path": "global/codex/skills/html-video/references/security-and-isolation.md",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "d12fe2640e40137bef9aee16473330689304f2bfa30bf3d431b473ad5c28a762",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_fleet_redaction.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "32586175d935af37d4ccc2045537606408894c91c594e6aa636670e7e8d20e61",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_grok_acp.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "e5c7d2cfec63cb51ed241a64b838e795f056c3f39e829cd6b5344c3c70380627",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_grok_home_isolation.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "d9afb906e3301161a818458f12396fd1833690f66fac414408698d6e2d5ead77",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_grok_permission_denied_resume.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "c7dfc3a6a588c96114508b877656baedda21a88eb4a3fe6a24c73ba8ef8ce135",
+      "path": "global/codex/skills/agent-graph/scripts/test_routing_advisor.py",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "69b0c6a6969a2e386fc373b841de155c183141895dc93c7e1c11060e31c406a3",
+      "path": "global/codex/skills/home-assistant/tests/test_ha_client.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "fdb1cdb18d1b1ad206e2006b1d0cde978994247ed6079538d215434c59a878f5",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_haiku_worker.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "45cabcdafb06c32b0e110bd9e3738de4679a3b243ffa75e0e206c604190d3bb1",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_fleet_context_budget.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "35e40908a82bd621f86d8ef334b6b1e204070e6192b0721258c2048f61e04309",
+      "path": "global/codex/skills/idea-maker/tests/test_idea.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "bae78fe89f7c435d3e7c13b55afb1d6bc668d6bc9e19ff0d89a4e9dc8a6bf700",
+      "path": "global/codex/skills/cloud-org-operator/tests/test_cloud_org.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "0eb660fa9a14862c17986623b7cb70d9477b0eb53f196aa973c4fcd338537ecc",
+      "path": "global/codex/skills/agent-graph/scripts/test_mistral_admission.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "b0b32ba812f73ce17281345f03db82d9f70c6cf7b6dc8845e3d940aabe8ea99c",
+      "path": "global/codex/skills/skill-ab-testing/tests/test_ab_runner.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "dba87309226d7d1cbcfb0f226e62152dce88a54baa4b58f410308377ecdf4c81",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_public_source_capture.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "8264bfba10614c6d58aa19778d6061094a1a38b22bee1c49f4038879e62cac32",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_mistral_native_stop_diagnosis.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "a494c1acaae0eb5f2325d9f4b729965b9af09f5a88d905342b4293ad6fec9b5e",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_openclaw_sandbox_binding.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "9e7b4e14ad99bbc5fb1a918fdcba08d043d63f8ef62ceda56e1065482fc6dd9f",
+      "path": "global/codex/skills/agent-graph/scripts/test_maker_diagnostics.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "78f4f78ea46d7b52d762d00098759a724f7702002ecebe640184b34d40389021",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_adaptive.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "5d1edd633737880e83ff3769402ba2ee0e71dc8aea06c987a74601c3917e62b7",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_mercury_runtime.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "a99553cbc0a0509a8bb394ea4a80a823e6630c174c9eb7554d8add2ebc79c17f",
+      "path": "global/codex/skills/design-code-architecture/scripts/test_architecture_evidence.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "caabc76642c760037cb5d2f4a2252218319ec1b730078bb6c84c2423adc6d2db",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_probe_deadline.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "38a3b8162a1f116e1b9b7ff588d7763797b34dae07c6f19eccab197d968afdd5",
+      "path": "global/codex/skills/delivery-audit/tests/test_integration.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "cbe65c0cbe2ea809a4bbd74ee7679496026677dd3b3275d80524ff28efa216bf",
+      "path": "global/tools/chrome-relay/tests/test_owner_start.py",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "6091bdfd68866f4ecc5475394134989eb1f8fe828d44f17e07e16270460f482d",
+      "path": "shared/agent-office/tests/test_codex_desktop_remote.py",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "8b7e5a683325a05fc3b1afc72ac610e9a29f546ebfeb32ad4889eb5945064643",
+      "path": "shared/agent-office/tests/test_office_native_transport_paths.py",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "1023209d768c2318a03461b28e1ddeb2f541d118d8b6003d576e035eabed3943",
+      "path": "shared/routing-ledger/test_routing_ledger.py",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "197ff290d3d625e558676b3bfc812ea683be1d1a42a8ddd2e94b27c9d152bde9",
+      "path": "global/tools/chrome-relay/tests/test_saved_login.cjs",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "9320b995246454069aa229ca7baa49593661ef085ab1223649993cec8cc59884",
+      "path": "tools/release-workbench/tests/test_recognized_caretaker_source.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "1988312990d26b01dc763003c6574a226567cd96babb4da0254dbd2767a522c5",
+      "path": "global/tools/browser-worker/tests/test_redirect_semantics.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "7a2c77c3a45a587d4d055e909ae7d164294fdadc6c0cb662706fa7696fc73ec2",
+      "path": "shared/agent-office/tests/test_wake_stop_gate.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "3044eaa0a783ec3ea08f2c5c34b56152274548b2de1b0eb5f6328e3e3a070970",
+      "path": "global/codex/skills/creating-mermaid-diagrams/reference/code-evidence.md",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "07d404e5c4ecfc731bb3cfc02ae19f01f357dfe31612bee0ba4bdf17da5a10e0",
+      "path": "shared/agent-office/tests/test_office_mcp_wake.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "ee2e70d7f5a02bd81b6e7f3e25158b45db8892eb13aea68efa706114a32f55bd",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_fallback_hardening.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "266b06f02acbd50e037a29212ea03bb32ea7fca04a6f1e543aa9f29931d36b10",
+      "path": "shared/openclaw-desktop-control/releases/0.1.2/runtime/windows/dpapi-launcher.template.ps1",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "38556ec987db223ac911bbadf406145f8f7eadb8f1a6536b3d6f1d2cc1fcee22",
+      "path": "shared/agent-office/test_worker_profile.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "5c5770bfa253be05c8f57086b982a4f10c8ef9d7b4a29fe16f82c09fa532353b",
+      "path": "global/codex/skills/agent-graph/scripts/test_context_guard.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "72fe17b42919904420c517280f52a60ed4afb54db8d4f2def1ef826853337760",
+      "path": "shared/agent-office/tests/test_installer_remote.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "2be227918bcbac7b95d02e3bcafe99ff92f1eb020c157495e2c91d9712f3c5a5",
+      "path": "shared/agent-office/CLI-HOST-DISPATCH-CONTRACT.md",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "2a69c491e8093efa5affc2aa7f2f4ea819f3e30fddabc9ee2476ca3f7028906e",
+      "path": "shared/grok-office-gateway/README.md",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "8834591be82986c7bf6ad8bef38795bbf0d4eebf41a3eb1e6a0989ab9b71b825",
+      "path": "shared/openclaw-desktop-control/releases/0.1.2/transport/tests/test_botapi.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "124d4b0f14f602f0768f2889b7414202e4dcf2427fb8c093b05d44d36ad1b01d",
+      "path": "shared/mcp/m365-workspace/pilot-identity.mjs",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "cd4cae6f8fbb852dae5a89e6446481d22de8dc466369eaddb740e7ca6f9d322d",
+      "path": "shared/knowledge-hub/skills/delegate-coding-task/references/claude-code.md",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "7d2145c14218f0433bd75b58aca55489100b8124e6ffb8967c3bc72c1bfaddf3",
+      "path": "global/tools/browser-worker/README.md",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "25c54e7fb27029e0c68379858f3b14a2d34f1b1802df2a53225fa97bb7741656",
+      "path": "shared/openclaw-desktop-control/releases/0.1.2/runtime/tests/test_runtime.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "2ba5238c642c9674738ec89f10cf7519da575ac672cdd586922f8a2ff6cd9558",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_review_severity.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "f27bc455cb3fcebfd31a8b2c5a8584833c77714ba8e015e63995537a10bb3596",
+      "path": "tools/release-workbench/tests/test_docs.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "dce8f78ad21586dfc9f7fd4e3e9b4cdbbac333b9025448813522d5c0cf0e6d72",
+      "path": "shared/mcp/m365-workspace/workspace-server.mjs",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "109c1f0b38ba29a726555799e21d522484e4bfa01cc4b31e462f880c3e507726",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_fleet_selected_profile.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "493aea7a66315414dbb8d974ea537d2966fe828036a380ad57f2e3c6c05624a4",
+      "path": "global/tools/browser-worker/tests/test_network_policy.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "4ea64ec747674bad38f04e98462ea612164b394c923688bef1407e68d61fd87b",
+      "path": "global/codex/skills/remote-computer-use/scripts/remote_staging.ps1",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "25e86cd1b487dae6a0e10d74c28ae4c3211810dd585403a3c29778c216a23318",
+      "path": "tools/release-workbench/tests/test_privacy_parent.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "a15e28b689d9419cb7b9cd6ccceb08df0e46302fa6b46bcada40368976adb5e8",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_persist_review_findings.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "960d6cfc11f39dd336d347c0c46ad94ee83a7cf2f8d1fdf1f5d3a21783b61b2e",
+      "path": "shared/agent-office/coordfs/atomic.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "124d4b0f14f602f0768f2889b7414202e4dcf2427fb8c093b05d44d36ad1b01d",
+      "path": "shared/mcp/m365-workspace/linux-identity.mjs",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "75a42b06b4d46d74f454fe6e6ee057171b108bc1561cc43bb23abfa4b86eba30",
+      "path": "tools/release-workbench/tests/test_source_privacy_contexts.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "0ae9fbb00c156f9f16658ed9d9591b5129afa0c7a19054948f6ab47858bf20df",
+      "path": "global/codex/skills/model-council/scripts/test_security.ps1",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "05f2b868ce3b45cf77de1b50fe89583e9f32191f2c24f84f1e302cad1d296061",
+      "path": "shared/knowledge-hub/scripts/capability_rollout.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "271b0e194367840c72d0decc49d6fb007de553dd8417a047938aecb4b16dd90f",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/caretaker/transports.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "e17f0538bb0208dbe36cf933dbe8c4bf763fb8b27f8b8426a5dc8bdac92cddf9",
+      "path": "global/tools/chrome-relay/tests/test_registration.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "ea3aaf6fc5e3cedd352e83b1eca60d53c83ed28954dd51bdef1806e0fdbd3aaa",
+      "path": "global/tools/chrome-relay/tests/test_mcp.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "38a348662f2f16096ae1e293a8dedfbb5b6b87e8959604c3dcb97f205f618728",
+      "path": "fleet-suite/payload/agent-fleet/references/profiles.json",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "510c234afe7856a5870e27abf622811706ee0b6614045365105bf0185df4dd89",
+      "path": "global/tools/chrome-relay/tests/test_managed.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "f58a02c2838979709724f7523a8ad8d81dedd58ca896a9473950475d9c6898cf",
+      "path": "shared/agent-office/tests/test_office_projects.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "e08f628442aaa80b8b227fd8fc94c4e2c3eaf5cb710957e0f42471ccf6181ccd",
+      "path": "global/codex/skills/agent-graph/scripts/test_public_handoff_artifact.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "2b1f20d36f61428b8e91cd34d6333b5abb130475ef7552ecd249fada4b75b03b",
+      "path": "fleet-suite/payload/agent-fleet/scripts/mercury_runtime.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "bfd9e4bc81621d71185ed35a13cd1353c41f2a17f8598e34e0cbde21b39648e1",
+      "path": "shared/agent-office/tests/test_wake_self_pull.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "26539e6712be22fd56bec338ef160021aa747a957a31e77019a3297ede38bf61",
+      "path": "global/tools/chrome-relay/extension/sw.js",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "3bcc0a4e32463162951d3b507eba490224079e14100cd6fcbb0ef37b2c133bdb",
+      "path": "fleet-suite/payload/agent-fleet/scripts/routing_v2.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "299d8af54b3392857efaec57d7205e11925bfb7c0330627a60d46042bf5e1153",
+      "path": "global/tools/chrome-relay/managed.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "7e5e7f78d962d8c593cb54dc0fc82eb950c271489c8917e94700f5a43c3488be",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/caretaker/prespawn206.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "1f92aa64c741bf08a8f0715f4290c9d1eac0d1fa1d9e0c6fa834558ebb75bdf6",
+      "path": "shared/agent-office/tests/test_office_contract.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "c0f6f197e56b580392ea2c4922fd34319b8fe4e9b7663d1db3740dcb96e287fa",
+      "path": "global/codex/skills/agent-graph/scripts/escalation_policy.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "10f283121b573df2f9a84142b45d590db1efa53b8669c38787a7581c12dfefdc",
+      "path": "global/tools/browser-worker/tests/test_browser_worker.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "526fab5fcca2e95009f57348f4171c527ce59f9fd6c4f242dcb561c04cb11481",
+      "path": "shared/agent-office/tests/test_knowledge_bridge.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "05ab36c9d8683ca892527c14dc82424ff3188077ecd2b1dea47326c40914e790",
+      "path": "shared/agent-office/coordfs/office_mcp.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "afabca54be82370fe0654fa3206711f5a51a0aa3946a507f6d16185224b15ffb",
+      "path": "global/tools/chrome-relay/uat.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "978fe54d3473efc8182a212764ab6eae116385ae0f4d2a5ea19c17fad70f1143",
+      "path": "shared/agent-office/coordfs/leases.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "7c4379aa015ba7577b6808b49cdbe3b2aa232e0c5ddecaadaabea65b9e14689f",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_fleet_invocation.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "a5b1c1ec8cddb4d105433d21467c98ae9e760b54acdee360ccae948c368953e3",
+      "path": "shared/agent-office/coordfs/wake.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "d833a72e32d92bf9ef19c1b7949593eb1782571efe9d3def0d2dcb7dd62b2c0e",
+      "path": "shared/knowledge-hub/skills/llm-wiki/scripts/knowledge.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "cf1960f1731b9933f0a5b4d41339726a552fe902bf603864114340e58806e5fc",
+      "path": "global/codex/skills/model-audit/scripts/test_skill_contract.ps1",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "4272d2f3b02961388e2bc7d4050e0e64ea690622700f9654391c3983f700fc8a",
+      "path": "tools/release-workbench/tests/test_encoded_owner_paths.py",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "60aa259a2da0d06af4106b5871acd1967d89bfe675d77cdac90808a5b69d4ea5",
+      "path": "global/codex/skills/rag-engineering/fixtures/baseline-predictions.json",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "f72c9c8db59930366fbbbfcffb8c4601785bf6a513b1332797271bff1e00e8f9",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_caretaker_0138.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "b906cf9aefc09987f97ed7f0038fd588997654c59f78be4995e4f7dd8d32a5da",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_grok_permission_denial.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "85c6cc8cb08823d1e6f8ddbba7e0a323d6627a076bc26b85a823c9625c565e3b",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_grok_absolute_write.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "f01d8c7c5ee99e8b878339934f99414bd99949d9f3ce3cbfcf9b5cd3772f1617",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_grok_proxy_alias_write.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "90c15607d127baa72544843f54f33e4cc2b594009e1dcd65c4d94db7789709b4",
+      "path": "global/codex/skills/codex-security-cli/tests/test_codex_security_safe.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "90c15607d127baa72544843f54f33e4cc2b594009e1dcd65c4d94db7789709b4",
+      "path": "global/codex/skills/codex-security-cli/tests/test_codex_security_safe.py",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "4bcad1533bda5be5dc0301c934cd9ec6324683c87a161d1e8c43674ff7d407d9",
+      "path": "global/codex/skills/agent-graph/scripts/test_jev_client.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "fb810d6f77606fce48ae31066febc2e7a28c3b9d02d090fcf72a34228aa7537b",
+      "path": "fleet-suite/payload/agent-loop/scripts/test_adversarial.py",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "fb810d6f77606fce48ae31066febc2e7a28c3b9d02d090fcf72a34228aa7537b",
+      "path": "fleet-suite/payload/agent-loop/scripts/test_adversarial.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "37c01f4a70f3d7e6d59f9ce0f2e4529d421e7030ea51985b78329cdb81e7caad",
+      "path": "global/codex/skills/agent-graph/scripts/test_jev_client.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "37c01f4a70f3d7e6d59f9ce0f2e4529d421e7030ea51985b78329cdb81e7caad",
+      "path": "global/codex/skills/agent-graph/scripts/test_jev_client.py",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "8192222dec65c419ceff97002f509a539af57ccb7d0b41e6d91fcc4d4a2685a6",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_caretaker_0138.py",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "8192222dec65c419ceff97002f509a539af57ccb7d0b41e6d91fcc4d4a2685a6",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_caretaker_0138.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "cbe6d1a195602c6fa9520b94a73533dc508f3468186409a79015ddcef2ccbdfd",
+      "path": "global/codex/skills/agent-graph/scripts/test_history_scout.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "278ad005dbcdf7344814666c8aef4dd90c589997dadfb13d552702b383f8bf81",
+      "path": "global/tools/chrome-relay/tests/test_broker.py",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "5ecc61144e2860debcd9f191456107417ff697bc38cb61ae29ad4d859b59a059",
+      "path": "global/codex/skills/agent-graph/scripts/test_history_scout.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "0d5aeeaa2c7757ff3584b1cb251befcf6cee199cb580d8a34ba2af9f5369ce40",
+      "path": "tools/release-workbench/tests/test_configuration.py",
+      "rule": "privacy.owner_path"
+    },
+    {
+      "content_sha256": "41d78ba22c82fb665ffda79884f3499f6f185a27052d64bc56adbcd033a5d6d3",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_grok_absolute_write.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "7764c53157d9e28d4232c7bfebd65673c0a695998dafb7e7fa76d4ec3636e0d2",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_grok_permission_denial.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "e5d8639b45eb4798d1964b8e44ee89a799262c552e5e1a16c6327c83f6683638",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_grok_proxy_alias_write.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "42fcac70235089ec16225791f898861741634b2ef8745f645a306d756179e1fa",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_file_admission.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "55d944adb0f27c8266653be6140a4262c19c604f15f3e0e543eb5ffb568d7a46",
+      "path": "global/codex/skills/agent-graph/scripts/test_todo_fleet.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "278ad005dbcdf7344814666c8aef4dd90c589997dadfb13d552702b383f8bf81",
+      "path": "global/tools/chrome-relay/tests/test_broker.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "03b934649356aa04dfe4393932d11ac450b525974b53643a9eadd582260fcb39",
+      "path": "shared/agent-office/tests/test_codex_desktop_tool_host.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "e04ac239f6dbc767dd71969e935f395829edce6e11cf2cfd60ed1c4eec326b68",
+      "path": "shared/agent-office/tests/test_office_channels.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "e4f37ef505444b21991b6328b6ca89f9d0c81bc59ec185e011c8c3845598531e",
+      "path": "shared/agent-office/tests/test_office_cli_remote.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "bc1eadb7006fa064eb313c7078c5922e23590231ff0772966f3698f6bcf635b8",
+      "path": "shared/openclaw-desktop-control/releases/0.1.2/automation/tests/test_helpdesk.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "5b8c90ca3161fcda2b0d6679afb7252ac377c20cbc7ab0f145ae685c7e7b2f0a",
+      "path": "shared/openclaw-desktop-control/releases/0.1.2/automation/tests/test_t6b_hardening.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "3347f560e97e3a8849a191e5fa855330d75e68017655e8abbb6b0dfef7d36c37",
+      "path": "shared/openclaw-desktop-control/releases/0.1.2/integrations/helpdesk_read.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "669746cc42eccfa69c43f50f5ba21e2dd110925551739d5608234ea34c922400",
+      "path": "global/codex/skills/email/scripts/mail_direct.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "7952b94910f6ec12625adf3439468b40ce2cf75183c726fd93f9e6e885c6a6cf",
+      "path": "global/codex/skills/email/tests/test_mail_direct.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "e4c5915027596f08a756f1640d8db1084841edad74feff7d581f0a01df579019",
+      "path": "global/codex/skills/email/tests/test_tone_and_send.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "b5facc8d6227a3645ffcf137583b4400698a9173cd719fe65593e9b63368d545",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_durability_recovery.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "content_sha256": "97eeb4c9f2f894d7cda35bdfef1ca1111bfaf8fb035bbe20afa1214db0752326",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_scheduled_tick.py",
+      "rule": "privacy.credential_assignment"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_fleet_quota_gates.py",
+      "content_sha256": "3d3bcc44e409accfe164bbf71f3fd4cc8f09a839cb5c1c4018e715e9965fefa9"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "global/codex/skills/agent-graph/scripts/test_escalation_advisor.py",
+      "content_sha256": "df80946b11ff30e3a32073d5dfd7d3ba92fe2858b5cd3ee6fcb55f513d0d0fea"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "global/codex/skills/systematic-debugging/scripts/test_summarize_evidence.py",
+      "content_sha256": "c8e1fc3d1ce241361d981b7e1841aab5b48dccd78ac3fe4093fb3b495982bb96"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "shared/delegation/test_owner_digest.py",
+      "content_sha256": "94c59ed6fd4ceaa450a21962cc4ad2d6c1582c70e76752e80c4d817a1b076a1b"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "shared/grok-office-gateway/test_grok_office_gateway.py",
+      "content_sha256": "0a73e922fb7f4065c07caf037384d38536f64cc716c26b19928918261e4cb94b"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "global/codex/skills/hermes-delegation/scripts/test_hermes_delegation.py",
+      "content_sha256": "7125a44385698a75db15f15e05a6f6f97604b009ab079b3f144296154188808b"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "global/codex/skills/clone-thread/scripts/test_clone_thread.py",
+      "content_sha256": "c41e6cecb07fbfaf01e287785603f9136a5924a5aac9cd4ae6033a3778605fa9"
+    },
+    {
+      "rule": "privacy.owner_path",
+      "path": "global/codex/skills/clone-thread/scripts/test_clone_thread.py",
+      "content_sha256": "c41e6cecb07fbfaf01e287785603f9136a5924a5aac9cd4ae6033a3778605fa9"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "global/codex/skills/marketing-context/scripts/test_summarize_reviews.py",
+      "content_sha256": "7a0f5c8865741331ff270ebfd002b3f819ffba841f08ebc376d209fbbdccf2e9"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_mistral_runtime.py",
+      "content_sha256": "562dbd1a850b4b33a64d99c2221aff34e696c9c08704ce4101ac24a50ccaa9a3"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "shared/knowledge-hub/skills/llm-wiki/scripts/test_knowledge_continuity.py",
+      "content_sha256": "7964afae6ef6071a0140e0a90aac79025ed0493cc3df55e62efc837e06a3f5fc"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "shared/mcp/gcp-readonly/test_server.py",
+      "content_sha256": "8c03607f7dbc34d4f09137c4bd30c3ed3bfa258953faa816666b95468af0e562"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "global/codex/skills/rsi-helpdesk/scripts/test_repair_history.py",
+      "content_sha256": "111bf2fb7794b2dd3611e9f745bd67b9d7e940b5e518139cf041648ae11634eb"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "global/codex/skills/rsi-helpdesk/scripts/test_helpdesk.py",
+      "content_sha256": "1888693550a0dd1505abc3e7b09e90a36f6aecb0f692ba8413b3acdc6c85132a"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "global/codex/skills/simulate-attack/tests/test_simulate_attack.py",
+      "content_sha256": "f5e8a09616e9b84b8c9860da784a30b74f0a35699b1e6695a74b660a6353b8bb"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "global/tools/code-search/runtime.py",
+      "content_sha256": "8910a43324617131bacd52cacb8f3dbf571b6f72093cac9e39a472bacb9bea41"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "global/tools/code-search/tests/test_core.py",
+      "content_sha256": "01f35985a45cc6202ab7d0fff76e1ccd6e025ef16c7b4c77894adeebc676ce81"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_fleet.py",
+      "content_sha256": "0e0daedd22157315da4bb91daf13f155b545ab7321671a87420d3fdbf3b63b40"
+    },
+    {
+      "rule": "privacy.owner_path",
+      "path": "fleet-suite/payload/agent-fleet/scripts/test_fleet.py",
+      "content_sha256": "0e0daedd22157315da4bb91daf13f155b545ab7321671a87420d3fdbf3b63b40"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "shared/dots-farm/dots_farm/adapters.py",
+      "content_sha256": "510d5926960d8eb59a10d57ec61c905ffd1e5435ec2b96a9535409613f3c0e86"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "shared/dots-farm/dots_farm/store.py",
+      "content_sha256": "f167658c9edb72425c27e15f6ca915bcc450df905ac8bbdbf7244749739ddb89"
+    },
+    {
+      "rule": "privacy.owner_path",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_checkpoint_timeout_resume.py",
+      "content_sha256": "26467e8644b2358e0aab7854c3d54d63e76b80d61f236df857c806a0bc8a3c9f"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "shared/openclaw-hub-caretaker/releases/0.1.78/tests/test_filter.py",
+      "content_sha256": "21356503725ece920fba511f9938139b5d600c467f9336ad71d1bec94aadbc5b"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "shared/mcp/m365-workspace/test_workspace_lazy.mjs",
+      "content_sha256": "438fd81386991342e15e362dccf5aa0530c6daa93b4167b2f85a1e98b50d93fa"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "shared/agent-office/tests/test_meta_preflight.py",
+      "content_sha256": "ffe4b90394c99125e1704f3cd1edc194968dcc82088a978047217dc2681a1b09"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "global/tools/chrome-relay/tests/test_extension.cjs",
+      "content_sha256": "362a3a2781d22ab4ac5fa138412c727cec2af158031f56a648d0736514d5ec76"
+    },
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "global/codex/skills/model-council/scripts/rada.ps1",
+      "content_sha256": "139c0102554abdfdf3777af48d0998df1fff98d701f5fd19d92c0f295cb8eb4c"
+    }
+  ],
+  "forbidden_literals": [],
+  "version": 1
+}

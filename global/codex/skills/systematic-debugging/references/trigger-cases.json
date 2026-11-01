@@ -1,0 +1,26 @@
+{
+  "positive": [
+    "Test API zaczal zwracac 500 po konkretnej zmianie.",
+    "Uzytkownik moze odtworzyc bledny zapis formularza.",
+    "Logi pokazuja rozbieznosc miedzy kontraktem modulow.",
+    "Po deployu w produkcji zaczely narastac bledy 500: ustal os czasu, zmiany i hipotezy bez sondowania produkcji.",
+    "Maly izolowany blad lokalny: zastosuj zwykle kroki reprodukcja-poprawka-retest bez osi incydentu."
+  ],
+  "negative": [
+    "Prosba o nowa funkcje bez symptomu lub regresji.",
+    "Jednorazowa eksploracja pomyslu bez bledu do wyjasnienia.",
+    "Prosba o deploy lub zmiane konfiguracji produkcyjnej."
+  ],
+  "anti_triggers": [
+    "Nie uznawaj stack trace ani korelacji z deployem za root cause bez testu odrozniajacego hipotezy.",
+    "Nie raportuj FIXED bez reprodukcji przed poprawka.",
+    "Nie maskuj braku dostepu jako braku bledu.",
+    "Nie sonduj aktywnie produkcji ani nie wykonuj rollbacku bez jawnej zgody."
+  ],
+  "sensitive_actions": [
+    "production mutation",
+    "data deletion",
+    "secret or credential access",
+    "external upload or notification"
+  ]
+}

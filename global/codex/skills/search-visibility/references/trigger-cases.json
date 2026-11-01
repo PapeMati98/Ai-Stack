@@ -1,0 +1,19 @@
+{
+  "skill": "search-visibility",
+  "positive": [
+    "Audit the technical SEO and structured data of these pages.",
+    "Plan GEO or AEO improvements and a citation monitoring baseline.",
+    "Explain why our target page is not discoverable using the supplied crawl data."
+  ],
+  "negative_anti_trigger": [
+    "Deploy the SEO fixes directly to production.",
+    "Submit URLs, build backlinks or contact publishers automatically.",
+    "Give current ranking or algorithm claims without a source and date."
+  ],
+  "sensitive_actions": [
+    "publishing or deploying page, robots or structured-data changes",
+    "submitting URLs or changing indexing controls",
+    "automated outreach, backlink acquisition or reputation activity",
+    "accessing restricted analytics, webmaster or customer data"
+  ]
+}

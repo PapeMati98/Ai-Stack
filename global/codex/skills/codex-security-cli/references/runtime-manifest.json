@@ -1,0 +1,20 @@
+{
+  "package": "@openai/codex-security",
+  "version": "0.1.1",
+  "license": "Apache-2.0",
+  "sourceRepository": "https://github.com/openai/codex-security",
+  "sourceTag": "npm-v0.1.1",
+  "sourceCommit": "e94d6bef9797a192febfde89a26ec7f831bc09b2",
+  "registryIntegrity": "sha512-sNxULf7IyicJRgYnycguaEzO2ZeANEv3oyrupjMoKVq5TjRrmIhORpaa7U2LVIpEHJP7//icGZV37MRIlp9X/A==",
+  "tarballSha1": "2ed585c8d2dfd7b0ebccf94753921913b8402061",
+  "packageTreeSha256": "87e8455013bf8672a43c46f5f2a0187f64628624551ca9e3de2cdc12e15594bc",
+  "packageLockSha256": "e7257e397f279162635448c55d9fcfefcb980082e60da2a23619a2d5c997ce42",
+  "binarySha256": "8464effc0af5c05c2d58703de9f43c315b0c9e4e66299937c5cf8a304294e326",
+  "packageFileCount": 178,
+  "nodeMinimum": "22.0.0",
+  "nodePath": "C:\\Program Files\\nodejs\\node.exe",
+  "nodeSha256": "3331e1ffe19874215472217c5e94f5a0c6d8e18c4ac7111d3937aa0ad5e9b4a5",
+  "pythonMinimum": "3.10.0",
+  "runtimeRelativePath": ".agents\\runtimes\\codex-security\\0.1.1",
+  "auditedAt": "2026-07-29"
+}

@@ -1,0 +1,110 @@
+{
+  "schema_version": 2,
+  "task_summary": "Implement and independently verify a bounded Router v2 change.",
+  "substantive": true,
+  "delegation_value": 80,
+  "delegation_mode": "COUNCIL",
+  "complexity": "high",
+  "complexity_score": 5,
+  "ambiguity": 3,
+  "risk": "high",
+  "verifiability": "high",
+  "visual_sensitivity": "low",
+  "context_load": {
+    "estimated_tokens": 90000,
+    "file_count": 18,
+    "repository_scope": "module"
+  },
+  "time_horizon": "long",
+  "urgency": "medium",
+  "workload_weights": {
+    "architecture": 25,
+    "implementation": 50,
+    "review": 25
+  },
+  "required_capabilities": [
+    "independent-review",
+    "write"
+  ],
+  "required_tools": [
+    "filesystem-read",
+    "write"
+  ],
+  "red_team_intent": null,
+  "minimum_capabilities": {
+    "implementation": 85,
+    "instruction-following": 80,
+    "independent-review": 80
+  },
+  "verification": {
+    "automatic_tests": true,
+    "independent_review": true,
+    "human_review": false
+  },
+  "delegation_economics": {
+    "estimated_parent_minutes": 180,
+    "estimated_contractor_minutes": 70,
+    "coordination_minutes": 12,
+    "parallelizable_fraction": 0.45
+  },
+  "allocation_policy": "quality-first",
+  "model_scores": {
+    "antigravity": {
+      "score": 90,
+      "reason": "Strong large-context implementation and review fit."
+    },
+    "claude": {
+      "score": 95,
+      "reason": "Strong architecture and independent review fit."
+    },
+    "codex": {
+      "score": 100,
+      "reason": "Best implementation, debugging, and verification fit."
+    },
+    "grok": {
+      "score": 95,
+      "reason": "Fast adversarial engineering review."
+    },
+    "kimi": {
+      "score": 90,
+      "reason": "Strong implementation and context handling."
+    },
+    "minimax": {
+      "score": 80,
+      "reason": "Long-context multimodal implementation and review capacity with provisional local quality evidence."
+    },
+    "muse": {
+      "score": 80,
+      "reason": "Fast long-context coding contractor pinned to Muse Spark 1.3; Contributor is categorically prohibited."
+    },
+    "opencode": {
+      "score": 95,
+      "reason": "GLM-5.3-Flash is the default bounded independent security reviewer for the changed scope."
+    },
+    "qwen": {
+      "score": 70,
+      "reason": "Promising but runtime entitlement remains unverified."
+    },
+    "qwen-local": {
+      "score": 80,
+      "reason": "Red-team-only local advisory/review alias; excluded because this profile has no explicit red-team intent."
+    },
+    "openclaw-local-qwen": {
+      "score": 0,
+      "reason": "Illustrative profile remains routing-disabled until explicit parent activation with verified local runtime evidence."
+    },
+    "openclaw-muse-subscription": {
+      "score": 0,
+      "reason": "Full-tool subscription integration is not accepted; this example must not route to the inference-only candidate."
+    },
+    "qwen-local-5070ti": {
+      "score": 60,
+      "reason": "Red-team-only local canary alias; excluded because this profile has no explicit red-team intent."
+    }
+  },
+  "preflight": {
+    "skill": "new-task",
+    "status": "applied",
+    "reason": "This is a substantive multi-file application change."
+  }
+}

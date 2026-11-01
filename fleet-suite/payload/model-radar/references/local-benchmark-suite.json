@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "suite_version": "2026-07-28.1",
+  "reviewed_at": "2026-07-28T09:06:06Z",
+  "policy": {
+    "workspace": "unique temporary fixture only",
+    "network": "disabled unless the research case explicitly requires primary sources",
+    "writes": "isolated worktree or temporary fixture",
+    "acceptance": "parent verification required",
+    "sample_unit": "one root_task_id"
+  },
+  "cases": [
+    {
+      "id": "architecture-boundaries-01",
+      "kind": "architecture",
+      "mode": "advisory",
+      "risk": "medium",
+      "prompt": "Design a bounded migration for a synthetic three-service application and identify compatibility and rollback constraints.",
+      "verification": [
+        "All stated constraints are addressed",
+        "Trade-offs and rollback are explicit",
+        "No invented repository facts"
+      ]
+    },
+    {
+      "id": "debugging-root-cause-01",
+      "kind": "debugging",
+      "mode": "review",
+      "risk": "medium",
+      "prompt": "Find the root cause in a seeded failing Python fixture and propose the smallest patch with a regression test.",
+      "verification": [
+        "Seeded failure is reproduced",
+        "Root cause matches the fixture oracle",
+        "Regression test fails before and passes after"
+      ]
+    },
+    {
+      "id": "implementation-contract-01",
+      "kind": "implementation",
+      "mode": "implement",
+      "risk": "medium",
+      "prompt": "Implement a small typed API contract in a temporary fixture without changing unrelated files.",
+      "verification": [
+        "Fixture tests pass",
+        "Public contract matches the specification",
+        "Diff contains no unrelated changes"
+      ]
+    },
+    {
+      "id": "frontend-visual-01",
+      "kind": "frontend",
+      "mode": "implement",
+      "risk": "medium",
+      "prompt": "Implement a responsive synthetic dashboard state from a fixed visual brief and preserve keyboard accessibility.",
+      "verification": [
+        "Desktop and mobile screenshots match the brief",
+        "No overlap or overflow",
+        "Keyboard and contrast checks pass"
+      ]
+    },
+    {
+      "id": "large-context-consistency-01",
+      "kind": "large-context",
+      "mode": "review",
+      "risk": "medium",
+      "prompt": "Audit a synthetic multi-module repository for contract drift and return file-grounded findings only.",
+      "verification": [
+        "Every finding has a valid file reference",
+        "Seeded cross-module drift is found",
+        "No unsupported finding is accepted"
+      ]
+    },
+    {
+      "id": "review-adversarial-01",
+      "kind": "review",
+      "mode": "review",
+      "risk": "high",
+      "prompt": "Review a seeded patch containing correctness, security, and missing-test defects and prioritize actionable findings.",
+      "verification": [
+        "Critical seeded defects are found",
+        "Severity ordering matches impact",
+        "False-positive count stays within the fixture threshold"
+      ]
+    },
+    {
+      "id": "research-primary-sources-01",
+      "kind": "research",
+      "mode": "advisory",
+      "risk": "medium",
+      "prompt": "Answer a time-sensitive technical question using current primary sources and distinguish facts from inference.",
+      "verification": [
+        "All current claims cite primary sources",
+        "Dates and versions are explicit",
+        "Inference is labeled"
+      ]
+    },
+    {
+      "id": "repeatable-scope-control-01",
+      "kind": "repeatable",
+      "mode": "implement",
+      "risk": "low",
+      "prompt": "Apply a deterministic mechanical change to a synthetic fixture while preserving formatting and unrelated files.",
+      "verification": [
+        "Golden output matches",
+        "No unrelated file changes",
+        "Runtime and token telemetry are recorded"
+      ]
+    }
+  ]
+}

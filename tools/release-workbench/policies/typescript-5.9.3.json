@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "forbidden_literals": [],
+  "allowlist": [
+    {
+      "rule": "privacy.credential_assignment",
+      "path": "fleet-suite/payload/agent-fleet/scripts/vendor/typescript/typescript.js",
+      "content_sha256": "f722647f0903c50a673288f2fb17ebb81ad8be458a8e32c139da7278ad9c044f"
+    }
+  ]
+}

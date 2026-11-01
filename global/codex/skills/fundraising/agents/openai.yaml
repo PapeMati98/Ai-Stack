@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fundraising"
+  short_description: "Buduje i naprawia materialy do pozyskania finansowania"
+  default_prompt: "Przygotuj zweryfikowany workflow materialow inwestycyjnych z aktualnych dowodow."

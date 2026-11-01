@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "thread": {
+    "id": "01a0fc52-d89f-7101-b5a0-26573f0e8817",
+    "hostId": "local",
+    "cwd": "D:\\",
+    "status": {
+      "type": "notLoaded"
+    }
+  },
+  "page": {
+    "order": "newest_first",
+    "limit": 2,
+    "nextCursor": "{\"requestedThreadId\":\"01a0fc52-d89f-7101-b5a0-26573f0e8817\",\"rolloutOrdinal\":16516,\"includeAnchor\":false,\"scope\":{\"kind\":\"turns\"}}",
+    "hasMore": true
+  },
+  "turns": [
+    {
+      "id": "01a10df8-04bf-7cd0-9ad5-6325782403fb",
+      "status": "completed",
+      "startedAt": 1791235720,
+      "completedAt": 1791253159
+    },
+    {
+      "id": "01a10de3-7780-7d03-ad1a-0934cb5ef55e",
+      "status": "completed",
+      "startedAt": 1791234373,
+      "completedAt": 1791235372
+    }
+  ]
+}

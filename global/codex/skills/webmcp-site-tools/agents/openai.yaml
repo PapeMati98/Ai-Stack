@@ -1,0 +1,4 @@
+interface:
+  display_name: "WebMCP Site Tools"
+  short_description: "Build and audit safe Site tools for web apps"
+  default_prompt: "Design or audit Site tools for this app, reuse its existing permissions and domain logic, prove native discovery, and retain independent visual UAT."

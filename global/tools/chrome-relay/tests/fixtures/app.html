@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Relay synthetic fixture</title>
+<body>
+<h1>Relay synthetic fixture</h1>
+<p id="count">Increment count: 0</p>
+<p id="sent">Send count: 0</p>
+<p id="delay">Delay count: 0</p>
+<p>api_key &#61; SYNTHETIC_BROWSER_REDACTION_CANARY_20261031</p>
+<label>Notes <input aria-label="Notes" id="notes" value="INPUT_VALUE_CANARY_2962a2d1"></label>
+<button id="increment">Increment</button>
+<button id="send">Send synthetic note</button>
+<button id="held">Delay once</button>
+<form id="form"><input aria-label="Submit synthetic form" type="submit"></form>
+<label>Password <input type="password" autocomplete="current-password" value="PASSWORD_CANARY_95012334"></label>
+<input aria-label="One time code" name="otp" autocomplete="one-time-code">
+<a href="/oauth/consent">Connect external account</a>
+<a href="https://example.invalid/">Outside policy</a>
+<a href="/popup" target="_blank">Open synthetic child</a>
+<script>
+let increments = 0, sends = 0, delays = 0;
+document.querySelector('#increment').onclick = () => { document.querySelector('#count').textContent = 'Increment count: ' + ++increments; };
+document.querySelector('#send').onclick = () => { document.querySelector('#sent').textContent = 'Send count: ' + ++sends; };
+document.querySelector('#form').onsubmit = (event) => { event.preventDefault(); document.querySelector('#sent').textContent = 'Send count: ' + ++sends; };
+document.querySelector('#held').onclick = () => { document.querySelector('#delay').textContent = 'Delay count: ' + ++delays; alert('Synthetic held dialog'); };
+</script></body></html>

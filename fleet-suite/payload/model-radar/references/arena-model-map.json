@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "source_dataset": "lmarena-ai/leaderboard-dataset",
+  "mappings": [
+    {
+      "profile": "claude",
+      "model": "fable",
+      "arena_ids": [
+        "Claude Fable 5 (High)",
+        "claude-fable-5"
+      ],
+      "confidence": "verified"
+    },
+    {
+      "profile": "claude",
+      "model": "sonnet",
+      "arena_ids": [
+        "Claude Sonnet 5 (High)",
+        "claude-sonnet-5"
+      ],
+      "confidence": "verified"
+    },
+    {
+      "profile": "kimi",
+      "model": "k3",
+      "arena_ids": [
+        "kimi-k3-max",
+        "kimi-k3"
+      ],
+      "confidence": "candidate"
+    },
+    {
+      "profile": "codex",
+      "model": "gpt-5.6-sol",
+      "arena_ids": [
+        "GPT 5.6 Sol (xHigh)",
+        "gpt-5.6-sol"
+      ],
+      "confidence": "verified"
+    },
+    {
+      "profile": "codex",
+      "model": "gpt-5.6-terra",
+      "arena_ids": [
+        "gpt-5.6-terra"
+      ],
+      "confidence": "candidate"
+    },
+    {
+      "profile": "codex",
+      "model": "gpt-5.6-luna",
+      "arena_ids": [
+        "gpt-5.6-luna"
+      ],
+      "confidence": "candidate"
+    },
+    {
+      "profile": "antigravity",
+      "model": "gemini-3.8-flash-low",
+      "arena_ids": [
+        "Gemini 3.8 Flash (Low)",
+        "gemini-3.8-flash-low"
+      ],
+      "confidence": "candidate"
+    },
+    {
+      "profile": "antigravity",
+      "model": "gemini-3.8-flash-medium",
+      "arena_ids": [
+        "Gemini 3.8 Flash (Medium)",
+        "gemini-3.8-flash-medium"
+      ],
+      "confidence": "candidate"
+    },
+    {
+      "profile": "antigravity",
+      "model": "gemini-3.8-flash-high",
+      "arena_ids": [
+        "Gemini 3.8 Flash (High)",
+        "gemini-3.8-flash-high"
+      ],
+      "confidence": "candidate"
+    },
+    {
+      "profile": "antigravity",
+      "model": "Gemini 3.1 Pro (High)",
+      "arena_ids": [
+        "Gemini 3.1 Pro Preview",
+        "gemini-3.1-pro"
+      ],
+      "confidence": "verified"
+    },
+    {
+      "profile": "grok",
+      "model": "grok-4.5",
+      "arena_ids": [
+        "Grok 4.5",
+        "grok-4.5"
+      ],
+      "confidence": "verified"
+    },
+    {
+      "profile": "qwen",
+      "model": "qwen3.8-max-0902",
+      "arena_ids": [
+        "qwen3.8-max-0902",
+        "qwen-3.8-max-0902"
+      ],
+      "confidence": "candidate"
+    },
+    {
+      "profile": "codex",
+      "model": "gpt-6-luna",
+      "arena_ids": [
+        "gpt-6-luna"
+      ],
+      "confidence": "candidate"
+    },
+    {
+      "profile": "codex",
+      "model": "gpt-6-sol",
+      "arena_ids": [
+        "gpt-6-sol"
+      ],
+      "confidence": "candidate"
+    }
+  ]
+}

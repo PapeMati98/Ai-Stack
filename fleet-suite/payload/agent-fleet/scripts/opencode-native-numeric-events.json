@@ -1,0 +1,70 @@
+[
+  {
+    "type": "step_finish",
+    "part": {
+      "type": "step-finish",
+      "id": "native-redacted-0",
+      "tokens": {
+        "total": 8200,
+        "input": 7527,
+        "output": 78,
+        "reasoning": 595,
+        "cache": {
+          "write": 0,
+          "read": 0
+        }
+      }
+    }
+  },
+  {
+    "type": "step_finish",
+    "part": {
+      "type": "step-finish",
+      "id": "native-redacted-1",
+      "tokens": {
+        "total": 10145,
+        "input": 2393,
+        "output": 134,
+        "reasoning": 130,
+        "cache": {
+          "write": 0,
+          "read": 7488
+        }
+      }
+    }
+  },
+  {
+    "type": "step_finish",
+    "part": {
+      "type": "step-finish",
+      "id": "native-redacted-2",
+      "tokens": {
+        "total": 13550,
+        "input": 3581,
+        "output": 93,
+        "reasoning": 20,
+        "cache": {
+          "write": 0,
+          "read": 9856
+        }
+      }
+    }
+  },
+  {
+    "type": "step_finish",
+    "part": {
+      "type": "step-finish",
+      "id": "native-redacted-3",
+      "tokens": {
+        "total": 25153,
+        "input": 4870,
+        "output": 2042,
+        "reasoning": 4865,
+        "cache": {
+          "write": 0,
+          "read": 13376
+        }
+      }
+    }
+  }
+]

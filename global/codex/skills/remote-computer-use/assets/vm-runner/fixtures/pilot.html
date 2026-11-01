@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Remote Computer Use Pilot</title>
+  </head>
+  <body>
+    <main>
+      <h1>Remote Computer Use Pilot</h1>
+      <p id="count">0</p>
+      <button id="increment" type="button">Increment</button>
+    </main>
+    <script>
+      const count = document.querySelector('#count');
+      document.querySelector('#increment').addEventListener('click', () => {
+        count.textContent = String(Number(count.textContent) + 1);
+      });
+    </script>
+  </body>
+</html>

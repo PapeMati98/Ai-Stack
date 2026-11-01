@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "project_slug": "example-app",
+  "summary": "Add a compatible internal lookup index.",
+  "synthetic_only": false,
+  "persistent_write": true,
+  "schema_change": "additive-compatible",
+  "new_consumer": false,
+  "published_metric_change": false,
+  "personal_or_restricted": false,
+  "cross_system": false,
+  "access_change": false,
+  "migration_or_backfill": false,
+  "retention_or_delete": false,
+  "production": false
+}

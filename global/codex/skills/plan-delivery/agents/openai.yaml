@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan delivery"
+  short_description: "Zamienia prompt w zweryfikowany kontrakt realizacji"
+  default_prompt: "Przeksztalc ten prompt w kompletny, zweryfikowany kontrakt realizacji przed wykonaniem."

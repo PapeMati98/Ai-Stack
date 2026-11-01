@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "policy_version": "2026-09-22.1",
+  "catalog_url": "https://openrouter.ai/api/v1/models/user",
+  "catalog_max_age_days": 7,
+  "endpoint_probe_timeout_seconds": 20,
+  "failure_threshold": 2,
+  "quarantine_hours": 24,
+  "retired_model_ids": ["stealth/ox-alpha", "meta/muse-spark-1.2-contributor", "nvidia/nemotron-3-ultra-550b-a55b:free"],
+  "minimum_panel_size": {
+    "quick": 3,
+    "default": 6,
+    "full": 8,
+    "custom": 1
+  },
+  "panels": {
+    "quick": [
+      "chair",
+      "execution",
+      "correctness",
+      "independent"
+    ],
+    "default": [
+      "chair",
+      "principal",
+      "execution",
+      "long_context",
+      "systems",
+      "alternative",
+      "correctness",
+      "independent",
+      "contrarian"
+    ],
+    "full": [
+      "chair",
+      "principal",
+      "execution",
+      "long_context",
+      "systems",
+      "alternative",
+      "correctness",
+      "independent",
+      "contrarian",
+      "red_team",
+      "simplicity",
+      "business"
+    ]
+  },
+  "roles": {
+    "chair": {
+      "label": "PRZEWODNICZACY / OCENA CALOSCI",
+      "description": "Polacz rygor techniczny, dlugi horyzont, wykonalnosc agentowa i decyzje GO/NO-GO. Wskaz najwyzej dwa rozstrzygniecia, ktore realnie zmieniaja decyzje o starcie.",
+      "selector": {
+        "patterns": ["^anthropic/claude-fable-[0-9]+$"],
+        "preferred_ids": ["anthropic/claude-fable-5"],
+        "minimum_created": 1781007515,
+        "deny_ids": []
+      }
+    },
+    "principal": {
+      "label": "PRINCIPAL REVIEWER / GLEBOKI AUDYT",
+      "description": "Przeprowadz drugi, niezalezny audyt decyzji najwyzszego rzedu. Szukaj bledow w modelu problemu, dowodach, granicach systemu i dlugohoryzontowych konsekwencjach, ktore mogly umknac przewodniczacemu.",
+      "selector": {
+        "patterns": ["^anthropic/claude-opus-[0-9]+(?:\\.[0-9]+)?$"],
+        "preferred_ids": ["anthropic/claude-opus-5.5"],
+        "minimum_created": 1790094732,
+        "deny_ids": ["anthropic/claude-opus-4.8"]
+      }
+    },
+    "execution": {
+      "label": "WYKONANIE / AGENTIC CODING",
+      "description": "Sprawdz kolejnosc implementacji, narzedzia, integracje, testy, migracje, koszt iteracji i miejsca, w ktorych wykonawca utknie.",
+      "selector": {
+        "patterns": ["^qwen/qwen[0-9]+(?:\\.[0-9]+)?-max$"],
+        "preferred_ids": ["qwen/qwen3.8-max"],
+        "minimum_created": 1785731612,
+        "deny_ids": ["qwen/qwen3.7-max"]
+      }
+    },
+    "long_context": {
+      "label": "DLUGI KONTEKST / SPOJNOSC IMPLEMENTACJI",
+      "description": "Sprawdz spojnosci cross-file i cross-system, zaleznosci rozproszone w dlugim kontekscie, wykonalnosc wieloetapowa oraz miejsca, w ktorych lokalnie poprawne decyzje tworza globalny blad.",
+      "selector": {
+        "patterns": ["^moonshotai/kimi-k[0-9]+(?:\\.[0-9]+)?(?:-max)?$"],
+        "preferred_ids": ["moonshotai/kimi-k3"],
+        "minimum_created": 1784215858,
+        "deny_ids": ["moonshotai/kimi-k2.5", "moonshotai/kimi-k2.6", "moonshotai/kimi-k2.7-code"]
+      }
+    },
+    "systems": {
+      "label": "INZYNIERIA SYSTEMOWA / DOWIEZIENIE CALOSCI",
+      "description": "Przeloz koncepcje na spojny, dlugohoryzontowy workflow agentowy. Sprawdz planowanie, uzycie narzedzi, ciaglosc kontekstu, artefakty, weryfikacje i utrzymanie. Ogranicz sie do najwyzej trzech materialnych wnioskow, aby nie nadweryfikowywac planu.",
+      "selector": {
+        "patterns": ["^tencent/hy[0-9]+(?:-preview)?$"],
+        "preferred_ids": ["tencent/hy4-preview"],
+        "minimum_created": 1787897375,
+        "deny_ids": ["tencent/hy3", "tencent/hy3-preview"]
+      }
+    },
+    "alternative": {
+      "label": "ALTERNATYWNA ARCHITEKTURA",
+      "description": "Kwestionuj fundament i szukaj prostszego lub mocniejszego podzialu, narzedzia albo wzorca. Atakuj decyzje strukturalne i ukryte zaleznosci.",
+      "selector": {
+        "patterns": ["^z-ai/glm-[0-9]+(?:\\.[0-9]+)?$"],
+        "preferred_ids": ["z-ai/glm-5.2"],
+        "minimum_created": 1781631930,
+        "deny_ids": []
+      }
+    },
+    "correctness": {
+      "label": "POPRAWNOSC / EDGE CASES",
+      "description": "Sprawdz trudne wejscia, granice, strefy czasowe, wspolbieznosc, walidacje wyniku i ciche bledy logiczne.",
+      "selector": {
+        "patterns": ["^deepseek/deepseek-v[0-9]+(?:\\.[0-9]+)?-flash(?:-[0-9]+)?$"],
+        "preferred_ids": ["deepseek/deepseek-v4-flash-0731"],
+        "minimum_created": 1785478908,
+        "deny_ids": ["deepseek/deepseek-v4-pro"]
+      }
+    },
+    "independent": {
+      "label": "NIEZALEZNA PERSPEKTYWA / META",
+      "description": "Wnies niezalezna perspektywe modelu z innego laboratorium. Szukaj zalozen, ktore panel uznal za oczywiste bez dowodu, oraz brakujacych falsyfikatorow.",
+      "selector": {
+        "patterns": ["^meta/muse-spark-[0-9]+(?:\\.[0-9]+)?$"],
+        "preferred_ids": ["meta/muse-spark-1.2"],
+        "minimum_created": 1785959287,
+        "deny_ids": ["meta/muse-spark-1.1", "meta/muse-spark-1.2-contributor"]
+      }
+    },
+    "contrarian": {
+      "label": "KONTRARIANIN / ADWOKAT DIABLA",
+      "description": "Atakuj najsilniejsze zalozenie planu i postaw niewygodne pytania techniczne lub biznesowe, na ktore pozostali zbyt latwo przystaja.",
+      "selector": {
+        "patterns": ["^x-ai/grok-[0-9]+(?:\\.[0-9]+)*$"],
+        "preferred_ids": ["x-ai/grok-4.5"],
+        "minimum_created": 1783523154,
+        "deny_ids": ["x-ai/grok-4.3"]
+      }
+    },
+    "red_team": {
+      "label": "RED TEAM / RYZYKO",
+      "description": "Szukaj awarii, kruchych zaleznosci, single points of failure, braku rollbacku oraz ryzyk produkcji, security i utraty danych. ROLA WYLACZONA 2026-09-02: jedynym dostawca byl nvidia/nemotron-*-ultra:free, ktory jawnie uzywa danych do ulepszania produktow NVIDIA. Zasada nadrzedna wlasciciela zakazuje modeli trenujacych na naszych danych. Rola czeka na zgodnego zastepce - dopoki patterns sa puste, nie rozwiazuje sie i panel full ma 11 soczewek zamiast 12 (minimum to 8).",
+      "selector": {
+        "patterns": [],
+        "preferred_ids": [],
+        "minimum_created": 1780551208,
+        "deny_ids": ["nvidia/nemotron-3-ultra-550b-a55b:free"]
+      }
+    },
+    "simplicity": {
+      "label": "PROSTOTA / YAGNI",
+      "description": "Usun nadmiar, przedwczesne abstrakcje i prace na zapas. Zachowaj najprostsze rozwiazanie, ktore spelnia cel.",
+      "selector": {
+        "patterns": ["^mistralai/mistral-medium-.*$"],
+        "preferred_ids": ["mistralai/mistral-medium-3-5"],
+        "minimum_created": 1777570439,
+        "deny_ids": []
+      }
+    },
+    "business": {
+      "label": "INTENCJA BIZNESOWA / PRODUKT",
+      "description": "Sprawdz, czy plan rozwiazuje prawdziwy problem, nie tylko literalne polecenie. Pilnuj wartosci uzytkownika, kosztu utrzymania i dryfu zakresu.",
+      "selector": {
+        "patterns": ["^google/gemini-[0-9]+(?:\\.[0-9]+)?-flash$"],
+        "preferred_ids": ["google/gemini-3.6-flash"],
+        "minimum_created": 1784646733,
+        "deny_ids": ["google/gemini-3.5-flash"]
+      }
+    },
+    "arbiter": {
+      "label": "ARBITER / DRUGORZEDNE SCIEZKI",
+      "description": "Waz sprzeczne sciezki i rozstrzygaj trudny rozstaj projektowy. Uzywaj tylko po jawnym wlaczeniu, bo jest to rola kosztowna.",
+      "selector": {
+        "patterns": ["^sakana/fugu-ultra$"],
+        "preferred_ids": ["sakana/fugu-ultra"],
+        "minimum_created": 1782276303,
+        "deny_ids": []
+      }
+    }
+  }
+}

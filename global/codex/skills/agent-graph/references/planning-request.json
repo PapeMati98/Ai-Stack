@@ -1,0 +1,16 @@
+{
+  "goal": "REPLACE with the user's complete bounded request and prohibitions",
+  "workspace": "REPLACE with the actual absolute project path",
+  "role": "maker",
+  "constraints": ["Planning only, no mutations, deployment or contacts with real users"],
+  "task": {
+    "text": "Read only the necessary project context. Return a concise TODO with requirements, dependencies, parallel branches, maker and independent reviewer candidates, scope, test criteria and final integration. Preserve every user requirement; distinguish business questions from reversible technical choices. No contract, council, witness or implementation.",
+    "mode": "advisory",
+    "kind": "architecture",
+    "complexity": "high",
+    "workload_weights": {"architecture": 100},
+    "scope": ["REPLACE with relevant project files or directories"],
+    "done_when": ["TODO covers the complete user request and can be scheduled without a second planning ceremony"],
+    "maker": [{"agent": "claude", "model": "claude-fable-5-1", "score": 95, "reason": "Qualified strong planner; replace only with an actually supported model"}]
+  }
+}

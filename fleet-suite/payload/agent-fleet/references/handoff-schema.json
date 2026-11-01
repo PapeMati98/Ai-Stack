@@ -1,0 +1,44 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "summary",
+    "files_changed",
+    "verification",
+    "risks",
+    "next_steps"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["completed", "partial", "blocked", "failed"]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 16000
+    },
+    "files_changed": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {"type": "string", "maxLength": 1000}
+    },
+    "verification": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {"type": "string", "maxLength": 2000}
+    },
+    "risks": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {"type": "string", "maxLength": 2000}
+    },
+    "next_steps": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {"type": "string", "maxLength": 2000}
+    }
+  }
+}

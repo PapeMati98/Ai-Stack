@@ -1,0 +1,24 @@
+{
+  "positive": [
+    "Porownanie modeli przed wyborem strategii treningu.",
+    "Sprawdzenie licencji, rewizji i formatu datasetu.",
+    "Ocena, czy kandydat miesci sie w lokalnym VRAM i runtime."
+  ],
+  "negative": [
+    "Prosba o rozpoczecie treningu bez rekonesansu.",
+    "Prosba o wdrozenie modelu na produkcje.",
+    "Ogolne pytanie edukacyjne bez konkretnego kandydata lub decyzji."
+  ],
+  "anti_triggers": [
+    "hf-read nie moze samoistnie pobierac artefaktow.",
+    "Nie utozsamiaj karty modelu z niezalezna walidacja.",
+    "Nie uznawaj braku informacji o licencji za licencje permissive."
+  ],
+  "sensitive_actions": [
+    "download",
+    "upload or repo write",
+    "HF Jobs or scheduled job",
+    "gated asset access",
+    "community Space or publication"
+  ]
+}

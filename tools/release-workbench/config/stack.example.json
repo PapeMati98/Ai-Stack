@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "stack_root": "stack",
+  "state_root": "state",
+  "runtime_root": "runtime",
+  "enabled_clis": [],
+  "external_integrations": [],
+  "network_integrations_enabled": false,
+  "credential_references": {}
+}

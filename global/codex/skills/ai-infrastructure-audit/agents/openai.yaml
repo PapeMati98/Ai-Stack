@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI infrastructure audit"
+  short_description: "Read-only kontrola agentów, MCP, RAG i łańcucha dostaw"
+  default_prompt: "Użyj $ai-infrastructure-audit do dowodowego, read-only audytu wskazanej infrastruktury AI."

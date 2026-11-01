@@ -1,0 +1,45 @@
+{
+ "schema": "hub-quality-pilot-frozen-v1",
+ "questions": [
+  {
+   "q_id": "Q1",
+   "type": "current_value",
+   "text": "Jaki jest aktualny limit zapytan/min na klucz w projekcie alpha-tools? Podaj zrodlo i date."
+  },
+  {
+   "q_id": "Q2",
+   "type": "outdated_detection",
+   "text": "Ktore materiale zawieraja nieaktualna informacje o limicie alpha-tools i skad to wiadomo?"
+  },
+  {
+   "q_id": "Q3",
+   "type": "contradiction",
+   "text": "Czy w gamma-portal wystepuje sprzecznosc? Jezeli tak, podaj obie strony i wskaz, ktorej nie mozna uznac bez weryfikacji."
+  },
+  {
+   "q_id": "Q4",
+   "type": "duplicate",
+   "text": "Ktore fakty w beta-crm sa duplikatem i ktora wersje nalezy uznac za referencyjna?"
+  },
+  {
+   "q_id": "Q5",
+   "type": "cross_project",
+   "text": "Projekt delta-shop tez ma limit 100 zapytan/min. Czy to zmienia odpowiedz o aktualnym limicie alpha-tools?"
+  },
+  {
+   "q_id": "Q6",
+   "type": "evidence_citation",
+   "text": "Podaj zrodlo (source_id i sciezke evidence) dla faktu o eksportencie faktur w beta-crm."
+  },
+  {
+   "q_id": "Q7",
+   "type": "no_evidence",
+   "text": "Jak dlugo Gamma przechowuje logi audytowe? Nie zakladaj zgodnosie materialow."
+  },
+  {
+   "q_id": "Q8",
+   "type": "current_value",
+   "text": "Ile trwa maksymalny zakres eksportu CSV w beta-crm i czy to wymaga potwierdzenia KSeF?"
+  }
+ ]
+}

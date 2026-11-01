@@ -1,0 +1,174 @@
+{
+  "schema_version": 2,
+  "purpose": "Original regression corpus for lexical candidate generation. Each case runs the shortlist against the real discovered catalog, extended with real managed-release frontmatter resolved through skills-ownership.json for skills absent from the origin snapshot. All expectations apply strictly: a missing expected skill is a failure, not a skip. forbid and expect_empty always apply.",
+  "orchestration_skills": [
+    "agent-graph",
+    "agent-loop",
+    "agent-office",
+    "new-task",
+    "model-council",
+    "plan-delivery"
+  ],
+  "managed_release_skills": [
+    "design-ui",
+    "design-loop",
+    "agent-loop",
+    "agent-office"
+  ],
+  "cases": [
+    {
+      "id": "ui-from-mockup-pl",
+      "language": "pl",
+      "task": "Zaimplementuj ekran logowania zgodnie z makietą od grafika",
+      "expect_all": ["design-ui", "design-loop"],
+      "forbid": []
+    },
+    {
+      "id": "ui-from-mockup-en",
+      "language": "en",
+      "task": "Rebuild the pricing page layout from the new mockup",
+      "expect_all": ["design-ui", "design-loop"],
+      "forbid": []
+    },
+    {
+      "id": "ui-natural-en",
+      "language": "en",
+      "task": "Design a settings page for the mobile app",
+      "expect_all": ["design-ui", "design-loop"],
+      "forbid": []
+    },
+    {
+      "id": "ui-from-graphic-project-pl",
+      "language": "pl",
+      "task": "Zaimplementuj formularz rejestracji z projektu graficznego",
+      "expect_all": ["design-ui", "design-loop"],
+      "forbid": []
+    },
+    {
+      "id": "incident-after-deploy-pl",
+      "language": "pl",
+      "task": "Po wdrożeniu na produkcję padł checkout, zdiagnozuj awarię",
+      "expect_all": ["systematic-debugging"],
+      "forbid": ["video-gen", "google-ads-strategy"]
+    },
+    {
+      "id": "incident-after-deploy-en",
+      "language": "en",
+      "task": "Incident right after deploy: payments endpoint returns 500, triage the root cause",
+      "expect_all": ["systematic-debugging"],
+      "forbid": ["video-gen", "google-ads-strategy"]
+    },
+    {
+      "id": "incident-natural-pl",
+      "language": "pl",
+      "task": "Sklep pada z bledem 500 od wczorajszego wydania",
+      "expect_all": ["systematic-debugging"],
+      "forbid": ["video-gen", "google-ads-strategy", "agent-graph", "plan-delivery"]
+    },
+    {
+      "id": "incident-natural-en",
+      "language": "en",
+      "task": "Customers report the checkout broke with a 500 error right after the release",
+      "expect_all": ["systematic-debugging"],
+      "forbid": ["video-gen", "google-ads-strategy", "agent-graph", "plan-delivery"]
+    },
+    {
+      "id": "change-impact-pl",
+      "language": "pl",
+      "task": "Oceń wpływ zmiany schematu danych na pozostałe moduły systemu",
+      "expect_any": ["design-code-architecture", "data-governance"],
+      "forbid": []
+    },
+    {
+      "id": "change-impact-en",
+      "language": "en",
+      "task": "Assess the change impact of the schema migration before merging",
+      "expect_any": ["design-code-architecture", "data-governance"],
+      "forbid": []
+    },
+    {
+      "id": "change-impact-natural-pl",
+      "language": "pl",
+      "task": "Co sie stanie z reszta systemu, jak zmienie format tej tabeli?",
+      "expect_any": ["design-code-architecture", "data-governance"],
+      "forbid": ["agent-graph", "plan-delivery"]
+    },
+    {
+      "id": "change-impact-natural-en",
+      "language": "en",
+      "task": "Check what breaks downstream if I rename this column",
+      "expect_any": ["design-code-architecture", "data-governance"],
+      "forbid": ["agent-graph", "plan-delivery"]
+    },
+    {
+      "id": "change-impact-api-en",
+      "language": "en",
+      "task": "What will break if we change the API contract?",
+      "expect_all": ["design-code-architecture"],
+      "forbid": ["agent-graph"]
+    },
+    {
+      "id": "change-impact-api-pl",
+      "language": "pl",
+      "task": "Co sie zepsuje jesli zmienie API zamowien?",
+      "expect_all": ["design-code-architecture"],
+      "forbid": ["agent-graph"]
+    },
+    {
+      "id": "regression-tests-pl",
+      "language": "pl",
+      "task": "Napisz testy regresji dla modułu płatności",
+      "expect_all": ["test-first-engineering"],
+      "forbid": []
+    },
+    {
+      "id": "tests-natural-en",
+      "language": "en",
+      "task": "Add tests for the new coupon logic",
+      "expect_all": ["test-first-engineering"],
+      "forbid": ["agent-graph", "plan-delivery"]
+    },
+    {
+      "id": "simple-status-pl",
+      "language": "pl",
+      "task": "Pokaż mi status zadania",
+      "expect_empty": true,
+      "forbid": ["agent-graph", "agent-loop", "new-task", "model-council", "plan-delivery"]
+    },
+    {
+      "id": "simple-status-project-pl",
+      "language": "pl",
+      "task": "Pokaż status projektu",
+      "expect_empty": true,
+      "forbid": ["new-task", "start-stack", "agent-graph", "agent-loop", "plan-delivery"]
+    },
+    {
+      "id": "simple-status-project-en",
+      "language": "en",
+      "task": "What is the project status?",
+      "expect_empty": true,
+      "forbid": ["new-task", "start-stack", "agent-graph", "agent-loop", "plan-delivery"]
+    },
+    {
+      "id": "simple-status-open-pl",
+      "language": "pl",
+      "task": "Ile jest teraz otwartych zadan?",
+      "expect_empty": true,
+      "forbid": ["agent-graph", "agent-loop", "new-task", "model-council", "plan-delivery"]
+    },
+    {
+      "id": "smalltalk-negative",
+      "language": "pl",
+      "task": "Opowiedz krótki dowcip o kotach",
+      "expect_empty": true,
+      "forbid": []
+    },
+    {
+      "id": "generic-negative-en",
+      "language": "en",
+      "task": "Tell me a fun fact about the ocean",
+      "expect_empty": true,
+      "forbid": []
+    }
+  ]
+}

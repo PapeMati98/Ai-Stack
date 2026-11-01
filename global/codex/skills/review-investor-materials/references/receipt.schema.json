@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-stack.invalid/schemas/fundraising/acceptance-candidate/1",
+  "title": "Investment material acceptance candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "receipt_id", "campaign_id", "campaign_seal", "artifacts", "content_lineage", "design_lineage", "reviews", "findings", "repair_budget", "distribution_status"],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "receipt_id": {"type": "string", "pattern": "^receipt-[a-z0-9][a-z0-9-]{2,95}$"},
+    "campaign_id": {"type": "string", "pattern": "^campaign-[a-z0-9][a-z0-9-]{2,95}$"},
+    "campaign_seal": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "artifacts": {"type": "array", "minItems": 1},
+    "content_lineage": {"type": "object", "required": ["maker"]},
+    "design_lineage": {"type": "object", "required": ["maker"]},
+    "distribution_status": {"const": "not_authorized"},
+    "reviews": {"type": "array", "minItems": 6, "maxItems": 6},
+    "findings": {"type": "array"},
+    "repair_budget": {"type": "object"}
+  }
+}

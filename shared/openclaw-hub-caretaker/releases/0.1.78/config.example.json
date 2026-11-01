@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "project_slug": "example-value-0134",
+  "agent": "example-value-0135",
+  "session_id": "example-value-0136",
+  "state_dir": "example-value-0137",
+  "maintenance_state_dir": "example-value-0137",
+  "inputs": [
+    {
+      "path": "example-value-0138",
+      "kind": "session_jsonl",
+      "tool": "codex"
+    },
+    {
+      "path": "example-value-0140",
+      "kind": "session_jsonl",
+      "tool": "openclaw"
+    },
+    {
+      "path": "example-value-0141",
+      "kind": "session_jsonl",
+      "tool": "claude"
+    },
+    {
+      "path": "example-value-0142",
+      "kind": "normalized_events",
+      "tool": "openclaw"
+    }
+  ],
+  "allowlist": {
+    "tools": [
+      "codex",
+      "openclaw",
+      "claude"
+    ],
+    "max_body_bytes": 8192,
+    "max_excerpt_bytes": 400
+  },
+  "primary": {
+    "kind": "openclaw_argv",
+    "executable": "example-value-0145",
+    "argv": [
+      "example-value-0146",
+      "example-value-0147",
+      "example-value-0148",
+      "example-value-0149",
+      "example-value-0150",
+      "example-value-0151",
+      "example-value-0152",
+      "example-value-0153",
+      "example-value-0154",
+      "example-value-0155",
+      "example-value-0156",
+      "example-value-0157",
+      "example-value-0158",
+      "example-value-0159",
+      "example-value-0160"
+    ],
+    "run_config_inline": {
+      "telemetry": {
+        "enabled": false
+      },
+      "update": {
+        "checkOnStart": false
+      },
+      "agents": {
+        "defaults": {
+          "workspace": "example-value-0151",
+          "skipBootstrap": true,
+          "heartbeat": {
+            "every": "example-value-0161"
+          },
+          "model": {
+            "primary": "example-value-0157",
+            "fallbacks": []
+          },
+          "sandbox": {
+            "mode": "example-value-0162"
+          }
+        }
+      },
+      "models": {
+        "providers": {
+          "vllm": {
+            "baseUrl": "https://example.invalid/service-0163",
+            "api": "example-value-0164",
+            "apiKey": "",
+            "models": [
+              {
+                "id": "example-value-0166",
+                "name": "example-value-0167",
+                "reasoning": true,
+                "input": [
+                  "example-value-0168"
+                ],
+                "contextWindow": 16384,
+                "maxTokens": 2048,
+                "compat": {
+                  "thinkingFormat": "example-value-0169"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "tools": {
+        "allow": [
+          "example-value-0170"
+        ],
+        "deny": [
+          "example-value-0171",
+          "example-value-0172",
+          "example-value-0173",
+          "example-value-0147",
+          "example-value-0174",
+          "example-value-0175",
+          "example-value-0176",
+          "example-value-0177",
+          "example-value-0178"
+        ],
+        "fs": {
+          "workspaceOnly": true
+        },
+        "exec": {
+          "mode": "example-value-0179"
+        },
+        "web": {
+          "search": {
+            "enabled": false
+          },
+          "fetch": {
+            "enabled": false
+          }
+        }
+      },
+      "plugins": {
+        "enabled": false
+      },
+      "mcp": {
+        "servers": {}
+      },
+      "skills": {
+        "allowBundled": [],
+        "load": {
+          "watch": false,
+          "extraDirs": []
+        }
+      }
+    }
+  },
+  "fallback": null,
+  "hub": {
+    "python_executable": "example-value-0003",
+    "script": "example-value-0188",
+    "vault": "example-value-0189",
+    "require_context": true,
+    "min_health": "pass",
+    "min_lint": "pass",
+    "context_receipt": "example-value-0191"
+  },
+  "office": {
+    "python_executable": "example-value-0003",
+    "script": "example-value-0192",
+    "wrapper": "{{OWNED_ROOT}}/example-0193",
+    "home": "example-value-0194",
+    "harness": "example-value-0134",
+    "host": "example-value-0135",
+    "session_id": "example-value-0136",
+    "rate_per_minute": 6,
+    "dedup": true,
+    "no_autoplay_reply": true
+  },
+  "limits": {
+    "max_records_per_run": 64,
+    "max_prompt_bytes": 16384,
+    "incident_cooldown_seconds": 300
+  }
+}

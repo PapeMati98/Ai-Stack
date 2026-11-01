@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-loop-l2-search/contract.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "loop_id", "goal", "non_goals", "project", "base_ref",
+    "scope", "executor", "implementers", "auditor", "supervisor",
+    "verification", "quality", "search", "limits", "network_allowed",
+    "kill_switch"
+  ],
+  "properties": {
+    "schema_version": {"const": 3},
+    "loop_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,63}$"},
+    "goal": {"type": "string", "minLength": 1, "maxLength": 4000},
+    "non_goals": {"type": "array", "maxItems": 50, "items": {"type": "string", "maxLength": 1000}},
+    "project": {"type": "string", "minLength": 1},
+    "base_ref": {"const": "HEAD"},
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed_paths", "protected_paths"],
+      "properties": {
+        "allowed_paths": {"type": "array", "minItems": 1, "maxItems": 100, "items": {"type": "string"}},
+        "protected_paths": {"type": "array", "maxItems": 100, "items": {"type": "string"}}
+      }
+    },
+    "executor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtime_profile", "knowledge_mode", "max_prompt_bytes",
+        "max_model_tool_calls", "max_task_bytes", "max_repository_files",
+        "max_repository_bytes"
+      ],
+      "properties": {
+        "runtime_profile": {"const": "l2-thin"},
+        "knowledge_mode": {"const": "none"},
+        "max_prompt_bytes": {"type": "integer", "minimum": 1024, "maximum": 100000},
+        "max_model_tool_calls": {"type": "integer", "minimum": 1, "maximum": 20},
+        "max_task_bytes": {"type": "integer", "minimum": 256, "maximum": 100000},
+        "max_repository_files": {"type": "integer", "minimum": 1, "maximum": 10000},
+        "max_repository_bytes": {"type": "integer", "minimum": 1, "maximum": 100000000}
+      }
+    },
+    "implementers": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/actor"}
+    },
+    "auditor": {"$ref": "#/$defs/auditor"},
+    "supervisor": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/actor"}
+      ]
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["trusted_runner", "trusted_runner_sha256", "timeout_seconds"],
+      "properties": {
+        "trusted_runner": {"type": "string"},
+        "trusted_runner_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "timeout_seconds": {"type": "integer", "minimum": 5, "maximum": 600}
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract", "contract_sha256"],
+      "properties": {
+        "contract": {"type": "string", "minLength": 1},
+        "contract_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "search": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hypotheses", "complexity", "baseline_quality_score",
+        "minimum_improvement", "tie_budget", "stagnation_window",
+        "max_supervisor_interventions"
+      ],
+      "properties": {
+        "hypotheses": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 12,
+          "items": {"type": "string", "minLength": 1, "maxLength": 2000}
+        },
+        "complexity": {"enum": ["low", "medium", "high"]},
+        "baseline_quality_score": {"type": "integer", "minimum": 0, "maximum": 100},
+        "minimum_improvement": {"type": "integer", "minimum": 0, "maximum": 100},
+        "tie_budget": {"type": "integer", "minimum": 0, "maximum": 3},
+        "stagnation_window": {"type": "integer", "minimum": 1, "maximum": 6},
+        "max_supervisor_interventions": {"type": "integer", "minimum": 0, "maximum": 3}
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_wall_seconds", "max_total_tokens", "max_fresh_input_tokens",
+        "max_cache_read_tokens", "max_cache_write_tokens", "max_output_tokens",
+        "max_reasoning_tokens", "unknown_token_policy", "max_changed_files",
+        "max_diff_bytes"
+      ],
+      "properties": {
+        "max_wall_seconds": {"type": "integer", "minimum": 300, "maximum": 28800},
+        "max_total_tokens": {"type": ["integer", "null"], "minimum": 1},
+        "max_fresh_input_tokens": {"type": ["integer", "null"], "minimum": 1},
+        "max_cache_read_tokens": {"type": ["integer", "null"], "minimum": 1},
+        "max_cache_write_tokens": {"type": ["integer", "null"], "minimum": 1},
+        "max_output_tokens": {"type": ["integer", "null"], "minimum": 1},
+        "max_reasoning_tokens": {"type": ["integer", "null"], "minimum": 1},
+        "unknown_token_policy": {"enum": ["allow", "stop"]},
+        "token_policy": {"enum": ["hard", "estimate"], "description": "Optional. Missing in old immutable contracts means legacy hard; estimate records token overruns and unknown telemetry as warnings without stopping."},
+        "max_changed_files": {"type": "integer", "minimum": 1, "maximum": 100},
+        "max_diff_bytes": {"type": "integer", "minimum": 1, "maximum": 5000000}
+      }
+    },
+    "network_allowed": {"const": false},
+    "kill_switch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "env"],
+      "properties": {
+        "file": {"const": "STOP"},
+        "env": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"}
+      }
+    }
+  },
+  "$defs": {
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agent", "model", "execution_profile", "assessment_file", "timeout_seconds"],
+      "properties": {
+        "agent": {"type": "string", "minLength": 1},
+        "model": {"type": ["string", "null"]},
+        "execution_profile": {"type": ["string", "null"]},
+        "assessment_file": {"type": "string", "minLength": 1},
+        "timeout_seconds": {"type": "integer", "minimum": 30, "maximum": 1800}
+      }
+    },
+    "auditor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agent", "model", "timeout_seconds"],
+      "properties": {
+        "agent": {"type": "string", "minLength": 1},
+        "model": {"type": ["string", "null"]},
+        "timeout_seconds": {"type": "integer", "minimum": 30, "maximum": 1800}
+      }
+    }
+  }
+}

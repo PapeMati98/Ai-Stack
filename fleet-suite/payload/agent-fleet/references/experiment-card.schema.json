@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Fleet scientific experiment card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "card_id",
+    "campaign_id",
+    "hypothesis",
+    "run_ids",
+    "independence",
+    "hardware_request",
+    "data_quality",
+    "repair_policy"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "card_id": {"type": "string", "pattern": "^experiment-[A-Za-z0-9][A-Za-z0-9-]{7,127}$"},
+    "campaign_id": {"type": "string", "pattern": "^campaign-[A-Za-z0-9][A-Za-z0-9-]{7,127}$"},
+    "hypothesis": {"type": "string", "minLength": 1, "maxLength": 2000},
+    "run_ids": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 1024,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^run-[A-Za-z0-9][A-Za-z0-9-]{7,127}$"}
+    },
+    "independence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["independent", "depends_on_cards"],
+      "properties": {
+        "independent": {"const": true},
+        "depends_on_cards": {"const": []}
+      }
+    },
+    "hardware_request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gpu_hours", "concurrency_slot"],
+      "properties": {
+        "gpu_hours": {"type": "number", "exclusiveMinimum": 0, "maximum": 1000000},
+        "concurrency_slot": {"type": "integer", "minimum": 1, "maximum": 1024}
+      }
+    },
+    "data_quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "evidence_ref"],
+      "properties": {
+        "status": {"enum": ["pending", "passed", "failed"]},
+        "evidence_ref": {"type": "string", "minLength": 1, "maxLength": 500}
+      }
+    },
+    "repair_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed", "scope"],
+      "properties": {
+        "allowed": {"const": true},
+        "scope": {"const": "rejected-only"}
+      }
+    }
+  }
+}

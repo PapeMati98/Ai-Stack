@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "title": "Przepływ architektury przetwarzania",
+  "subtitle": "Ilustracyjny diagram przepływu rekordów między warstwami: wejście, walidacja, normalizacja, bramka jakości, magazyn i eksport.",
+  "badge": "ILUSTRACYJNE · DANE POKAZOWE",
+  "telemetry_mode": "illustrative",
+  "duration_sec": 6.0,
+  "fps": 30,
+  "packets_per_edge": 3,
+  "grid": { "cols": 4, "rows": 3 },
+  "nodes": [
+    { "id": "ingest", "label": "Wejście danych źródłowych", "kind": "source", "col": 0, "row": 1 },
+    { "id": "walidacja", "label": "Walidacja schematu rekordów", "kind": "process", "col": 1, "row": 0 },
+    { "id": "normalizacja", "label": "Normalizacja pól i kodowania", "kind": "process", "col": 1, "row": 2 },
+    { "id": "bramka", "label": "Bramka jakości danych", "kind": "gate", "col": 2, "row": 1 },
+    { "id": "magazyn", "label": "Magazyn wyników pośrednich", "kind": "store", "col": 3, "row": 0 },
+    { "id": "eksport", "label": "Eksport pakietów wynikowych", "kind": "sink", "col": 3, "row": 2 }
+  ],
+  "edges": [
+    { "id": "e-ing-wal", "from": "ingest", "to": "walidacja", "kind": "data", "label": "surowe rekordy" },
+    { "id": "e-ing-nor", "from": "ingest", "to": "normalizacja", "kind": "data", "label": "strumień wejściowy" },
+    { "id": "e-wal-bra", "from": "walidacja", "to": "bramka", "kind": "control", "label": "wynik walidacji" },
+    { "id": "e-nor-bra", "from": "normalizacja", "to": "bramka", "kind": "data", "label": "rekordy znormalizowane" },
+    { "id": "e-bra-mag", "from": "bramka", "to": "magazyn", "kind": "data", "label": "zatwierdzone pakiety" },
+    { "id": "e-bra-eks", "from": "bramka", "to": "eksport", "kind": "event", "label": "zdarzenie eksportu" },
+    { "id": "e-mag-eks", "from": "magazyn", "to": "eksport", "kind": "data", "label": "odczyt magazynu" }
+  ],
+  "counters": { "records_target": 1280, "error_budget": 3, "queue_max": 96 },
+  "log_messages": [
+    "ingest: pakiet wejściowy przyjęty do bufora",
+    "walidacja: schemat rekordu zgodny z kontraktem",
+    "normalizacja: ujednolicone kodowanie pól tekstowych",
+    "bramka: próbka jakości powyżej progu akceptacji",
+    "magazyn: zapis partii wyników pośrednich",
+    "eksport: pakiet wynikowy gotowy do odbioru"
+  ]
+}

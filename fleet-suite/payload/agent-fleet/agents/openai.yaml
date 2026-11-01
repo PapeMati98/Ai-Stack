@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Fleet CLI"
+  short_description: "Route CLI workers with quality and GLM security gates"
+  default_prompt: "Use $agent-fleet for this substantive task: apply the proper preflight, score every configured model, consider current plan headroom, delegate bounded work while Codex keeps working, run an independent read-only gate over the current worker runs, use the native OpenCode GLM-5.3-Flash Security Gate for a coherent implementation batch, repair only rejected scope within the frozen budget, perform parent acceptance, and report per-model token and quota evidence."

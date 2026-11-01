@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "loop_id": "weekly-project-health",
+  "goal": "Produce an evidence-backed weekly project health report.",
+  "non_goals": [
+    "Do not implement or modify project files.",
+    "Do not deploy, commit, push, or mutate runtime configuration."
+  ],
+  "watched_scope": [
+    "src/**",
+    "tests/**",
+    "docs/**"
+  ],
+  "cadence": {
+    "kind": "manual"
+  },
+  "timezone": "Europe/Warsaw",
+  "maturity": "L1",
+  "delegation": {
+    "via": "agent-fleet",
+    "mode": "review",
+    "agent": "auto",
+    "kind": "review",
+    "complexity": "medium",
+    "task_file": "task.md",
+    "assessment_file": "assessment.json",
+    "enable_web": false
+  },
+  "limits": {
+    "max_attempts_per_run": 1,
+    "run_timeout_seconds": 900,
+    "snapshot_max_files": 20000,
+    "snapshot_max_bytes": 1073741824,
+    "budget": {
+      "runs_per_day": 2,
+      "tokens_per_run": 50000,
+      "tokens_per_day": 75000,
+      "unknown_token_policy": "stop",
+      "token_policy": "estimate"
+    }
+  },
+  "stop_conditions": {
+    "no_progress_runs": 2,
+    "repeated_failure_runs": 2,
+    "budget_stop": true
+  },
+  "human_gates": [
+    "L2_promotion"
+  ],
+  "kill_switch": {
+    "file": "STOP",
+    "env": "AGENT_LOOP_KILL"
+  },
+  "retention": {
+    "runs_keep_days": 30,
+    "reports_keep_days": 30
+  },
+  "write_policy": {
+    "allowed_write_areas": [
+      ".agents/loops/weekly-project-health/**"
+    ],
+    "path_claims": [
+      "src/**",
+      "tests/**",
+      "docs/**"
+    ],
+    "forbid_watched_writes": true
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-stack.invalid/schemas/jit-graph-candidate/0.1",
+  "title": "Declarative JIT Graph Candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "candidate_id", "synthesis_input_sha256",
+    "planning_contract_sha256", "static_topology_id", "generator",
+    "requirements_covered", "tasks", "dependencies",
+    "coordination_estimate", "fallback"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "candidate_id": {"type": "string", "pattern": "^jit-graph-[a-z0-9][a-z0-9-]{7,80}$"},
+    "synthesis_input_sha256": {"$ref": "#/$defs/sha256"},
+    "planning_contract_sha256": {"$ref": "#/$defs/sha256"},
+    "static_topology_id": {"type": "string", "minLength": 3, "maxLength": 120},
+    "generator": {"$ref": "#/$defs/generator"},
+    "requirements_covered": {
+      "type": "array", "minItems": 1, "maxItems": 256, "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^REQ-[0-9]{3,}$"}
+    },
+    "tasks": {
+      "type": "array", "minItems": 1, "maxItems": 128,
+      "items": {"$ref": "#/$defs/task"}
+    },
+    "dependencies": {
+      "type": "array", "maxItems": 512,
+      "items": {"$ref": "#/$defs/dependency"}
+    },
+    "coordination_estimate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["parallel_streams", "review_gates", "estimated_coordination_steps"],
+      "properties": {
+        "parallel_streams": {"type": "integer", "minimum": 1, "maximum": 32},
+        "review_gates": {"type": "integer", "minimum": 1, "maximum": 128},
+        "estimated_coordination_steps": {"type": "integer", "minimum": 1, "maximum": 512}
+      }
+    },
+    "fallback": {
+      "type": "object", "additionalProperties": false,
+      "required": ["static_topology_id", "trigger"],
+      "properties": {
+        "static_topology_id": {"type": "string", "minLength": 3, "maxLength": 120},
+        "trigger": {"type": "string", "minLength": 3, "maxLength": 500}
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "generator": {
+      "type": "object", "additionalProperties": false,
+      "required": ["fleet_run_id", "provider_lineage", "model_identity"],
+      "properties": {
+        "fleet_run_id": {"type": "string", "minLength": 8, "maxLength": 200},
+        "provider_lineage": {"type": "string", "minLength": 2, "maxLength": 100},
+        "model_identity": {"type": "string", "minLength": 2, "maxLength": 200}
+      }
+    },
+    "context": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "sha256", "purpose"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1, "maxLength": 500},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "purpose": {"type": "string", "minLength": 3, "maxLength": 300}
+      }
+    },
+    "budget": {
+      "type": "object", "additionalProperties": false,
+      "required": ["max_wall_seconds", "max_tool_calls", "max_tokens", "max_attempts", "max_repairs"],
+      "properties": {
+        "max_wall_seconds": {"type": "integer", "minimum": 1},
+        "max_tool_calls": {"type": "integer", "minimum": 1},
+        "max_tokens": {"type": "integer", "minimum": 1},
+        "max_attempts": {"type": "integer", "minimum": 1, "maximum": 3},
+        "max_repairs": {"type": "integer", "minimum": 0, "maximum": 2}
+      }
+    },
+    "reviewer": {
+      "type": "object", "additionalProperties": false,
+      "required": ["different_provider_lineage", "required_capabilities"],
+      "properties": {
+        "different_provider_lineage": {"const": true},
+        "required_capabilities": {
+          "type": "array", "minItems": 1, "maxItems": 16, "uniqueItems": true,
+          "items": {"type": "string", "minLength": 2, "maxLength": 100}
+        }
+      }
+    },
+    "task": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "task_id", "objective", "requirement_refs", "authority_ceiling_ref",
+        "static_task_contract_sha256", "capability", "context_refs",
+        "skill_bindings", "tool_allowlist", "read_scope", "write_scope",
+        "budget", "stop_conditions", "evidence_refs", "criterion_refs",
+        "reviewer_constraint", "repair_route"
+      ],
+      "properties": {
+        "task_id": {"type": "string", "pattern": "^task-[a-z0-9][a-z0-9-]{2,100}$"},
+        "objective": {"type": "string", "minLength": 8, "maxLength": 2000},
+        "requirement_refs": {
+          "type": "array", "minItems": 1, "maxItems": 64, "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^REQ-[0-9]{3,}$"}
+        },
+        "authority_ceiling_ref": {"type": "string", "minLength": 3, "maxLength": 160},
+        "static_task_contract_sha256": {"$ref": "#/$defs/sha256"},
+        "capability": {"type": "string", "minLength": 3, "maxLength": 100},
+        "context_refs": {"type": "array", "maxItems": 64, "items": {"$ref": "#/$defs/context"}},
+        "skill_bindings": {"type": "array", "maxItems": 8, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,63}$"}},
+        "tool_allowlist": {"type": "array", "maxItems": 32, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 100}},
+        "read_scope": {"type": "array", "maxItems": 64, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 500}},
+        "write_scope": {"type": "array", "maxItems": 32, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 500}},
+        "budget": {"$ref": "#/$defs/budget"},
+        "stop_conditions": {"type": "array", "minItems": 1, "maxItems": 16, "uniqueItems": true, "items": {"type": "string", "minLength": 3, "maxLength": 300}},
+        "evidence_refs": {"type": "array", "minItems": 1, "maxItems": 64, "uniqueItems": true, "items": {"type": "string", "minLength": 3, "maxLength": 200}},
+        "criterion_refs": {"type": "array", "minItems": 1, "maxItems": 64, "uniqueItems": true, "items": {"type": "string", "pattern": "^crit-[a-z0-9][a-z0-9-]{2,100}$"}},
+        "reviewer_constraint": {"$ref": "#/$defs/reviewer"},
+        "repair_route": {
+          "type": "object", "additionalProperties": false,
+          "required": ["on_reject", "on_exhaustion"],
+          "properties": {
+            "on_reject": {"enum": ["bounded-repair", "block"]},
+            "on_exhaustion": {"enum": ["static-fallback", "block"]}
+          }
+        }
+      }
+    },
+    "dependency": {
+      "type": "object", "additionalProperties": false,
+      "required": ["from", "to", "kind"],
+      "properties": {
+        "from": {"type": "string", "pattern": "^task-[a-z0-9][a-z0-9-]{2,100}$"},
+        "to": {"type": "string", "pattern": "^task-[a-z0-9][a-z0-9-]{2,100}$"},
+        "kind": {"enum": ["requires", "evidence-gate", "review-gate"]}
+      }
+    }
+  }
+}

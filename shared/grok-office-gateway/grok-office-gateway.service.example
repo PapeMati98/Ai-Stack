@@ -1,0 +1,19 @@
+[Unit]
+Description=Grok Office Gateway Daemon
+After=network.target
+
+[Service]
+Type=simple
+User=agentoffice
+Group=agentoffice
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=true
+ReadWritePaths=/var/lib/agent-office
+ExecStart=/usr/bin/python3.14 -B -I /opt/agent-stack/shared/grok-office-gateway/grok_office_gateway.py --config /etc/grok-office-gateway/config.json
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

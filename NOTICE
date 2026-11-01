@@ -1,0 +1,8 @@
+AI Stack
+Copyright 2026 The AI Stack authors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This product includes TypeScript, Copyright Microsoft Corporation, licensed
+under the Apache License, Version 2.0. Its license, third-party notices and
+provenance are kept in fleet-suite/payload/agent-fleet/scripts/vendor/typescript/.

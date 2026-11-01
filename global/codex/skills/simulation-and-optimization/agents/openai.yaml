@@ -1,0 +1,3 @@
+interface:
+  display_name: "Simulation and Optimization"
+  short_description: "Model systems, optimize trade-offs, and validate policies"

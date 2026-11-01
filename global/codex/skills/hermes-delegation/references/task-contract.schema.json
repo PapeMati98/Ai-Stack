@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Hermes Delegation Task Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "bridge_version",
+    "task_id",
+    "created_at",
+    "requested_for",
+    "requesting_agent",
+    "mode",
+    "title",
+    "task",
+    "target",
+    "acceptance_criteria",
+    "requested_skills",
+    "runtime",
+    "approval",
+    "delegation",
+    "contract_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "bridge_version": {"type": "string"},
+    "task_id": {"type": "string", "pattern": "^hdt-[0-9]{8}T[0-9]{6}Z-[a-f0-9]{8}$"},
+    "created_at": {"type": "string"},
+    "requested_for": {"const": "Mateusz"},
+    "requesting_agent": {"type": "string", "minLength": 1, "maxLength": 80},
+    "mode": {"enum": ["REPORT_ONLY", "RESEARCH_ONLY", "PRIVATE_READ", "INFRA_OBSERVE", "PREPARE_PATCH", "INFRA_CHANGE", "EXTERNAL_ACTION", "SCHEDULED_AUTONOMY"]},
+    "title": {"type": "string", "minLength": 1, "maxLength": 240},
+    "task": {"type": "string", "minLength": 1, "maxLength": 200000},
+    "target": {"type": "object"},
+    "acceptance_criteria": {"type": "array", "items": {"type": "string"}},
+    "requested_skills": {"type": "array", "items": {"type": "string"}},
+    "runtime": {"type": "object"},
+    "approval": {"type": "object"},
+    "delegation": {"type": "object"},
+    "contract_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "fixture_id": "synthetic-vault-2026-09-02",
+  "target_class": "TEST",
+  "target_name": "synthetic-vault",
+  "data_classification": "synthetic",
+  "executed": false,
+  "dry_run_only": true,
+  "notes": "Synthetic target used only by deterministic tests. It is never executed against a real target and contains no restricted dataset."
+}

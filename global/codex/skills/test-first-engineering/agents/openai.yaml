@@ -1,0 +1,3 @@
+interface:
+  display_name: "Test First Engineering"
+  short_description: "Define behavior with failing tests before implementation"

@@ -1,0 +1,18 @@
+{
+  "positive": [
+    "Summarize this supplied call transcript and extract decisions and owners.",
+    "Read at most ten approved support messages and prepare ticket triage drafts.",
+    "Prepare an unsent reply draft from this bounded ticket payload."
+  ],
+  "negative_anti_trigger": [
+    "Summarize a public document already available locally without Hermes-only capabilities.",
+    "Implement a local code change that does not require AI Lab Server or Hermes tools.",
+    "Review a plan using Agent Fleet rather than Hermes."
+  ],
+  "sensitive_actions": [
+    "Mailbox or calendar retrieval requires PRIVATE_READ and an exact private-read receipt.",
+    "Sending a draft requires a new EXTERNAL_ACTION contract and receipt.",
+    "CRM or ticket mutation requires a new EXTERNAL_ACTION contract and receipt.",
+    "External escalation requires a new EXTERNAL_ACTION contract and receipt."
+  ]
+}

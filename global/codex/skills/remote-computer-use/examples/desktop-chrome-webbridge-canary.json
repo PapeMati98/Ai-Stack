@@ -1,0 +1,18 @@
+{
+  "schema_version": 2,
+  "task_id": "desktop-chrome-webbridge-canary",
+  "mode": "desktop",
+  "headless": false,
+  "side_effects": "test-only",
+  "capability": "uat",
+  "timeout_seconds": 120,
+  "target": {"kind": "app", "app_id": "chrome-agent-uat"},
+  "actions": [
+    {"type": "launch", "app_id": "chrome-agent-uat"},
+    {"type": "wait", "milliseconds": 5000},
+    {"type": "wait", "milliseconds": 5000},
+    {"type": "wait", "milliseconds": 5000},
+    {"type": "screenshot", "name": "chrome-webbridge-live"},
+    {"type": "close_target"}
+  ]
+}

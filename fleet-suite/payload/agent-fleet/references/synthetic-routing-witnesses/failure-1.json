@@ -1,0 +1,33 @@
+{
+  "synthetic_fixture": true,
+  "run_id": "synthetic-routing-failure-1",
+  "agent": "antigravity",
+  "adapter": "antigravity",
+  "model": "gemini-3.8-flash-high",
+  "run_status": "FAILED",
+  "exit_code": 3,
+  "started_at": "2026-01-01T00:00:00Z",
+  "completed_at": "2026-01-01T00:00:02Z",
+  "runtime_attestation": {
+    "status": "VERIFIED",
+    "synthetic_fixture": true
+  },
+  "token_usage": {
+    "status": "known",
+    "total_tokens": 0,
+    "adapter": "antigravity"
+  },
+  "provider_attempts": [
+    {
+      "exit_code": 3,
+      "terminal_reason": "error",
+      "transport_outcome": {
+        "status": "failed"
+      },
+      "token_usage": {
+        "status": "known",
+        "total_tokens": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-stack:skill-evolution:behavior-evidence:1",
+  "title": "Skill Evolution behavior evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "source_run_id",
+    "source_kind",
+    "producer",
+    "source_artifact_sha256",
+    "signature"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "evidence_id": {"type": "string", "pattern": "^evidence-[a-z0-9][a-z0-9-]{2,95}$"},
+    "source_run_id": {"type": "string", "pattern": "^run-[a-z0-9][a-z0-9-]{2,95}$"},
+    "source_kind": {"enum": ["agent-fleet", "agent-graph", "agent-loop", "acceptance"]},
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor_id", "provider_lineage"],
+      "properties": {
+        "actor_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"},
+        "provider_lineage": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"}
+      }
+    },
+    "source_artifact_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_family",
+        "role",
+        "model_family",
+        "runtime",
+        "tool_surface",
+        "environment",
+        "symptom",
+        "expected_behavior",
+        "outcome"
+      ],
+      "properties": {
+        "task_family": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"},
+        "role": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"},
+        "model_family": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"},
+        "runtime": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"},
+        "tool_surface": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"},
+        "environment": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"},
+        "symptom": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"},
+        "expected_behavior": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"},
+        "outcome": {"enum": ["success", "failure", "recovered"]}
+      }
+    }
+  }
+}

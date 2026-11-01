@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "task_id": "offline-egress-probe",
+  "mode": "browser",
+  "headless": true,
+  "side_effects": "none",
+  "timeout_seconds": 60,
+  "target": {
+    "kind": "fixture",
+    "value": "offline-egress.html"
+  },
+  "actions": [
+    {
+      "type": "assert_text",
+      "selector": "#webrtc",
+      "contains": "blocked"
+    },
+    {
+      "type": "screenshot",
+      "name": "offline-egress"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "implicit_trigger": "poczatek_kazdego_zadania",
+  "positive": [
+    "Dobierz skille do budowy aplikacji z audytem bezpieczeństwa",
+    "Rozpoczynam nowe zadanie i potrzebuję właściwego workflow",
+    "Zakres zadania zmienił się z analizy na wdrożenie"
+  ],
+  "negative": [
+    "Zainstaluj znaleziony skill bez audytu",
+    "Uruchom wszystkie dostępne skille",
+    "Zmień uprawnienia aktywnych narzędzi"
+  ],
+  "sensitive_actions": [
+    "instalacja lub usunięcie skilla",
+    "zmiana permissions",
+    "wykonanie skryptu odkrytego skilla"
+  ],
+  "routing_policy": {
+    "gates": [
+      "permissions_unchanged",
+      "read_only_catalog",
+      "conflict_fail_closed"
+    ],
+    "aliases": {
+      "security": "governance",
+      "tests": "qa",
+      "testing": "qa"
+    },
+    "specialist_limit": 4
+  },
+  "reuse_without_new_catalog": [
+    "Status w niezmienionym zadaniu",
+    "Kontynuuj ustalone TODO bez zmiany ryzyka",
+    "Popraw literówkę w tej samej odebranej ścieżce"
+  ]
+}

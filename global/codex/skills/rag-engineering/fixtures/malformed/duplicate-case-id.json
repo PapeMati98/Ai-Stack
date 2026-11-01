@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "corpus_id": "synth-malformed-3",
+  "license": "public-domain",
+  "manifest": [
+    {
+      "source_id": "src-a",
+      "project_id": "atlas",
+      "title": "Source A",
+      "revision": "v1",
+      "valid_from": "2026-01-01T00:00:00Z",
+      "valid_until": null,
+      "supersedes": [],
+      "superseded_by": null,
+      "aliases": []
+    }
+  ],
+  "alias_groups": [],
+  "forbidden_sources": [],
+  "cases": [
+    {
+      "case_id": "case-dup",
+      "question": "first",
+      "temporal_intent": "any",
+      "adversarial_kind": "baseline_correctness",
+      "expected": {
+        "answer": "x",
+        "answer_match_policy": "case_insensitive",
+        "abstain_expected": false,
+        "required_sources": ["src-a"],
+        "allowed_revisions": null,
+        "forbidden_sources": []
+      }
+    },
+    {
+      "case_id": "case-dup",
+      "question": "second",
+      "temporal_intent": "any",
+      "adversarial_kind": "baseline_correctness",
+      "expected": {
+        "answer": "y",
+        "answer_match_policy": "case_insensitive",
+        "abstain_expected": false,
+        "required_sources": ["src-a"],
+        "allowed_revisions": null,
+        "forbidden_sources": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "runner_version": "0.3.0",
+  "browser_executable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "allow_network": false,
+  "allowed_origins": [],
+  "capture_console_text": false,
+  "max_timeout_seconds": 300,
+  "max_actions": 50,
+  "desktop_enabled": false,
+  "desktop_task_name": "MateuszAI-RemoteComputerUseDesktop",
+  "desktop_user": "EXAMPLE-VM\\ExampleUser",
+  "desktop_max_text_length": 2000,
+  "desktop_allowed_apps": [
+    {
+      "id": "notepad",
+      "executable": "C:\\Windows\\System32\\notepad.exe",
+      "arguments": [],
+      "process_names": [
+        "notepad"
+      ]
+    },
+    {
+      "id": "text-input-fixture",
+      "executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "arguments": [
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-WindowStyle",
+        "Hidden",
+        "-ExecutionPolicy",
+        "RemoteSigned",
+        "-File",
+        "C:\\ProgramData\\MateuszAI\\remote-computer-use\\current\\fixtures\\text-input-fixture.ps1"
+      ],
+      "process_names": [
+        "powershell"
+      ]
+    },
+    {
+      "id": "chrome-agent-uat",
+      "executable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "arguments": [
+        "--user-data-dir=C:\\Example\\remote-computer-use\\chrome-profile",
+        "--profile-directory=Default",
+        "--no-first-run",
+        "--no-default-browser-check",
+        "--disable-background-mode",
+        "--disable-sync",
+        "--disable-features=PasswordManagerOnboarding,AutofillServerCommunication"
+      ],
+      "process_names": [
+        "chrome"
+      ]
+    }
+  ]
+}

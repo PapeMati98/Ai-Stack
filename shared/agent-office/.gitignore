@@ -1,0 +1,15 @@
+# Runtime lives at %USERPROFILE%/.agents/coord and must never be committed
+# or copied into private backup payloads.
+.agents/
+.coord/
+leases/
+events.jsonl
+events.jsonl.*
+*.lock
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+*.py[cod]
+office/

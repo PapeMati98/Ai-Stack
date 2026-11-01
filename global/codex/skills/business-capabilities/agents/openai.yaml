@@ -1,0 +1,4 @@
+interface:
+  display_name: "Business Capabilities"
+  short_description: "Apply the right business lens without adding role noise"
+  default_prompt: "Use $business-capabilities to structure this business decision or deliverable with one primary lens and at most one supporting lens."

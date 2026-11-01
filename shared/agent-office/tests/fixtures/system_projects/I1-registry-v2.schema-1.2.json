@@ -1,0 +1,1935 @@
+{
+  "schema": "agent-stack/registry-v2",
+  "version": "candidate-v3",
+  "generated_at": "2026-01-01T00:00:00Z",
+  "generated_by": "synthetic-value-0291",
+  "status": "CANDIDATE - base (n2) + topics (n3) + short display_name (n4) + przeniesienie pol v1 (carryover) + aliasy S8; niepublikowany jako stabilna wiedza; D7 i D1 czekaja na decyzje wlasciciela",
+  "phase": "base",
+  "sources": {
+    "hub_registry": {
+      "path": "synthetic-value-0003",
+      "generated_at": "2026-01-01T00:00:00Z"
+    },
+    "org_map_draft": {
+      "path": "synthetic-value-0005",
+      "map_version": "synthetic-value-0006",
+      "generated": "2026-01-01"
+    },
+    "topics": {
+      "path": "synthetic-value-0293",
+      "topics": 20,
+      "evidence_records": 88,
+      "note": "synthetic-value-0294"
+    },
+    "names": {
+      "path": "synthetic-value-0295",
+      "short_names": 11
+    },
+    "s8_aliases": {
+      "path": "synthetic-value-0296",
+      "aliases_added": 13,
+      "pending_projects_added": [
+        "example-project-071",
+        "synthetic-value-0297"
+      ]
+    },
+    "v1_carryover": {
+      "path": "synthetic-value-0298",
+      "sha256": "synthetic-value-0299",
+      "families_added": 8,
+      "related_added": 18,
+      "current_state_added": 59,
+      "projects_missing_in_v2": []
+    }
+  },
+  "rules": [
+    "synthetic-value-0008",
+    "synthetic-value-0009",
+    "synthetic-value-0010",
+    "synthetic-value-0011"
+  ],
+  "organizations": [
+    {
+      "id": "example-org-001",
+      "kind": "company",
+      "status": "confirmed",
+      "aliases": [
+        "synthetic-value-0013",
+        "synthetic-value-0014",
+        "synthetic-value-0015",
+        "synthetic-value-0016"
+      ],
+      "display_name": "synthetic-value-0016"
+    },
+    {
+      "id": "example-org-002",
+      "kind": "company",
+      "status": "confirmed",
+      "aliases": [
+        "synthetic-value-0018",
+        "synthetic-value-0019",
+        "synthetic-value-0020"
+      ],
+      "display_name": "synthetic-value-0300"
+    },
+    {
+      "id": "example-org-003",
+      "kind": "company",
+      "status": "confirmed",
+      "aliases": [
+        "synthetic-value-0022",
+        "synthetic-value-0023",
+        "synthetic-value-0024",
+        "synthetic-value-0025"
+      ],
+      "display_name": "synthetic-value-0022"
+    },
+    {
+      "id": "example-org-004",
+      "kind": "company",
+      "status": "candidate",
+      "aliases": [
+        "synthetic-value-0027",
+        "synthetic-value-0028",
+        "synthetic-value-0029"
+      ],
+      "display_name": "synthetic-value-0301"
+    },
+    {
+      "id": "example-org-005",
+      "kind": "company",
+      "status": "candidate",
+      "aliases": [
+        "synthetic-value-0031",
+        "synthetic-value-0032",
+        "synthetic-value-0033",
+        "synthetic-value-0034"
+      ],
+      "display_name": "synthetic-value-0032"
+    }
+  ],
+  "workspace_groups": [
+    {
+      "name": "synthetic-value-0035",
+      "org": null,
+      "note": "synthetic-value-0036"
+    },
+    {
+      "name": "synthetic-value-0014",
+      "org": "example-org-001"
+    },
+    {
+      "name": "synthetic-value-0022",
+      "org": "example-org-003"
+    },
+    {
+      "name": "synthetic-value-0027",
+      "org": "example-org-004"
+    },
+    {
+      "name": "synthetic-value-0018",
+      "org": "example-org-002"
+    },
+    {
+      "name": "synthetic-value-0032",
+      "org": "example-org-005"
+    },
+    {
+      "name": "synthetic-value-0037",
+      "org": null,
+      "note": "synthetic-value-0038"
+    },
+    {
+      "name": "synthetic-value-0039",
+      "org": null,
+      "note": "synthetic-value-0038"
+    },
+    {
+      "name": "synthetic-value-0040",
+      "org": null,
+      "note": "synthetic-value-0038"
+    },
+    {
+      "name": "synthetic-value-0041",
+      "org": null,
+      "note": "synthetic-value-0038"
+    },
+    {
+      "name": "synthetic-value-0042",
+      "org": null,
+      "note": "synthetic-value-0043"
+    }
+  ],
+  "projects": {
+    "example-project-001": {
+      "title": "synthetic-value-0044",
+      "display_name": "synthetic-value-0044",
+      "family": "example-family-007",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0047"
+      ],
+      "hub_main_page": "synthetic-value-0048",
+      "hub_latest_page": "synthetic-value-0048",
+      "status": "active",
+      "related": [
+        "example-project-001"
+      ],
+      "current_state_source": "src-20260101T000000003Z-synthetic"
+    },
+    "example-project-002": {
+      "title": "synthetic-value-0049",
+      "display_name": "synthetic-value-0049",
+      "family": "example-family-004",
+      "aliases": [],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.6
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0053"
+      ],
+      "hub_main_page": "synthetic-value-0304",
+      "hub_latest_page": "synthetic-value-0304",
+      "status": "active",
+      "current_state_source": "src-20260101T000000004Z-synthetic"
+    },
+    "agent-stack": {
+      "title": "synthetic-value-0054",
+      "display_name": "synthetic-value-0306",
+      "family": "example-family-001",
+      "aliases": [
+        "synthetic-value-0307",
+        "synthetic-value-0308"
+      ],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0056"
+      ],
+      "hub_main_page": "synthetic-value-0057",
+      "hub_latest_page": "synthetic-value-0058",
+      "status": "active",
+      "related": [
+        "example-project-002",
+        "agent-stack",
+        "example-project-003"
+      ],
+      "current_state_source": "src-20260101T000000001Z-synthetic"
+    },
+    "example-project-003": {
+      "title": "synthetic-value-0059",
+      "display_name": "synthetic-value-0059",
+      "family": "example-family-007",
+      "aliases": [],
+      "org_links": [
+        {
+          "org": "example-org-005",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.8
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [],
+      "hub_main_page": "synthetic-value-0061",
+      "hub_latest_page": "synthetic-value-0061",
+      "status": "active",
+      "current_state_source": "src-20260101T000000005Z-synthetic"
+    },
+    "example-project-004": {
+      "title": "synthetic-value-0040",
+      "display_name": "synthetic-value-0040",
+      "family": "example-family-007",
+      "aliases": [
+        "synthetic-value-0062"
+      ],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0063"
+      ],
+      "hub_main_page": "synthetic-value-0064",
+      "hub_latest_page": "synthetic-value-0064",
+      "status": "active",
+      "current_state_source": "src-20260101T000000006Z-synthetic"
+    },
+    "example-project-005": {
+      "title": "synthetic-value-0065",
+      "display_name": "synthetic-value-0065",
+      "family": "example-family-002",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [],
+      "hub_main_page": "synthetic-value-0067",
+      "hub_latest_page": "synthetic-value-0067",
+      "status": "active"
+    },
+    "example-project-006": {
+      "title": "synthetic-value-0068",
+      "display_name": "synthetic-value-0068",
+      "family": "example-family-002",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0069"
+      ],
+      "hub_main_page": "synthetic-value-0315",
+      "hub_latest_page": "synthetic-value-0316",
+      "status": "active",
+      "related": [
+        "example-project-004",
+        "example-project-005"
+      ],
+      "current_state_source": "src-20260101T000000008Z-synthetic"
+    },
+    "example-project-007": {
+      "title": "synthetic-value-0070",
+      "display_name": "synthetic-value-0070",
+      "family": "example-family-001",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0071"
+      ],
+      "hub_main_page": "synthetic-value-0072",
+      "hub_latest_page": "synthetic-value-0073",
+      "status": "active",
+      "current_state_source": "src-20260101T000000009Z-synthetic"
+    },
+    "example-project-008": {
+      "title": "synthetic-value-0074",
+      "display_name": "synthetic-value-0074",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0076",
+        "{{TEST_ROOT}}/project-0077"
+      ],
+      "hub_main_page": "synthetic-value-0078",
+      "hub_latest_page": "synthetic-value-0078",
+      "status": "active",
+      "current_state_source": "src-20260101T000000010Z-synthetic"
+    },
+    "example-project-069": {
+      "title": "synthetic-value-0322",
+      "display_name": "synthetic-value-0323",
+      "family": "example-family-007",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [],
+      "hub_main_page": null,
+      "hub_latest_page": null,
+      "status": "pending"
+    },
+    "example-project-009": {
+      "title": "synthetic-value-0079",
+      "display_name": "synthetic-value-0079",
+      "family": "example-family-007",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [],
+      "hub_main_page": "synthetic-value-0080",
+      "hub_latest_page": "synthetic-value-0080",
+      "status": "active",
+      "current_state_source": "src-20260101T000000011Z-synthetic"
+    },
+    "example-project-010": {
+      "title": "synthetic-value-0081",
+      "display_name": "synthetic-value-0081",
+      "family": "example-family-007",
+      "aliases": [
+        "synthetic-value-0082",
+        "synthetic-value-0325"
+      ],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0083"
+      ],
+      "hub_main_page": "synthetic-value-0084",
+      "hub_latest_page": "synthetic-value-0084",
+      "status": "active",
+      "related": [
+        "example-project-006",
+        "example-project-007"
+      ],
+      "current_state_source": "src-20260101T000000012Z-synthetic"
+    },
+    "example-project-011": {
+      "title": "synthetic-value-0085",
+      "display_name": "synthetic-value-0085",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0086"
+      ],
+      "hub_main_page": "synthetic-value-0329",
+      "hub_latest_page": "synthetic-value-0329",
+      "status": "active",
+      "current_state_source": "src-20260101T000000013Z-synthetic"
+    },
+    "example-project-012": {
+      "title": "synthetic-value-0087",
+      "display_name": "synthetic-value-0087",
+      "family": "example-family-002",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0088"
+      ],
+      "hub_main_page": "synthetic-value-0089",
+      "hub_latest_page": "synthetic-value-0089",
+      "status": "active",
+      "current_state_source": "src-20260101T000000014Z-synthetic"
+    },
+    "example-project-013": {
+      "title": "synthetic-value-0090",
+      "display_name": "synthetic-value-0090",
+      "family": "example-family-005",
+      "aliases": [
+        "synthetic-value-0332"
+      ],
+      "org_links": [
+        {
+          "org": "example-org-003",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.9
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [],
+      "hub_main_page": "synthetic-value-0091",
+      "hub_latest_page": "synthetic-value-0091",
+      "status": "active"
+    },
+    "example-project-014": {
+      "title": "synthetic-value-0092",
+      "display_name": "synthetic-value-0333",
+      "family": "example-family-005",
+      "aliases": [
+        "synthetic-value-0093"
+      ],
+      "org_links": [
+        {
+          "org": "example-org-003",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.95
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0094",
+        "{{TEST_ROOT}}/project-0095"
+      ],
+      "hub_main_page": "synthetic-value-0096",
+      "hub_latest_page": "synthetic-value-0097",
+      "status": "active",
+      "related": [
+        "example-project-008",
+        "example-project-009"
+      ],
+      "current_state_source": "src-20260101T000000016Z-synthetic"
+    },
+    "example-project-015": {
+      "title": "synthetic-value-0098",
+      "display_name": "synthetic-value-0098",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0099"
+      ],
+      "hub_main_page": "synthetic-value-0336",
+      "hub_latest_page": "synthetic-value-0336",
+      "status": "active",
+      "current_state_source": "src-20260101T000000017Z-synthetic"
+    },
+    "example-project-016": {
+      "title": "synthetic-value-0100",
+      "display_name": "synthetic-value-0100",
+      "family": "example-family-002",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0101"
+      ],
+      "hub_main_page": "synthetic-value-0102",
+      "hub_latest_page": "synthetic-value-0102",
+      "status": "active",
+      "current_state_source": "src-20260101T000000018Z-synthetic"
+    },
+    "example-project-017": {
+      "title": "synthetic-value-0103",
+      "display_name": "synthetic-value-0103",
+      "family": "example-family-002",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0104"
+      ],
+      "hub_main_page": "synthetic-value-0105",
+      "hub_latest_page": "synthetic-value-0105",
+      "status": "active",
+      "current_state_source": "src-20260101T000000019Z-synthetic"
+    },
+    "example-project-018": {
+      "title": "synthetic-value-0106",
+      "display_name": "synthetic-value-0106",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [],
+      "hub_main_page": "synthetic-value-0107",
+      "hub_latest_page": "synthetic-value-0107",
+      "status": "active"
+    },
+    "example-project-019": {
+      "title": "synthetic-value-0108",
+      "display_name": "synthetic-value-0108",
+      "family": "example-family-001",
+      "aliases": [
+        "synthetic-value-0109",
+        "synthetic-value-0110",
+        "synthetic-value-0111",
+        "synthetic-value-0112"
+      ],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0113",
+        "{{TEST_ROOT}}/project-0114",
+        "{{TEST_ROOT}}/project-0115"
+      ],
+      "hub_main_page": "synthetic-value-0116",
+      "hub_latest_page": "synthetic-value-0117",
+      "status": "active",
+      "current_state_source": "src-20260101T000000021Z-synthetic"
+    },
+    "example-project-020": {
+      "title": "synthetic-value-0118",
+      "display_name": "synthetic-value-0118",
+      "family": "example-family-001",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0119"
+      ],
+      "hub_main_page": "synthetic-value-0120",
+      "hub_latest_page": "synthetic-value-0120",
+      "status": "active",
+      "current_state_source": "src-20260101T000000022Z-synthetic"
+    },
+    "example-project-021": {
+      "title": "synthetic-value-0121",
+      "display_name": "synthetic-value-0121",
+      "family": "example-family-004",
+      "aliases": [],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.6
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [],
+      "hub_main_page": "synthetic-value-0122",
+      "hub_latest_page": "synthetic-value-0122",
+      "status": "active",
+      "current_state_source": "src-20260101T000000023Z-synthetic"
+    },
+    "example-project-022": {
+      "title": "synthetic-value-0123",
+      "display_name": "synthetic-value-0123",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0124"
+      ],
+      "hub_main_page": "synthetic-value-0125",
+      "hub_latest_page": "synthetic-value-0125",
+      "status": "active",
+      "current_state_source": "src-20260101T000000024Z-synthetic"
+    },
+    "example-project-023": {
+      "title": "synthetic-value-0126",
+      "display_name": "synthetic-value-0126",
+      "family": "example-family-004",
+      "aliases": [],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.9
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [],
+      "hub_main_page": "synthetic-value-0127",
+      "hub_latest_page": "synthetic-value-0127",
+      "status": "active",
+      "current_state_source": "src-20260101T000000025Z-synthetic"
+    },
+    "example-project-024": {
+      "title": "synthetic-value-0128",
+      "display_name": "synthetic-value-0128",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0129"
+      ],
+      "hub_main_page": "synthetic-value-0130",
+      "hub_latest_page": "synthetic-value-0130",
+      "status": "active",
+      "current_state_source": "src-20260101T000000026Z-synthetic"
+    },
+    "example-project-025": {
+      "title": "synthetic-value-0131",
+      "display_name": "synthetic-value-0131",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0132"
+      ],
+      "hub_main_page": "synthetic-value-0133",
+      "hub_latest_page": "synthetic-value-0133",
+      "status": "active",
+      "current_state_source": "src-20260101T000000027Z-synthetic"
+    },
+    "example-project-026": {
+      "title": "synthetic-value-0134",
+      "display_name": "synthetic-value-0134",
+      "family": "example-family-002",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0135"
+      ],
+      "hub_main_page": "synthetic-value-0347",
+      "hub_latest_page": "synthetic-value-0347",
+      "status": "active",
+      "current_state_source": "src-20260101T000000028Z-synthetic"
+    },
+    "example-project-027": {
+      "title": "synthetic-value-0136",
+      "display_name": "synthetic-value-0136",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0137"
+      ],
+      "hub_main_page": "synthetic-value-0138",
+      "hub_latest_page": "synthetic-value-0139",
+      "status": "active",
+      "current_state_source": "src-20260101T000000029Z-synthetic"
+    },
+    "example-project-028": {
+      "title": "synthetic-value-0140",
+      "display_name": "synthetic-value-0140",
+      "family": "example-family-007",
+      "aliases": [
+        "synthetic-value-0350"
+      ],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0141"
+      ],
+      "hub_main_page": "synthetic-value-0142",
+      "hub_latest_page": "synthetic-value-0142",
+      "status": "active",
+      "related": [
+        "example-project-010"
+      ],
+      "current_state_source": "src-20260101T000000030Z-synthetic"
+    },
+    "example-project-029": {
+      "title": "synthetic-value-0143",
+      "display_name": "synthetic-value-0143",
+      "family": "example-family-004",
+      "aliases": [],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.95
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0144"
+      ],
+      "hub_main_page": "synthetic-value-0145",
+      "hub_latest_page": "synthetic-value-0145",
+      "status": "active"
+    },
+    "example-project-030": {
+      "title": "synthetic-value-0146",
+      "display_name": "synthetic-value-0146",
+      "family": "example-family-007",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0147"
+      ],
+      "hub_main_page": "synthetic-value-0148",
+      "hub_latest_page": "synthetic-value-0148",
+      "status": "active",
+      "current_state_source": "src-20260101T000000032Z-synthetic"
+    },
+    "example-project-031": {
+      "title": "synthetic-value-0149",
+      "display_name": "synthetic-value-0149",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [],
+      "hub_main_page": "synthetic-value-0150",
+      "hub_latest_page": "synthetic-value-0150",
+      "status": "active",
+      "related": [
+        "example-project-011"
+      ]
+    },
+    "example-project-032": {
+      "title": "synthetic-value-0151",
+      "display_name": "synthetic-value-0355",
+      "family": "example-family-004",
+      "aliases": [
+        "synthetic-value-0152"
+      ],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.9
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0153",
+        "{{TEST_ROOT}}/project-0154",
+        "{{TEST_ROOT}}/project-0155"
+      ],
+      "hub_main_page": "synthetic-value-0156",
+      "hub_latest_page": "synthetic-value-0156",
+      "status": "active",
+      "current_state_source": "src-20260101T000000034Z-synthetic"
+    },
+    "example-project-033": {
+      "title": "synthetic-value-0157",
+      "display_name": "synthetic-value-0157",
+      "family": "example-family-002",
+      "aliases": [
+        "synthetic-value-0158"
+      ],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [],
+      "hub_main_page": "synthetic-value-0159",
+      "hub_latest_page": "synthetic-value-0159",
+      "status": "active"
+    },
+    "example-project-034": {
+      "title": "synthetic-value-0160",
+      "display_name": "synthetic-value-0160",
+      "family": "example-family-003",
+      "aliases": [
+        "synthetic-value-0357"
+      ],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.9
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0162"
+      ],
+      "hub_main_page": "synthetic-value-0163",
+      "hub_latest_page": "synthetic-value-0163",
+      "status": "active",
+      "related": [
+        "example-project-012",
+        "example-project-013"
+      ],
+      "current_state_source": "src-20260101T000000036Z-synthetic"
+    },
+    "example-project-035": {
+      "title": "synthetic-value-0164",
+      "display_name": "synthetic-value-0164",
+      "family": "example-family-001",
+      "aliases": [
+        "synthetic-value-0165"
+      ],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0166",
+        "{{TEST_ROOT}}/project-0167"
+      ],
+      "hub_main_page": "synthetic-value-0168",
+      "hub_latest_page": "synthetic-value-0169",
+      "status": "active"
+    },
+    "example-project-036": {
+      "title": "synthetic-value-0170",
+      "display_name": "synthetic-value-0170",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0171"
+      ],
+      "hub_main_page": "synthetic-value-0172",
+      "hub_latest_page": "synthetic-value-0172",
+      "status": "active",
+      "current_state_source": "src-20260101T000000038Z-synthetic"
+    },
+    "example-project-037": {
+      "title": "synthetic-value-0173",
+      "display_name": "synthetic-value-0173",
+      "family": "example-family-007",
+      "aliases": [],
+      "org_links": [
+        {
+          "org": "example-org-005",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.8
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0174"
+      ],
+      "hub_main_page": "synthetic-value-0362",
+      "hub_latest_page": "synthetic-value-0362",
+      "status": "active",
+      "related": [
+        "example-project-014"
+      ],
+      "current_state_source": "src-20260101T000000039Z-synthetic"
+    },
+    "example-project-038": {
+      "title": "synthetic-value-0175",
+      "display_name": "synthetic-value-0175",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0176"
+      ],
+      "hub_main_page": "synthetic-value-0177",
+      "hub_latest_page": "synthetic-value-0178",
+      "status": "active",
+      "current_state_source": "src-20260101T000000040Z-synthetic"
+    },
+    "example-project-039": {
+      "title": "synthetic-value-0179",
+      "display_name": "synthetic-value-0179",
+      "family": "example-family-002",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0180"
+      ],
+      "hub_main_page": "synthetic-value-0181",
+      "hub_latest_page": "synthetic-value-0181",
+      "status": "active",
+      "current_state_source": "src-20260101T000000041Z-synthetic"
+    },
+    "example-project-040": {
+      "title": "synthetic-value-0182",
+      "display_name": "synthetic-value-0182",
+      "family": "example-family-001",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [],
+      "hub_main_page": "synthetic-value-0183",
+      "hub_latest_page": "synthetic-value-0183",
+      "status": "active"
+    },
+    "example-project-041": {
+      "title": "synthetic-value-0184",
+      "display_name": "synthetic-value-0184",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0185"
+      ],
+      "hub_main_page": "synthetic-value-0186",
+      "hub_latest_page": "synthetic-value-0187",
+      "status": "active",
+      "current_state_source": "src-20260101T000000043Z-synthetic"
+    },
+    "example-project-042": {
+      "title": "synthetic-value-0188",
+      "display_name": "synthetic-value-0188",
+      "family": "example-family-008",
+      "aliases": [
+        "synthetic-value-0368"
+      ],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0189",
+        "{{TEST_ROOT}}/project-0190"
+      ],
+      "hub_main_page": "synthetic-value-0191",
+      "hub_latest_page": "synthetic-value-0191",
+      "status": "active",
+      "related": [
+        "example-project-015"
+      ],
+      "current_state_source": "src-20260101T000000044Z-synthetic"
+    },
+    "example-project-043": {
+      "title": "synthetic-value-0192",
+      "display_name": "synthetic-value-0192",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0193"
+      ],
+      "hub_main_page": "synthetic-value-0194",
+      "hub_latest_page": "synthetic-value-0194",
+      "status": "active",
+      "current_state_source": "src-20260101T000000045Z-synthetic"
+    },
+    "example-project-044": {
+      "title": "synthetic-value-0195",
+      "display_name": "synthetic-value-0195",
+      "family": "example-family-001",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0196"
+      ],
+      "hub_main_page": null,
+      "hub_latest_page": null,
+      "status": "pending",
+      "related": [
+        "example-project-016"
+      ],
+      "current_state_source": "src-20260101T000000046Z-synthetic"
+    },
+    "example-project-045": {
+      "title": "synthetic-value-0197",
+      "display_name": "synthetic-value-0197",
+      "family": "example-family-005",
+      "aliases": [],
+      "org_links": [
+        {
+          "org": "example-org-003",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.95
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [],
+      "hub_main_page": "synthetic-value-0198",
+      "hub_latest_page": "synthetic-value-0198",
+      "status": "active"
+    },
+    "example-project-046": {
+      "title": "synthetic-value-0199",
+      "display_name": "synthetic-value-0199",
+      "family": "example-family-002",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0200"
+      ],
+      "hub_main_page": "synthetic-value-0201",
+      "hub_latest_page": "synthetic-value-0201",
+      "status": "active",
+      "current_state_source": "src-20260101T000000048Z-synthetic"
+    },
+    "example-project-047": {
+      "title": "synthetic-value-0202",
+      "display_name": "synthetic-value-0202",
+      "family": "example-family-004",
+      "aliases": [],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.95
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0203"
+      ],
+      "hub_main_page": "synthetic-value-0204",
+      "hub_latest_page": "synthetic-value-0204",
+      "status": "active",
+      "related": [
+        "example-project-017"
+      ],
+      "current_state_source": "src-20260101T000000049Z-synthetic"
+    },
+    "example-project-048": {
+      "title": "synthetic-value-0205",
+      "display_name": "synthetic-value-0205",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0206"
+      ],
+      "hub_main_page": "synthetic-value-0207",
+      "hub_latest_page": "synthetic-value-0207",
+      "status": "active",
+      "current_state_source": "src-20260101T000000050Z-synthetic"
+    },
+    "example-project-049": {
+      "title": "synthetic-value-0208",
+      "display_name": "synthetic-value-0208",
+      "family": "example-family-007",
+      "aliases": [],
+      "org_links": [
+        {
+          "org": "example-org-002",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.9
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0209",
+        "{{TEST_ROOT}}/project-0210"
+      ],
+      "hub_main_page": "synthetic-value-0211",
+      "hub_latest_page": "synthetic-value-0211",
+      "status": "active",
+      "current_state_source": "src-20260101T000000051Z-synthetic"
+    },
+    "example-project-050": {
+      "title": "synthetic-value-0212",
+      "display_name": "synthetic-value-0212",
+      "family": "example-family-003",
+      "aliases": [],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.95
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0213"
+      ],
+      "hub_main_page": "synthetic-value-0214",
+      "hub_latest_page": "synthetic-value-0215",
+      "status": "active",
+      "related": [
+        "example-project-018",
+        "example-project-019"
+      ],
+      "current_state_source": "src-20260101T000000052Z-synthetic"
+    },
+    "example-project-051": {
+      "title": "synthetic-value-0216",
+      "display_name": "synthetic-value-0382",
+      "family": "example-family-003",
+      "aliases": [
+        "synthetic-value-0383",
+        "synthetic-value-0384"
+      ],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "confirmed",
+          "confidence": 1.0
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0217"
+      ],
+      "hub_main_page": "synthetic-value-0218",
+      "hub_latest_page": "synthetic-value-0218",
+      "status": "active",
+      "related": [
+        "example-project-020",
+        "example-project-021",
+        "example-project-022"
+      ],
+      "current_state_source": "src-20260101T000000053Z-synthetic"
+    },
+    "example-project-052": {
+      "title": "synthetic-value-0219",
+      "display_name": "synthetic-value-0219",
+      "family": "example-family-004",
+      "aliases": [],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.65
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0220",
+        "{{TEST_ROOT}}/project-0221"
+      ],
+      "hub_main_page": "synthetic-value-0222",
+      "hub_latest_page": "synthetic-value-0222",
+      "status": "active",
+      "current_state_source": "src-20260101T000000054Z-synthetic"
+    },
+    "example-project-053": {
+      "title": "synthetic-value-0223",
+      "display_name": "synthetic-value-0223",
+      "family": "example-family-004",
+      "aliases": [],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.6
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0224"
+      ],
+      "hub_main_page": "synthetic-value-0225",
+      "hub_latest_page": "synthetic-value-0225",
+      "status": "active",
+      "related": [
+        "example-project-023",
+        "example-project-024"
+      ],
+      "current_state_source": "src-20260101T000000055Z-synthetic"
+    },
+    "example-project-054": {
+      "title": "synthetic-value-0226",
+      "display_name": "synthetic-value-0226",
+      "family": "example-family-004",
+      "aliases": [],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.9
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0227"
+      ],
+      "hub_main_page": "synthetic-value-0228",
+      "hub_latest_page": "synthetic-value-0228",
+      "status": "active",
+      "current_state_source": "src-20260101T000000056Z-synthetic"
+    },
+    "paw": {
+      "title": "synthetic-value-0229",
+      "display_name": "synthetic-value-0229",
+      "family": "example-family-003",
+      "aliases": [
+        "synthetic-value-0393"
+      ],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.9
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0230"
+      ],
+      "hub_main_page": "synthetic-value-0231",
+      "hub_latest_page": "synthetic-value-0232",
+      "status": "active",
+      "related": [
+        "example-project-025"
+      ],
+      "current_state_source": "src-20260101T000000002Z-synthetic"
+    },
+    "example-project-055": {
+      "title": "synthetic-value-0233",
+      "display_name": "synthetic-value-0396",
+      "family": "example-family-004",
+      "aliases": [
+        "synthetic-value-0234"
+      ],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.6
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0235"
+      ],
+      "hub_main_page": "synthetic-value-0236",
+      "hub_latest_page": "synthetic-value-0236",
+      "status": "active",
+      "current_state_source": "src-20260101T000000057Z-synthetic"
+    },
+    "example-project-056": {
+      "title": "synthetic-value-0237",
+      "display_name": "synthetic-value-0237",
+      "family": "example-family-002",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0238"
+      ],
+      "hub_main_page": "synthetic-value-0239",
+      "hub_latest_page": "synthetic-value-0239",
+      "status": "active",
+      "current_state_source": "src-20260101T000000058Z-synthetic"
+    },
+    "example-project-057": {
+      "title": "synthetic-value-0240",
+      "display_name": "synthetic-value-0240",
+      "family": "example-family-002",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [],
+      "hub_main_page": "synthetic-value-0241",
+      "hub_latest_page": "synthetic-value-0241",
+      "status": "active",
+      "current_state_source": "src-20260101T000000059Z-synthetic"
+    },
+    "example-project-058": {
+      "title": "synthetic-value-0242",
+      "display_name": "synthetic-value-0242",
+      "family": "example-family-004",
+      "aliases": [],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.6
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [],
+      "hub_main_page": "synthetic-value-0243",
+      "hub_latest_page": "synthetic-value-0243",
+      "status": "active"
+    },
+    "example-project-059": {
+      "title": "synthetic-value-0244",
+      "display_name": "synthetic-value-0244",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0245"
+      ],
+      "hub_main_page": "synthetic-value-0246",
+      "hub_latest_page": "synthetic-value-0246",
+      "status": "active",
+      "current_state_source": "src-20260101T000000061Z-synthetic"
+    },
+    "example-project-060": {
+      "title": "synthetic-value-0247",
+      "display_name": "synthetic-value-0247",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0248"
+      ],
+      "hub_main_page": "synthetic-value-0249",
+      "hub_latest_page": "synthetic-value-0249",
+      "status": "active",
+      "current_state_source": "src-20260101T000000062Z-synthetic"
+    },
+    "example-project-061": {
+      "title": "synthetic-value-0250",
+      "display_name": "synthetic-value-0250",
+      "family": "example-family-003",
+      "aliases": [
+        "synthetic-value-0402"
+      ],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.9
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0251"
+      ],
+      "hub_main_page": "synthetic-value-0252",
+      "hub_latest_page": "synthetic-value-0252",
+      "status": "active",
+      "current_state_source": "src-20260101T000000063Z-synthetic"
+    },
+    "example-project-062": {
+      "title": "synthetic-value-0253",
+      "display_name": "synthetic-value-0253",
+      "family": "example-family-006",
+      "aliases": [
+        "synthetic-value-0404"
+      ],
+      "org_links": [
+        {
+          "org": "example-org-004",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.95
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0254",
+        "{{TEST_ROOT}}/project-0255"
+      ],
+      "hub_main_page": "synthetic-value-0256",
+      "hub_latest_page": "synthetic-value-0257",
+      "status": "active",
+      "related": [
+        "example-project-026"
+      ],
+      "current_state_source": "src-20260101T000000064Z-synthetic"
+    },
+    "example-project-063": {
+      "title": "synthetic-value-0258",
+      "display_name": "synthetic-value-0407",
+      "family": "example-family-006",
+      "aliases": [
+        "synthetic-value-0259"
+      ],
+      "org_links": [
+        {
+          "org": "example-org-004",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.95
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0260"
+      ],
+      "hub_main_page": "synthetic-value-0261",
+      "hub_latest_page": "synthetic-value-0262",
+      "status": "active",
+      "related": [
+        "example-project-027"
+      ],
+      "current_state_source": "src-20260101T000000065Z-synthetic"
+    },
+    "example-project-064": {
+      "title": "synthetic-value-0263",
+      "display_name": "synthetic-value-0263",
+      "family": "example-family-008",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [],
+      "hub_main_page": "synthetic-value-0264",
+      "hub_latest_page": "synthetic-value-0264",
+      "status": "active",
+      "current_state_source": "src-20260101T000000066Z-synthetic"
+    },
+    "example-project-065": {
+      "title": "synthetic-value-0265",
+      "display_name": "synthetic-value-0410",
+      "family": "example-family-007",
+      "aliases": [
+        "synthetic-value-0266"
+      ],
+      "org_links": [
+        {
+          "org": "example-org-002",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.95
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0267",
+        "{{TEST_ROOT}}/project-0268"
+      ],
+      "hub_main_page": "synthetic-value-0269",
+      "hub_latest_page": "synthetic-value-0269",
+      "status": "active",
+      "current_state_source": "src-20260101T000000067Z-synthetic"
+    },
+    "example-project-066": {
+      "title": "synthetic-value-0270",
+      "display_name": "synthetic-value-0270",
+      "family": "example-family-003",
+      "aliases": [
+        "synthetic-value-0271",
+        "synthetic-value-0412"
+      ],
+      "org_links": [
+        {
+          "org": "example-org-001",
+          "role": "partner",
+          "status": "inferred",
+          "confidence": 0.85
+        }
+      ],
+      "org_resolution": "synthetic-value-0052",
+      "folders": [
+        "{{TEST_ROOT}}/project-0272",
+        "{{TEST_ROOT}}/project-0273",
+        "{{TEST_ROOT}}/project-0274"
+      ],
+      "hub_main_page": "synthetic-value-0275",
+      "hub_latest_page": "synthetic-value-0276",
+      "status": "active",
+      "current_state_source": "src-20260101T000000068Z-synthetic"
+    },
+    "example-project-067": {
+      "title": "synthetic-value-0277",
+      "display_name": "synthetic-value-0277",
+      "family": "example-family-002",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [
+        "{{TEST_ROOT}}/project-0278"
+      ],
+      "hub_main_page": "synthetic-value-0279",
+      "hub_latest_page": "synthetic-value-0279",
+      "status": "active",
+      "current_state_source": "src-20260101T000000069Z-synthetic"
+    },
+    "example-project-068": {
+      "title": "synthetic-value-0280",
+      "display_name": "synthetic-value-0280",
+      "family": "example-family-002",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [],
+      "hub_main_page": "synthetic-value-0281",
+      "hub_latest_page": "synthetic-value-0281",
+      "status": "active"
+    },
+    "example-project-070": {
+      "title": "synthetic-value-0415",
+      "display_name": "synthetic-value-0416",
+      "family": "example-family-003",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [],
+      "hub_main_page": null,
+      "hub_latest_page": null,
+      "status": "pending"
+    },
+    "example-project-071": {
+      "title": "synthetic-value-0417",
+      "display_name": "synthetic-value-0418",
+      "family": "example-family-001",
+      "aliases": [],
+      "org_links": [],
+      "org_resolution": "synthetic-value-0046",
+      "folders": [],
+      "hub_main_page": null,
+      "hub_latest_page": null,
+      "status": "pending"
+    }
+  },
+  "topics": [
+    {
+      "id": "example-topic-001",
+      "name": "synthetic-value-0419",
+      "aliases": [
+        "synthetic-value-0283",
+        "synthetic-value-0286",
+        "synthetic-value-0285",
+        "synthetic-value-0284"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-028",
+        "example-project-029",
+        "example-project-027",
+        "example-project-030",
+        "example-project-031",
+        "example-project-016"
+      ]
+    },
+    {
+      "id": "example-topic-002",
+      "name": "synthetic-value-0425",
+      "aliases": [
+        "synthetic-value-0425",
+        "synthetic-value-0426",
+        "synthetic-value-0427"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-032",
+        "example-project-028",
+        "example-project-029"
+      ]
+    },
+    {
+      "id": "example-topic-003",
+      "name": "synthetic-value-0429",
+      "aliases": [
+        "synthetic-value-0430",
+        "synthetic-value-0431",
+        "synthetic-value-0432",
+        "synthetic-value-0433"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-032",
+        "example-project-033",
+        "example-project-028",
+        "example-project-029",
+        "example-project-016"
+      ]
+    },
+    {
+      "id": "example-topic-004",
+      "name": "synthetic-value-0436",
+      "aliases": [
+        "synthetic-value-0436"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-034",
+        "example-project-035",
+        "example-project-036",
+        "example-project-037",
+        "example-project-038"
+      ]
+    },
+    {
+      "id": "example-topic-005",
+      "name": "synthetic-value-0443",
+      "aliases": [
+        "synthetic-value-0444",
+        "synthetic-value-0445",
+        "synthetic-value-0446"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-032",
+        "example-project-028",
+        "example-project-033",
+        "example-project-014",
+        "example-project-030",
+        "example-project-035"
+      ]
+    },
+    {
+      "id": "example-topic-006",
+      "name": "synthetic-value-0448",
+      "aliases": [
+        "synthetic-value-0449",
+        "synthetic-value-0450",
+        "synthetic-value-0451"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-028",
+        "example-project-039",
+        "example-project-029",
+        "example-project-030"
+      ]
+    },
+    {
+      "id": "example-topic-007",
+      "name": "synthetic-value-0454",
+      "aliases": [
+        "synthetic-value-0455",
+        "synthetic-value-0456",
+        "synthetic-value-0457"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-032",
+        "example-project-033",
+        "example-project-028",
+        "example-project-040"
+      ]
+    },
+    {
+      "id": "example-topic-008",
+      "name": "synthetic-value-0460",
+      "aliases": [
+        "synthetic-value-0461",
+        "synthetic-value-0462",
+        "synthetic-value-0463",
+        "synthetic-value-0464"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-037",
+        "example-project-032",
+        "example-project-036",
+        "example-project-016"
+      ]
+    },
+    {
+      "id": "example-topic-009",
+      "name": "synthetic-value-0466",
+      "aliases": [
+        "synthetic-value-0467",
+        "synthetic-value-0468",
+        "synthetic-value-0469"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-032",
+        "example-project-028",
+        "example-project-033",
+        "example-project-034",
+        "example-project-027"
+      ]
+    },
+    {
+      "id": "example-topic-010",
+      "name": "synthetic-value-0471",
+      "aliases": [
+        "synthetic-value-0472",
+        "synthetic-value-0473",
+        "synthetic-value-0474",
+        "synthetic-value-0475"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-033",
+        "example-project-037",
+        "example-project-029",
+        "example-project-032",
+        "example-project-041"
+      ]
+    },
+    {
+      "id": "example-topic-011",
+      "name": "synthetic-value-0477",
+      "aliases": [
+        "synthetic-value-0477",
+        "synthetic-value-0478",
+        "synthetic-value-0479"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-032",
+        "example-project-033",
+        "example-project-016",
+        "example-project-028"
+      ]
+    },
+    {
+      "id": "example-topic-012",
+      "name": "synthetic-value-0481",
+      "aliases": [
+        "synthetic-value-0482",
+        "synthetic-value-0483",
+        "synthetic-value-0484",
+        "synthetic-value-0485",
+        "synthetic-value-0486"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-028",
+        "example-project-037",
+        "example-project-027",
+        "example-project-016"
+      ]
+    },
+    {
+      "id": "example-topic-013",
+      "name": "synthetic-value-0488",
+      "aliases": [
+        "synthetic-value-0412",
+        "synthetic-value-0489",
+        "synthetic-value-0490"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-037",
+        "example-project-042",
+        "example-project-016",
+        "example-project-032",
+        "example-project-038"
+      ]
+    },
+    {
+      "id": "example-topic-014",
+      "name": "synthetic-value-0493",
+      "aliases": [
+        "synthetic-value-0494",
+        "synthetic-value-0495",
+        "synthetic-value-0496",
+        "synthetic-value-0497",
+        "synthetic-value-0498"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-033",
+        "example-project-016",
+        "example-project-032"
+      ]
+    },
+    {
+      "id": "example-topic-015",
+      "name": "synthetic-value-0500",
+      "aliases": [
+        "synthetic-value-0501",
+        "synthetic-value-0355",
+        "synthetic-value-0502",
+        "synthetic-value-0503",
+        "synthetic-value-0504"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-042",
+        "example-project-039",
+        "example-project-035",
+        "example-project-038"
+      ]
+    },
+    {
+      "id": "example-topic-016",
+      "name": "synthetic-value-0506",
+      "aliases": [
+        "synthetic-value-0507",
+        "synthetic-value-0508",
+        "synthetic-value-0509",
+        "synthetic-value-0510"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-032",
+        "example-project-033",
+        "example-project-028",
+        "example-project-016",
+        "example-project-029"
+      ]
+    },
+    {
+      "id": "example-topic-017",
+      "name": "synthetic-value-0512",
+      "aliases": [
+        "synthetic-value-0513",
+        "synthetic-value-0514",
+        "synthetic-value-0515",
+        "synthetic-value-0516"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-032",
+        "example-project-033",
+        "example-project-028",
+        "example-project-029",
+        "example-project-016"
+      ]
+    },
+    {
+      "id": "example-topic-018",
+      "name": "synthetic-value-0518",
+      "aliases": [
+        "synthetic-value-0519",
+        "synthetic-value-0520",
+        "synthetic-value-0521"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-028",
+        "example-project-035",
+        "example-project-039"
+      ]
+    },
+    {
+      "id": "example-topic-019",
+      "name": "synthetic-value-0523",
+      "aliases": [
+        "synthetic-value-0524",
+        "synthetic-value-0525"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-032",
+        "example-project-033",
+        "example-project-016",
+        "example-project-040"
+      ]
+    },
+    {
+      "id": "example-topic-020",
+      "name": "synthetic-value-0527",
+      "aliases": [
+        "synthetic-value-0528",
+        "synthetic-value-0529",
+        "synthetic-value-0530",
+        "synthetic-value-0531"
+      ],
+      "status": "draft",
+      "projects": [
+        "example-project-033",
+        "example-project-032",
+        "example-project-028"
+      ]
+    }
+  ],
+  "people": [],
+  "known_gaps": [
+    "synthetic-value-0532",
+    "synthetic-value-0288",
+    "synthetic-value-0289",
+    "synthetic-value-0290",
+    "synthetic-value-0533",
+    "synthetic-value-0534",
+    "synthetic-value-0535",
+    "synthetic-value-0536",
+    "synthetic-value-0537",
+    "synthetic-value-0538",
+    "synthetic-value-0539",
+    "synthetic-value-0540",
+    "synthetic-value-0541",
+    "synthetic-value-0542",
+    "synthetic-value-0543",
+    "synthetic-value-0544",
+    "synthetic-value-0545",
+    "synthetic-value-0546",
+    "synthetic-value-0547",
+    "synthetic-value-0548",
+    "synthetic-value-0549"
+  ],
+  "frozen_source": {
+    "schema": "agent-stack/registry-v2",
+    "version": "frozen-v0",
+    "generated_at": "2026-01-01T00:00:00Z"
+  },
+  "families": [
+    {
+      "id": "example-family-001",
+      "title": "synthetic-value-0550",
+      "description": "synthetic-value-0551",
+      "order": 0
+    },
+    {
+      "id": "example-family-002",
+      "title": "synthetic-value-0552",
+      "description": "synthetic-value-0553",
+      "order": 1
+    },
+    {
+      "id": "example-family-003",
+      "title": "synthetic-value-0554",
+      "description": "synthetic-value-0555",
+      "order": 2
+    },
+    {
+      "id": "example-family-004",
+      "title": "synthetic-value-0556",
+      "description": "synthetic-value-0557",
+      "order": 3
+    },
+    {
+      "id": "example-family-005",
+      "title": "synthetic-value-0558",
+      "description": "synthetic-value-0559",
+      "order": 4
+    },
+    {
+      "id": "example-family-006",
+      "title": "synthetic-value-0560",
+      "description": "synthetic-value-0561",
+      "order": 5
+    },
+    {
+      "id": "example-family-007",
+      "title": "synthetic-value-0562",
+      "description": "synthetic-value-0563",
+      "order": 6
+    },
+    {
+      "id": "example-family-008",
+      "title": "synthetic-value-0564",
+      "description": "synthetic-value-0565",
+      "order": 7
+    }
+  ]
+}

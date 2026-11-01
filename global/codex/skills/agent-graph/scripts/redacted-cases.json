@@ -1,0 +1,10 @@
+[
+  {
+    "run_id": "run-20261005T002714Z-4867f2695f",
+    "completion_reason": "parent-timeout",
+    "provider_terminal_reason": "completed",
+    "exit_code": 124,
+    "handoff_valid": true,
+    "handoff_status": "completed"
+  }
+]

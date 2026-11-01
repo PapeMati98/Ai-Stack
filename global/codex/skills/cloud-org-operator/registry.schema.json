@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "organizations"],
+  "properties": {
+    "schema_version": {"enum": [1, 2]},
+    "organizations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["organization_id", "aliases", "providers"],
+        "properties": {
+          "organization_id": {"$ref": "#/$defs/identifier"},
+          "aliases": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/identifier"}},
+          "providers": {
+            "type": "object",
+            "additionalProperties": false,
+            "minProperties": 1,
+            "properties": {
+              "azure": {"$ref": "#/$defs/azure"},
+              "graph": {"$ref": "#/$defs/graph"},
+              "gcp": {"$ref": "#/$defs/gcp"},
+              "google-workspace": {"$ref": "#/$defs/googleWorkspace"},
+              "m365": {"$ref": "#/$defs/m365"}
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "organizations": {
+            "contains": {"properties": {"providers": {"required": ["m365"]}}}
+          }
+        }
+      },
+      "then": {"properties": {"schema_version": {"const": 2}}}
+    }
+  ],
+  "$defs": {
+    "identifier": {"type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"},
+    "account": {"type": "string", "format": "email"},
+    "path": {"type": "string", "minLength": 3},
+    "azure": {
+      "type": "object", "additionalProperties": false,
+      "required": ["project_root", "tenant_id", "subscription_id"],
+      "properties": {
+        "project_root": {"$ref": "#/$defs/path"}, "config_root": {"$ref": "#/$defs/path"},
+        "account": {"$ref": "#/$defs/account"}, "tenant_id": {"$ref": "#/$defs/identifier"},
+        "subscription_id": {"$ref": "#/$defs/identifier"}
+      }
+    },
+    "graph": {
+      "type": "object", "additionalProperties": false,
+      "required": ["project_root", "tenant_id", "graph_context"],
+      "properties": {
+        "project_root": {"$ref": "#/$defs/path"}, "config_root": {"$ref": "#/$defs/path"},
+        "account": {"$ref": "#/$defs/account"}, "tenant_id": {"$ref": "#/$defs/identifier"},
+        "graph_context": {"$ref": "#/$defs/identifier"}
+      }
+    },
+    "gcp": {
+      "type": "object", "additionalProperties": false,
+      "required": ["project_root", "project_id", "configuration"],
+      "properties": {
+        "project_root": {"$ref": "#/$defs/path"}, "config_root": {"$ref": "#/$defs/path"},
+        "account": {"$ref": "#/$defs/account"}, "project_id": {"$ref": "#/$defs/identifier"},
+        "configuration": {"$ref": "#/$defs/identifier"}
+      }
+    },
+    "googleWorkspace": {
+      "type": "object", "additionalProperties": false,
+      "required": ["project_root", "domain", "configuration"],
+      "properties": {
+        "project_root": {"$ref": "#/$defs/path"}, "config_root": {"$ref": "#/$defs/path"},
+        "account": {"$ref": "#/$defs/account"}, "domain": {"$ref": "#/$defs/identifier"},
+        "configuration": {"$ref": "#/$defs/identifier"}
+      }
+    },
+    "m365Identity": {
+      "oneOf": [
+        {
+          "required": ["auth_mode", "account"],
+          "properties": {"auth_mode": {"const": "delegated"}, "account": {"$ref": "#/$defs/account"}},
+          "not": {"required": ["application_id"]}
+        },
+        {
+          "required": ["auth_mode", "application_id"],
+          "properties": {"auth_mode": {"const": "app-only"}, "application_id": {"$ref": "#/$defs/identifier"}},
+          "not": {"required": ["account"]}
+        }
+      ]
+    },
+    "sharepointHost": {
+      "type": "string",
+      "pattern": "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+    },
+    "sitePath": {
+      "type": "string",
+      "pattern": "^(?!.*(?:/\\.{1,2})(?:/|$))/(?:$|(?:[A-Za-z0-9._~-]|%20|%[89A-F][0-9A-F])+(?:/(?:[A-Za-z0-9._~-]|%20|%[89A-F][0-9A-F])+)*)$"
+    },
+    "m365Connector": {
+      "type": "object", "additionalProperties": false,
+      "required": ["connector_id", "tenant_id", "sharepoint_host", "auth_mode"],
+      "properties": {
+        "connector_id": {"$ref": "#/$defs/identifier"}, "tenant_id": {"$ref": "#/$defs/identifier"},
+        "sharepoint_host": {"$ref": "#/$defs/sharepointHost"}, "site_path": {"$ref": "#/$defs/sitePath"},
+        "auth_mode": {"enum": ["delegated", "app-only"]}, "account": {"$ref": "#/$defs/account"},
+        "application_id": {"$ref": "#/$defs/identifier"}
+      },
+      "allOf": [{"$ref": "#/$defs/m365Identity"}]
+    },
+    "m365": {
+      "type": "object", "additionalProperties": false,
+      "required": ["project_root", "config_root", "tenant_id", "sharepoint_host", "auth_mode"],
+      "properties": {
+        "project_root": {"$ref": "#/$defs/path"}, "config_root": {"$ref": "#/$defs/path"},
+        "tenant_id": {"$ref": "#/$defs/identifier"}, "sharepoint_host": {"$ref": "#/$defs/sharepointHost"},
+        "site_path": {"$ref": "#/$defs/sitePath"}, "auth_mode": {"enum": ["delegated", "app-only"]},
+        "account": {"$ref": "#/$defs/account"}, "application_id": {"$ref": "#/$defs/identifier"},
+        "m365_connection_name": {"$ref": "#/$defs/identifier"},
+        "mcp_connectors": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/m365Connector"}}
+      },
+      "allOf": [{"$ref": "#/$defs/m365Identity"}]
+    }
+  }
+}

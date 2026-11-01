@@ -1,0 +1,17 @@
+{
+  "positive": [
+    "Zbuduj plugin WordPress z endpointem REST",
+    "Napraw blok Gutenberga, który źle się zapisuje",
+    "Zrób bezpieczny plan WP-CLI dla stagingu"
+  ],
+  "negative": [
+    "Zbuduj aplikację React bez WordPressa",
+    "Napisz tekst na blog",
+    "Zmień rekord w ogólnej bazie SQL"
+  ],
+  "sensitive_actions": [
+    "WP-CLI na produkcji",
+    "import, eksport lub search-replace bazy",
+    "publikacja albo aktualizacja produkcyjnych pluginów"
+  ]
+}

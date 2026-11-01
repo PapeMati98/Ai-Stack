@@ -1,0 +1,4 @@
+interface:
+  display_name: "Office Loop"
+  short_description: "Realizuj cel zespołu przez Office i paczki TODO Fleet"
+  default_prompt: "Użyj $office-loop, aby domknąć cel przez Office, decyzje dyrektora i konkretne paczki TODO Fleet."

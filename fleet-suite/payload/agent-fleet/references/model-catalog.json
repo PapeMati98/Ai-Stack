@@ -1,0 +1,790 @@
+{
+  "schema_version": 1,
+  "updated": "2026-10-13",
+  "source": "docs/model-tiers-20260929/PROPOSAL.md; owner decisions 2026-09-29 (tiers, DENY list, retirement compromise, JEV 0.004 USD, Manager-first escalation, recency balancing); owner decision 2026-10-12: Muse Wonder Full 1.0 D, Wonder 1.0 M, Spark 1.3 K; exact native model canaries supplied by parent, Contributor forbidden; owner decision 2026-10-13: Gemini 4 Argon High D via Antigravity (agy 1.3.4 exact ID gemini-4-argon-high); owner states model training is off on the Ultra account",
+  "tiers": {
+    "D": {
+      "rank": 4,
+      "name": "Dyrektor",
+      "role": "plan calosci, rozstrzyganie sporow, odbior pracy Managerow"
+    },
+    "M": {
+      "rank": 3,
+      "name": "Manager",
+      "role": "plan podgrafu, precyzyjne zlecenia, odbior, trudne wezly"
+    },
+    "K": {
+      "rank": 2,
+      "name": "Kierownik",
+      "role": "wykonanie i odbior wymiennie, glowny kon roboczy"
+    },
+    "W": {
+      "rank": 1,
+      "name": "Worker",
+      "role": "wykonanie dobrze okreslonej pracy"
+    }
+  },
+  "policy": {
+    "conserve_lineages_below_director": [
+      "anthropic",
+      "openai"
+    ],
+    "conserve_penalty": 8,
+    "recency_window_hours": 168,
+    "recency_half_life_hours": 48,
+    "recency_max_penalty": 15,
+    "similar_score_band": 10,
+    "over_tier_penalty": 5,
+    "plan_weights_unit": "monthly plan price in USD (owner 2026-09-29; PLN at 3.7/USD). Claude/Codex count 50: their plans serve parent sessions first. minimax 100 is a TEMPORARY squeeze (owner 2026-09-30): plan cancelled, paid until 2026-10-25, use it up; at retirement remove this key with the model (lifecycle deprecated, tier DENY)",
+    "plan_weights": {
+      "antigravity": 127,
+      "claude": 50,
+      "codex": 50,
+      "codebuddy": 10,
+      "grok": 100,
+      "kimi": 100,
+      "mimo": 50,
+      "minimax": 100,
+      "muse": 54,
+      "opencode": 80,
+      "qwen": 68
+    },
+    "default_plan_weight": 68,
+    "jev_max_cost_usd": 0.004,
+    "escalation_order": [
+      "M",
+      "D"
+    ],
+    "retirement": "successor takes default routing after 20 local tasks without regression and VERIFIED_OPTOUT; predecessor stays active at low priority 14 days; catalog removal needs owner approval",
+    "unclassified_penalty": 10,
+    "deny_model_patterns": [
+      {
+        "pattern": "(^|[/-])sonnet",
+        "reason": "Sonnet: inefficient reasoning, costs like Fable (owner 2026-09-29)"
+      },
+      {
+        "pattern": "^grok-4\\.[0-6]($|[^0-9])",
+        "reason": "older Grok generation; grok-4.7 is current (owner 2026-09-29)"
+      },
+      {
+        "pattern": "^muse-spark-1\\.[0-2]($|[^0-9])",
+        "reason": "older Muse generation; muse-spark-1.3 is current (owner 2026-09-29)"
+      },
+      {
+        "pattern": "^deepseek-v4-pro",
+        "reason": "DeepSeek V4 Pro excluded by owner 2026-09-29"
+      },
+      {
+        "pattern": "^gpt-5\\.",
+        "reason": "GPT 5.x generation superseded by GPT 6 (owner 2026-09-29)"
+      },
+      {
+        "pattern": "contributor",
+        "reason": "training/data-sharing model (hard rule)"
+      },
+      {
+        "pattern": "^gpt-6-sol($|[^0-9])",
+        "reason": "Owner decision 2026-10-02: retired Sol6 must never be selected for a new invocation"
+      }
+    ]
+  },
+  "models": [
+    {
+      "model_id": "gpt-6-astra",
+      "display": "GPT 6 Astra",
+      "lineage": "openai",
+      "tier": "D",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "codex",
+          "model": "gpt-6-astra"
+        }
+      ],
+      "roles": [
+        "plan",
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "planowanie calosci",
+        "rozstrzyganie sporow",
+        "rygor odbioru"
+      ],
+      "weaknesses": [
+        "najdrozszy",
+        "wolniejszy"
+      ]
+    },
+    {
+      "model_id": "claude-fable-5-1",
+      "display": "Fable 5.1",
+      "lineage": "anthropic",
+      "tier": "D",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "claude",
+          "model": "claude-fable-5-1"
+        }
+      ],
+      "roles": [
+        "plan",
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "architektura",
+        "synteza",
+        "bezpieczenstwo"
+      ],
+      "weaknesses": [
+        "najdrozszy",
+        "adapter Fleet Claude za bramka anthropic-retention"
+      ]
+    },
+    {
+      "model_id": "claude-opus-5-5",
+      "display": "Opus 5.5",
+      "lineage": "anthropic",
+      "tier": "M",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "claude",
+          "model": "claude-opus-5-5"
+        }
+      ],
+      "roles": [
+        "plan",
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "planowanie wezlow",
+        "odbior"
+      ],
+      "weaknesses": [
+        "subskrypcja Claude do oszczedzania"
+      ]
+    },
+    {
+      "model_id": "claude-haiku-5-5",
+      "display": "Haiku 5.5",
+      "lineage": "anthropic",
+      "tier": "W",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "claude",
+          "model": "claude-haiku-5-5"
+        }
+      ],
+      "roles": [
+        "execute"
+      ],
+      "strengths": [],
+      "weaknesses": [
+        "LIMITED: jeden syntetyczny canary narzedziowy potwierdzony; bez ogolnej kwalifikacji jakosci kodowania. Tylko jawny Worker execute, low risk; brak zmiany domyslnych map Claude."
+      ]
+    },
+    {
+      "model_id": "gpt-6-sol",
+      "display": "GPT 6 Sol",
+      "lineage": "openai",
+      "tier": "DENY",
+      "lifecycle": "deprecated",
+      "profiles": [
+        {
+          "agent": "codex",
+          "model": "gpt-6-sol"
+        }
+      ],
+      "roles": [
+        "plan",
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "trudne kodowanie",
+        "integracja"
+      ],
+      "weaknesses": [
+        "subskrypcja Codex do oszczedzania"
+      ],
+      "deny_reason": "Owner decision 2026-10-02 prohibits all new gpt-6-sol invocations; historical results remain evidence.",
+      "replacement_id": "gpt-6.1-sol"
+    },
+    {
+      "model_id": "gpt-6.1-sol",
+      "display": "GPT 6.1 Sol",
+      "lineage": "openai",
+      "tier": "M",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "codex",
+          "model": "gpt-6.1-sol"
+        }
+      ],
+      "roles": [
+        "plan",
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "trudne kodowanie",
+        "integracja"
+      ],
+      "weaknesses": [
+        "subskrypcja Codex do oszczedzania"
+      ],
+      "notes": "Owner decision 2026-10-02: exact successor ID; older Sol6 forbidden for new invocations. Runtime availability still requires qualified profile/readiness."
+    },
+    {
+      "model_id": "qwen3.8-max",
+      "display": "Qwen 3.8 Max",
+      "lineage": "alibaba-qwen",
+      "tier": "M",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "qwen",
+          "model": "qwen3.8-max"
+        }
+      ],
+      "roles": [
+        "plan",
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "architect-level",
+        "dlugi kontekst"
+      ],
+      "weaknesses": [
+        "dotad nadużywany do wszystkiego (4198 wywolan we wrzesniu)"
+      ],
+      "notes": "runtime alias qwen3.8-max; datowany snapshot tylko jako proweniencja"
+    },
+    {
+      "model_id": "k3",
+      "display": "Kimi K3 Max",
+      "lineage": "moonshot",
+      "tier": "M",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "kimi",
+          "model": "k3"
+        }
+      ],
+      "roles": [
+        "plan",
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "odbior",
+        "kodowanie Python"
+      ],
+      "weaknesses": [
+        "male okno 5 h"
+      ]
+    },
+    {
+      "model_id": "grok-4.7",
+      "display": "Grok 4.7",
+      "lineage": "xai",
+      "tier": "K",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "grok",
+          "model": "grok-4.7"
+        }
+      ],
+      "roles": [
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "rzetelny odbior bezpieczenstwa",
+        "wzgledne zapisy plikow"
+      ],
+      "weaknesses": [
+        "limit narzedzi ACP",
+        "nowe pliki dopiero od 0.9.52"
+      ]
+    },
+    {
+      "model_id": "muse-wonder-full-1.0",
+      "display": "Muse Wonder Full 1.0",
+      "lineage": "meta",
+      "tier": "D",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "muse",
+          "model": "muse-wonder-full-1.0"
+        }
+      ],
+      "roles": [
+        "plan",
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "owner-assigned tier 2026-10-12"
+      ],
+      "weaknesses": [
+        "no parent-accepted local Wonder benchmark; conservative inherited priors"
+      ]
+    },
+    {
+      "model_id": "gemini-4-argon-high",
+      "display": "Gemini 4 Argon",
+      "lineage": "google",
+      "tier": "D",
+      "lifecycle": "candidate",
+      "profiles": [
+        {
+          "agent": "antigravity",
+          "model": "gemini-4-argon-high"
+        }
+      ],
+      "roles": [
+        "plan",
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "dlugi kontekst",
+        "przeglad duzych repo",
+        "knowledge work",
+        "multimodal"
+      ],
+      "weaknesses": [
+        "praca terminalowa slabsza niz Opus/Astra (dane producenta)",
+        "dlugi prompt w argv (Antigravity)",
+        "brak lokalnego benchmarku"
+      ]
+    },
+    {
+      "model_id": "muse-wonder-1.0",
+      "display": "Muse Wonder 1.0",
+      "lineage": "meta",
+      "tier": "M",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "muse",
+          "model": "muse-wonder-1.0"
+        }
+      ],
+      "roles": [
+        "plan",
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "owner-assigned tier 2026-10-12"
+      ],
+      "weaknesses": [
+        "no parent-accepted local Wonder benchmark; conservative inherited priors"
+      ]
+    },
+    {
+      "model_id": "muse-spark-1.3",
+      "display": "Muse Spark 1.3",
+      "lineage": "meta",
+      "tier": "K",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "muse",
+          "model": "muse-spark-1.3"
+        }
+      ],
+      "roles": [
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "kodowanie",
+        "szybki"
+      ],
+      "weaknesses": [
+        "sandbox Windows (ACL)",
+        "workspace poza evidence w przyszlosci"
+      ]
+    },
+    {
+      "model_id": "qwen3.8-flash",
+      "display": "Qwen 3.8 Flash Next",
+      "lineage": "alibaba-qwen",
+      "tier": "K",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "qwen",
+          "model": "qwen3.8-flash"
+        }
+      ],
+      "roles": [
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "rzetelny odbior",
+        "ograniczona praca srednia"
+      ],
+      "weaknesses": [
+        "implement wymaga Dockera"
+      ]
+    },
+    {
+      "model_id": "hy4-preview",
+      "display": "Hy4 Preview",
+      "lineage": "tencent",
+      "tier": "K",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "codebuddy",
+          "model": "hy4-preview"
+        }
+      ],
+      "roles": [
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "inzynieria systemowa"
+      ],
+      "weaknesses": [
+        "kredyty CodeBuddy"
+      ]
+    },
+    {
+      "model_id": "glm-5.3",
+      "display": "GLM 5.3",
+      "lineage": "zhipu",
+      "tier": "K",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "opencode",
+          "model": "glm-5.3"
+        }
+      ],
+      "roles": [
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "odbior",
+        "tani"
+      ],
+      "weaknesses": [
+        "opencode edit/bash deny w czesci profili"
+      ]
+    },
+    {
+      "model_id": "mimo-v2.6-pro",
+      "display": "MiMo V2.6 Pro",
+      "lineage": "xiaomi",
+      "tier": "M",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "mimo",
+          "model": "mimo-v2.6-pro"
+        }
+      ],
+      "roles": [
+        "plan",
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "kodowanie",
+        "AA Intelligence 46 (powyzej Qwen Max 45 i K3 44)",
+        "najtanszy koszt/zadanie w AA ($0.13)"
+      ],
+      "weaknesses": [
+        "limit krokow natywnych",
+        "wolny: ~42 tok/s (AA) - nie do pilnych sciezek"
+      ]
+    },
+    {
+      "model_id": "gemini-3.8-flash-high",
+      "display": "Gemini 3.8 Flash Max",
+      "lineage": "google",
+      "tier": "K",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "antigravity",
+          "model": "gemini-3.8-flash-high"
+        }
+      ],
+      "roles": [
+        "review",
+        "execute"
+      ],
+      "strengths": [
+        "szybki",
+        "szeroki kontekst"
+      ],
+      "weaknesses": [
+        "dlugi prompt w argv (Antigravity)"
+      ]
+    },
+    {
+      "model_id": "gpt-6-luna",
+      "display": "GPT 6 Luna",
+      "lineage": "openai",
+      "tier": "W",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "codex",
+          "model": "gpt-6-luna"
+        }
+      ],
+      "roles": [
+        "execute",
+        "review"
+      ],
+      "strengths": [
+        "szybkie dobrze okreslone zadania"
+      ],
+      "weaknesses": [
+        "subskrypcja Codex do oszczedzania"
+      ]
+    },
+    {
+      "model_id": "deepseek-v4.1-flash",
+      "display": "DeepSeek V4.1 Flash",
+      "lineage": "deepseek",
+      "tier": "W",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "qwen",
+          "model": "deepseek-v4.1-flash"
+        }
+      ],
+      "roles": [
+        "execute",
+        "review"
+      ],
+      "strengths": [
+        "bardzo tani",
+        "dobry kon roboczy"
+      ],
+      "weaknesses": [],
+      "supersedes": "deepseek-v4-flash-0731",
+      "notes": "Owner decision 2026-10-13: active, zastepuje deepseek-v4-flash-0731; natywny canary Qwen Code 0.25.1 2026-10-13 OK; profil Fleet od 0.9.71"
+    },
+    {
+      "model_id": "deepseek-v4-flash-0731",
+      "display": "DeepSeek V4 Flash",
+      "lineage": "deepseek",
+      "tier": "W",
+      "lifecycle": "deprecated",
+      "profiles": [
+        {
+          "agent": "qwen",
+          "model": "deepseek-v4-flash-0731"
+        }
+      ],
+      "roles": [
+        "execute",
+        "review"
+      ],
+      "strengths": [
+        "tani"
+      ],
+      "weaknesses": [
+        "poprzednik V4.1 Flash"
+      ],
+      "replacement_id": "deepseek-v4.1-flash",
+      "retire_after": "2026-10-27"
+    },
+    {
+      "model_id": "glm-5.3-flash",
+      "display": "GLM 5.3 Flash",
+      "lineage": "zhipu",
+      "tier": "W",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "opencode",
+          "model": "glm-5.3-flash"
+        }
+      ],
+      "roles": [
+        "execute",
+        "review"
+      ],
+      "strengths": [
+        "tani odbior read-only"
+      ],
+      "weaknesses": [
+        "timeouty przy duzych odbiorach"
+      ]
+    },
+    {
+      "model_id": "MiniMax-M3",
+      "display": "MiniMax M3",
+      "lineage": "minimax",
+      "tier": "W",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "minimax",
+          "model": "MiniMax-M3"
+        }
+      ],
+      "roles": [
+        "execute",
+        "review"
+      ],
+      "strengths": [
+        "kon roboczy",
+        "1M kontekst",
+        "~1.7B tok/mies. w planie Plus do 2026-10-25"
+      ],
+      "weaknesses": [
+        "Office tylko relay"
+      ],
+      "retire_after": "2026-10-25"
+    },
+    {
+      "model_id": "vllm/Qwen3.8-27B",
+      "display": "OpenClaw lokalny Qwen 3.8 27B",
+      "lineage": "alibaba-qwen",
+      "tier": "W",
+      "lifecycle": "active",
+      "profiles": [
+        {
+          "agent": "openclaw-local-qwen",
+          "model": "vllm/Qwen3.8-27B"
+        }
+      ],
+      "roles": [
+        "execute"
+      ],
+      "strengths": [
+        "zero kosztu providera"
+      ],
+      "weaknesses": [
+        "lokalny sprzet"
+      ]
+    },
+    {
+      "model_id": "sonnet",
+      "display": "Claude Sonnet 5.5",
+      "lineage": "anthropic",
+      "tier": "DENY",
+      "lifecycle": "deprecated",
+      "profiles": [
+        {
+          "agent": "claude",
+          "model": "sonnet"
+        }
+      ],
+      "deny_reason": "koszt klasy Dyrektora przy nizszej jakosci (owner 2026-09-29)"
+    },
+    {
+      "model_id": "deepseek-v4-pro",
+      "display": "DeepSeek V4 Pro",
+      "lineage": "deepseek",
+      "tier": "DENY",
+      "lifecycle": "deprecated",
+      "profiles": [
+        {
+          "agent": "qwen",
+          "model": "deepseek-v4-pro"
+        }
+      ],
+      "deny_reason": "drozszy i slabszy niz V4.1 Flash (owner 2026-09-29)"
+    },
+    {
+      "model_id": "gpt-5.6-terra",
+      "display": "GPT 5.6 Terra",
+      "lineage": "openai",
+      "tier": "DENY",
+      "lifecycle": "deprecated",
+      "profiles": [
+        {
+          "agent": "codex",
+          "model": "gpt-5.6-terra"
+        }
+      ],
+      "deny_reason": "bez sensu dzis; ocena ponownie przy wersji 6 (owner)"
+    },
+    {
+      "model_id": "gpt-5.6-sol",
+      "display": "GPT 5.6 Sol",
+      "lineage": "openai",
+      "tier": "DENY",
+      "lifecycle": "deprecated",
+      "profiles": [
+        {
+          "agent": "codex",
+          "model": "gpt-5.6-sol"
+        }
+      ],
+      "deny_reason": "starsza generacja niz GPT 6 Sol w tej samej subskrypcji"
+    },
+    {
+      "model_id": "gpt-5.6-luna",
+      "display": "GPT 5.6 Luna",
+      "lineage": "openai",
+      "tier": "DENY",
+      "lifecycle": "deprecated",
+      "profiles": [
+        {
+          "agent": "codex",
+          "model": "gpt-5.6-luna"
+        }
+      ],
+      "deny_reason": "starsza generacja niz GPT 6 Luna w tej samej subskrypcji"
+    },
+    {
+      "model_id": "gemini-3.1-pro-high",
+      "display": "Gemini 3.1 Pro",
+      "lineage": "google",
+      "tier": "DENY",
+      "lifecycle": "deprecated",
+      "profiles": [
+        {
+          "agent": "antigravity",
+          "model": "gemini-3.1-pro-high"
+        }
+      ],
+      "deny_reason": "starsza generacja niz Gemini 3.8 w tej samej subskrypcji"
+    },
+    {
+      "model_id": "gemini-3.8-flash-medium",
+      "display": "Gemini 3.8 Flash (medium)",
+      "lineage": "google",
+      "tier": "DENY",
+      "lifecycle": "deprecated",
+      "profiles": [
+        {
+          "agent": "antigravity",
+          "model": "gemini-3.8-flash-medium"
+        },
+        {
+          "agent": "antigravity",
+          "model": "gemini-3.8-flash-low"
+        }
+      ],
+      "deny_reason": "wlasciciel wskazal Gemini 3.8 Flash Max; nizsze poziomy wysilku nie sa osobnymi wykonawcami"
+    }
+  ]
+}

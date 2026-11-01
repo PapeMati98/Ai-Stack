@@ -1,0 +1,30 @@
+{
+  "sessionId": "synthetic-metadata-fixture",
+  "modelId": "grok-4.7",
+  "usage": {
+    "apiDurationMs": 78514,
+    "cacheCreationTokens": 0,
+    "cachedReadTokens": 46080,
+    "costUsdTicks": 379569200,
+    "inputTokens": 75220,
+    "modelCalls": 3,
+    "numTurns": 3,
+    "outputTokens": 5053,
+    "reasoningTokens": 4148,
+    "totalTokens": 80273
+  },
+  "modelUsage": {
+    "grok-4.7": {
+      "apiDurationMs": 78514,
+      "cacheCreationTokens": 0,
+      "cachedReadTokens": 46080,
+      "costUsdTicks": 379569200,
+      "inputTokens": 75220,
+      "modelCalls": 3,
+      "numTurns": 3,
+      "outputTokens": 5053,
+      "reasoningTokens": 4148,
+      "totalTokens": 80273
+    }
+  }
+}

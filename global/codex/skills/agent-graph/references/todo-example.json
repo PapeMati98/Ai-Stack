@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "goal": "Two independent fixes, then an integrated user journey",
+  "planner": {
+    "model": "actual-strong-parent-model",
+    "source": "current-task"
+  },
+  "workspace": "C:/replace-with/prepared-detached-worktree",
+  "candidate_policy": "open",
+  "max_parallel": 4,
+  "requirements": [
+    "Correct calculation",
+    "Readable empty state",
+    "Working combined journey"
+  ],
+  "constraints": [
+    "No production deploy",
+    "No real mail",
+    "Preserve unrelated changes"
+  ],
+  "historical_scout": {
+    "topics": [
+      "calculation regression",
+      "empty-state message"
+    ],
+    "consumers": [
+      "calculation",
+      "empty-state",
+      "integrated-uat"
+    ],
+    "max_records": 8,
+    "recipient_max_bytes": 4096
+  },
+  "tasks": [
+    {
+      "id": "history",
+      "text": "One bounded advisory scout: discover topic-relevant historical experience across projects and emit dated sourced evidence records for declared consumers.",
+      "covers": [
+        "Correct calculation",
+        "Readable empty state",
+        "Working combined journey"
+      ],
+      "role": "scout",
+      "mode": "advisory",
+      "scope": [
+        "src"
+      ],
+      "done_when": [
+        "Bounded historical evidence records with source/project/dates/caveats for relevant nodes"
+      ],
+      "depends_on": [],
+      "min_tier_execute": "W",
+      "maker": [
+        {
+          "agent": "minimax",
+          "model": "MiniMax-M3.1-Flash",
+          "score": 90,
+          "reason": "Qualified subscription Worker for the bounded slice; current default, not legacyM3"
+        },
+        {
+          "agent": "openclaw-local-qwen",
+          "model": "vllm/Qwen3.8-27B",
+          "score": 85,
+          "reason": "Local Worker for bounded source and offline checks when the native runtime is ready"
+        }
+      ],
+      "reviewer": [
+        {
+          "agent": "grok",
+          "model": "grok-4.7",
+          "score": 85,
+          "reason": "Independent check of evidence records and trust boundaries"
+        }
+      ],
+      "checks": []
+    },
+    {
+      "id": "calculation",
+      "text": "Fix the specified calculation and its regression test.",
+      "covers": [
+        "Correct calculation"
+      ],
+      "scope": [
+        "src/calculation.py",
+        "tests/test_calculation.py"
+      ],
+      "done_when": [
+        "Regression test demonstrates the expected business calculation"
+      ],
+      "depends_on": [
+        "history"
+      ],
+      "min_tier_execute": "W",
+      "maker": [
+        {
+          "agent": "minimax",
+          "model": "MiniMax-M3.1-Flash",
+          "score": 90,
+          "reason": "Qualified subscription Worker for the bounded slice; current default, not legacyM3"
+        },
+        {
+          "agent": "qwen",
+          "model": "deepseek-v4.1-flash-1017",
+          "score": 90,
+          "reason": "Qualified DeepSeek Worker when shared Token Plan gate allows it; never clear an exhausted pool to select it"
+        },
+        {
+          "agent": "openclaw-local-qwen",
+          "model": "vllm/Qwen3.8-27B",
+          "score": 85,
+          "reason": "Local Worker for bounded source and offline checks when the native runtime is ready"
+        },
+        {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "score": 80,
+          "reason": "Qualified fallback; preserve Codex plan for work requiring its capabilities"
+        }
+      ],
+      "reviewer": [
+        {
+          "agent": "grok",
+          "model": "grok-4.7",
+          "score": 90,
+          "reason": "Independent business and regression review"
+        }
+      ],
+      "checks": [
+        [
+          "python",
+          "-m",
+          "unittest",
+          "tests.test_calculation"
+        ]
+      ]
+    },
+    {
+      "id": "empty-state",
+      "text": "Fix the specified empty-state message without redesigning the screen.",
+      "covers": [
+        "Readable empty state"
+      ],
+      "scope": [
+        "src/empty-state.tsx"
+      ],
+      "done_when": [
+        "Empty data renders the specified message without breaking populated data"
+      ],
+      "depends_on": [
+        "history"
+      ],
+      "maker": [
+        {
+          "agent": "minimax",
+          "model": "MiniMax-M3.1-Flash",
+          "score": 90,
+          "reason": "Qualified subscription Worker for the bounded slice; current default, not legacyM3"
+        },
+        {
+          "agent": "qwen",
+          "model": "deepseek-v4.1-flash-1017",
+          "score": 90,
+          "reason": "Qualified DeepSeek Worker when shared Token Plan gate allows it; never clear an exhausted pool to select it"
+        },
+        {
+          "agent": "openclaw-local-qwen",
+          "model": "vllm/Qwen3.8-27B",
+          "score": 85,
+          "reason": "Local Worker for bounded source and offline checks when the native runtime is ready"
+        },
+        {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "score": 80,
+          "reason": "Qualified fallback; preserve Codex plan for work requiring its capabilities"
+        }
+      ],
+      "reviewer": [
+        {
+          "agent": "grok",
+          "model": "grok-4.7",
+          "score": 90,
+          "reason": "Independent product review"
+        }
+      ],
+      "checks": [
+        [
+          "node",
+          "scripts/verify-empty-state.js"
+        ]
+      ],
+      "min_tier_execute": "W"
+    },
+    {
+      "id": "integrated-uat",
+      "candidate_policy": "pin",
+      "text": "Run the combined user journey in isolated DEV and inspect visible state and backend result.",
+      "covers": [
+        "Working combined journey"
+      ],
+      "mode": "advisory",
+      "scope": [
+        "src",
+        "tests"
+      ],
+      "done_when": [
+        "Required journey has actual expected/actual evidence and no external side effects"
+      ],
+      "depends_on": [
+        "history",
+        "calculation",
+        "empty-state"
+      ],
+      "maker": [
+        {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "score": 85,
+          "reason": "Execute existing deterministic journey"
+        }
+      ],
+      "reviewer": [
+        {
+          "agent": "grok",
+          "model": "grok-4.7",
+          "score": 90,
+          "reason": "Inspect actual journey evidence, not a planning report"
+        }
+      ],
+      "checks": []
+    }
+  ],
+  "completion": {
+    "task_kind": "repair",
+    "task_family": "implementation",
+    "episode_role": "top-level",
+    "eligible": true,
+    "exception": "none",
+    "uat_required": true
+  }
+}

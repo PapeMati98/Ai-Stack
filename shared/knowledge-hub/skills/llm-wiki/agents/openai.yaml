@@ -1,0 +1,4 @@
+interface:
+  display_name: "LLM Wiki"
+  short_description: "Retrieve governed knowledge with optional Obsidian navigation"
+  default_prompt: "Use $llm-wiki before substantive work to retrieve verified context, optionally narrow it through the read-only Obsidian bridge, then contribute durable evidence as a proposal after completion."

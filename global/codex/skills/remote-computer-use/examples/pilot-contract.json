@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "task_id": "offline-pilot",
+  "mode": "browser",
+  "headless": true,
+  "side_effects": "none",
+  "timeout_seconds": 60,
+  "target": {
+    "kind": "fixture",
+    "value": "pilot.html"
+  },
+  "actions": [
+    {
+      "type": "assert_title_contains",
+      "contains": "Remote Computer Use Pilot"
+    },
+    {
+      "type": "click",
+      "selector": "#increment"
+    },
+    {
+      "type": "assert_text",
+      "selector": "#count",
+      "contains": "1"
+    },
+    {
+      "type": "screenshot",
+      "name": "pilot-after-click"
+    }
+  ]
+}

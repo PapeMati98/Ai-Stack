@@ -1,0 +1,17 @@
+{
+  "claude": "subscription",
+  "codex": "subscription",
+  "kimi": "subscription",
+  "qwen": "subscription",
+  "opencode": "subscription",
+  "minimax": "subscription",
+  "codebuddy": "subscription",
+  "muse": "subscription",
+  "mimo": "subscription",
+  "grok": "subscription",
+  "antigravity": "subscription",
+  "openclaw-local-qwen": "local",
+  "mistral": "subscription",
+  "zcode": "subscription",
+  "opencode-beam": "api"
+}

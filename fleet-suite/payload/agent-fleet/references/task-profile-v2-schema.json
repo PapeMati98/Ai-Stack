@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Fleet Task Profile v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_summary",
+    "substantive",
+    "delegation_value",
+    "delegation_mode",
+    "complexity",
+    "complexity_score",
+    "ambiguity",
+    "risk",
+    "verifiability",
+    "visual_sensitivity",
+    "context_load",
+    "time_horizon",
+    "urgency",
+    "workload_weights",
+    "required_capabilities",
+    "required_tools",
+    "red_team_intent",
+    "minimum_capabilities",
+    "verification",
+    "delegation_economics",
+    "allocation_policy",
+    "model_scores",
+    "preflight"
+  ],
+  "properties": {
+    "schema_version": {"const": 2},
+    "task_summary": {"type": "string", "minLength": 1, "maxLength": 1000},
+    "substantive": {"type": "boolean"},
+    "delegation_value": {"type": "integer", "minimum": 0, "maximum": 100},
+    "delegation_mode": {
+      "type": "string",
+      "enum": ["SKIP", "ONE", "COUNCIL", "PARALLEL_IMPLEMENT"]
+    },
+    "complexity": {"type": "string", "enum": ["low", "medium", "high"]},
+    "complexity_score": {"type": "integer", "minimum": 1, "maximum": 5},
+    "ambiguity": {"type": "integer", "minimum": 1, "maximum": 5},
+    "risk": {"type": "string", "enum": ["low", "medium", "high", "critical"]},
+    "verifiability": {"type": "string", "enum": ["low", "medium", "high"]},
+    "visual_sensitivity": {"type": "string", "enum": ["low", "medium", "high"]},
+    "context_load": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["estimated_tokens", "file_count", "repository_scope"],
+      "properties": {
+        "estimated_tokens": {"type": ["integer", "null"], "minimum": 0},
+        "file_count": {"type": ["integer", "null"], "minimum": 0},
+        "repository_scope": {
+          "type": "string",
+          "enum": ["single-file", "module", "repository", "multi-repository"]
+        }
+      }
+    },
+    "time_horizon": {"type": "string", "enum": ["short", "medium", "long"]},
+    "urgency": {"type": "string", "enum": ["low", "medium", "high"]},
+    "workload_weights": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 100
+      }
+    },
+    "required_capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": ["large-context", "multimodal", "web", "write", "independent-review", "security-review"]
+      }
+    },
+    "required_tools": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1, "maxLength": 100}
+    },
+    "red_team_intent": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["mode", "explicit"],
+      "properties": {
+        "mode": {"const": "red-team"},
+        "explicit": {"const": true}
+      }
+    },
+    "minimum_capabilities": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 100
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["automatic_tests", "independent_review", "human_review"],
+      "properties": {
+        "automatic_tests": {"type": "boolean"},
+        "independent_review": {"type": "boolean"},
+        "human_review": {"type": "boolean"}
+      }
+    },
+    "delegation_economics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "estimated_parent_minutes",
+        "estimated_contractor_minutes",
+        "coordination_minutes",
+        "parallelizable_fraction"
+      ],
+      "properties": {
+        "estimated_parent_minutes": {"type": "number", "minimum": 0},
+        "estimated_contractor_minutes": {"type": "number", "minimum": 0},
+        "coordination_minutes": {"type": "number", "minimum": 0},
+        "parallelizable_fraction": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "allocation_policy": {
+      "type": "string",
+      "enum": [
+        "balanced",
+        "burn-before-reset",
+        "fast-lane",
+        "parallel-exploration",
+        "preserve-premium",
+        "quality-first"
+      ]
+    },
+    "model_scores": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["score", "reason"],
+        "properties": {
+          "score": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100,
+            "multipleOf": 5
+          },
+          "reason": {"type": "string", "minLength": 1, "maxLength": 500}
+        }
+      }
+    },
+    "data_handling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "anthropic_zdr_authorization"],
+      "properties": {
+        "classification": {
+          "type": "string",
+          "enum": ["unknown", "public", "internal", "confidential", "restricted"]
+        },
+        "anthropic_zdr_authorization": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "scope",
+            "models",
+            "verified_at",
+            "expires_at",
+            "evidence_ref"
+          ],
+          "properties": {
+            "status": {"const": "authorized"},
+            "scope": {"const": "account"},
+            "models": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {"type": "string", "minLength": 1}
+            },
+            "verified_at": {"type": "string", "format": "date-time"},
+            "expires_at": {"type": "string", "format": "date-time"},
+            "evidence_ref": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    },
+    "preflight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["skill", "status", "reason"],
+      "properties": {
+        "skill": {"type": "string", "enum": ["new-task", "new-training", "none"]},
+        "status": {"type": "string", "enum": ["applied", "not-applicable"]},
+        "reason": {"type": "string", "minLength": 1, "maxLength": 500}
+      }
+    }
+  }
+}

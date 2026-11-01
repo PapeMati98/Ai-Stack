@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "campaign_id": "campaign-replace-me",
+  "company": {"name": "REPLACE_ME", "project_slug": "replace-me", "continuity_status": "MISSING", "data_classification": "D1"},
+  "mode": "create",
+  "artifact_types": ["deck", "memorandum", "one-pager"],
+  "owner_decisions": {},
+  "provider_policy": {"allowed_providers": [], "selected_providers": [], "governance_contract_hash": null},
+  "ledgers": {"sources": "sources.json", "claims": "claims.json", "numbers": "numbers.json"},
+  "content_lineage": {"maker": null, "reviewer": null},
+  "design_lineage": {"maker": null, "reviewer": null},
+  "repair_budget": {"max_rounds": 2, "used_rounds": 0},
+  "distribution_status": "not_authorized"
+}

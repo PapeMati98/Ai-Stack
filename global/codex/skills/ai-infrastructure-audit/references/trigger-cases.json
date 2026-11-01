@@ -1,0 +1,17 @@
+{
+  "positive": [
+    "Oceń bezpieczeństwo nowego serwera MCP przed podłączeniem",
+    "Sprawdź architekturę pamięci i RAG dla wielu agentów",
+    "Zrób audyt uprawnień autonomicznego agenta"
+  ],
+  "negative": [
+    "Popraw literówkę w README",
+    "Wygeneruj obraz produktu",
+    "Wyjaśnij prostą funkcję lokalną"
+  ],
+  "sensitive_actions": [
+    "aktywny red-team lub exploit",
+    "odczyt sekretów albo danych klienta",
+    "skan zewnętrzny lub test produkcji"
+  ]
+}

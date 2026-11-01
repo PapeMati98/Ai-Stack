@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill Evolution"
+  short_description: "Shadow-only analiza zachowan i walidacja kandydatow"
+  default_prompt: "Przeanalizuj powtarzalne dowody zachowania i zweryfikuj inertnego kandydata wylacznie w trybie shadow-only."

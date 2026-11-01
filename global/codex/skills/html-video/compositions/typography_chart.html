@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synthetic Systems Telemetry</title>
+  <style>
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-base: #080a0f;
+      --bg-card: rgba(18, 22, 34, 0.75);
+      --bg-card-border: rgba(56, 189, 248, 0.2);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #475569;
+      --accent-cyan: #00f0ff;
+      --accent-violet: #a855f7;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --glow-cyan: 0 0 25px rgba(0, 240, 255, 0.35);
+      --glow-violet: 0 0 25px rgba(168, 85, 247, 0.35);
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg-base);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Background Grid & Ambient Glow */
+    .viewport-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(168, 85, 247, 0.08) 0%, transparent 45%),
+        linear-gradient(to bottom, #090c14, #05070a);
+    }
+
+    .grid-lines {
+      position: absolute;
+      inset: 0;
+      background-size: 60px 60px;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      pointer-events: none;
+    }
+
+    /* Content Wrapper */
+    .content-frame {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Aspect Ratio Adaptations */
+    body.aspect-16-9 .content-frame {
+      padding: 72px 84px;
+    }
+
+    body.aspect-9-16 .content-frame {
+      padding: 96px 72px;
+    }
+
+    body.aspect-1-1 .content-frame {
+      padding: 60px 60px;
+    }
+
+    body.aspect-1-1 .main-title {
+      font-size: 42px;
+    }
+
+    body.aspect-1-1 .sub-title {
+      font-size: 18px;
+      line-height: 1.4;
+      max-width: 800px;
+    }
+
+    body.aspect-1-1 .body-layout {
+      flex-direction: column;
+      justify-content: space-around;
+      gap: 24px;
+      margin: 24px 0;
+    }
+
+    body.aspect-1-1 .metrics-col {
+      width: 100%;
+    }
+
+    body.aspect-1-1 .kpi-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    body.aspect-1-1 .kpi-card {
+      padding: 16px 18px;
+      border-radius: 14px;
+      gap: 6px;
+    }
+
+    body.aspect-1-1 .kpi-value {
+      font-size: 32px;
+    }
+
+    body.aspect-1-1 .chart-card {
+      padding: 20px 20px 16px 20px;
+      min-height: 240px;
+    }
+
+    /* Header Component */
+    .header-block {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .badge-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .live-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 10px var(--accent-cyan);
+    }
+
+    .system-tag {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .main-title {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    body.aspect-16-9 .main-title {
+      font-size: 48px;
+    }
+
+    body.aspect-9-16 .main-title {
+      font-size: 56px;
+      line-height: 1.15;
+    }
+
+    .sub-title {
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.4;
+      max-width: 720px;
+    }
+
+    body.aspect-16-9 .sub-title {
+      font-size: 20px;
+    }
+
+    body.aspect-9-16 .sub-title {
+      font-size: 26px;
+      line-height: 1.45;
+      max-width: 960px;
+    }
+
+    /* Main Grid: 16:9 vs 9:16 */
+    .body-layout {
+      flex: 1;
+      display: flex;
+      margin: 36px 0;
+      gap: 40px;
+    }
+
+    body.aspect-16-9 .body-layout {
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    body.aspect-9-16 .body-layout {
+      flex-direction: column;
+      justify-content: space-around;
+      gap: 36px;
+    }
+
+    /* Metrics Section */
+    .metrics-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    body.aspect-16-9 .metrics-col {
+      width: 44%;
+    }
+
+    body.aspect-9-16 .metrics-col {
+      width: 100%;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    body.aspect-9-16 .kpi-grid {
+      gap: 24px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 16px;
+      padding: 24px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+
+    body.aspect-9-16 .kpi-card {
+      padding: 28px 24px;
+      border-radius: 20px;
+      gap: 12px;
+    }
+
+    .kpi-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+      opacity: 0.6;
+    }
+
+    .kpi-label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    body.aspect-9-16 .kpi-label {
+      font-size: 24px;
+      letter-spacing: 0.09em;
+    }
+
+    .kpi-value {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      font-variant-numeric: tabular-nums;
+    }
+
+    body.aspect-9-16 .kpi-value {
+      font-size: 50px;
+    }
+
+    .kpi-sub {
+      font-size: 13px;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    body.aspect-9-16 .kpi-sub {
+      font-size: 22px;
+    }
+
+    /* Chart Section */
+    .chart-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .chart-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 20px;
+      padding: 30px 28px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 260px;
+      position: relative;
+      backdrop-filter: blur(12px);
+    }
+
+    body.aspect-9-16 .chart-card {
+      padding: 32px 30px;
+      min-height: 380px;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .chart-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-main);
+    }
+
+    body.aspect-9-16 .chart-title {
+      font-size: 26px;
+    }
+
+    .chart-legend {
+      display: flex;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    body.aspect-9-16 .chart-legend {
+      font-size: 22px;
+      gap: 24px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-bullet {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    body.aspect-9-16 .legend-bullet {
+      width: 16px;
+      height: 16px;
+    }
+
+    .chart-viewport {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    svg.telemetry-chart {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    /* Portrait Mobile Enhancements for Secondary Labels */
+    body.aspect-9-16 .live-indicator {
+      font-size: 22px;
+      padding: 10px 24px;
+    }
+
+    body.aspect-9-16 .pulse-dot {
+      width: 14px;
+      height: 14px;
+    }
+
+    body.aspect-9-16 .system-tag {
+      font-size: 22px;
+    }
+
+    /* Bottom Scrubber & Timecode */
+    .timeline-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    body.aspect-9-16 .footer-meta {
+      font-size: 24px;
+    }
+
+    .timecode-display {
+      color: var(--accent-cyan);
+      font-weight: 700;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    body.aspect-9-16 .progress-track {
+      height: 10px;
+    }
+
+    .progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
+      border-radius: 9999px;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    }
+  </style>
+</head>
+<body class="aspect-16-9">
+  <div class="viewport-container">
+    <div class="grid-lines"></div>
+
+    <div class="content-frame">
+      <!-- Header -->
+      <header class="header-block">
+        <div class="badge-row">
+          <div class="live-indicator">
+            <span class="pulse-dot"></span>
+            <span>Synthetic Deterministic Node</span>
+          </div>
+          <span class="system-tag">Synthetic Architecture Benchmark v2.4</span>
+        </div>
+        <h1 class="main-title">Synthetic Execution Pipeline</h1>
+        <p class="sub-title">Synthetic frame-accurate temporal synthesis with zero clock drift and verified seek determinism.</p>
+      </header>
+
+      <!-- Main Layout -->
+      <div class="body-layout">
+        <!-- Metrics Column -->
+        <div class="metrics-col">
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <span class="kpi-label">Synthetic Throughput</span>
+              <span class="kpi-value" id="kpi-throughput">0</span>
+              <span class="kpi-sub">↑ sim ops/sec (peak)</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Synthetic Precision</span>
+              <span class="kpi-value" id="kpi-precision">99.90%</span>
+              <span class="kpi-sub" style="color: var(--accent-emerald);">● 0.000 variance</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Active Worker Nodes</span>
+              <span class="kpi-value" id="kpi-agents">0 / 24</span>
+              <span class="kpi-sub" style="color: var(--accent-violet);">● Synchronized</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Simulated Frame Jitter</span>
+              <span class="kpi-value" id="kpi-jitter">0.000</span>
+              <span class="kpi-sub" style="color: var(--accent-amber);">ms (zero-drift)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart Column -->
+        <div class="chart-col">
+          <div class="chart-card">
+            <div class="chart-header">
+              <span class="chart-title">Synthetic Convergence Trajectory</span>
+              <div class="chart-legend">
+                <div class="legend-item">
+                  <span class="legend-bullet" style="background: var(--accent-cyan);"></span>
+                  <span>Simulated Metric A</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-bullet" style="background: var(--accent-violet);"></span>
+                  <span>Simulated Consensus B</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-viewport">
+              <svg class="telemetry-chart" viewBox="0 0 800 360" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.25" />
+                    <stop offset="100%" stop-color="#00f0ff" stop-opacity="0.0" />
+                  </linearGradient>
+                </defs>
+
+                <!-- Grid lines inside SVG -->
+                <line x1="0" y1="90" x2="800" y2="90" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4 4" />
+                <line x1="0" y1="180" x2="800" y2="180" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4 4" />
+                <line x1="0" y1="270" x2="800" y2="270" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4 4" />
+
+                <!-- Secondary Line (Violet) -->
+                <path id="chart-curve-secondary"
+                      d="M 0,320 C 150,300 240,240 380,210 C 520,180 620,140 800,100"
+                      fill="none"
+                      stroke="#a855f7"
+                      stroke-width="3"
+                      stroke-linecap="round" />
+
+                <!-- Area Fill for Primary Line -->
+                <path id="chart-area-primary"
+                      d="M 0,340 C 120,330 200,260 360,200 C 500,150 640,70 800,40 L 800,360 L 0,360 Z"
+                      fill="url(#areaGradient)"
+                      opacity="0" />
+
+                <!-- Primary Line (Cyan) -->
+                <path id="chart-curve-primary"
+                      d="M 0,340 C 120,330 200,260 360,200 C 500,150 640,70 800,40"
+                      fill="none"
+                      stroke="#00f0ff"
+                      stroke-width="4.5"
+                      stroke-linecap="round" />
+
+                <!-- Scrubber Vertical Line -->
+                <line id="chart-scrubber-line" x1="0" y1="0" x2="0" y2="360" stroke="#00f0ff" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.8" />
+
+                <!-- Current Tracking Point -->
+                <circle id="chart-tracker-point" cx="0" cy="340" r="6" fill="#ffffff" stroke="#00f0ff" stroke-width="3" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer / Timeline Scrubber -->
+      <footer class="timeline-footer">
+        <div class="progress-track">
+          <div class="progress-fill" id="timeline-progress-bar"></div>
+        </div>
+        <div class="footer-meta">
+          <span id="frame-counter-display">FRAME: 000000 / 000150</span>
+          <span class="timecode-display" id="timecode-display">00:00.000 / 00:05.000</span>
+          <span id="fps-badge">TARGET: 30.00 FPS [SYNTHETIC TEST]</span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // Parse layout config from URL
+      const params = new URLSearchParams(window.location.search);
+      const aspect = params.get('aspect') || '16:9';
+      const defaultW = aspect === '9:16' ? 1080 : (aspect === '1:1' ? 1080 : 1920);
+      const defaultH = aspect === '9:16' ? 1920 : (aspect === '1:1' ? 1080 : 1080);
+      const width = parseInt(params.get('w') || defaultW, 10);
+      const height = parseInt(params.get('h') || defaultH, 10);
+
+      // Apply aspect class
+      if (aspect === '9:16') {
+        document.body.className = 'aspect-9-16';
+      } else if (aspect === '1:1') {
+        document.body.className = 'aspect-1-1';
+      } else {
+        document.body.className = 'aspect-16-9';
+      }
+
+      // DOM Elements
+      const kpiThroughput = document.getElementById('kpi-throughput');
+      const kpiPrecision = document.getElementById('kpi-precision');
+      const kpiAgents = document.getElementById('kpi-agents');
+      const kpiJitter = document.getElementById('kpi-jitter');
+      const timecodeDisplay = document.getElementById('timecode-display');
+      const frameCounterDisplay = document.getElementById('frame-counter-display');
+      const progressBar = document.getElementById('timeline-progress-bar');
+      const curvePrimary = document.getElementById('chart-curve-primary');
+      const curveSecondary = document.getElementById('chart-curve-secondary');
+      const areaPrimary = document.getElementById('chart-area-primary');
+      const trackerPoint = document.getElementById('chart-tracker-point');
+      const scrubberLine = document.getElementById('chart-scrubber-line');
+
+      // Pre-compute path lengths
+      const primaryLength = curvePrimary.getTotalLength();
+      const secondaryLength = curveSecondary.getTotalLength();
+
+      curvePrimary.style.strokeDasharray = primaryLength;
+      curvePrimary.style.strokeDashoffset = primaryLength;
+      curveSecondary.style.strokeDasharray = secondaryLength;
+      curveSecondary.style.strokeDashoffset = secondaryLength;
+
+      // Deterministic math easing helpers (no Date, no Math.random)
+      function easeInOutCubic(x) {
+        return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+      }
+
+      function easeOutQuad(x) {
+        return 1 - (1 - x) * (1 - x);
+      }
+
+      function formatTime(seconds) {
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60);
+        const ms = Math.floor((seconds % 1) * 1000);
+        return String(m).padStart(2, '0') + ':' +
+               String(s).padStart(2, '0') + '.' +
+               String(ms).padStart(3, '0');
+      }
+
+      const DURATION = 5.0;
+      const FPS = 30;
+      const TOTAL_FRAMES = Math.round(DURATION * FPS);
+
+      // Core deterministic seek function
+      function seek(t) {
+        // Strict bounding
+        const clampedT = Math.max(0, Math.min(t, DURATION));
+        const progress = clampedT / DURATION;
+
+        // Eased factors
+        const pCubic = easeInOutCubic(progress);
+        const pQuad = easeOutQuad(progress);
+
+        // Update SVG primary curve
+        const offsetPrimary = primaryLength * (1 - pCubic);
+        curvePrimary.style.strokeDashoffset = offsetPrimary;
+
+        // Update SVG secondary curve
+        const offsetSecondary = secondaryLength * (1 - easeInOutCubic(Math.min(1, progress * 1.1)));
+        curveSecondary.style.strokeDashoffset = offsetSecondary;
+
+        // Area opacity
+        areaPrimary.setAttribute('opacity', (pCubic * 0.9).toFixed(3));
+
+        // Tracker point position on primary curve
+        const pointAtLength = primaryLength * pCubic;
+        const pt = curvePrimary.getPointAtLength(pointAtLength);
+        trackerPoint.setAttribute('cx', pt.x.toFixed(2));
+        trackerPoint.setAttribute('cy', pt.y.toFixed(2));
+        scrubberLine.setAttribute('x1', pt.x.toFixed(2));
+        scrubberLine.setAttribute('x2', pt.x.toFixed(2));
+
+        // Update KPIs
+        const throughputVal = Math.floor(2840 * pCubic);
+        kpiThroughput.textContent = throughputVal.toLocaleString('en-US');
+
+        const precisionVal = (99.90 + 0.098 * pQuad).toFixed(3);
+        kpiPrecision.textContent = precisionVal + '%';
+
+        const agentsCount = Math.floor(24 * pQuad);
+        kpiAgents.textContent = agentsCount + ' / 24';
+
+        kpiJitter.textContent = (0.000).toFixed(3);
+
+        // Update timeline progress bar and timecodes
+        progressBar.style.width = (progress * 100).toFixed(2) + '%';
+        timecodeDisplay.textContent = formatTime(clampedT) + ' / ' + formatTime(DURATION);
+
+        const currentFrame = Math.min(TOTAL_FRAMES, Math.round(clampedT * FPS));
+        frameCounterDisplay.textContent = 'FRAME: ' +
+          String(currentFrame).padStart(6, '0') + ' / ' +
+          String(TOTAL_FRAMES).padStart(6, '0');
+      }
+
+      // Timeline Contract object
+      window.renderTimeline = {
+        duration: DURATION,
+        fps: FPS,
+        width: width,
+        height: height,
+        aspectRatio: aspect,
+        assets: [],
+        seek: seek
+      };
+
+      // Expose seek globally
+      window.seek = seek;
+
+      // Initialize at t=0
+      seek(0.0);
+
+      // Signal readiness to engine
+      Promise.all([
+        document.fonts ? document.fonts.ready : Promise.resolve(),
+        new Promise(resolve => {
+          if (document.readyState === 'complete') {
+            resolve();
+          } else {
+            window.addEventListener('load', resolve);
+          }
+        })
+      ]).then(() => {
+        document.documentElement.setAttribute('data-timeline-ready', 'true');
+      });
+    })();
+  </script>
+</body>
+</html>

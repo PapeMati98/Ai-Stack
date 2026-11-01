@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-loop/state.schema.json",
+  "title": "agent-loop state.json (mutable operational state, atomic)",
+  "description": "Krotkotrwaly stan operacyjny petli. Zapis ATOMOWY (temp + fsync + atomic replace). Odporny na przerwanie procesu. NIE trafia automatycznie do wiki.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "loop_id", "phase", "updated_at", "current_run_id", "current_started_at", "attempt", "breaker", "progress", "failure", "budget", "settled_run_ids", "lock", "last_run_id", "last_fleet_run_id", "last_status"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "loop_id": { "type": "string" },
+    "phase": {
+      "enum": ["IDLE", "TRIGGERED", "VALIDATING", "PLANNING", "DELEGATING", "VERIFYING", "RECORDING", "RECOVERING", "STOPPED"],
+      "description": "Aktualny stan maszyny stanow (patrz state machine w raporcie)."
+    },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "current_run_id": { "type": ["string", "null"], "description": "run_id biezacego przebiegu (mint w TRIGGERED); null gdy IDLE/STOPPED." },
+    "current_started_at": { "type": ["string", "null"], "format": "date-time" },
+    "attempt": { "type": "integer", "minimum": 0, "description": "Numer proby w biezacym runie (dla max_attempts_per_run)." },
+    "breaker": {
+      "type": "object", "additionalProperties": false,
+      "required": ["open", "reason", "opened_at"],
+      "properties": {
+        "open": { "type": "boolean" },
+        "reason": { "enum": ["KILL_SWITCH", "MAX_ATTEMPTS", "REPEATED_FAILURE", "NO_PROGRESS", "TIMEOUT", "BUDGET_EXCEEDED", "TELEMETRY_UNKNOWN", "L1_WRITE_DETECTED", "CONTROL_PLANE_WRITE_DETECTED", "INTERRUPTED", null] },
+        "opened_at": { "type": ["string", "null"], "format": "date-time" }
+      }
+    },
+    "progress": {
+      "type": "object", "additionalProperties": false,
+      "required": ["marker", "last_change_run_id", "unchanged_runs"],
+      "properties": {
+        "marker": { "type": ["string", "null"], "description": "Deterministyczny odcisk postepu (np. hash raportu/znalezisk). Brak zmiany przez no_progress_runs -> breaker." },
+        "last_change_run_id": { "type": ["string", "null"] },
+        "unchanged_runs": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "failure": {
+      "type": "object", "additionalProperties": false,
+      "required": ["consecutive", "last_error_kind"],
+      "properties": {
+        "consecutive": { "type": "integer", "minimum": 0 },
+        "last_error_kind": { "type": ["string", "null"] }
+      }
+    },
+    "budget": {
+      "type": "object", "additionalProperties": false,
+      "required": ["day", "runs_today", "tokens_today", "unknown_token_runs"],
+      "properties": {
+        "day": { "type": "string", "description": "YYYY-MM-DD w timezone petli; reset licznikow przy zmianie." },
+        "runs_today": { "type": "integer", "minimum": 0 },
+        "tokens_today": { "type": "integer", "minimum": 0, "description": "Suma tylko znanych tokenow. Brak telemetrii jest osobno liczony jako unknown_token_runs i nigdy nie jest szacowany." },
+        "unknown_token_runs": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "settled_run_ids": {
+      "type": "array", "items": { "type": "string" }, "uniqueItems": true,
+      "description": "KLUCZOWE (fix F7): run_id juz rozliczone z budzetu. Ponowne status/plan/recovery NIE dolicza ich ponownie. Rozliczenie dokladnie raz."
+    },
+    "lock": {
+      "type": "object", "additionalProperties": false,
+      "required": ["pid", "host", "acquired_at", "lock_file"],
+      "properties": {
+        "pid": { "type": ["integer", "null"] },
+        "host": { "type": ["string", "null"] },
+        "acquired_at": { "type": ["string", "null"], "format": "date-time" },
+        "lock_file": { "type": "string", "description": "Informacyjne. Prawdziwa wzajemna wykluczalnosc = OS-held lock (Windows: msvcrt byte-range lock; Linux: flock), nie ten wpis." }
+      }
+    },
+    "last_run_id": { "type": ["string", "null"] },
+    "last_fleet_run_id": { "type": ["string", "null"] },
+    "last_status": { "type": ["string", "null"] }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "organization_id", "provider", "target", "reasons"],
+  "properties": {
+    "decision": {"enum": ["ALLOW", "REGISTRY_ALLOW", "DENY"]},
+    "organization_id": {"type": ["string", "null"]},
+    "provider": {"type": ["string", "null"]},
+    "target": {"type": "object"},
+    "reasons": {"type": "array", "items": {"type": "string"}},
+    "live_context_status": {"enum": ["VERIFIED", "UNVERIFIED"]},
+    "execution_allowed": {"type": "boolean"},
+    "execution_channel": {"enum": ["graph-powershell", "m365-cli", "mcp"]},
+    "intent": {"enum": ["read", "mutate"]},
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "read_only_allowed": {"type": "boolean"},
+    "plan": {"type": "object"}
+  }
+}

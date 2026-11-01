@@ -1,0 +1,124 @@
+{
+ "schema": "hub-quality-pilot-frozen-v1",
+ "materials": [
+  {
+   "source_id": "pilot-alpha-1",
+   "project": "alpha-tools",
+   "title": "Alpha deployment guide",
+   "facts": [
+    {
+     "fact_id": "alpha-1.1",
+     "text": "Alpha wdraza sie przez release 2.3 z migracja bazy w jednym kroku.",
+     "observed_at": "2026-08-01",
+     "status": "current",
+     "evidence": "release/2.3/DEPLOY.md"
+    },
+    {
+     "fact_id": "alpha-1.2",
+     "text": "Alpha API limit: 100 zapytan/min na klucz.",
+     "observed_at": "2026-08-01",
+     "status": "current",
+     "evidence": "docs/api-limits.md"
+    }
+   ]
+  },
+  {
+   "source_id": "pilot-alpha-2",
+   "project": "alpha-tools",
+   "title": "Alpha limits update (supersedes 1.2)",
+   "facts": [
+    {
+     "fact_id": "alpha-2.1",
+     "text": "Od 2026-09-15 Alpha API limit wynosi 250 zapytan/min na klucz; stary limit 100 jest nieaktualny.",
+     "observed_at": "2026-09-15",
+     "status": "current",
+     "evidence": "release/2.4/CHANGELOG.md"
+    }
+   ]
+  },
+  {
+   "source_id": "pilot-beta-1",
+   "project": "beta-crm",
+   "title": "Beta CRM eksport faktur",
+   "facts": [
+    {
+     "fact_id": "beta-1.1",
+     "text": "Beta eksport faktur do CSV dziala z zakresu maksymalnie 31 dni.",
+     "observed_at": "2026-07-20",
+     "status": "current",
+     "evidence": "docs/export.md"
+    },
+    {
+     "fact_id": "beta-1.2",
+     "text": "Beta wymaga potwierdzenia KSeF przed eksportem.",
+     "observed_at": "2026-07-20",
+     "status": "current",
+     "evidence": "docs/export.md"
+    }
+   ]
+  },
+  {
+   "source_id": "pilot-beta-2",
+   "project": "beta-crm",
+   "title": "Beta CRM eksport — duplikat starszy",
+   "facts": [
+    {
+     "fact_id": "beta-2.1",
+     "text": "Beta eksport faktur do CSV dziala z zakresu maksymalnie 31 dni.",
+     "observed_at": "2026-07-05",
+     "status": "duplicate",
+     "evidence": "docs/export-old.md"
+    }
+   ]
+  },
+  {
+   "source_id": "pilot-gamma-1",
+   "project": "gamma-portal",
+   "title": "Gamma portal sesje",
+   "facts": [
+    {
+     "fact_id": "gamma-1.1",
+     "text": "Sesja Gamma wygasa po 30 minutach bezczynnosci.",
+     "observed_at": "2026-06-10",
+     "status": "current",
+     "evidence": "docs/session.md"
+    },
+    {
+     "fact_id": "gamma-1.2",
+     "text": "Gamma zapisuje logi audytowe przez 90 dni.",
+     "observed_at": "2026-06-10",
+     "status": "current",
+     "evidence": "docs/audit.md"
+    }
+   ]
+  },
+  {
+   "source_id": "pilot-gamma-2",
+   "project": "gamma-portal",
+   "title": "Gamma portal audyt — sprzeczny",
+   "facts": [
+    {
+     "fact_id": "gamma-2.1",
+     "text": "Gamma zapisuje logi audytowe przez 365 dni.",
+     "observed_at": "2026-06-12",
+     "status": "contradicts gamma-1.2",
+     "evidence": "docs/audit-v2.md"
+    }
+   ]
+  },
+  {
+   "source_id": "pilot-delta-1",
+   "project": "delta-shop",
+   "title": "Delta shop API limit (podobny temat, inny projekt)",
+   "facts": [
+    {
+     "fact_id": "delta-1.1",
+     "text": "Delta shop API limit: 100 zapytan/min na klucz.",
+     "observed_at": "2026-08-02",
+     "status": "current",
+     "evidence": "docs/api.md"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,2 @@
+{"classification":"internal","content":[{"text":"Synthetic Codex fact one.","type":"text"}],"cursor":"run-1","id":"synthetic-codex-item-1","role":"assistant","session_id":"codex-1","timestamp":"2026-10-30T00:00:00Z","type":"response_item"}
+{"classification":"internal","content":[{"text":"Synthetic Codex fact two.","type":"text"}],"cursor":"run-2","id":"synthetic-codex-item-2","role":"assistant","session_id":"codex-1","timestamp":"2026-10-30T00:01:00Z","type":"response_item"}

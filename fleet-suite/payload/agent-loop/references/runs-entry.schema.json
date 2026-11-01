@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-loop/runs-entry.schema.json",
+  "title": "agent-loop runs.jsonl append-only event",
+  "description": "Every line is immutable. A run event is never edited when a parent later accepts or rejects it; record-result appends a separate acceptance event.",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "event_id", "event_type", "run_id", "loop_id",
+        "started_at", "ended_at", "status", "fleet", "verification",
+        "budget_charged", "breaker_event", "writes_performed", "report_path"
+      ],
+      "properties": {
+        "schema_version": { "const": 1 },
+        "event_id": { "type": "string" },
+        "event_type": { "const": "run" },
+        "run_id": { "type": "string" },
+        "loop_id": { "type": "string" },
+        "started_at": { "type": "string", "format": "date-time" },
+        "ended_at": { "type": "string", "format": "date-time" },
+        "status": {
+          "enum": [
+            "completed", "failed", "timeout", "stopped",
+            "skipped-budget", "skipped-kill", "rejected-write",
+            "rejected-control-plane"
+          ]
+        },
+        "fleet": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "fleet_run_id", "agent", "model", "tokens", "quota_before",
+            "quota_after", "duration_seconds", "run_status"
+          ],
+          "properties": {
+            "fleet_run_id": { "type": ["string", "null"] },
+            "agent": { "type": ["string", "null"] },
+            "model": { "type": ["string", "null"] },
+            "tokens": {
+              "oneOf": [
+                { "type": "integer", "minimum": 0 },
+                { "const": "unknown" }
+              ]
+            },
+            "quota_before": { "type": ["object", "string", "null"] },
+            "quota_after": { "type": ["object", "string", "null"] },
+            "duration_seconds": { "type": ["number", "null"], "minimum": 0 },
+            "run_status": { "type": ["string", "null"] }
+          }
+        },
+        "verification": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["verdict", "reasons"],
+          "properties": {
+            "verdict": { "const": "REJECT" },
+            "reasons": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "budget_charged": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "run_id_settled", "tokens_counted", "tokens_unknown",
+            "runs_today", "tokens_today"
+          ],
+          "properties": {
+            "run_id_settled": { "type": "boolean" },
+            "tokens_counted": { "type": "integer", "minimum": 0 },
+            "tokens_unknown": { "type": "boolean" },
+            "runs_today": { "type": "integer", "minimum": 0 },
+            "tokens_today": { "type": "integer", "minimum": 0 },
+            "warnings": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "breaker_event": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["reason"],
+              "properties": {
+                "reason": {
+                  "enum": [
+                    "KILL_SWITCH", "MAX_ATTEMPTS", "REPEATED_FAILURE",
+                    "NO_PROGRESS", "TIMEOUT", "BUDGET_EXCEEDED",
+                    "TELEMETRY_UNKNOWN", "L1_WRITE_DETECTED",
+                    "CONTROL_PLANE_WRITE_DETECTED", "INTERRUPTED"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "writes_performed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Count of detected unauthorized watched-project or control-plane mutations. Expected controller metadata writes are not included."
+        },
+        "report_path": { "type": ["string", "null"] }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "event_id", "event_type", "run_id",
+        "fleet_run_id", "recorded_at", "verified_by", "quality",
+        "criteria_pass", "verdict", "note"
+      ],
+      "properties": {
+        "schema_version": { "const": 1 },
+        "event_id": { "type": "string" },
+        "event_type": { "const": "acceptance" },
+        "run_id": { "type": "string" },
+        "fleet_run_id": { "type": "string" },
+        "recorded_at": { "type": "string", "format": "date-time" },
+        "verified_by": { "type": "string", "minLength": 1 },
+        "quality": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "criteria_pass": { "type": "boolean" },
+        "verdict": { "enum": ["ACCEPT", "REJECT"] },
+        "note": { "type": "string" }
+      }
+    }
+  ]
+}

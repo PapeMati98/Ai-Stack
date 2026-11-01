@@ -1,0 +1,6 @@
+interface:
+  display_name: "Hermes Delegation"
+  short_description: "Zlecaj zadania Robertowi na AI Lab Server"
+  default_prompt: "Use $hermes-delegation to prepare and submit a bounded task to Robert on AI Lab Server."
+policy:
+  allow_implicit_invocation: false

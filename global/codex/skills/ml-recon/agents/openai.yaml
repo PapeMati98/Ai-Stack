@@ -1,0 +1,3 @@
+interface:
+  display_name: "ML Recon"
+  short_description: "Scout models, datasets, licenses, fit, and local feasibility"

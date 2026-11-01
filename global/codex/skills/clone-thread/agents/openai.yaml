@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clone Thread"
+  short_description: "Przenos kontekst projektu miedzy narzedziami Desktop"
+  default_prompt: "Uzyj $clone-thread \"Projekt - Modul\", aby wczytac lokalna wiedze projektu i zarejestrowac biezacy watek."

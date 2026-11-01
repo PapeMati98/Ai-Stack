@@ -1,0 +1,115 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_summary",
+    "substantive",
+    "delegation_value",
+    "delegation_mode",
+    "complexity",
+    "risk",
+    "workload_weights",
+    "required_capabilities",
+    "required_tools",
+    "red_team_intent",
+    "model_scores",
+    "preflight"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "task_summary": {"type": "string", "minLength": 1, "maxLength": 1000},
+    "substantive": {"type": "boolean"},
+    "delegation_value": {"type": "integer", "minimum": 0, "maximum": 100},
+    "delegation_mode": {
+      "type": "string",
+      "enum": ["SKIP", "ONE", "COUNCIL", "PARALLEL_IMPLEMENT"]
+    },
+    "complexity": {"type": "string", "enum": ["low", "medium", "high"]},
+    "risk": {"type": "string", "enum": ["low", "medium", "high", "critical"]},
+    "workload_weights": {
+      "type": "object",
+      "additionalProperties": {"type": "integer", "minimum": 0, "maximum": 100}
+    },
+    "required_capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": ["large-context", "multimodal", "web", "write", "independent-review", "security-review"]
+      }
+    },
+    "required_tools": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1, "maxLength": 100}
+    },
+    "red_team_intent": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["mode", "explicit"],
+      "properties": {
+        "mode": {"const": "red-team"},
+        "explicit": {"const": true}
+      }
+    },
+    "model_scores": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["score", "reason"],
+        "properties": {
+          "score": {"type": "integer", "minimum": 0, "maximum": 100, "multipleOf": 5},
+          "reason": {"type": "string", "minLength": 1, "maxLength": 500}
+        }
+      }
+    },
+    "data_handling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "anthropic_zdr_authorization"],
+      "properties": {
+        "classification": {
+          "type": "string",
+          "enum": ["unknown", "public", "internal", "confidential", "restricted"]
+        },
+        "anthropic_zdr_authorization": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "scope",
+            "models",
+            "verified_at",
+            "expires_at",
+            "evidence_ref"
+          ],
+          "properties": {
+            "status": {"const": "authorized"},
+            "scope": {"const": "account"},
+            "models": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {"type": "string", "minLength": 1}
+            },
+            "verified_at": {"type": "string", "format": "date-time"},
+            "expires_at": {"type": "string", "format": "date-time"},
+            "evidence_ref": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    },
+    "preflight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["skill", "status", "reason"],
+      "properties": {
+        "skill": {"type": "string", "enum": ["new-task", "new-training", "none"]},
+        "status": {"type": "string", "enum": ["applied", "not-applicable"]},
+        "reason": {"type": "string", "minLength": 1, "maxLength": 500}
+      }
+    }
+  }
+}

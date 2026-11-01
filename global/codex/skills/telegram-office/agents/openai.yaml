@@ -1,0 +1,6 @@
+interface:
+  display_name: "Telegram Office"
+  short_description: "Owner cards, scoped choices and useful Telegram notices"
+  default_prompt: "Use $telegram-office to reply through the configured Office bot or prepare an honest unsent payload."
+policy:
+  allow_implicit_invocation: true

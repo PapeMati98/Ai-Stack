@@ -1,0 +1,4 @@
+interface:
+  display_name: "Accept system"
+  short_description: "Pelny odbior systemu, widoczny UAT i petla naprawcza"
+  default_prompt: "Zaplanuj i przeprowadz pelny odbior tej zmiany az do ACCEPTED albo uczciwego NOT_ACCEPTED; dla UI wymagaj osiagalnych powierzchni, postrzegalnej reakcji oraz jawnych bledow z odzyskaniem."

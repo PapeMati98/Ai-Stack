@@ -1,0 +1,19 @@
+{
+  "skill": "simulation-and-optimization",
+  "positive": [
+    "Compare heuristic, MILP and MPC options for this battery dispatch problem.",
+    "Build a V&V and Pareto evaluation plan for this simulation.",
+    "Assess whether an RL policy is justified after the deterministic baselines."
+  ],
+  "negative_anti_trigger": [
+    "Connect the optimizer to the live battery or change dispatch automatically.",
+    "Optimize a reward without units, constraints, baseline or OOS scenarios.",
+    "Tune a simulation when the physical use case and measurement target are unspecified."
+  ],
+  "sensitive_actions": [
+    "sending control commands to energy or industrial equipment",
+    "deploying a model, optimizer or policy to production",
+    "changing operating limits, safety envelopes or fallback behavior",
+    "using restricted telemetry or deleting simulation evidence"
+  ]
+}

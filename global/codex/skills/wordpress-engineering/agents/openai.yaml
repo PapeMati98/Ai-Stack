@@ -1,0 +1,4 @@
+interface:
+  display_name: "WordPress engineering"
+  short_description: "Bezpieczny rozwój pluginów, motywów, bloków i REST API"
+  default_prompt: "Użyj $wordpress-engineering do rozpoznania projektu WordPress i wykonania minimalnej zmiany z testami."

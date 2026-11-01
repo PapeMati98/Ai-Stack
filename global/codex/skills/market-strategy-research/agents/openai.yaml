@@ -1,0 +1,4 @@
+interface:
+  display_name: "Market strategy research"
+  short_description: "Research-only backtesty, koszty, OOS i odporność strategii"
+  default_prompt: "Użyj $market-strategy-research do prerejestrowanego badania strategii bez operacji brokerskich."

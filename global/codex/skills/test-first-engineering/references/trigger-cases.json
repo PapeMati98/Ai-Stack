@@ -1,0 +1,23 @@
+{
+  "positive": [
+    "Naprawa regresji wymaga zachowania, ktore mozna asertywnie sprawdzic.",
+    "Zmienia sie kontrakt endpointu lub parsera.",
+    "Zmiana UI musi zachowac przeplyw uzytkownika i odpowiedz backendu."
+  ],
+  "negative": [
+    "Czyste formatowanie bez zmiany zachowania.",
+    "Eksploracyjny notebook jednorazowy bez stabilnego kontraktu.",
+    "Analiza logow, w ktorej nie edytuje sie kodu."
+  ],
+  "anti_triggers": [
+    "Nie pisz testu, ktory tylko powtarza implementacje.",
+    "Nie uznawaj samego exit code za dowod akceptacji.",
+    "Nie poszerzaj scope, aby poprawic niepowiazane testy."
+  ],
+  "sensitive_actions": [
+    "production deploy",
+    "destructive migration",
+    "credential access",
+    "external side effect"
+  ]
+}

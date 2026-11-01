@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-stack:skill-evolution:candidate:1",
+  "title": "Skill Evolution inert candidate metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "candidate_id",
+    "target_skill",
+    "pattern_ids",
+    "applicability",
+    "supported_model_families",
+    "supported_runtimes",
+    "expected_behavior",
+    "candidate_sha256",
+    "proposer"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "candidate_id": {"type": "string", "pattern": "^candidate-[a-z0-9][a-z0-9-]{2,95}$"},
+    "target_skill": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,63}$"},
+    "pattern_ids": {
+      "type": "array", "minItems": 1, "maxItems": 64, "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^pattern-[a-f0-9]{16}$"}
+    },
+    "applicability": {"enum": ["universal", "model-family", "runtime-specific", "task-specific"]},
+    "supported_model_families": {
+      "type": "array", "minItems": 1, "maxItems": 32, "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"}
+    },
+    "supported_runtimes": {
+      "type": "array", "minItems": 1, "maxItems": 32, "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"}
+    },
+    "expected_behavior": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"},
+    "candidate_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "proposer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor_id", "provider_lineage"],
+      "properties": {
+        "actor_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"},
+        "provider_lineage": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"}
+      }
+    }
+  }
+}

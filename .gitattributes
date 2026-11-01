@@ -1,0 +1,3 @@
+# Keep source fingerprints stable across Git clients. Shell scripts use LF.
+* -text
+*.sh text eol=lf

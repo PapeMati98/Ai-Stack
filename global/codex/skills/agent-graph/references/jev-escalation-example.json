@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "case-2026-09-26-001",
+  "summary": "Report totals regressed after the last release; restored by reverting the last deploy.",
+  "category": "technical_bug",
+  "baseline_reference": "release-2026-09-20",
+  "business_change": false,
+  "scope_change": false,
+  "restores_baseline": true,
+  "reproduced": true,
+  "hard_gates": [],
+  "approved_gates": [],
+  "technical_uncertainty": false
+}

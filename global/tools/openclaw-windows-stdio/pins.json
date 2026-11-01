@@ -1,0 +1,23 @@
+{
+  "openclaw_version": "2026.9.4",
+  "files": [
+    {
+      "relative": "child-CIJaNq5a.mjs",
+      "source": "npm:openclaw@2026.9.4/dist/child-CIJaNq5a.mjs",
+      "before_sha256": "0c74b9683b1655277fe45c81b6d4109c22297706703979701bb8a87f4d67ec80",
+      "after_sha256": "f5d1dae8d52384d7e26915249012e089a0cf245c88f6f9f73fde30ed997dd262"
+    },
+    {
+      "relative": "service-child-windows-job-native-VEJPU_1s.mjs",
+      "source": "npm:openclaw@2026.9.4/dist/service-child-windows-job-native-VEJPU_1s.mjs",
+      "before_sha256": "30045d996ffa341580cc7614f8f6102c0894d4fdeaeff565f0b3513b2b1493c1",
+      "after_sha256": "44ae75e50b89864c058b8b1bb014fc260284bb0e6361e220550b6e8875338f44"
+    },
+    {
+      "relative": "process/supervisor/service-child-windows-job-anchor.js",
+      "source": "npm:openclaw@2026.9.4/dist/process/supervisor/service-child-windows-job-anchor.js",
+      "before_sha256": "de6aa362930da48661eee2eb22d9df24ad7eefa3439f8d6079f308b07b6c7bed",
+      "after_sha256": "ffd5b6e00128d972db7486132ab9a562fec9ce4e3aa27def69c464cd3a60aac6"
+    }
+  ]
+}

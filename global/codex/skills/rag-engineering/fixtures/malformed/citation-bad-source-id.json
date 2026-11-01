@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "model_id": "candidate-bad-cit",
+  "model_kind": "candidate",
+  "predictions": [
+    {
+      "case_id": "any",
+      "answer": "value",
+      "abstained": false,
+      "abstain_reason": null,
+      "citations": [
+        {
+          "source_id": "INVALID SOURCE ID!",
+          "chunk_id": "x",
+          "page": 1,
+          "revision": "v1",
+          "quote": "q",
+          "confidence": 0.5,
+          "timestamp_zone": "UTC",
+          "retrieved_at": "2026-09-15T10:00:00Z"
+        }
+      ],
+      "rationale": "source_id does not match the required regex (contains spaces, uppercase, symbols)"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "schema_version": 2,
+  "organizations": [
+    {
+      "organization_id": "organization-a",
+      "aliases": ["org-a"],
+      "providers": {
+        "azure": {
+          "project_root": "C:/Projects/Organization A",
+          "config_root": "C:/Users/Example/AppData/Roaming/Agents/cloud-contexts/organization-a/azure",
+          "account": "owner@confirmed.example",
+          "tenant_id": "confirmed-tenant-id",
+          "subscription_id": "confirmed-subscription-id"
+        },
+        "graph": {
+          "project_root": "C:/Projects/Organization A",
+          "config_root": "C:/Users/Example/AppData/Roaming/Agents/cloud-contexts/organization-a/graph",
+          "account": "owner@confirmed.example",
+          "tenant_id": "confirmed-tenant-id",
+          "graph_context": "confirmed-context-label"
+        },
+        "m365": {
+          "project_root": "C:/Projects/Organization A",
+          "config_root": "C:/Users/Example/AppData/Roaming/Agents/cloud-contexts/organization-a/m365",
+          "tenant_id": "fictional-tenant-a",
+          "sharepoint_host": "organization-a.sharepoint.example",
+          "site_path": "/sites/operations",
+          "auth_mode": "delegated",
+          "account": "owner@organization-a.example",
+          "m365_connection_name": "organization-a-admin",
+          "mcp_connectors": [
+            {
+              "connector_id": "m365-connector-organization-a",
+              "tenant_id": "fictional-tenant-a",
+              "sharepoint_host": "organization-a.sharepoint.example",
+              "site_path": "/sites/operations",
+              "auth_mode": "delegated",
+              "account": "owner@organization-a.example"
+            }
+          ]
+        },
+        "gcp": {
+          "project_root": "C:/Projects/Organization A",
+          "config_root": "C:/Users/Example/AppData/Roaming/Agents/cloud-contexts/organization-a/gcloud",
+          "account": "owner@confirmed.example",
+          "project_id": "confirmed-project-id",
+          "configuration": "confirmed-gcloud-configuration"
+        },
+        "google-workspace": {
+          "project_root": "C:/Projects/Organization A",
+          "config_root": "C:/Users/Example/AppData/Roaming/Agents/cloud-contexts/organization-a/google-workspace",
+          "account": "owner@confirmed.example",
+          "domain": "confirmed.example",
+          "configuration": "confirmed-workspace-configuration"
+        }
+      }
+    },
+    {
+      "organization_id": "organization-b",
+      "aliases": ["org-b"],
+      "providers": {
+        "m365": {
+          "project_root": "D:/Projects/Organization B",
+          "config_root": "C:/Users/Example/AppData/Roaming/Agents/cloud-contexts/organization-b/m365",
+          "tenant_id": "fictional-tenant-b",
+          "sharepoint_host": "organization-b.sharepoint.example",
+          "auth_mode": "app-only",
+          "application_id": "fictional-application-b",
+          "m365_connection_name": "organization-b-automation",
+          "mcp_connectors": [
+            {
+              "connector_id": "m365-connector-organization-b",
+              "tenant_id": "fictional-tenant-b",
+              "sharepoint_host": "organization-b.sharepoint.example",
+              "auth_mode": "app-only",
+              "application_id": "fictional-application-b"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

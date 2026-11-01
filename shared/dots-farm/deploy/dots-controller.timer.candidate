@@ -1,0 +1,13 @@
+# Not installed/enabled. System timer polls; individual cadence remains in Store.
+[Unit]
+Description=DOTS synthetic controller deterministic wake
+
+[Timer]
+OnBootSec=30s
+OnUnitInactiveSec=60s
+AccuracySec=1s
+Unit=dots-controller.service
+Persistent=false
+
+[Install]
+WantedBy=timers.target

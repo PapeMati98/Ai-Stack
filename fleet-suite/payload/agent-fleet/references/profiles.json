@@ -1,0 +1,5502 @@
+{
+  "schema_version": 5,
+  "verified_at": "2026-09-02",
+  "routing_policy": {
+    "mode": "adaptive",
+    "baseline_kill_switch": "AGENT_FLEET_ROUTING_MODE=baseline",
+    "tie_band": 6,
+    "orchestrator_weight": 0.25,
+    "arena_max_adjustment": 2.5,
+    "minimum_local_samples": 5,
+    "quota_unknown_policy": "neutral-with-lower-confidence",
+    "score_version": "assignment-v2.0",
+    "local_learning_prior_samples": 20,
+    "unknown_runtime_state_policy": "hard-stop",
+    "unknown_quota_policy": "neutral"
+  },
+  "profiles": {
+    "claude": {
+      "adapter": "claude",
+      "office_access": "mcp",
+      "cli_provider_id": "anthropic",
+      "display_name": "Claude Code",
+      "routing_enabled": true,
+      "candidates": [
+        "%USERPROFILE%\\.local\\bin\\claude.exe",
+        "claude.exe",
+        "claude"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "auth",
+        "status"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "minimum_version": "2.1.280",
+        "tested_through_version": "2.1.280",
+        "deny_patterns": [
+          "not authenticated",
+          "not logged in",
+          "\"loggedin\": false",
+          "\"loggedin\":false",
+          "authentication required",
+          "login required",
+          "subscription required"
+        ]
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 1.0,
+      "native_compaction_max_context": 150000,
+      "quota_collection": {
+        "session_command": "/usage",
+        "collector_mode": "claude-native-usage",
+        "usage_history_path": "%APPDATA%\\Claude\\plan-usage-history.json",
+        "max_bytes": 8388608,
+        "max_sample_age_seconds": 3600,
+        "per_run_tokens": "json"
+      },
+      "execution_profile_map": {
+        "low": "claude-sonnet-5-balanced",
+        "medium": "claude-opus-5-5-medium",
+        "high": "claude-opus-5-5-high"
+      },
+      "execution_profile_map_by_mode": {
+        "advisory": {
+          "low": "claude-sonnet-5-balanced",
+          "medium": "claude-opus-5-5-medium",
+          "high": "claude-opus-5-5-xhigh"
+        },
+        "review": {
+          "low": "claude-sonnet-5-balanced",
+          "medium": "claude-opus-5-5-medium",
+          "high": "claude-opus-5-5-high"
+        },
+        "implement": {
+          "low": "claude-sonnet-5-balanced",
+          "medium": "claude-sonnet-5-balanced",
+          "high": "claude-opus-5-5-high"
+        }
+      },
+      "execution_profiles": {
+        "claude-sonnet-5-balanced": {
+          "model_class": "sonnet",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "sonnet",
+          "model_provider_id": "anthropic",
+          "runtime_model_id": "sonnet",
+          "reasoning_level": "medium",
+          "lifecycle": "DEPRECATED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 92,
+            "instruction-following": 82,
+            "multimodal": 92,
+            "speed": 68,
+            "tool-use": 88,
+            "web": 90,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 68,
+            "first_pass": 72,
+            "verifiability": 80,
+            "expected_overhead_minutes": 12,
+            "expected_repair_minutes": 24,
+            "uncertainty": 0.38
+          },
+          "premium": false,
+          "evidence_confidence": 0.65
+        },
+        "claude-fable-5-1-low-canary": {
+          "model_class": "mythos",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "claude-fable-5-1",
+          "model_provider_id": "anthropic",
+          "runtime_model_id": "claude-fable-5-1",
+          "reasoning_level": "low",
+          "lifecycle": "CANARY",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 95,
+            "instruction-following": 94,
+            "multimodal": 95,
+            "speed": 62,
+            "tool-use": 95,
+            "web": 94,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 62,
+            "first_pass": 82,
+            "verifiability": 88,
+            "expected_overhead_minutes": 10,
+            "expected_repair_minutes": 18,
+            "uncertainty": 0.42
+          },
+          "premium": true,
+          "evidence_confidence": 0.45
+        },
+        "claude-fable-5-1-medium-canary": {
+          "model_class": "mythos",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "claude-fable-5-1",
+          "model_provider_id": "anthropic",
+          "runtime_model_id": "claude-fable-5-1",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 97,
+            "instruction-following": 96,
+            "multimodal": 96,
+            "speed": 56,
+            "tool-use": 96,
+            "web": 95,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 56,
+            "first_pass": 88,
+            "verifiability": 91,
+            "expected_overhead_minutes": 12,
+            "expected_repair_minutes": 15,
+            "uncertainty": 0.35
+          },
+          "premium": true,
+          "evidence_confidence": 0.45
+        },
+        "claude-fable-5-1-high-canary": {
+          "model_class": "mythos",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "claude-fable-5-1",
+          "model_provider_id": "anthropic",
+          "runtime_model_id": "claude-fable-5-1",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "critical",
+          "supported_modes": [
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 98,
+            "instruction-following": 97,
+            "multimodal": 96,
+            "speed": 49,
+            "tool-use": 97,
+            "web": 95,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 49,
+            "first_pass": 92,
+            "verifiability": 93,
+            "expected_overhead_minutes": 15,
+            "expected_repair_minutes": 12,
+            "uncertainty": 0.31
+          },
+          "premium": true,
+          "evidence_confidence": 0.45
+        },
+        "claude-fable-5-1-xhigh-canary": {
+          "model_class": "mythos",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "claude-fable-5-1",
+          "model_provider_id": "anthropic",
+          "runtime_model_id": "claude-fable-5-1",
+          "reasoning_level": "xhigh",
+          "lifecycle": "LIMITED",
+          "max_risk": "critical",
+          "supported_modes": [
+            "advisory"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 99,
+            "instruction-following": 97,
+            "multimodal": 96,
+            "speed": 40,
+            "tool-use": 97,
+            "web": 95,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 40,
+            "first_pass": 94,
+            "verifiability": 94,
+            "expected_overhead_minutes": 18,
+            "expected_repair_minutes": 10,
+            "uncertainty": 0.3
+          },
+          "premium": true,
+          "evidence_confidence": 0.45
+        },
+        "claude-fable-5-1-security-review": {
+          "model_class": "mythos",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "claude-fable-5-1",
+          "model_provider_id": "anthropic",
+          "runtime_model_id": "claude-fable-5-1",
+          "reasoning_level": "high",
+          "lifecycle": "ACTIVE",
+          "max_risk": "critical",
+          "supported_modes": [
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "security-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 98,
+            "instruction-following": 97,
+            "multimodal": 0,
+            "security-review": 97,
+            "speed": 49,
+            "tool-use": 97,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 49,
+            "first_pass": 92,
+            "verifiability": 93,
+            "expected_overhead_minutes": 15,
+            "expected_repair_minutes": 12,
+            "uncertainty": 0.31
+          },
+          "premium": true,
+          "evidence_confidence": 0.7
+        },
+        "claude-opus-5-5-medium": {
+          "model_class": "opus",
+          "coding_rank": 1,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "claude-opus-5-5",
+          "model_provider_id": "anthropic",
+          "runtime_model_id": "claude-opus-5-5",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 97,
+            "instruction-following": 96,
+            "multimodal": 96,
+            "speed": 56,
+            "tool-use": 96,
+            "web": 95,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 56,
+            "first_pass": 88,
+            "verifiability": 91,
+            "expected_overhead_minutes": 12,
+            "expected_repair_minutes": 15,
+            "uncertainty": 0.5
+          },
+          "premium": true,
+          "evidence_confidence": 0.45
+        },
+        "claude-opus-5-5-high": {
+          "model_class": "opus",
+          "coding_rank": 1,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "claude-opus-5-5",
+          "model_provider_id": "anthropic",
+          "runtime_model_id": "claude-opus-5-5",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "critical",
+          "supported_modes": [
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 98,
+            "instruction-following": 97,
+            "multimodal": 96,
+            "speed": 49,
+            "tool-use": 97,
+            "web": 95,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 49,
+            "first_pass": 92,
+            "verifiability": 93,
+            "expected_overhead_minutes": 15,
+            "expected_repair_minutes": 12,
+            "uncertainty": 0.5
+          },
+          "premium": true,
+          "evidence_confidence": 0.45
+        },
+        "claude-opus-5-5-xhigh": {
+          "model_class": "opus",
+          "coding_rank": 1,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "claude-opus-5-5",
+          "model_provider_id": "anthropic",
+          "runtime_model_id": "claude-opus-5-5",
+          "reasoning_level": "xhigh",
+          "lifecycle": "LIMITED",
+          "max_risk": "critical",
+          "supported_modes": [
+            "advisory"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 99,
+            "instruction-following": 97,
+            "multimodal": 96,
+            "speed": 40,
+            "tool-use": 97,
+            "web": 95,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 40,
+            "first_pass": 94,
+            "verifiability": 94,
+            "expected_overhead_minutes": 18,
+            "expected_repair_minutes": 10,
+            "uncertainty": 0.5
+          },
+          "premium": true,
+          "evidence_confidence": 0.45
+        },
+        "claude-haiku-5-5-worker": {
+          "model_class": "haiku",
+          "coding_rank": null,
+          "model": "claude-haiku-5-5",
+          "model_provider_id": "anthropic",
+          "runtime_model_id": "claude-haiku-5-5",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "low",
+          "supported_modes": [
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {},
+          "efficiency_priors": {},
+          "premium": false,
+          "evidence_confidence": 0.0
+        }
+      },
+      "models": {
+        "low": "sonnet",
+        "medium": "claude-opus-5-5",
+        "high": "claude-opus-5-5"
+      },
+      "data_policy": {
+        "applies_to_models": [
+          "claude-fable-5-1",
+          "claude-opus-5-5",
+          "claude-haiku-5-5"
+        ],
+        "default_data_retention_days": 30,
+        "zdr_default": false,
+        "restricted_requires_current_account_authorization": true
+      },
+      "fit": {
+        "architecture": 98,
+        "debugging": 91,
+        "docs": 94,
+        "frontend": 89,
+        "implementation": 91,
+        "large-context": 94,
+        "multimodal": 92,
+        "repeatable": 68,
+        "research": 92,
+        "review": 96
+      },
+      "notes": [
+        "2026-09-22: Opus 5.5 exact ID replaces default Fable lanes with matching effort; CLI >=2.1.280 and live account probe passed. LIMITED capability priors are inherited unchanged, not measured Opus benchmarks; uncertainty=0.5. Sonnet implementation.medium and explicit Fable security-review are preserved.",
+        "Fable 5.1 low remains explicit A/B; medium, high, and xhigh are LIMITED exact-ID profiles; security-review is ACTIVE and read-only.",
+        "Use Sonnet for routine low work; never route Fable 5.1 max automatically.",
+        "No executable Fable 5 alias remains. During an active owner credit declaration the entire Claude lineage is automatic last resort."
+      ]
+    },
+    "kimi": {
+      "adapter": "kimi",
+      "office_access": "direct",
+      "cli_provider_id": "moonshot",
+      "display_name": "Kimi Code",
+      "routing_enabled": true,
+      "candidates": [
+        "%USERPROFILE%\\.kimi-code\\bin\\kimi.exe",
+        "kimi.exe",
+        "kimi"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "provider",
+        "list"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "enforce_model_inventory": true,
+        "deny_patterns": [
+          "not authenticated",
+          "not logged in",
+          "authentication required",
+          "login required",
+          "subscription required"
+        ]
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 1.15,
+      "quota_collection": {
+        "session_command": "/usage",
+        "collector_mode": "tui-assisted",
+        "per_run_tokens": "stream-json"
+      },
+      "execution_profile_map": {
+        "low": "kimi-k3-fast",
+        "medium": "kimi-k3-balanced",
+        "high": "kimi-k3-deep"
+      },
+      "execution_profiles": {
+        "kimi-k3-fast": {
+          "model_class": "opus",
+          "coding_rank": 4,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "k3",
+          "model_provider_id": "moonshot",
+          "runtime_model_id": "k3",
+          "reasoning_level": "low",
+          "lifecycle": "ACTIVE",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1048576,
+          "capabilities": {
+            "independent-review": 84,
+            "instruction-following": 82,
+            "multimodal": 97,
+            "speed": 94,
+            "tool-use": 91,
+            "web": 80,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 94,
+            "first_pass": 72,
+            "verifiability": 68,
+            "expected_overhead_minutes": 6,
+            "expected_repair_minutes": 24,
+            "uncertainty": 0.42
+          },
+          "premium": false,
+          "evidence_confidence": 0.65
+        },
+        "kimi-k3-balanced": {
+          "model_class": "opus",
+          "coding_rank": 4,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "k3",
+          "model_provider_id": "moonshot",
+          "runtime_model_id": "k3",
+          "reasoning_level": "medium",
+          "lifecycle": "ACTIVE",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1048576,
+          "capabilities": {
+            "independent-review": 88,
+            "instruction-following": 87,
+            "multimodal": 97,
+            "speed": 86,
+            "tool-use": 94,
+            "web": 82,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 86,
+            "first_pass": 80,
+            "verifiability": 74,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.34
+          },
+          "premium": false,
+          "evidence_confidence": 0.7
+        },
+        "kimi-k3-deep": {
+          "model_class": "opus",
+          "coding_rank": 4,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "k3",
+          "model_provider_id": "moonshot",
+          "runtime_model_id": "k3",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1048576,
+          "capabilities": {
+            "independent-review": 90,
+            "instruction-following": 89,
+            "multimodal": 98,
+            "speed": 70,
+            "tool-use": 95,
+            "web": 83,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 70,
+            "first_pass": 84,
+            "verifiability": 78,
+            "expected_overhead_minutes": 9,
+            "expected_repair_minutes": 18,
+            "uncertainty": 0.32
+          },
+          "premium": false,
+          "evidence_confidence": 0.55
+        }
+      },
+      "models": {
+        "low": "k3",
+        "medium": "k3",
+        "high": "k3"
+      },
+      "fit": {
+        "architecture": 84,
+        "debugging": 90,
+        "docs": 82,
+        "frontend": 98,
+        "implementation": 95,
+        "large-context": 96,
+        "multimodal": 97,
+        "repeatable": 91,
+        "research": 82,
+        "review": 88
+      },
+      "notes": [
+        "Frontend preference is Mateusz's observed local preference, not a vendor benchmark.",
+        "Always route Kimi work to local alias k3, displayed as K3 Max with a 1,048,576-token context.",
+        "Do not route to the legacy kimi-for-coding alias displayed locally as K2.7 Code.",
+        "Implementation mode was explicitly approved by Mateusz on 2026-07-21 despite Kimi prompt mode lacking a native filesystem sandbox; --allow-write and isolated worktree remain mandatory."
+      ]
+    },
+    "codex": {
+      "adapter": "codex",
+      "office_access": "mcp",
+      "cli_provider_id": "openai",
+      "display_name": "Codex CLI",
+      "routing_enabled": true,
+      "candidates": [
+        "codex.cmd",
+        "codex.exe",
+        "codex"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "--version"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "minimum_version": "0.156.1",
+        "deny_patterns": [
+          "not authenticated",
+          "not logged in",
+          "authentication required",
+          "login required",
+          "subscription required"
+        ]
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 1.0,
+      "quota_collection": {
+        "session_command": "/usage",
+        "collector_mode": "codex-rollout-rate-limits",
+        "sessions_dir": "%USERPROFILE%\\.codex\\sessions",
+        "max_files": 8,
+        "max_bytes_per_file": 262144,
+        "max_sample_age_seconds": 3600,
+        "confidence": 0.9,
+        "per_run_tokens": "jsonl"
+      },
+      "execution_profile_map": {
+        "low": "codex-gpt-6-luna",
+        "medium": "codex-gpt-6-1-sol-medium",
+        "high": "codex-gpt-6-1-sol-high"
+      },
+      "execution_profile_map_by_mode": {
+        "advisory": {
+          "low": "codex-gpt-6-luna",
+          "medium": "codex-gpt-6-1-sol-medium",
+          "high": "codex-gpt-6-astra"
+        },
+        "review": {
+          "low": "codex-gpt-6-luna",
+          "medium": "codex-gpt-6-1-sol-medium",
+          "high": "codex-gpt-6-astra"
+        }
+      },
+      "execution_profiles": {
+        "codex-gpt-5-6-luna": {
+          "model": "gpt-5.6-luna",
+          "model_provider_id": "openai",
+          "runtime_model_id": "gpt-5.6-luna",
+          "reasoning_level": "low",
+          "lifecycle": "DEPRECATED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 84,
+            "instruction-following": 90,
+            "multimodal": 84,
+            "speed": 96,
+            "tool-use": 92,
+            "web": 86,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 96,
+            "first_pass": 72,
+            "verifiability": 78,
+            "expected_overhead_minutes": 5,
+            "expected_repair_minutes": 22,
+            "uncertainty": 0.36
+          },
+          "premium": false,
+          "evidence_confidence": 0.65
+        },
+        "codex-gpt-5-6-terra": {
+          "model_class": "sonnet",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "gpt-5.6-terra",
+          "model_provider_id": "openai",
+          "runtime_model_id": "gpt-5.6-terra",
+          "reasoning_level": "medium",
+          "lifecycle": "DEPRECATED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 94,
+            "instruction-following": 95,
+            "multimodal": 89,
+            "speed": 82,
+            "tool-use": 97,
+            "web": 90,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 82,
+            "first_pass": 86,
+            "verifiability": 90,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 16,
+            "uncertainty": 0.25
+          },
+          "premium": false,
+          "evidence_confidence": 0.75
+        },
+        "codex-gpt-5-6-sol": {
+          "model": "gpt-5.6-sol",
+          "model_provider_id": "openai",
+          "runtime_model_id": "gpt-5.6-sol",
+          "reasoning_level": "high",
+          "lifecycle": "DEPRECATED",
+          "max_risk": "critical",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "security-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 98,
+            "instruction-following": 97,
+            "multimodal": 90,
+            "security-review": 98,
+            "speed": 58,
+            "tool-use": 99,
+            "web": 92,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 58,
+            "first_pass": 93,
+            "verifiability": 96,
+            "expected_overhead_minutes": 11,
+            "expected_repair_minutes": 12,
+            "uncertainty": 0.18
+          },
+          "premium": true,
+          "evidence_confidence": 0.8
+        },
+        "codex-gpt-5-6-sol-security-review": {
+          "model": "gpt-5.6-sol",
+          "model_provider_id": "openai",
+          "runtime_model_id": "gpt-5.6-sol",
+          "reasoning_level": "high",
+          "lifecycle": "DEPRECATED",
+          "max_risk": "critical",
+          "supported_modes": [
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "security-review",
+            "tool-use"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 98,
+            "instruction-following": 97,
+            "security-review": 98,
+            "speed": 58,
+            "tool-use": 99,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 58,
+            "first_pass": 93,
+            "verifiability": 96,
+            "expected_overhead_minutes": 11,
+            "expected_repair_minutes": 12,
+            "uncertainty": 0.18
+          },
+          "premium": true,
+          "evidence_confidence": 0.8
+        },
+        "codex-gpt-6-astra": {
+          "model_class": "mythos",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "gpt-6-astra",
+          "model_provider_id": "openai",
+          "runtime_model_id": "gpt-6-astra",
+          "reasoning_level": "max",
+          "lifecycle": "LIMITED",
+          "max_risk": "critical",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "security-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 98,
+            "instruction-following": 97,
+            "multimodal": 90,
+            "security-review": 98,
+            "speed": 45,
+            "tool-use": 99,
+            "web": 92,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 45,
+            "first_pass": 93,
+            "verifiability": 96,
+            "expected_overhead_minutes": 14,
+            "expected_repair_minutes": 12,
+            "uncertainty": 0.3
+          },
+          "premium": true,
+          "evidence_confidence": 0.55
+        },
+        "codex-gpt-6-luna": {
+          "model_class": "luna",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "gpt-6-luna",
+          "model_provider_id": "openai",
+          "runtime_model_id": "gpt-6-luna",
+          "reasoning_level": "low",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 78,
+            "instruction-following": 82,
+            "multimodal": 75,
+            "speed": 80,
+            "tool-use": 84,
+            "web": 78,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 80,
+            "first_pass": 65,
+            "verifiability": 70,
+            "expected_overhead_minutes": 6,
+            "expected_repair_minutes": 25,
+            "uncertainty": 0.55
+          },
+          "premium": false,
+          "evidence_confidence": 0.3
+        },
+        "codex-gpt-6-sol-medium": {
+          "model_class": "opus",
+          "coding_rank": 2,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "gpt-6-sol",
+          "model_provider_id": "openai",
+          "runtime_model_id": "gpt-6-sol",
+          "reasoning_level": "medium",
+          "lifecycle": "DEPRECATED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 88,
+            "instruction-following": 88,
+            "multimodal": 82,
+            "security-review": 0,
+            "speed": 65,
+            "tool-use": 90,
+            "web": 84,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 65,
+            "first_pass": 78,
+            "verifiability": 82,
+            "expected_overhead_minutes": 9,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.5
+          },
+          "premium": true,
+          "evidence_confidence": 0.3
+        },
+        "codex-gpt-6-sol-high": {
+          "model_class": "opus",
+          "coding_rank": 2,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "gpt-6-sol",
+          "model_provider_id": "openai",
+          "runtime_model_id": "gpt-6-sol",
+          "reasoning_level": "high",
+          "lifecycle": "DEPRECATED",
+          "max_risk": "critical",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 88,
+            "instruction-following": 88,
+            "multimodal": 82,
+            "security-review": 0,
+            "speed": 55,
+            "tool-use": 90,
+            "web": 84,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 55,
+            "first_pass": 78,
+            "verifiability": 82,
+            "expected_overhead_minutes": 9,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.5
+          },
+          "premium": true,
+          "evidence_confidence": 0.3
+        },
+        "codex-gpt-6-1-sol-medium": {
+          "model_class": "opus",
+          "coding_rank": 2,
+          "model_class_source": "owner-decision-2026-10-02; program-20261005",
+          "model": "gpt-6.1-sol",
+          "model_provider_id": "openai",
+          "runtime_model_id": "gpt-6.1-sol",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 88,
+            "instruction-following": 88,
+            "multimodal": 82,
+            "security-review": 0,
+            "speed": 65,
+            "tool-use": 90,
+            "web": 84,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 65,
+            "first_pass": 78,
+            "verifiability": 82,
+            "expected_overhead_minutes": 9,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.5
+          },
+          "premium": true,
+          "evidence_confidence": 0.3
+        },
+        "codex-gpt-6-1-sol-high": {
+          "model_class": "opus",
+          "coding_rank": 2,
+          "model_class_source": "owner-decision-2026-10-02; program-20261005",
+          "model": "gpt-6.1-sol",
+          "model_provider_id": "openai",
+          "runtime_model_id": "gpt-6.1-sol",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "critical",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 88,
+            "instruction-following": 88,
+            "multimodal": 82,
+            "security-review": 0,
+            "speed": 55,
+            "tool-use": 90,
+            "web": 84,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 55,
+            "first_pass": 78,
+            "verifiability": 82,
+            "expected_overhead_minutes": 9,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.5
+          },
+          "premium": true,
+          "evidence_confidence": 0.3
+        }
+      },
+      "models": {
+        "low": "gpt-6-luna",
+        "medium": "gpt-6.1-sol",
+        "high": "gpt-6.1-sol"
+      },
+      "fit": {
+        "architecture": 96,
+        "debugging": 97,
+        "docs": 91,
+        "frontend": 89,
+        "implementation": 98,
+        "large-context": 92,
+        "multimodal": 89,
+        "repeatable": 98,
+        "research": 92,
+        "review": 97
+      },
+      "notes": [
+        "Use GPT-6 Luna for low work, GPT-6 Sol for medium/high implementation, and GPT-6 Astra for high advisory/review. GPT-5.6 remains available for explicit compatibility and the dedicated security-review profile.",
+        "Historical 2026-09-22 ChatGPT-account Codex CLI canaries returned model-not-supported for GPT-6 Luna/Sol. This availability result was superseded by successful exact-ID canaries on Codex CLI 0.156.1 on 2026-09-23; the profiles remain LIMITED and unbenchmarked.",
+        "2026-09-23 fresh ChatGPT-account Codex CLI 0.156.1 canaries succeeded with exact runtime IDs gpt-6-luna and gpt-6-sol. Keep GPT-6 Luna/Sol profiles LIMITED with conservative priors pending broader accepted outcomes. GPT-6 Sol security-review capability remains 0, so dedicated security review stays on ACTIVE GPT-5.6 Sol. Availability canaries do not establish benchmark, quota, or cost claims.",
+        "A separately launchable Codex CLI is required; the Desktop WindowsApps binary can reject nested execution.",
+        "gpt-6-astra (0.8.47): automatically eligible for high advisory/review, including architecture; explicit model/profile overrides remain available. LIMITED pending broader accepted outcomes; no automatic promotion to ACTIVE. Same OpenAI account opt-out as Codex (CONFIRMED_OFF).",
+        "2026-10-05: owner requires gpt-6.1-sol for new medium/high Sol work. Legacy gpt-6-sol profiles retained as DEPRECATED; tier guard remains. Astra high advisory/review and Luna low unchanged. No new capability/benchmark claim."
+      ]
+    },
+    "antigravity": {
+      "adapter": "antigravity",
+      "cli_provider_id": "google",
+      "display_name": "Antigravity CLI",
+      "routing_enabled": true,
+      "candidates": [
+        "%LOCALAPPDATA%\\agy\\bin\\agy.exe",
+        "agy.exe",
+        "agy"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "models"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "enforce_model_inventory": true,
+        "deny_patterns": [
+          "not authenticated",
+          "not logged in",
+          "authentication required",
+          "login required",
+          "subscription required"
+        ]
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 1.1,
+      "quota_collection": {
+        "session_command": "/usage",
+        "collector_mode": "tui-assisted",
+        "per_run_tokens": "unknown"
+      },
+      "execution_profile_map": {
+        "low": "antigravity-gemini-3-8-flash-high",
+        "medium": "antigravity-gemini-3-8-flash-high",
+        "high": "antigravity-gemini-3-8-flash-high"
+      },
+      "execution_profiles": {
+        "antigravity-gemini-3-8-flash-low": {
+          "model_class": "sonnet",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "gemini-3.8-flash-low",
+          "model_provider_id": "google",
+          "runtime_model_id": "gemini-3.8-flash-low",
+          "reasoning_level": "low",
+          "lifecycle": "DEPRECATED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1048576,
+          "capabilities": {
+            "independent-review": 86,
+            "instruction-following": 86,
+            "multimodal": 99,
+            "speed": 98,
+            "tool-use": 91,
+            "web": 94,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 98,
+            "first_pass": 75,
+            "verifiability": 76,
+            "expected_overhead_minutes": 5,
+            "expected_repair_minutes": 22,
+            "uncertainty": 0.38
+          },
+          "premium": false,
+          "evidence_confidence": 0.65
+        },
+        "antigravity-gemini-3-8-flash-medium": {
+          "model_class": "sonnet",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "gemini-3.8-flash-medium",
+          "model_provider_id": "google",
+          "runtime_model_id": "gemini-3.8-flash-medium",
+          "reasoning_level": "medium",
+          "lifecycle": "DEPRECATED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1048576,
+          "capabilities": {
+            "independent-review": 91,
+            "instruction-following": 91,
+            "multimodal": 99,
+            "speed": 94,
+            "tool-use": 94,
+            "web": 95,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 94,
+            "first_pass": 82,
+            "verifiability": 82,
+            "expected_overhead_minutes": 6,
+            "expected_repair_minutes": 17,
+            "uncertainty": 0.31
+          },
+          "premium": false,
+          "evidence_confidence": 0.68
+        },
+        "antigravity-gemini-3-8-flash-high": {
+          "model_class": "sonnet",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "gemini-3.8-flash-high",
+          "model_provider_id": "google",
+          "runtime_model_id": "gemini-3.8-flash-high",
+          "reasoning_level": "high",
+          "lifecycle": "ACTIVE",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1048576,
+          "capabilities": {
+            "independent-review": 93,
+            "instruction-following": 93,
+            "multimodal": 99,
+            "speed": 88,
+            "tool-use": 95,
+            "web": 95,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 88,
+            "first_pass": 86,
+            "verifiability": 85,
+            "expected_overhead_minutes": 8,
+            "expected_repair_minutes": 15,
+            "uncertainty": 0.3
+          },
+          "premium": false,
+          "evidence_confidence": 0.68
+        },
+        "antigravity-gemini-3-1-pro-high": {
+          "model": "gemini-3.1-pro-high",
+          "model_provider_id": "google",
+          "runtime_model_id": "gemini-3.1-pro-high",
+          "reasoning_level": "high",
+          "lifecycle": "DEPRECATED",
+          "max_risk": "critical",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 94,
+            "instruction-following": 92,
+            "multimodal": 99,
+            "speed": 59,
+            "tool-use": 95,
+            "web": 95,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 59,
+            "first_pass": 88,
+            "verifiability": 87,
+            "expected_overhead_minutes": 11,
+            "expected_repair_minutes": 15,
+            "uncertainty": 0.26
+          },
+          "premium": true,
+          "evidence_confidence": 0.7
+        },
+        "antigravity-gemini-4-argon-high": {
+          "model_class": "mythos",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-10-13 (D); vendor-reported priors, no local Argon benchmark",
+          "model": "gemini-4-argon-high",
+          "model_provider_id": "google",
+          "runtime_model_id": "gemini-4-argon-high",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1048576,
+          "capabilities": {
+            "independent-review": 94,
+            "instruction-following": 93,
+            "multimodal": 99,
+            "speed": 60,
+            "tool-use": 90,
+            "web": 95,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 60,
+            "first_pass": 85,
+            "verifiability": 88,
+            "expected_overhead_minutes": 12,
+            "expected_repair_minutes": 15,
+            "uncertainty": 0.45
+          },
+          "premium": true,
+          "evidence_confidence": 0.3
+        }
+      },
+      "models": {
+        "low": "gemini-3.8-flash-low",
+        "medium": "gemini-3.8-flash-medium",
+        "high": "gemini-3.8-flash-high"
+      },
+      "fit": {
+        "architecture": 91,
+        "debugging": 91,
+        "docs": 90,
+        "frontend": 94,
+        "implementation": 92,
+        "large-context": 98,
+        "multimodal": 99,
+        "repeatable": 96,
+        "research": 94,
+        "review": 91
+      },
+      "notes": [
+        "Prefer Gemini models here to consume the Google/Antigravity entitlement rather than duplicating Claude quota.",
+        "Gemini 3.8 Flash is the automatic low/medium/high workhorse; Gemini 3.1 Pro High remains available only by explicit specialist selection.",
+        "Gemini 3.8 Flash Cyber is not available in the local Antigravity inventory and must not be selected without a separately approved Fairwind entitlement rollout."
+      ]
+    },
+    "grok": {
+      "adapter": "grok",
+      "cli_provider_id": "xai",
+      "display_name": "Grok CLI",
+      "routing_enabled": true,
+      "candidates": [
+        "%USERPROFILE%\\.grok\\bin\\grok.exe",
+        "grok.exe",
+        "grok"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "models"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "enforce_model_inventory": true,
+        "deny_patterns": [
+          "not authenticated",
+          "not logged in",
+          "authentication required",
+          "login required",
+          "subscription required"
+        ]
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 1.0,
+      "quota_collection": {
+        "session_command": "/usage",
+        "collector_mode": "tui-assisted",
+        "per_run_tokens": "json"
+      },
+      "execution_profile_map": {
+        "low": "grok-4-7-fast",
+        "medium": "grok-4-7-balanced",
+        "high": "grok-4-7-xhigh"
+      },
+      "execution_profiles": {
+        "grok-4-7-fast": {
+          "model_class": "opus",
+          "coding_rank": 5,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "grok-4.7",
+          "model_provider_id": "xai",
+          "runtime_model_id": "grok-4.7",
+          "reasoning_level": "low",
+          "lifecycle": "ACTIVE",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 90,
+            "instruction-following": 86,
+            "multimodal": 90,
+            "speed": 96,
+            "tool-use": 94,
+            "web": 98,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 96,
+            "first_pass": 76,
+            "verifiability": 76,
+            "expected_overhead_minutes": 5,
+            "expected_repair_minutes": 22,
+            "uncertainty": 0.38
+          },
+          "premium": false,
+          "evidence_confidence": 0.65
+        },
+        "grok-4-7-balanced": {
+          "model_class": "opus",
+          "coding_rank": 5,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "grok-4.7",
+          "model_provider_id": "xai",
+          "runtime_model_id": "grok-4.7",
+          "reasoning_level": "medium",
+          "lifecycle": "ACTIVE",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "security-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 95,
+            "instruction-following": 91,
+            "multimodal": 90,
+            "security-review": 95,
+            "speed": 88,
+            "tool-use": 96,
+            "web": 98,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 88,
+            "first_pass": 83,
+            "verifiability": 83,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 18,
+            "uncertainty": 0.31
+          },
+          "premium": false,
+          "evidence_confidence": 0.7
+        },
+        "grok-4-7-deep": {
+          "model_class": "opus",
+          "coding_rank": 5,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "grok-4.7",
+          "model_provider_id": "xai",
+          "runtime_model_id": "grok-4.7",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 97,
+            "instruction-following": 93,
+            "multimodal": 91,
+            "speed": 72,
+            "tool-use": 97,
+            "web": 99,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 72,
+            "first_pass": 87,
+            "verifiability": 87,
+            "expected_overhead_minutes": 9,
+            "expected_repair_minutes": 16,
+            "uncertainty": 0.29
+          },
+          "premium": false,
+          "evidence_confidence": 0.55
+        },
+        "grok-4-7-xhigh": {
+          "model_class": "opus",
+          "coding_rank": 5,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "grok-4.7",
+          "model_provider_id": "xai",
+          "runtime_model_id": "grok-4.7",
+          "reasoning_level": "xhigh",
+          "lifecycle": "LIMITED",
+          "max_risk": "critical",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "security-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 98,
+            "instruction-following": 95,
+            "multimodal": 92,
+            "security-review": 97,
+            "speed": 58,
+            "tool-use": 99,
+            "web": 99,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 58,
+            "first_pass": 90,
+            "verifiability": 91,
+            "expected_overhead_minutes": 11,
+            "expected_repair_minutes": 15,
+            "uncertainty": 0.27
+          },
+          "premium": false,
+          "evidence_confidence": 0.55
+        },
+        "grok-4-7-security-review": {
+          "model_class": "opus",
+          "coding_rank": 5,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "grok-4.7",
+          "model_provider_id": "xai",
+          "runtime_model_id": "grok-4.7",
+          "reasoning_level": "medium",
+          "lifecycle": "ACTIVE",
+          "max_risk": "critical",
+          "supported_modes": [
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "security-review",
+            "tool-use"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 95,
+            "instruction-following": 91,
+            "security-review": 95,
+            "speed": 88,
+            "tool-use": 96,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 88,
+            "first_pass": 83,
+            "verifiability": 83,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 18,
+            "uncertainty": 0.31
+          },
+          "premium": false,
+          "evidence_confidence": 0.7
+        }
+      },
+      "models": {
+        "low": "grok-4.7",
+        "medium": "grok-4.7",
+        "high": "grok-4.7"
+      },
+      "fit": {
+        "architecture": 92,
+        "debugging": 95,
+        "docs": 88,
+        "frontend": 88,
+        "implementation": 96,
+        "large-context": 93,
+        "multimodal": 90,
+        "repeatable": 93,
+        "research": 98,
+        "review": 96
+      },
+      "notes": [
+        "Use for fast engineering, code review, and current research.",
+        "Web and X search remain disabled unless the task explicitly needs them.",
+        "The ACP adapter exposes bounded Bash consistently with the shell capability: explicit allow rules, explicit destructive and remote-git denies, dontAsk permission mode, strict sandbox containment, and a parent-side broker that grants only one-shot approval to a matching single command.",
+        "Grok 4.6 is the only selectable Grok model. Low, medium, and high complexity differ by reasoning effort, never by falling back to Grok 4.5.",
+        "Grok 4.5 is retained only in historical evidence and benchmark snapshots; the router rejects it as an override."
+      ]
+    },
+    "qwen": {
+      "office_access": "mcp",
+      "adapter": "qwen",
+      "cli_provider_id": "alibaba",
+      "display_name": "Qwen Code",
+      "routing_enabled": true,
+      "candidates": [
+        "%LOCALAPPDATA%\\qwen-code\\bin\\qwen.cmd",
+        "qwen.cmd",
+        "qwen.exe",
+        "qwen"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "--version"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "deny_patterns": [
+          "not authenticated",
+          "not logged in",
+          "authentication required",
+          "login required",
+          "subscription required"
+        ]
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 1.35,
+      "quota_pool_id": "bailian-shared-flat-rate",
+      "quota_collection": {
+        "session_command": "/stats",
+        "collector_mode": "local-token-ledger",
+        "ledger_dir": "%USERPROFILE%\\.qwen\\usage",
+        "ledger_glob": "token-usage-*.jsonl",
+        "window_capacity_tokens": 165500000,
+        "window_seconds": 604800,
+        "window_reset_anchor": "2026-08-12T18:49:00Z",
+        "capacity_source": "inferred-from-provider-console-2026-08-06",
+        "confidence": 0.7,
+        "require_fresh_snapshot": false,
+        "minimum_confidence": 0.6,
+        "max_files": 256,
+        "max_records": 2000000,
+        "per_run_tokens": "json",
+        "unknown_quota_mode": "fail-capped"
+      },
+      "execution_profile_map": {
+        "low": "qwen-deepseek-v4-1-flash-1017",
+        "medium": "qwen-3-8-flash-next-product",
+        "high": "qwen-3-8-max"
+      },
+      "execution_profile_map_by_mode": {
+        "advisory": {
+          "low": "qwen-deepseek-v4-1-flash-1017",
+          "medium": "qwen-3-8-flash-next-product",
+          "high": "qwen-3-8-max"
+        },
+        "review": {
+          "low": "qwen-deepseek-v4-1-flash-1017",
+          "medium": "qwen-3-8-flash-next-product",
+          "high": "qwen-3-8-max"
+        },
+        "implement": {
+          "low": "qwen-deepseek-v4-1-flash-1017",
+          "medium": "qwen-3-8-flash-next-product",
+          "high": "qwen-3-8-max"
+        }
+      },
+      "execution_profiles": {
+        "qwen-deepseek-v4-1-flash": {
+          "model_class": "sonnet",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-10-13 (promote DeepSeek V4.1 Flash to active, replaces v4-flash-0731)",
+          "model": "deepseek-v4.1-flash",
+          "model_provider_id": "deepseek",
+          "runtime_model_id": "deepseek-v4.1-flash",
+          "reasoning_level": "low",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 88,
+            "instruction-following": 88,
+            "multimodal": 72,
+            "speed": 96,
+            "tool-use": 90,
+            "web": 0,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 96,
+            "first_pass": 82,
+            "verifiability": 82,
+            "expected_overhead_minutes": 5,
+            "expected_repair_minutes": 18,
+            "uncertainty": 0.28
+          },
+          "premium": false,
+          "evidence_confidence": 0.7
+        },
+        "qwen-deepseek-v4-flash-0731": {
+          "model_class": "sonnet",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "deepseek-v4-flash-0731",
+          "model_provider_id": "deepseek",
+          "runtime_model_id": "deepseek-v4-flash-0731",
+          "reasoning_level": "low",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 88,
+            "instruction-following": 88,
+            "multimodal": 72,
+            "speed": 96,
+            "tool-use": 90,
+            "web": 0,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 96,
+            "first_pass": 82,
+            "verifiability": 82,
+            "expected_overhead_minutes": 5,
+            "expected_repair_minutes": 18,
+            "uncertainty": 0.28
+          },
+          "premium": false,
+          "evidence_confidence": 0.7
+        },
+        "qwen-deepseek-v4-pro-high": {
+          "model": "deepseek-v4-pro",
+          "model_provider_id": "deepseek",
+          "runtime_model_id": "deepseek-v4-pro",
+          "reasoning_level": "high",
+          "lifecycle": "DEPRECATED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 92,
+            "instruction-following": 92,
+            "multimodal": 0,
+            "speed": 55,
+            "tool-use": 94,
+            "web": 0,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 55,
+            "first_pass": 90,
+            "verifiability": 88,
+            "expected_overhead_minutes": 10,
+            "expected_repair_minutes": 12,
+            "uncertainty": 0.24
+          },
+          "premium": true,
+          "evidence_confidence": 0.6
+        },
+        "qwen-deepseek-v4-pro-max": {
+          "model": "deepseek-v4-pro",
+          "model_provider_id": "deepseek",
+          "runtime_model_id": "deepseek-v4-pro",
+          "reasoning_level": "max",
+          "lifecycle": "DEPRECATED",
+          "max_risk": "critical",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 94,
+            "instruction-following": 93,
+            "multimodal": 0,
+            "speed": 35,
+            "tool-use": 94,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 35,
+            "first_pass": 92,
+            "verifiability": 90,
+            "expected_overhead_minutes": 14,
+            "expected_repair_minutes": 10,
+            "uncertainty": 0.2
+          },
+          "premium": true,
+          "evidence_confidence": 0.55
+        },
+        "qwen-3-8-max": {
+          "model_class": "opus",
+          "coding_rank": 3,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "qwen3.8-max",
+          "model_provider_id": "alibaba",
+          "runtime_model_id": "qwen3.8-max",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 92,
+            "instruction-following": 90,
+            "multimodal": 84,
+            "speed": 72,
+            "tool-use": 93,
+            "web": 0,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 72,
+            "first_pass": 86,
+            "verifiability": 84,
+            "expected_overhead_minutes": 8,
+            "expected_repair_minutes": 15,
+            "uncertainty": 0.3
+          },
+          "premium": true,
+          "evidence_confidence": 0.68
+        },
+        "qwen-3-8-flash-next-product": {
+          "model": "qwen3.8-flash",
+          "product_name": "Qwen3.8-Flash-Next",
+          "model_provider_id": "alibaba",
+          "runtime_model_id": "qwen3.8-flash",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 90,
+            "instruction-following": 91,
+            "multimodal": 92,
+            "speed": 94,
+            "tool-use": 92,
+            "web": 0,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 94,
+            "first_pass": 84,
+            "verifiability": 86,
+            "expected_overhead_minutes": 5,
+            "expected_repair_minutes": 14,
+            "uncertainty": 0.32
+          },
+          "premium": false,
+          "evidence_confidence": 0.62
+        },
+        "qwen-deepseek-v4-1-flash-1017": {
+          "model_class": "sonnet",
+          "coding_rank": null,
+          "model_class_source": "owner request2026-10-21 + Alibaba Token Plan2026-10-20; native canary pending because existing monthly pool refusal remains in force",
+          "model": "deepseek-v4.1-flash-1017",
+          "model_provider_id": "deepseek",
+          "runtime_model_id": "deepseek-v4.1-flash-1017",
+          "reasoning_level": "low",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 88,
+            "instruction-following": 88,
+            "multimodal": 72,
+            "speed": 96,
+            "tool-use": 90,
+            "web": 0,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 96,
+            "first_pass": 82,
+            "verifiability": 82,
+            "expected_overhead_minutes": 5,
+            "expected_repair_minutes": 18,
+            "uncertainty": 0.28
+          },
+          "premium": false,
+          "evidence_confidence": 0.5
+        }
+      },
+      "models": {
+        "low": "deepseek-v4.1-flash-1017",
+        "medium": "qwen3.8-flash",
+        "high": "qwen3.8-max"
+      },
+      "fit": {
+        "architecture": 88,
+        "debugging": 92,
+        "docs": 88,
+        "frontend": 88,
+        "implementation": 94,
+        "large-context": 92,
+        "multimodal": 84,
+        "repeatable": 94,
+        "research": 84,
+        "review": 91
+      },
+      "notes": [
+        "Qwen3.8-Max is invoked through the canonical runtime ID qwen3.8-max. The provider automatically selects its current snapshot (observed qwen3.8-max-0902); snapshots are provenance, never CLI model IDs, and billing/pricing remain unchanged.",
+        "DeepSeek V4 Pro is registered as an explicit-only LIMITED route at high and max reasoning. It is intentionally absent from automatic complexity maps until accepted canaries justify promotion.",
+        "Qwen Code 0.20.0 recognizes deepseek-v4-pro as a 1,000,000-token context model with a 384,000-token output ceiling; Fleet still applies its smaller turn, tool, and wall-time budgets.",
+        "Every Qwen run receives a per-run system settings file. DeepSeek V4 routes use explicit reasoning effort, bounded API retries, 80 percent compaction, loop detection, an idle timeout, an empty fallback list, and exact provider-model verification.",
+        "All Qwen execution profiles consume one shared Bailian flat-rate pool, never independent per-model quotas.",
+        "Qwen3.8-Flash-Next is the product lineage; QwenCloud and Qwen Code expose it through the exact runtime/API ID qwen3.8-flash. Never invent qwen3.8-flash-next as a runtime ID.",
+        "Qwen3.8-Flash-Next handles ordinary bounded medium work, DeepSeek V4 Flash handles low-cost volume, and the qwen3.8-max runtime alias handles architect-level and hardest implementation work. Its provider-reported snapshot is recorded as provenance only. GLM 5.3 Flash is routed through the dedicated Z.AI/OpenCode adapter; Qwen Code has no GLM 5.2 route.",
+        "Implementation uses auto-edit, a Docker sandbox, a versioned tool denylist, terminal-result projection, and hard turn/tool/time limits; shell remains unavailable and parent-owned verification is mandatory.",
+        "Profiles remain LIMITED until enough parent-accepted outcomes replace provisional priors."
+      ]
+    },
+    "qwen-local": {
+      "adapter": "qwen",
+      "cli_provider_id": "local",
+      "display_name": "Qwen Code / local 27B zero-provider-cost lane",
+      "routing_enabled": false,
+      "local_cost_lever": true,
+      "candidates": [
+        "%LOCALAPPDATA%\\qwen-code\\bin\\qwen.cmd",
+        "qwen.cmd",
+        "qwen.exe",
+        "qwen"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "--version"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "deny_patterns": [
+          "model not found",
+          "connection refused",
+          "local runtime unavailable"
+        ]
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 1.8,
+      "quota_pool_id": "local-qwen-ollama-11439-zero-provider-cost",
+      "quota_collection": {
+        "collector_mode": "local-unmetered",
+        "confidence": 1.0,
+        "require_fresh_snapshot": true,
+        "minimum_confidence": 1.0,
+        "per_run_tokens": "json",
+        "note": "No provider token quota. Electricity and hardware cost are outside Fleet telemetry."
+      },
+      "local_runtime": {
+        "kind": "ollama-windows-external",
+        "state_id": "qwen3.8-abliterated-ollama-11439",
+        "base_url": "http://127.0.0.1:11439/v1",
+        "native_tags_url": "http://127.0.0.1:11439/api/tags",
+        "served_model_name": "huihui_ai/Qwen3.8-abliterated",
+        "model_manifest_digest": "bdc5e13cd1645bc409e95a7d9e864dc3ce3e5fe5beeb24a43c193e8041edd3e0",
+        "ollama_executable_windows": "%LOCALAPPDATA%\\MateuszAI\\ollama\\0.33.2\\ollama.exe",
+        "ollama_executable_sha256": "c79df1e0c1bfa10ed813c7030ac4c3ba38bb0e350bd7322d9bb58320343235c6",
+        "ollama_version": "0.33.2",
+        "context_window_tokens": 16384,
+        "max_num_seqs": 1,
+        "max_wall_time_seconds": 600,
+        "externally_managed": true,
+        "provider_cost_pln": 0.0,
+        "provider_cost_display": "0 zł"
+      },
+      "execution_profile_map": {
+        "low": "qwen-local-27b-fast",
+        "medium": "qwen-local-27b-balanced",
+        "high": "qwen-local-27b-balanced"
+      },
+      "execution_profiles": {
+        "qwen-local-27b-fast": {
+          "model": "huihui_ai/Qwen3.8-abliterated",
+          "model_provider_id": "local",
+          "runtime_model_id": "huihui_ai/Qwen3.8-abliterated",
+          "reasoning_level": "low",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": 16384,
+          "capabilities": {
+            "independent-review": 82,
+            "instruction-following": 84,
+            "multimodal": 0,
+            "speed": 90,
+            "tool-use": 86,
+            "web": 0,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 90,
+            "first_pass": 78,
+            "verifiability": 82,
+            "expected_overhead_minutes": 4,
+            "expected_repair_minutes": 16,
+            "uncertainty": 0.45
+          },
+          "premium": false,
+          "evidence_confidence": 0.35
+        },
+        "qwen-local-27b-balanced": {
+          "model": "huihui_ai/Qwen3.8-abliterated",
+          "model_provider_id": "local",
+          "runtime_model_id": "huihui_ai/Qwen3.8-abliterated",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": 16384,
+          "capabilities": {
+            "independent-review": 86,
+            "instruction-following": 87,
+            "multimodal": 0,
+            "speed": 78,
+            "tool-use": 88,
+            "web": 0,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 78,
+            "first_pass": 82,
+            "verifiability": 85,
+            "expected_overhead_minutes": 6,
+            "expected_repair_minutes": 14,
+            "uncertainty": 0.4
+          },
+          "premium": false,
+          "evidence_confidence": 0.35
+        }
+      },
+      "models": {
+        "low": "huihui_ai/Qwen3.8-abliterated",
+        "medium": "huihui_ai/Qwen3.8-abliterated",
+        "high": "huihui_ai/Qwen3.8-abliterated"
+      },
+      "fit": {
+        "architecture": 78,
+        "debugging": 86,
+        "docs": 91,
+        "frontend": 83,
+        "implementation": 86,
+        "large-context": 95,
+        "multimodal": 0,
+        "repeatable": 96,
+        "research": 76,
+        "review": 84
+      },
+      "notes": [
+        "Local zero-provider-cost implementation lane pinned to the exact runtime model huihui_ai/Qwen3.8-abliterated. It is eligible for bounded ordinary work only after the listener, executable, version, and manifest digest pass readiness.",
+        "Both aliases share one externally managed Ollama endpoint at http://127.0.0.1:11439. Fleet verifies the exact executable, version, SHA-256, and served native manifest digest before routing.",
+        "Provider cost is displayed as 0 zł. Electricity and hardware depreciation are intentionally outside Fleet telemetry.",
+        "Advisory, review, and implementation are admitted. Provider quota is not metered, but Fleet still applies a hard tool and wall-time ceiling; the shared endpoint remains one serialized slot.",
+        "The shared runtime has exactly one serialized slot and a 16384-token context. Fleet never starts, stops, or repairs the externally managed Ollama process."
+      ],
+      "routing_blocker": "legacy-local-qwen-alias-disabled-pending-openclaw-11440-canary"
+    },
+    "qwen-local-5070ti": {
+      "adapter": "qwen",
+      "cli_provider_id": "local",
+      "display_name": "Qwen Code / local 27B zero-provider-cost lane 5070 Ti",
+      "routing_enabled": false,
+      "local_cost_lever": true,
+      "candidates": [
+        "%LOCALAPPDATA%\\qwen-code\\bin\\qwen.cmd",
+        "qwen.cmd",
+        "qwen.exe",
+        "qwen"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "--version"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "deny_patterns": [
+          "model not found",
+          "connection refused",
+          "local runtime unavailable"
+        ]
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 0.1,
+      "quota_pool_id": "local-qwen-ollama-11439-zero-provider-cost",
+      "quota_collection": {
+        "collector_mode": "local-unmetered",
+        "confidence": 1.0,
+        "require_fresh_snapshot": true,
+        "minimum_confidence": 1.0,
+        "per_run_tokens": "json",
+        "note": "No provider token quota. Electricity and hardware cost are outside Fleet telemetry."
+      },
+      "local_runtime": {
+        "kind": "ollama-windows-external",
+        "state_id": "qwen3.8-abliterated-ollama-11439",
+        "base_url": "http://127.0.0.1:11439/v1",
+        "native_tags_url": "http://127.0.0.1:11439/api/tags",
+        "served_model_name": "huihui_ai/Qwen3.8-abliterated",
+        "model_manifest_digest": "bdc5e13cd1645bc409e95a7d9e864dc3ce3e5fe5beeb24a43c193e8041edd3e0",
+        "ollama_executable_windows": "%LOCALAPPDATA%\\MateuszAI\\ollama\\0.33.2\\ollama.exe",
+        "ollama_executable_sha256": "c79df1e0c1bfa10ed813c7030ac4c3ba38bb0e350bd7322d9bb58320343235c6",
+        "ollama_version": "0.33.2",
+        "context_window_tokens": 16384,
+        "max_num_seqs": 1,
+        "max_wall_time_seconds": 600,
+        "externally_managed": true,
+        "provider_cost_pln": 0.0,
+        "provider_cost_display": "0 zł"
+      },
+      "execution_profile_map": {
+        "low": "qwen-local-5070ti-balanced",
+        "medium": "qwen-local-5070ti-balanced",
+        "high": "qwen-local-5070ti-balanced"
+      },
+      "execution_profiles": {
+        "qwen-local-5070ti-balanced": {
+          "model": "huihui_ai/Qwen3.8-abliterated",
+          "model_provider_id": "local",
+          "runtime_model_id": "huihui_ai/Qwen3.8-abliterated",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": 16384,
+          "capabilities": {
+            "independent-review": 72,
+            "instruction-following": 75,
+            "multimodal": 0,
+            "speed": 88,
+            "tool-use": 70,
+            "web": 0,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 88,
+            "first_pass": 68,
+            "verifiability": 78,
+            "expected_overhead_minutes": 3,
+            "expected_repair_minutes": 14,
+            "uncertainty": 0.65
+          },
+          "premium": false,
+          "evidence_confidence": 0.15
+        }
+      },
+      "models": {
+        "low": "huihui_ai/Qwen3.8-abliterated",
+        "medium": "huihui_ai/Qwen3.8-abliterated",
+        "high": "huihui_ai/Qwen3.8-abliterated"
+      },
+      "fit": {
+        "architecture": 66,
+        "debugging": 74,
+        "docs": 78,
+        "frontend": 70,
+        "implementation": 86,
+        "large-context": 42,
+        "multimodal": 0,
+        "repeatable": 82,
+        "research": 61,
+        "review": 74
+      },
+      "notes": [
+        "Secondary alias for the same bounded local implementation lane. It shares the exact runtime and capacity lock with qwen-local; it is not an independent slot.",
+        "The Ollama endpoint is externally managed, loopback-only, pinned to one exact executable and model manifest digest, and Fleet never starts or stops it.",
+        "This alias serializes the identical single-slot runtime and quota pool as qwen-local; the aliases never create independent capacity.",
+        "Qwen Code owns bounded output continuation because the 16384-token window can clamp a single response while the agent prompt is resident.",
+        "Provider token cost is 0 zł. Electricity and hardware depreciation remain outside Fleet telemetry.",
+        "Advisory, review, and implementation are admitted after runtime readiness. No provider turn quota is imposed; the one-slot lock and hard wall-time/tool ceiling remain mandatory."
+      ],
+      "routing_blocker": "legacy-local-qwen-alias-disabled-pending-openclaw-11440-canary"
+    },
+    "opencode": {
+      "office_access": "mcp",
+      "adapter": "opencode",
+      "context_stop_tokens": 2500000,
+      "context_cumulative_warn_tokens": 1500000,
+      "cli_provider_id": "opencode",
+      "display_name": "OpenCode / Z.AI Coding Plan",
+      "routing_enabled": false,
+      "candidates": [
+        "%APPDATA%\\npm\\node_modules\\opencode-ai\\bin\\opencode.exe",
+        "%APPDATA%\\npm\\opencode.cmd",
+        "opencode.exe",
+        "opencode"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "models",
+        "zai-coding-plan"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "enforce_model_inventory": true,
+        "minimum_version": "1.18.18",
+        "tested_through_version": "1.18.21",
+        "fatal_patterns": [
+          "unexpected server error",
+          "internal server error"
+        ],
+        "deny_patterns": [
+          "provider not found",
+          "not authenticated",
+          "authentication required",
+          "invalid api key",
+          "subscription required",
+          "insufficient balance"
+        ]
+      },
+      "credential": {
+        "type": "windows-dpapi-securestring",
+        "path": "%APPDATA%\\Codex\\secrets\\zai_coding_plan_api_key.securestring",
+        "env_var": "ZHIPU_API_KEY"
+      },
+      "supported_modes": [
+        "advisory",
+        "review"
+      ],
+      "target_share": 0.9,
+      "quota_pool_id": "zai-coding-plan-weekly",
+      "quota_collection": {
+        "session_command": "Z.AI console / Usage",
+        "collector_mode": "provider-dashboard-manual",
+        "weekly_plan_points": 10000,
+        "per_run_tokens": "json-events",
+        "note": "Record remaining weekly points with quota-record when the provider console is checked; do not convert model tokens into plan points."
+      },
+      "execution_profile_map": {
+        "low": "opencode-glm-5-3-flash-low",
+        "medium": "opencode-glm-5-3-flash-high",
+        "high": "opencode-glm-5-3-flash-max"
+      },
+      "execution_profile_map_by_mode": {
+        "advisory": {
+          "low": "opencode-glm-5-3-flash-low",
+          "medium": "opencode-glm-5-3-flash-high",
+          "high": "opencode-glm-5-3-flash-max"
+        },
+        "review": {
+          "low": "opencode-glm-5-3-flash-low",
+          "medium": "opencode-glm-5-3-flash-high",
+          "high": "opencode-glm-5-3-flash-max"
+        }
+      },
+      "execution_profiles": {
+        "opencode-glm-5-3-flash-low": {
+          "model_class": "sonnet",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "glm-5.3-flash",
+          "model_provider_id": "zai",
+          "runtime_model_id": "zai-coding-plan/glm-5.3-flash",
+          "reasoning_level": "low",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "security-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 95,
+            "instruction-following": 93,
+            "multimodal": 82,
+            "security-review": 96,
+            "speed": 95,
+            "tool-use": 93,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 95,
+            "first_pass": 88,
+            "verifiability": 92,
+            "expected_overhead_minutes": 4,
+            "expected_repair_minutes": 10,
+            "uncertainty": 0.25
+          },
+          "premium": false,
+          "evidence_confidence": 0.72
+        },
+        "opencode-glm-5-3-flash-high": {
+          "model_class": "sonnet",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "glm-5.3-flash",
+          "model_provider_id": "zai",
+          "runtime_model_id": "zai-coding-plan/glm-5.3-flash",
+          "reasoning_level": "high",
+          "lifecycle": "ACTIVE",
+          "max_risk": "critical",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "security-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 97,
+            "instruction-following": 95,
+            "multimodal": 82,
+            "security-review": 98,
+            "speed": 84,
+            "tool-use": 95,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 84,
+            "first_pass": 92,
+            "verifiability": 95,
+            "expected_overhead_minutes": 6,
+            "expected_repair_minutes": 8,
+            "uncertainty": 0.18
+          },
+          "premium": false,
+          "evidence_confidence": 0.76
+        },
+        "opencode-glm-5-3-flash-max": {
+          "model_class": "sonnet",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "glm-5.3-flash",
+          "model_provider_id": "zai",
+          "runtime_model_id": "zai-coding-plan/glm-5.3-flash",
+          "reasoning_level": "max",
+          "lifecycle": "LIMITED",
+          "max_risk": "critical",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "security-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 98,
+            "instruction-following": 96,
+            "multimodal": 82,
+            "security-review": 99,
+            "speed": 68,
+            "tool-use": 96,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 68,
+            "first_pass": 94,
+            "verifiability": 96,
+            "expected_overhead_minutes": 8,
+            "expected_repair_minutes": 7,
+            "uncertainty": 0.15
+          },
+          "premium": false,
+          "evidence_confidence": 0.78
+        },
+        "opencode-glm-5-3-low": {
+          "model": "glm-5.3",
+          "model_provider_id": "zai",
+          "runtime_model_id": "zai-coding-plan/glm-5.3",
+          "reasoning_level": "low",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "security-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 94,
+            "instruction-following": 92,
+            "multimodal": 60,
+            "security-review": 95,
+            "speed": 88,
+            "tool-use": 90,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 88,
+            "first_pass": 86,
+            "verifiability": 91,
+            "expected_overhead_minutes": 6,
+            "expected_repair_minutes": 12,
+            "uncertainty": 0.28
+          },
+          "premium": false,
+          "evidence_confidence": 0.72
+        },
+        "opencode-glm-5-3-high": {
+          "model": "glm-5.3",
+          "model_provider_id": "zai",
+          "runtime_model_id": "zai-coding-plan/glm-5.3",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "security-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 97,
+            "instruction-following": 95,
+            "multimodal": 60,
+            "security-review": 98,
+            "speed": 68,
+            "tool-use": 93,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 68,
+            "first_pass": 91,
+            "verifiability": 94,
+            "expected_overhead_minutes": 9,
+            "expected_repair_minutes": 9,
+            "uncertainty": 0.2
+          },
+          "premium": false,
+          "evidence_confidence": 0.76
+        },
+        "opencode-glm-5-3-max": {
+          "model": "glm-5.3",
+          "model_provider_id": "zai",
+          "runtime_model_id": "zai-coding-plan/glm-5.3",
+          "reasoning_level": "max",
+          "lifecycle": "LIMITED",
+          "max_risk": "critical",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "security-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 98,
+            "instruction-following": 96,
+            "multimodal": 60,
+            "security-review": 99,
+            "speed": 48,
+            "tool-use": 94,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 48,
+            "first_pass": 93,
+            "verifiability": 96,
+            "expected_overhead_minutes": 12,
+            "expected_repair_minutes": 8,
+            "uncertainty": 0.17
+          },
+          "premium": false,
+          "evidence_confidence": 0.78
+        }
+      },
+      "models": {
+        "low": "glm-5.3-flash",
+        "medium": "glm-5.3-flash",
+        "high": "glm-5.3-flash"
+      },
+      "fit": {
+        "architecture": 92,
+        "debugging": 95,
+        "docs": 84,
+        "frontend": 83,
+        "implementation": 68,
+        "large-context": 96,
+        "multimodal": 60,
+        "repeatable": 91,
+        "research": 86,
+        "review": 98
+      },
+      "notes": [
+        "GLM-5.3-Flash is available through the paid Z.AI Coding Plan as exact runtime ID zai-coding-plan/glm-5.3-flash. It is the default bounded auditor only after an exact native canary; the prior GLM-5.3 profiles remain explicit-only compatibility routes.",
+        "Use this profile primarily as a read-only incremental security auditor over coherent implementation batches, not every micro-operation.",
+        "The API key is loaded only from the current-user Windows DPAPI file into the bounded OpenCode child environment; ambient provider keys are stripped.",
+        "OpenCode runs with inline deny-by-default permissions: no edits, shell, web, skills, MCP, subagents, external directories, questions, or sharing.",
+        "Z.AI Coding Lite provides 10000 weekly plan points. Model tokens and plan points are different units; remaining points require a provider-dashboard snapshot."
+      ],
+      "routing_blocker": "replaced-by-native-zcode-0.9.63",
+      "lifecycle": "LEGACY"
+    },
+    "opencode-beam": {
+      "office_access": "none",
+      "adapter": "opencode",
+      "context_stop_tokens": 262144,
+      "context_cumulative_warn_tokens": 200000,
+      "cli_provider_id": "opencode",
+      "display_name": "OpenCode / Reflection Beam (synthetic beta)",
+      "routing_enabled": true,
+      "candidates": [
+        "%APPDATA%\\npm\\node_modules\\opencode-ai\\bin\\opencode.exe",
+        "%APPDATA%\\npm\\opencode.cmd",
+        "opencode.exe",
+        "opencode"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "models",
+        "reflection"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "enforce_model_inventory": true,
+        "minimum_version": "1.18.18",
+        "tested_through_version": "1.18.21",
+        "fatal_patterns": [
+          "unexpected server error",
+          "internal server error"
+        ],
+        "deny_patterns": [
+          "provider not found",
+          "not authenticated",
+          "authentication required",
+          "invalid api key",
+          "incorrect api key provided",
+          "subscription required",
+          "insufficient balance"
+        ]
+      },
+      "credential": {
+        "type": "windows-dpapi-securestring",
+        "path": "%USERPROFILE%\\.agents\\reflection-beam\\secret\\reflection_api_key.securestring",
+        "env_var": "REFLECTION_API_KEY"
+      },
+      "enabled_providers": [
+        "reflection"
+      ],
+      "provider": {
+        "reflection": {
+          "npm": "@ai-sdk/openai-compatible",
+          "options": {
+            "baseURL": "https://api.reflection.ai/openai/v1",
+            "apiKey": "{env:REFLECTION_API_KEY}"
+          },
+          "models": {
+            "Beam-1.0-501B-A23B": {
+              "name": "Beam-1.0-501B-A23B",
+              "tool_call": true,
+              "limit": {
+                "context": 262144,
+                "output": 131072
+              }
+            }
+          }
+        }
+      },
+      "data_boundary": {
+        "synthetic_only": true,
+        "workspace_root": "%USERPROFILE%\\.agents\\synthetic-workspaces\\beam"
+      },
+      "trial_expires_at": "2026-10-29T23:59:00+01:00",
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 0.01,
+      "models": {
+        "low": "Beam-1.0-501B-A23B",
+        "medium": "Beam-1.0-501B-A23B",
+        "high": "Beam-1.0-501B-A23B"
+      },
+      "fit": {
+        "architecture": 70,
+        "debugging": 70,
+        "docs": 70,
+        "frontend": 70,
+        "implementation": 68,
+        "large-context": 70,
+        "multimodal": 0,
+        "repeatable": 70,
+        "research": 70,
+        "review": 70
+      },
+      "execution_profile_map": {
+        "low": "opencode-beam-1-0-low",
+        "medium": "opencode-beam-1-0-high",
+        "high": "opencode-beam-1-0-high"
+      },
+      "execution_profile_map_by_mode": {
+        "implement": {
+          "low": "opencode-beam-1-0-implement",
+          "medium": "opencode-beam-1-0-implement",
+          "high": "opencode-beam-1-0-implement"
+        },
+        "advisory": {
+          "low": "opencode-beam-1-0-low",
+          "medium": "opencode-beam-1-0-high",
+          "high": "opencode-beam-1-0-high"
+        },
+        "review": {
+          "low": "opencode-beam-1-0-low",
+          "medium": "opencode-beam-1-0-high",
+          "high": "opencode-beam-1-0-high"
+        }
+      },
+      "execution_profiles": {
+        "opencode-beam-1-0-low": {
+          "model_class": "sonnet",
+          "model": "Beam-1.0-501B-A23B",
+          "model_provider_id": "reflection",
+          "runtime_model_id": "reflection/Beam-1.0-501B-A23B",
+          "reasoning_level": "low",
+          "lifecycle": "LIMITED",
+          "max_risk": "low",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "security-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 262144,
+          "capabilities": {
+            "independent-review": 75,
+            "instruction-following": 75,
+            "multimodal": 0,
+            "security-review": 70,
+            "speed": 65,
+            "tool-use": 75,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 65,
+            "first_pass": 70,
+            "verifiability": 75,
+            "expected_overhead_minutes": 5,
+            "expected_repair_minutes": 12,
+            "uncertainty": 0.35
+          },
+          "premium": false,
+          "evidence_confidence": 0.5
+        },
+        "opencode-beam-1-0-high": {
+          "model_class": "sonnet",
+          "model": "Beam-1.0-501B-A23B",
+          "model_provider_id": "reflection",
+          "runtime_model_id": "reflection/Beam-1.0-501B-A23B",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "low",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "security-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 262144,
+          "capabilities": {
+            "independent-review": 80,
+            "instruction-following": 80,
+            "multimodal": 0,
+            "security-review": 75,
+            "speed": 50,
+            "tool-use": 80,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 50,
+            "first_pass": 75,
+            "verifiability": 80,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 10,
+            "uncertainty": 0.3
+          },
+          "premium": false,
+          "evidence_confidence": 0.55
+        },
+        "opencode-beam-1-0-implement": {
+          "model_class": "sonnet",
+          "model": "Beam-1.0-501B-A23B",
+          "model_provider_id": "reflection",
+          "runtime_model_id": "reflection/Beam-1.0-501B-A23B",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "write",
+            "tool-use"
+          ],
+          "context_window_tokens": 262144,
+          "capabilities": {
+            "instruction-following": 75,
+            "speed": 50,
+            "tool-use": 75,
+            "web": 0,
+            "write": 62
+          },
+          "efficiency_priors": {
+            "speed": 50,
+            "first_pass": 67,
+            "verifiability": 72,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 14,
+            "uncertainty": 0.4
+          },
+          "premium": false,
+          "evidence_confidence": 0.45
+        }
+      },
+      "notes": [
+        "Reflection Beam terms mark submitted content TRAINING_ENABLED; this profile is restricted to synthetic data in the pinned workspace.",
+        "Owner-authorized free beta ends 2026-10-29 23:59 Europe/Warsaw. Automatic implementation routing is limited to the pinned synthetic workspace; no Office, shared-knowledge snapshot, ambient API keys, shell, network tools, or native subagents are available."
+      ]
+    },
+    "opencode-mercury": {
+      "office_access": "none",
+      "adapter": "opencode",
+      "context_stop_tokens": 32768,
+      "context_warn_tokens": 24576,
+      "cli_provider_id": "opencode",
+      "display_name": "OpenCode / Mercury3 (provisional synthetic pilot)",
+      "routing_enabled": true,
+      "candidates": [
+        "~/.local/opencode-cli-1.18.21/node_modules/opencode-ai/bin/opencode.exe"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "models",
+        "inception"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "enforce_model_inventory": true,
+        "minimum_version": "1.18.21",
+        "tested_through_version": "1.18.21",
+        "fatal_patterns": [
+          "unexpected server error",
+          "internal server error"
+        ],
+        "deny_patterns": [
+          "provider not found",
+          "not authenticated",
+          "authentication required",
+          "invalid api key",
+          "incorrect api key provided",
+          "subscription required",
+          "insufficient balance"
+        ]
+      },
+      "credential": {
+        "type": "windows-credential-manager",
+        "target": "AIStack/Mercury3/Pilot",
+        "env_var": "INCEPTION_API_KEY"
+      },
+      "enabled_providers": [
+        "inception"
+      ],
+      "provider": {
+        "inception": {
+          "npm": "@ai-sdk/openai-compatible",
+          "options": {
+            "baseURL": "https://api.inceptionlabs.ai/v1",
+            "apiKey": "{env:INCEPTION_API_KEY}"
+          },
+          "models": {
+            "mercury-3": {
+              "name": "mercury-3",
+              "tool_call": true,
+              "reasoning": true,
+              "temperature": true,
+              "modalities": {
+                "input": [
+                  "text"
+                ],
+                "output": [
+                  "text"
+                ]
+              },
+              "limit": {
+                "context": 1000000,
+                "input": 1000000,
+                "output": 131072
+              },
+              "options": {
+                "reasoningEffort": "medium"
+              },
+              "variants": {
+                "medium": {
+                  "reasoningEffort": "medium"
+                }
+              }
+            }
+          }
+        }
+      },
+      "data_boundary": {
+        "synthetic_only": true,
+        "workspace_root": "~/.agents/task-work/mercury-pilot-20261020/synthetic"
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "models": {
+        "low": "mercury-3",
+        "medium": "mercury-3",
+        "high": "mercury-3"
+      },
+      "fit": {
+        "architecture": 30,
+        "debugging": 30,
+        "docs": 30,
+        "frontend": 30,
+        "implementation": 30,
+        "large-context": 30,
+        "multimodal": 0,
+        "repeatable": 30,
+        "research": 30,
+        "review": 30
+      },
+      "notes": [
+        "Provisional W pilot only; quality has not been established. Routing remains disabled; no automatic/customer selection.",
+        "Account UI evidence supplied by parent: Improve model OFF; Free 100M, used 0, PAYG inactive. This dated report is not a live balance or attestation.",
+        "Canonical user-local attestation: ~/.agents/mercury3-pilot/attestation.json; parent populates from verified UI. Recheck within 24 hours.",
+        "Provider enforces the global 100M Free allowance across models and keys. Local allowance is conservative and cannot know other-key usage.",
+        "Native permissions plus admission checks are not an OS filesystem/network sandbox. Normal streaming; no diffusing; text only."
+      ],
+      "mercury_pilot": true,
+      "routing_blocker": "pending-parent-canary-and-independent-review",
+      "quota_pool_id": "inception-mercury-free",
+      "paid_fallback": false,
+      "target_share": 0.01,
+      "advertised_limits": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "pilot_limits": {
+        "input": 32768,
+        "output": 4096,
+        "native_steps": 16
+      },
+      "quota_collection": {
+        "collector_mode": "manual-attestation",
+        "per_run_tokens": "opencode-step-finish-incomplete-auxiliary"
+      },
+      "execution_profiles": {
+        "opencode-mercury-3-read": {
+          "model_class": "worker",
+          "model": "mercury-3",
+          "model_provider_id": "inception",
+          "runtime_model_id": "inception/mercury-3",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "low",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "tool-use",
+            "independent-review"
+          ],
+          "context_window_tokens": 32768,
+          "capabilities": {
+            "independent-review": 30,
+            "instruction-following": 30,
+            "multimodal": 30,
+            "security-review": 30,
+            "speed": 30,
+            "tool-use": 30,
+            "web": 0,
+            "write": 30
+          },
+          "efficiency_priors": {
+            "speed": 65,
+            "first_pass": 70,
+            "verifiability": 75,
+            "expected_overhead_minutes": 5,
+            "expected_repair_minutes": 12,
+            "uncertainty": 0.35
+          },
+          "premium": false,
+          "evidence_confidence": 0.1
+        },
+        "opencode-mercury-3-implement": {
+          "model_class": "worker",
+          "model": "mercury-3",
+          "model_provider_id": "inception",
+          "runtime_model_id": "inception/mercury-3",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "low",
+          "supported_modes": [
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "write",
+            "tool-use"
+          ],
+          "context_window_tokens": 32768,
+          "capabilities": {
+            "instruction-following": 30,
+            "speed": 30,
+            "tool-use": 30,
+            "web": 0,
+            "write": 30
+          },
+          "efficiency_priors": {
+            "speed": 50,
+            "first_pass": 67,
+            "verifiability": 72,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 14,
+            "uncertainty": 0.4
+          },
+          "premium": false,
+          "evidence_confidence": 0.1
+        }
+      },
+      "execution_profile_map": {
+        "low": "opencode-mercury-3-read",
+        "medium": "opencode-mercury-3-read",
+        "high": "opencode-mercury-3-read"
+      },
+      "execution_profile_map_by_mode": {
+        "advisory": {
+          "low": "opencode-mercury-3-read",
+          "medium": "opencode-mercury-3-read",
+          "high": "opencode-mercury-3-read"
+        },
+        "review": {
+          "low": "opencode-mercury-3-read",
+          "medium": "opencode-mercury-3-read",
+          "high": "opencode-mercury-3-read"
+        },
+        "implement": {
+          "low": "opencode-mercury-3-implement",
+          "medium": "opencode-mercury-3-implement",
+          "high": "opencode-mercury-3-implement"
+        }
+      }
+    },
+    "minimax": {
+      "office_access": "mcp",
+      "adapter": "minimax",
+      "cli_provider_id": "minimax",
+      "display_name": "MiniMax Code",
+      "routing_enabled": true,
+      "candidates": [
+        "%USERPROFILE%\\.minimax-code\\versions\\0.6.12\\mcode.cmd",
+        "%USERPROFILE%\\.minimax-code\\mcode.cmd",
+        "mcode.cmd",
+        "mcode"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "provider",
+        "list"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "minimum_version": "0.6.12",
+        "tested_through_version": "0.6.12",
+        "deny_patterns": [
+          "not authenticated",
+          "not logged in",
+          "authentication required",
+          "login required",
+          "subscription required"
+        ]
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 0.85,
+      "quota_pool_id": "minimax-coding-plan",
+      "quota_collection": {
+        "session_command": "MiniMax Coding Plan console / Usage",
+        "collector_mode": "provider-dashboard-manual",
+        "per_run_tokens": "exec-json",
+        "note": "MiniMax exec JSON provides per-run model tokens; remaining subscription allowance requires a provider-console snapshot."
+      },
+      "execution_profile_map": {
+        "low": "minimax-m31-flash-low",
+        "medium": "minimax-m31-flash-medium",
+        "high": "minimax-m31-flash-high"
+      },
+      "execution_profile_map_by_mode": {
+        "advisory": {
+          "low": "minimax-m31-flash-low",
+          "medium": "minimax-m31-flash-medium",
+          "high": "minimax-m31-flash-high"
+        },
+        "review": {
+          "low": "minimax-m31-flash-low",
+          "medium": "minimax-m31-flash-medium",
+          "high": "minimax-m31-flash-high"
+        },
+        "implement": {
+          "low": "minimax-m31-flash-low",
+          "medium": "minimax-m31-flash-medium",
+          "high": "minimax-m31-flash-high"
+        }
+      },
+      "execution_profiles": {
+        "minimax-m3-thinking": {
+          "model": "MiniMax-M3",
+          "model_provider_id": "minimax",
+          "runtime_model_id": "minimax/MiniMax-M3",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": 512000,
+          "capabilities": {
+            "independent-review": 86,
+            "instruction-following": 84,
+            "multimodal": 96,
+            "speed": 80,
+            "tool-use": 88,
+            "web": 0,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 80,
+            "first_pass": 78,
+            "verifiability": 80,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.45
+          },
+          "premium": false,
+          "evidence_confidence": 0.35
+        },
+        "minimax-m31-flash-low": {
+          "model": "MiniMax-M3.1-Flash",
+          "model_provider_id": "minimax",
+          "runtime_model_id": "minimax/MiniMax-M3.1-Flash-Preview",
+          "reasoning_level": "low",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 86,
+            "instruction-following": 84,
+            "multimodal": 96,
+            "speed": 80,
+            "tool-use": 88,
+            "web": 0,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 80,
+            "first_pass": 78,
+            "verifiability": 80,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.45
+          },
+          "premium": false,
+          "evidence_confidence": 0.35
+        },
+        "minimax-m31-flash-medium": {
+          "model": "MiniMax-M3.1-Flash",
+          "model_provider_id": "minimax",
+          "runtime_model_id": "minimax/MiniMax-M3.1-Flash-Preview",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 86,
+            "instruction-following": 84,
+            "multimodal": 96,
+            "speed": 80,
+            "tool-use": 88,
+            "web": 0,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 80,
+            "first_pass": 78,
+            "verifiability": 80,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.45
+          },
+          "premium": false,
+          "evidence_confidence": 0.35
+        },
+        "minimax-m31-flash-high": {
+          "model": "MiniMax-M3.1-Flash",
+          "model_provider_id": "minimax",
+          "runtime_model_id": "minimax/MiniMax-M3.1-Flash-Preview",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 86,
+            "instruction-following": 84,
+            "multimodal": 96,
+            "speed": 80,
+            "tool-use": 88,
+            "web": 0,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 80,
+            "first_pass": 78,
+            "verifiability": 80,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.45
+          },
+          "premium": false,
+          "evidence_confidence": 0.35
+        }
+      },
+      "models": {
+        "low": "MiniMax-M3.1-Flash",
+        "medium": "MiniMax-M3.1-Flash",
+        "high": "MiniMax-M3.1-Flash"
+      },
+      "fit": {
+        "architecture": 82,
+        "debugging": 86,
+        "docs": 86,
+        "frontend": 86,
+        "implementation": 88,
+        "large-context": 97,
+        "multimodal": 96,
+        "repeatable": 82,
+        "research": 82,
+        "review": 86
+      },
+      "notes": [
+        "Fleet forces MAVIS_REGION=en for version probes, deep readiness probes, and child runs. If authentication must be renewed, use exactly mcode login --region global; plain mcode login defaults to the China-region flow and is not an accepted remediation.",
+        "Each run gets an isolated config with external skills, plugins, memory, browser, web, MCP, subagents, and shell disabled. Implementation is limited to native file read/write/edit tools in a detached worktree.",
+        "The profile remains LIMITED with deliberately conservative priors until parent-accepted production-like tasks provide local quality evidence.",
+        "Owner 2026-10-21: retain Monthly M Plan Explore; default Worker MiniMax-M3.1-Flash. Numerical remaining allowance unknown. No 2026-10-25 retirement.",
+        "Official CLI0.6.12 exposes managed runtime alias minimax/MiniMax-M3.1-Flash-Preview. MiniMax docs m-plan/intro state the retired Preview name is served by stable M3.1-Flash; native receipt verifies the requested alias, not backend weights. No automatic M3 fallback. Legacy minimax-m3-thinking remains explicit only.",
+        "Native --effort is explicit low/medium/high by workload; M3 legacy command remains flag-free. New CLI installed versioned alongside unchanged0.2.4."
+      ]
+    },
+    "codebuddy": {
+      "adapter": "codebuddy",
+      "cli_provider_id": "tencent",
+      "display_name": "CodeBuddy Code",
+      "routing_enabled": true,
+      "candidates": [
+        "%APPDATA%\\npm\\codebuddy.cmd",
+        "codebuddy.cmd",
+        "codebuddy"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "--model",
+        "__fleet_readiness_probe__",
+        "-p",
+        "probe"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "minimum_version": "2.155.0",
+        "tested_through_version": "2.155.0",
+        "required_deep_probe_substrings": [
+          "hy4-preview"
+        ],
+        "deny_patterns": [
+          "not authenticated",
+          "not logged in",
+          "authentication required",
+          "login required",
+          "subscription required",
+          "429 credits exhausted"
+        ]
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 0.85,
+      "quota_pool_id": "codebuddy-pro",
+      "quota_collection": {
+        "session_command": "CodeBuddy Pro console / Usage",
+        "collector_mode": "provider-dashboard-manual",
+        "per_run_credits": "rawUsage.credit",
+        "note": "CodeBuddy JSON provides per-run plan credits in rawUsage.credit; remaining subscription allowance requires a provider-console snapshot. total_cost_usd is not a dollar cost."
+      },
+      "execution_profile_map": {
+        "low": "codebuddy-hy4-preview-high",
+        "medium": "codebuddy-hy4-preview-high",
+        "high": "codebuddy-hy4-preview-high"
+      },
+      "execution_profile_map_by_mode": {
+        "advisory": {
+          "low": "codebuddy-hy4-preview-high",
+          "medium": "codebuddy-hy4-preview-high",
+          "high": "codebuddy-hy4-preview-high"
+        },
+        "review": {
+          "low": "codebuddy-hy4-preview-high",
+          "medium": "codebuddy-hy4-preview-high",
+          "high": "codebuddy-hy4-preview-high"
+        },
+        "implement": {
+          "low": "codebuddy-hy4-preview-high",
+          "medium": "codebuddy-hy4-preview-high",
+          "high": "codebuddy-hy4-preview-high"
+        }
+      },
+      "execution_profiles": {
+        "codebuddy-hy4-preview-high": {
+          "model_class": "opus",
+          "coding_rank": 7,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "hy4-preview",
+          "model_provider_id": "tencent",
+          "runtime_model_id": "hy4-preview",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": 1024000,
+          "capabilities": {
+            "independent-review": 86,
+            "instruction-following": 84,
+            "multimodal": 80,
+            "speed": 80,
+            "tool-use": 88,
+            "web": 0,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 80,
+            "first_pass": 78,
+            "verifiability": 80,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.45
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        }
+      },
+      "models": {
+        "low": "hy4-preview",
+        "medium": "hy4-preview",
+        "high": "hy4-preview"
+      },
+      "fit": {
+        "architecture": 82,
+        "debugging": 86,
+        "docs": 86,
+        "frontend": 86,
+        "implementation": 88,
+        "large-context": 97,
+        "multimodal": 80,
+        "repeatable": 82,
+        "research": 82,
+        "review": 86
+      },
+      "notes": [
+        "CodeBuddy Code 2.155.0 is a multi-provider router. Fleet pins Tencent hy4-preview on every run because that is the only served model that adds a distinct lineage versus the rest of the local stable.",
+        "Each Fleet child run isolates CODEBUDDY_CONFIG_DIR and CODEBUDDY_DATA_ROOT under the run directory. Login credentials stay in the CodeBuddy Extension LOCALAPPDATA auth store and are not copied.",
+        "Child environment always disables memory extraction, plugins, workflows, cron, remote control, IDE, background tasks, web fetch, builtin subagents, and telemetry. CODEBUDDY_CODE_ENABLE_TELEMETRY is never set. API key, auth token, and base URL overrides are stripped.",
+        "Fleet parses the native JSON array envelope, verifies every assistant providerData.model and requestModelId equal hy4-preview, records rawUsage.credit as plan credits, and never treats total_cost_usd=0 as a dollar cost.",
+        "The profile remains LIMITED and UNVERIFIED with deliberately conservative priors until parent-accepted production-like tasks provide local quality evidence.",
+        "Readiness deep probe deliberately requests an invalid model id. CodeBuddy answers with the account-scoped roster and rejects the request before inference, so the probe proves both a live login and hy4-preview entitlement at zero plan credits. Do NOT use --help for this: its text is longer than the 4000 character probe capture and the roster line is truncated away."
+      ]
+    },
+    "muse": {
+      "adapter": "muse",
+      "cli_provider_id": "meta",
+      "display_name": "Muse Code",
+      "routing_enabled": true,
+      "candidates": [
+        "%LOCALAPPDATA%\\Programs\\muse\\muse-bin-1.4.9-R6297.1.exe"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "sandbox",
+        "windows",
+        "check"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "minimum_version": "1.4.9",
+        "tested_through_version": "1.4.9",
+        "deny_patterns": [
+          "not authenticated",
+          "not logged in",
+          "authentication required",
+          "login required",
+          "subscription required",
+          "missing meta credentials"
+        ],
+        "fatal_patterns": [
+          "status=setup_required",
+          "status=unavailable",
+          "runner_trusted=false",
+          "sandbox_users_ready=false",
+          "capabilities_ready=false",
+          "wfp_ready=false"
+        ],
+        "required_deep_probe_lines": [
+          "runner_trusted=true",
+          "runner_version_matches=true",
+          "sandbox_users_ready=true",
+          "capabilities_ready=true",
+          "wfp_ready=true"
+        ]
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 0.75,
+      "quota_pool_id": "meta-muse-code-plan",
+      "quota_collection": {
+        "session_command": "Muse Code account usage",
+        "collector_mode": "provider-dashboard-manual",
+        "per_run_tokens": "json-events",
+        "note": "Muse JSONL is the per-run evidence source. Remaining subscription allowance requires a provider-console snapshot."
+      },
+      "execution_profile_map": {
+        "low": "muse-spark-1-3-low",
+        "medium": "muse-spark-1-3-balanced",
+        "high": "muse-spark-1-3-high"
+      },
+      "execution_profile_map_by_mode": {
+        "advisory": {
+          "low": "muse-spark-1-3-read-low",
+          "medium": "muse-spark-1-3-read-balanced",
+          "high": "muse-spark-1-3-read-high"
+        },
+        "review": {
+          "low": "muse-spark-1-3-read-low",
+          "medium": "muse-spark-1-3-read-balanced",
+          "high": "muse-spark-1-3-read-high"
+        },
+        "implement": {
+          "low": "muse-spark-1-3-low",
+          "medium": "muse-spark-1-3-balanced",
+          "high": "muse-spark-1-3-high"
+        }
+      },
+      "execution_profiles": {
+        "muse-spark-1-3-read-low": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "muse-spark-1.3",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-spark-1.3",
+          "reasoning_level": "low",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 78,
+            "instruction-following": 80,
+            "multimodal": 0,
+            "speed": 90,
+            "tool-use": 82,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 90,
+            "first_pass": 72,
+            "verifiability": 75,
+            "expected_overhead_minutes": 5,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.55
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-spark-1-3-read-balanced": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "muse-spark-1.3",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-spark-1.3",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 83,
+            "instruction-following": 85,
+            "multimodal": 0,
+            "speed": 82,
+            "tool-use": 87,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 82,
+            "first_pass": 78,
+            "verifiability": 80,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 17,
+            "uncertainty": 0.5
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-spark-1-3-read-high": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "muse-spark-1.3",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-spark-1.3",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 86,
+            "instruction-following": 88,
+            "multimodal": 0,
+            "speed": 70,
+            "tool-use": 89,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 70,
+            "first_pass": 82,
+            "verifiability": 84,
+            "expected_overhead_minutes": 9,
+            "expected_repair_minutes": 14,
+            "uncertainty": 0.48
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-spark-1-3-low": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "muse-spark-1.3",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-spark-1.3",
+          "reasoning_level": "low",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 78,
+            "instruction-following": 80,
+            "multimodal": 0,
+            "speed": 90,
+            "tool-use": 82,
+            "web": 75,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 90,
+            "first_pass": 72,
+            "verifiability": 75,
+            "expected_overhead_minutes": 5,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.55
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-spark-1-3-balanced": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "muse-spark-1.3",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-spark-1.3",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 83,
+            "instruction-following": 85,
+            "multimodal": 0,
+            "speed": 82,
+            "tool-use": 87,
+            "web": 78,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 82,
+            "first_pass": 78,
+            "verifiability": 80,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 17,
+            "uncertainty": 0.5
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-spark-1-3-high": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "muse-spark-1.3",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-spark-1.3",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 86,
+            "instruction-following": 88,
+            "multimodal": 0,
+            "speed": 70,
+            "tool-use": 89,
+            "web": 80,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 70,
+            "first_pass": 82,
+            "verifiability": 84,
+            "expected_overhead_minutes": 9,
+            "expected_repair_minutes": 14,
+            "uncertainty": 0.48
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-wonder-1-0-read-low": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-10-12; conservative Spark priors, no local Wonder benchmark",
+          "model": "muse-wonder-1.0",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-wonder-1.0",
+          "reasoning_level": "low",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 78,
+            "instruction-following": 80,
+            "multimodal": 0,
+            "speed": 90,
+            "tool-use": 82,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 90,
+            "first_pass": 72,
+            "verifiability": 75,
+            "expected_overhead_minutes": 5,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.55
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-wonder-1-0-read-balanced": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-10-12; conservative Spark priors, no local Wonder benchmark",
+          "model": "muse-wonder-1.0",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-wonder-1.0",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 83,
+            "instruction-following": 85,
+            "multimodal": 0,
+            "speed": 82,
+            "tool-use": 87,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 82,
+            "first_pass": 78,
+            "verifiability": 80,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 17,
+            "uncertainty": 0.5
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-wonder-1-0-read-high": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-10-12; conservative Spark priors, no local Wonder benchmark",
+          "model": "muse-wonder-1.0",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-wonder-1.0",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 86,
+            "instruction-following": 88,
+            "multimodal": 0,
+            "speed": 70,
+            "tool-use": 89,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 70,
+            "first_pass": 82,
+            "verifiability": 84,
+            "expected_overhead_minutes": 9,
+            "expected_repair_minutes": 14,
+            "uncertainty": 0.48
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-wonder-1-0-low": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-10-12; conservative Spark priors, no local Wonder benchmark",
+          "model": "muse-wonder-1.0",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-wonder-1.0",
+          "reasoning_level": "low",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 78,
+            "instruction-following": 80,
+            "multimodal": 0,
+            "speed": 90,
+            "tool-use": 82,
+            "web": 75,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 90,
+            "first_pass": 72,
+            "verifiability": 75,
+            "expected_overhead_minutes": 5,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.55
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-wonder-1-0-balanced": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-10-12; conservative Spark priors, no local Wonder benchmark",
+          "model": "muse-wonder-1.0",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-wonder-1.0",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 83,
+            "instruction-following": 85,
+            "multimodal": 0,
+            "speed": 82,
+            "tool-use": 87,
+            "web": 78,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 82,
+            "first_pass": 78,
+            "verifiability": 80,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 17,
+            "uncertainty": 0.5
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-wonder-1-0-high": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-10-12; conservative Spark priors, no local Wonder benchmark",
+          "model": "muse-wonder-1.0",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-wonder-1.0",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 86,
+            "instruction-following": 88,
+            "multimodal": 0,
+            "speed": 70,
+            "tool-use": 89,
+            "web": 80,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 70,
+            "first_pass": 82,
+            "verifiability": 84,
+            "expected_overhead_minutes": 9,
+            "expected_repair_minutes": 14,
+            "uncertainty": 0.48
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-wonder-full-1-0-read-low": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-10-12; conservative Spark priors, no local Wonder benchmark",
+          "model": "muse-wonder-full-1.0",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-wonder-full-1.0",
+          "reasoning_level": "low",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 78,
+            "instruction-following": 80,
+            "multimodal": 0,
+            "speed": 90,
+            "tool-use": 82,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 90,
+            "first_pass": 72,
+            "verifiability": 75,
+            "expected_overhead_minutes": 5,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.55
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-wonder-full-1-0-read-balanced": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-10-12; conservative Spark priors, no local Wonder benchmark",
+          "model": "muse-wonder-full-1.0",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-wonder-full-1.0",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 83,
+            "instruction-following": 85,
+            "multimodal": 0,
+            "speed": 82,
+            "tool-use": 87,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 82,
+            "first_pass": 78,
+            "verifiability": 80,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 17,
+            "uncertainty": 0.5
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-wonder-full-1-0-read-high": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-10-12; conservative Spark priors, no local Wonder benchmark",
+          "model": "muse-wonder-full-1.0",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-wonder-full-1.0",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 86,
+            "instruction-following": 88,
+            "multimodal": 0,
+            "speed": 70,
+            "tool-use": 89,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 70,
+            "first_pass": 82,
+            "verifiability": 84,
+            "expected_overhead_minutes": 9,
+            "expected_repair_minutes": 14,
+            "uncertainty": 0.48
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-wonder-full-1-0-low": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-10-12; conservative Spark priors, no local Wonder benchmark",
+          "model": "muse-wonder-full-1.0",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-wonder-full-1.0",
+          "reasoning_level": "low",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 78,
+            "instruction-following": 80,
+            "multimodal": 0,
+            "speed": 90,
+            "tool-use": 82,
+            "web": 75,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 90,
+            "first_pass": 72,
+            "verifiability": 75,
+            "expected_overhead_minutes": 5,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.55
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-wonder-full-1-0-balanced": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-10-12; conservative Spark priors, no local Wonder benchmark",
+          "model": "muse-wonder-full-1.0",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-wonder-full-1.0",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 83,
+            "instruction-following": 85,
+            "multimodal": 0,
+            "speed": 82,
+            "tool-use": 87,
+            "web": 78,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 82,
+            "first_pass": 78,
+            "verifiability": 80,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 17,
+            "uncertainty": 0.5
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        },
+        "muse-wonder-full-1-0-high": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-10-12; conservative Spark priors, no local Wonder benchmark",
+          "model": "muse-wonder-full-1.0",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-wonder-full-1.0",
+          "reasoning_level": "high",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 86,
+            "instruction-following": 88,
+            "multimodal": 0,
+            "speed": 70,
+            "tool-use": 89,
+            "web": 80,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 70,
+            "first_pass": 82,
+            "verifiability": 84,
+            "expected_overhead_minutes": 9,
+            "expected_repair_minutes": 14,
+            "uncertainty": 0.48
+          },
+          "premium": false,
+          "evidence_confidence": 0.2
+        }
+      },
+      "models": {
+        "low": "muse-spark-1.3",
+        "medium": "muse-spark-1.3",
+        "high": "muse-spark-1.3"
+      },
+      "fit": {
+        "architecture": 82,
+        "debugging": 85,
+        "docs": 84,
+        "frontend": 82,
+        "implementation": 87,
+        "large-context": 98,
+        "multimodal": 0,
+        "repeatable": 84,
+        "research": 80,
+        "review": 84
+      },
+      "notes": [
+        "Muse Code 1.4.6 uses the pinned native Windows executable; exact allowed models: muse-spark-1.3, muse-wonder-1.0, muse-wonder-full-1.0. No WSL is required.",
+        "Every Muse Contributor model is categorically prohibited because its catalog permits product-improvement use of user content; no generation has a default, alias, fallback, retry, substitution, resume, or waiver path.",
+        "Legacy non-Contributor muse-spark-1.2 is rejected before process launch and cannot be used as a fallback.",
+        "Fleet rejects unsafe profile data and model overrides before process launch, then verifies the provider-reported model identity after every run.",
+        "Fleet invokes the versioned executable with a literal argument vector and a prompt file. Windows sandbox readiness is probed; account authentication and entitlement still require a successful provider run.",
+        "The profile remains LIMITED with conservative priors until parent-accepted local runs provide evidence.",
+        "Owner Windows recovery 2026-09-17: native Muse Standard subscription login and model response verified; official Windows sandbox setup completed with all required readiness lines true. Contributor remains denied; per-run readiness and exact model checks remain enforced.",
+        "Fleet always passes --contributor-mode off on every model run, regardless of persisted account settings; earlier CLI versions lack this control and are not ready.",
+        "Wonder and Wonder Full require explicit model/profile selection; default execution maps remain Spark 1.3. All three models share meta-muse-code-plan.",
+        "Artificial Analysis Intelligence Index 2026-10-12 according to Meta: Wonder Full 56, Wonder 52, Spark 1.3 48. Provider claim supplied by parent, not a local benchmark; Wonder capability and efficiency priors are conservatively inherited from Spark.",
+        "Wonder context_window_tokens remains the Spark value 1007997 as a provisional routing assumption, not verified Wonder capacity; no source supplied for 1048576."
+      ]
+    },
+    "openclaw-local-qwen": {
+      "adapter": "openclaw",
+      "cli_provider_id": "openclaw",
+      "display_name": "OpenClaw / local vllm/Qwen3.8-27B zero-provider-cost lane",
+      "routing_enabled": true,
+      "local_cost_lever": true,
+      "candidates": [
+        "%USERPROFILE%\\.agents\\runtime\\openclaw\\2026.9.4\\node_modules\\.bin\\openclaw.cmd",
+        "openclaw.cmd",
+        "openclaw.exe",
+        "openclaw"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "--version"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "enforce_model_inventory": true,
+        "minimum_version": "2026.9.4",
+        "tested_through_version": "2026.9.4",
+        "deny_patterns": [
+          "not authenticated",
+          "not logged in",
+          "authentication required",
+          "login required",
+          "subscription required",
+          "runtime_not_ready",
+          "missing openclaw credentials",
+          "endpoint unavailable",
+          "connection refused"
+        ],
+        "fatal_patterns": [
+          "status=setup_required",
+          "status=unavailable",
+          "runner_trusted=false",
+          "sandbox_users_ready=false",
+          "capabilities_ready=false",
+          "wfp_ready=false",
+          "state_dir_deleted=true"
+        ]
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 1.0,
+      "quota_pool_id": "openclaw-local-vllm-zero-provider-cost",
+      "quota_collection": {
+        "collector_mode": "local-unmetered",
+        "confidence": 1.0,
+        "require_fresh_snapshot": true,
+        "minimum_confidence": 1.0,
+        "per_run_tokens": "json-envelope",
+        "note": "No provider token quota. Electricity and hardware cost are outside Fleet telemetry. Usage status reported as 'unknown' when the OpenClaw envelope omits the usage field; both verified and verified_unknown_usage are accepted identity states."
+      },
+      "local_runtime": {
+        "kind": "openclaw-vllm",
+        "state_id": "openclaw-qwen-11440",
+        "base_url": "http://127.0.0.1:11440/v1",
+        "served_model_name": "Qwen3.8-27B",
+        "provider": "vllm",
+        "context_window_tokens": 524288,
+        "max_num_seqs": 1,
+        "externally_managed": true,
+        "provider_cost_pln": 0,
+        "provider_cost_display": "0 zł",
+        "runtime_not_ready": false
+      },
+      "execution_profile_map": {
+        "low": "openclaw-local-qwen-balanced",
+        "medium": "openclaw-local-qwen-balanced",
+        "high": "openclaw-local-qwen-balanced"
+      },
+      "execution_profiles": {
+        "openclaw-local-qwen-balanced": {
+          "model": "vllm/Qwen3.8-27B",
+          "model_provider_id": "qwen",
+          "runtime_model_id": "vllm/Qwen3.8-27B",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review",
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write",
+            "sandbox-exec"
+          ],
+          "context_window_tokens": 524288,
+          "capabilities": {
+            "independent-review": 84,
+            "instruction-following": 86,
+            "multimodal": 0,
+            "speed": 82,
+            "tool-use": 86,
+            "web": 0,
+            "write": 100,
+            "sandbox-exec": 86
+          },
+          "efficiency_priors": {
+            "speed": 82,
+            "first_pass": 80,
+            "verifiability": 84,
+            "expected_overhead_minutes": 6,
+            "expected_repair_minutes": 16,
+            "uncertainty": 0.4
+          },
+          "premium": false,
+          "evidence_confidence": 0.8
+        }
+      },
+      "models": {
+        "low": "vllm/Qwen3.8-27B",
+        "medium": "vllm/Qwen3.8-27B",
+        "high": "vllm/Qwen3.8-27B"
+      },
+      "fit": {
+        "architecture": 78,
+        "debugging": 86,
+        "docs": 91,
+        "frontend": 83,
+        "implementation": 86,
+        "large-context": 92,
+        "multimodal": 0,
+        "repeatable": 96,
+        "research": 76,
+        "review": 84
+      },
+      "notes": [
+        "OpenClaw harness uses official local Qwen3.8-27B BF16 via pinned vllm provider on localhost11440; exact response model required.",
+        "2026-09-17: text/thinking/tools/streaming, native read-tool and gateway tests PASS. Actual499269-token input PASS at500W max77C; configured524288 boundary not separately load-tested.",
+        "Explicit owner activation. Each dispatch verifies exact backend model and declared context through bounded read-only models probe; outage fails visibly and never silently selects cloud.",
+        "Per-run fresh configuration restricts tools by mode, confines file tools to workspace, disables ambient skills/MCP/plugins and denies shell/network/subagents. This is tool-policy confinement, not an OS sandbox.",
+        "Legacy direct local Qwen profiles are retained for history and disabled for routing. Muse direct native subscription profile remains separately active; OpenClaw Muse tools profile remains disabled.",
+        "Provider inference token cost0; electricity/hardware outside accounting. Missing token usage remains unknown.",
+        "Implement-only fleet_sandbox MCP provides a pinned per-run Linux Docker sandbox; native host exec remains denied. No network/host mounts/destroy. Review/advisory retain the old empty MCP map."
+      ],
+      "fleet_sandbox_enabled": true
+    },
+    "openclaw-muse-subscription": {
+      "adapter": "openclaw",
+      "cli_provider_id": "openclaw",
+      "display_name": "OpenClaw / Meta Code Plan SUBSCRIPTION muse-spark-1.3 fallback",
+      "routing_enabled": false,
+      "routing_blocker": "subscription_unverified: local-vllm-not-proven",
+      "candidates": [
+        "%USERPROFILE%\\.agents\\runtime\\openclaw\\2026.9.4\\node_modules\\.bin\\openclaw.cmd",
+        "openclaw.cmd",
+        "openclaw.exe",
+        "openclaw"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "--version"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "enforce_model_inventory": true,
+        "deny_patterns": [
+          "subscription required",
+          "subscription missing",
+          "contributor",
+          "metered",
+          "model not found",
+          "fallback exhausted"
+        ],
+        "fatal_patterns": [
+          "status=unavailable",
+          "subscription_verified=false",
+          "model=muse-spark-1.3-contributor",
+          "transport=metered-meta-api"
+        ]
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 0.75,
+      "quota_pool_id": "openclaw-muse-subscription-meta",
+      "quota_collection": {
+        "session_command": "Meta Code Plan subscription dashboard",
+        "collector_mode": "subscription-dashboard-manual",
+        "per_run_tokens": "json-envelope",
+        "note": "OpenClaw envelope usage stays 'reported' or 'unknown'. Falls back to the provider dashboard for remaining subscription allowance. The metered Meta API plugin is categorically not authorised and the harness refuses to route through it."
+      },
+      "openclaw_subscription": {
+        "kind": "openclaw-muse-subscription",
+        "provider": "muse-code",
+        "served_model_name": "muse-spark-1.3",
+        "transport": "meta-subscription",
+        "subscription_verified": false
+      },
+      "execution_profile_map": {
+        "low": "openclaw-muse-subscription-balanced",
+        "medium": "openclaw-muse-subscription-balanced",
+        "high": "openclaw-muse-subscription-balanced"
+      },
+      "execution_profile_map_by_mode": {
+        "advisory": {
+          "low": "openclaw-muse-subscription-read",
+          "medium": "openclaw-muse-subscription-read",
+          "high": "openclaw-muse-subscription-read"
+        },
+        "review": {
+          "low": "openclaw-muse-subscription-read",
+          "medium": "openclaw-muse-subscription-read",
+          "high": "openclaw-muse-subscription-read"
+        },
+        "implement": {
+          "low": "openclaw-muse-subscription-balanced",
+          "medium": "openclaw-muse-subscription-balanced",
+          "high": "openclaw-muse-subscription-balanced"
+        }
+      },
+      "execution_profiles": {
+        "openclaw-muse-subscription-read": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "muse-code/muse-spark-1.3",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-code/muse-spark-1.3",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "tool-use"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 80,
+            "instruction-following": 82,
+            "multimodal": 0,
+            "speed": 86,
+            "tool-use": 84,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 86,
+            "first_pass": 76,
+            "verifiability": 78,
+            "expected_overhead_minutes": 6,
+            "expected_repair_minutes": 18,
+            "uncertainty": 0.5
+          },
+          "premium": false,
+          "evidence_confidence": 0.0
+        },
+        "openclaw-muse-subscription-balanced": {
+          "model_class": "opus",
+          "coding_rank": 6,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "muse-code/muse-spark-1.3",
+          "model_provider_id": "meta",
+          "runtime_model_id": "muse-code/muse-spark-1.3",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "shell",
+            "tool-use",
+            "web",
+            "write"
+          ],
+          "context_window_tokens": 1007997,
+          "capabilities": {
+            "independent-review": 82,
+            "instruction-following": 84,
+            "multimodal": 0,
+            "speed": 82,
+            "tool-use": 86,
+            "web": 78,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 82,
+            "first_pass": 80,
+            "verifiability": 80,
+            "expected_overhead_minutes": 7,
+            "expected_repair_minutes": 16,
+            "uncertainty": 0.45
+          },
+          "premium": false,
+          "evidence_confidence": 0.0
+        }
+      },
+      "models": {
+        "low": "muse-code/muse-spark-1.3",
+        "medium": "muse-code/muse-spark-1.3",
+        "high": "muse-code/muse-spark-1.3"
+      },
+      "fit": {
+        "architecture": 82,
+        "debugging": 85,
+        "docs": 84,
+        "frontend": 82,
+        "implementation": 87,
+        "large-context": 98,
+        "multimodal": 0,
+        "repeatable": 84,
+        "research": 80,
+        "review": 84
+      },
+      "notes": [
+        "Subscription-only fallback authorised by Owner (CONTEXT.md Ă‚Â§7) for ALL roles including background work. The harness reaches the Meta Code Plan SUBSCRIPTION transport through OpenClaw; the metered Meta API plugin is categorically not authorised.",
+        "The exact provider/model is muse-code/muse-spark-1.3; every Muse Contributor model is categorically prohibited; legacy muse-spark-1.2 is rejected before process launch; aliases, lineage tags, and snapshot suffixes are refused.",
+        "Fleet rejects unsafe profile data and model overrides before process launch, then verifies the provider-reported model identity from the OpenClaw envelope (ok,status,final,payloads,usage?,provider,model,sessionId,error?). Numeric usage is recorded as 'reported' or 'unknown'.",
+        "Routing stays disabled until parent proves the SUBSCRIPTION CLI backend is reachable (subscription_verified=true). Qwen outage is reported as an incident, never silent normal operation.",
+        "Fleet never silently inherits any ambient fallback; exact profiles and actual provider/model evidence remain mandatory. The harness drives a fresh per-run JSON config so ambient OpenClaw credentials and configuration cannot leak in.",
+        "The profile remains LIMITED with conservative priors until parent-accepted runs provide evidence. The fallback lane is restored to ACTIVE only by the parent after SUBSCRIPTION verification."
+      ]
+    },
+    "mimo": {
+      "adapter": "mimo",
+      "cli_provider_id": "xiaomi",
+      "display_name": "MiMo Code / Xiaomi Token Plan mimo-v2.6-pro",
+      "routing_enabled": true,
+      "candidates": [
+        "%LOCALAPPDATA%\\Programs\\MiMoCode\\0.1.15\\mimo.exe"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "--version"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "minimum_version": "0.1.15",
+        "tested_through_version": "0.1.15",
+        "deny_patterns": [
+          "not authenticated",
+          "not logged in",
+          "authentication required",
+          "login required",
+          "subscription required",
+          "subscription expired",
+          "plan expired",
+          "insufficient credits",
+          "credits exhausted"
+        ]
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 0.5,
+      "native_compaction_max_context": 180000,
+      "context_stop_tokens": 200000,
+      "quota_pool_id": "xiaomi-mimo-token-plan-standard",
+      "quota_collection": {
+        "plan_capacity_credits": 38000000000,
+        "pace_brake": {
+          "enabled": false,
+          "burst_factor": 1.5,
+          "window_hours": 24,
+          "max_reading_age_hours": 48
+        },
+        "session_command": "Xiaomi MiMo console / Token Plan",
+        "collector_mode": "provider-dashboard-manual",
+        "per_run_credits": "credits",
+        "note": "The Token Plan is denominated in Credits (38 billion Credits/month on the owner's Pro plan as of 2026-09-29), not tokens and not USD. The pool ID remains stable for historical quota records. Pace is telemetry only; a verified exhausted plan still suspends requests and PAYG is never an authorised fallback. No machine-readable usage source exists, so remaining allowance stays UNKNOWN until the parent records a console snapshot."
+      },
+      "mimo": {
+        "token_plan_only": true,
+        "native_agent": "build",
+        "provider_model": "xiaomi/mimo-v2.6-pro",
+        "endpoint": "https://token-plan-ams.xiaomimimo.com/v1",
+        "credential_store": {
+          "path": "~/.mimocode/data/auth.json",
+          "note": "Designated native MiMo auth home declared by the parent (not the XDG default). Fleet validates only the xiaomi Token Plan API record (type api, tp- key prefix, exact AMS base_url), injects a rebuilt copy through MIMOCODE_AUTH_CONTENT into an isolated per-run home, and never logs or copies the key."
+        }
+      },
+      "execution_profile_map": {
+        "low": "mimo-v2-6-pro-read",
+        "medium": "mimo-v2-6-pro-read",
+        "high": "mimo-v2-6-pro-read"
+      },
+      "execution_profile_map_by_mode": {
+        "advisory": {
+          "low": "mimo-v2-6-pro-read",
+          "medium": "mimo-v2-6-pro-read",
+          "high": "mimo-v2-6-pro-read"
+        },
+        "review": {
+          "low": "mimo-v2-6-pro-read",
+          "medium": "mimo-v2-6-pro-read",
+          "high": "mimo-v2-6-pro-read"
+        },
+        "implement": {
+          "low": "mimo-v2-6-pro-implement",
+          "medium": "mimo-v2-6-pro-implement",
+          "high": "mimo-v2-6-pro-implement"
+        }
+      },
+      "execution_profiles": {
+        "mimo-v2-6-pro-read": {
+          "model_class": "sonnet",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "mimo-v2.6-pro",
+          "model_provider_id": "xiaomi",
+          "runtime_model_id": "mimo-v2.6-pro",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review",
+            "tool-use"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 78,
+            "instruction-following": 80,
+            "multimodal": 0,
+            "speed": 70,
+            "tool-use": 80,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 70,
+            "first_pass": 72,
+            "verifiability": 74,
+            "expected_overhead_minutes": 8,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.6
+          },
+          "premium": false,
+          "evidence_confidence": 0.0
+        },
+        "mimo-v2-6-pro-implement": {
+          "model_class": "sonnet",
+          "coding_rank": null,
+          "model_class_source": "owner-decision-2026-09-26",
+          "model": "mimo-v2.6-pro",
+          "model_provider_id": "xiaomi",
+          "runtime_model_id": "mimo-v2.6-pro",
+          "reasoning_level": "medium",
+          "lifecycle": "LIMITED",
+          "max_risk": "high",
+          "supported_modes": [
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "independent-review",
+            "tool-use",
+            "write"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 78,
+            "instruction-following": 82,
+            "multimodal": 0,
+            "speed": 68,
+            "tool-use": 82,
+            "web": 0,
+            "write": 100
+          },
+          "efficiency_priors": {
+            "speed": 68,
+            "first_pass": 74,
+            "verifiability": 76,
+            "expected_overhead_minutes": 9,
+            "expected_repair_minutes": 18,
+            "uncertainty": 0.6
+          },
+          "premium": false,
+          "evidence_confidence": 0.0
+        }
+      },
+      "models": {
+        "low": "mimo-v2.6-pro",
+        "medium": "mimo-v2.6-pro",
+        "high": "mimo-v2.6-pro"
+      },
+      "fit": {
+        "architecture": 80,
+        "debugging": 84,
+        "docs": 82,
+        "frontend": 80,
+        "implementation": 85,
+        "large-context": 88,
+        "multimodal": 0,
+        "repeatable": 82,
+        "research": 70,
+        "review": 82
+      },
+      "notes": [
+        "MiMo Code 0.1.15 runs through the pinned native Windows executable with the exact native model mimo-v2.6-pro on the owner's Xiaomi Standard Token Plan. mimo-auto, every Flash model, every custom endpoint and every PAYG/metered variant are refused before process launch.",
+        "Region is the owner's verified AMS Token Plan (https://token-plan-ams.xiaomimimo.com/v1). Native provider is xiaomi, independently observed in live assistant metadata. Fleet validates the auth record base_url and explicitly binds provider.xiaomi.options.baseURL in per-run configuration.",
+        "Every child run strips ambient MIMOCODE_* overrides (endpoint, provider, model, inline auth, platform url, binary path, home), pins telemetry/sharing/analysis/autoupdate/plugins/LSP/web-UI/project-config off, sets OTEL_SDK_DISABLED=true, and applies a mode-scoped permission payload that always denies bash/shell, network fetch/search, MCP and the task/actor subagent tools.",
+        "The designated native login store is validated, not merely presence-checked: Fleet requires the xiaomi Token Plan API record (type api, tp- key prefix, exact AMS base_url) and refuses the run before any paid inference otherwise. The key is never logged or copied; Fleet injects only a rebuilt copy of that record via MIMOCODE_AUTH_CONTENT and points MIMOCODE_HOME at a fresh per-run home with cache/version preseeded to 21, so the shared login home is never reused and the user cache is never purged.",
+        "Quota stays UNKNOWN: no machine-readable usage source exists. Credits are not tokens and not USD, so cost_usd is always null and credits are reported separately when the runtime reports them. Empty, error and timed-out output is UNKNOWN, never zero.",
+        "The deep probe is --version only in a fresh preseeded native home. Credential validation proves schema and route binding, not current server entitlement; an actual successful request is required for that. Exact provider/model identity uses anchored native stderr observations, never stdout or model prose.",
+        "The profile remains LIMITED with heuristic priors and evidence_confidence 0.0. Parent synthetic native coding passed 4/4 tests; this is not a broad quality benchmark. Automatic Claude history import is disabled."
+      ]
+    },
+    "mistral": {
+      "adapter": "mistral",
+      "cli_provider_id": "mistral",
+      "display_name": "Mistral Vibe Pro / Large 4 - Kierownik (cybersecurity)",
+      "routing_enabled": true,
+      "office_access": "relay",
+      "candidates": [
+        "~/.agents/runtime/mistral-vibe/2.26.1/Scripts/vibe.exe"
+      ],
+      "version_args": [
+        "--version"
+      ],
+      "deep_probe_args": [
+        "--version"
+      ],
+      "readiness": {
+        "require_deep_probe": true,
+        "minimum_version": "2.26.1",
+        "tested_through_version": "2.26.1",
+        "deny_patterns": [
+          "not authenticated",
+          "unauthorized",
+          "quota exhausted",
+          "credits exhausted"
+        ]
+      },
+      "supported_modes": [
+        "advisory",
+        "review",
+        "implement"
+      ],
+      "target_share": 0.5,
+      "quota_pool_id": "mistral-vibe-code-pro",
+      "quota_collection": {
+        "collector_mode": "provider-dashboard-manual",
+        "unknown_quota_mode": "fail-open",
+        "session_command": "Mistral Vibe Code Pro dashboard",
+        "note": "UNKNOWN until live evidence. Vibe Code allowance is separate from Studio/API allowance. No zero quota inference, PAYG fallback or token-to-EUR conversion."
+      },
+      "mistral": {
+        "pro_only": true,
+        "payg_fallback": false,
+        "native_version": "2.26.1",
+        "model": "mistral-large-4",
+        "endpoint": "https://api.mistral.ai/v1",
+        "credential_backend": "native-windows-keyring",
+        "tools": "fleet-scoped-native",
+        "identity_evidence": "official-mistralai-sdk-response"
+      },
+      "execution_profile_map": {
+        "low": "mistral-large-4-read",
+        "medium": "mistral-large-4-read",
+        "high": "mistral-large-4-read"
+      },
+      "execution_profile_map_by_mode": {
+        "advisory": {
+          "low": "mistral-large-4-read",
+          "medium": "mistral-large-4-read",
+          "high": "mistral-large-4-read"
+        },
+        "review": {
+          "low": "mistral-large-4-read",
+          "medium": "mistral-large-4-read",
+          "high": "mistral-large-4-read"
+        },
+        "implement": {
+          "low": "mistral-large-4-maker",
+          "medium": "mistral-large-4-maker",
+          "high": "mistral-large-4-maker"
+        }
+      },
+      "execution_profiles": {
+        "mistral-large-4-read": {
+          "model_class": "sonnet",
+          "coding_rank": null,
+          "model_class_source": "native-K-qualification-20261011",
+          "model_tier": "K",
+          "model": "mistral-large-4",
+          "model_provider_id": "mistral",
+          "runtime_model_id": "mistral-large-4",
+          "reasoning_level": "off",
+          "lifecycle": "ACTIVE",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "independent-review",
+            "filesystem-read"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 65,
+            "instruction-following": 70,
+            "multimodal": 0,
+            "speed": 0,
+            "tool-use": 70,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 50,
+            "first_pass": 50,
+            "verifiability": 50,
+            "expected_overhead_minutes": 10,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.4
+          },
+          "premium": false,
+          "evidence_confidence": 0.7
+        },
+        "mistral-large-4-maker": {
+          "model_class": "sonnet",
+          "coding_rank": null,
+          "model_class_source": "native-K-qualification-20261011",
+          "model_tier": "K",
+          "model": "mistral-large-4",
+          "model_provider_id": "mistral",
+          "runtime_model_id": "mistral-large-4",
+          "reasoning_level": "off",
+          "lifecycle": "ACTIVE",
+          "max_risk": "medium",
+          "supported_modes": [
+            "implement"
+          ],
+          "tools": [
+            "filesystem-read",
+            "filesystem-write",
+            "write",
+            "sandboxed-check"
+          ],
+          "context_window_tokens": null,
+          "capabilities": {
+            "independent-review": 0,
+            "instruction-following": 70,
+            "multimodal": 0,
+            "speed": 0,
+            "tool-use": 70,
+            "web": 0,
+            "write": 70
+          },
+          "efficiency_priors": {
+            "speed": 50,
+            "first_pass": 50,
+            "verifiability": 50,
+            "expected_overhead_minutes": 10,
+            "expected_repair_minutes": 20,
+            "uncertainty": 0.4
+          },
+          "premium": false,
+          "evidence_confidence": 0.7
+        }
+      },
+      "models": {
+        "low": "mistral-large-4",
+        "medium": "mistral-large-4",
+        "high": "mistral-large-4"
+      },
+      "fit": {
+        "architecture": 0,
+        "debugging": 70,
+        "docs": 60,
+        "frontend": 0,
+        "implementation": 70,
+        "large-context": 0,
+        "multimodal": 0,
+        "repeatable": 70,
+        "research": 0,
+        "review": 65
+      },
+      "notes": [
+        "Qualified K candidate from synthetic native implementation and independent acceptance. Prior cybersecurity PARTIAL retained; confidence is internal evidence, not an external benchmark.",
+        "Pinned native Vibe 2.26.1 with fresh managed VIBE_HOME. Exact packaged custom tools only; workspace, inputs, writable scope and checks bound from trusted dispatch outside model workspace. Prompt-only advisory remains compatible.",
+        "Exact mistral-large-4/api.mistral.ai official SDK response witness remains mandatory on every inference route. No Medium, PAYG, API/Studio, environment or plaintext credential fallback. Native WinVault presence is not entitlement or quota.",
+        "Review/advisory may read admitted UTF8 files only. Implement may create/update admitted UTF8 text and execute declared Python checks in pinned offline Docker over a bounded read-only admitted snapshot. No host shell, arbitrary command, delete, rename, network, MCP or connectors.",
+        "Scope is an application boundary, not an OS sandbox for host file tools. Tool metadata telemetry is bounded and excludes file content. Docker runtime and image must already exist; no image pull or host execution fallback.",
+        "Vibe training optout UNVERIFIED; redact secrets/customer data and minimize context. API training OFF, local telemetry OFF. Pro only, PAYG OFF. Quota UNKNOWN until provider dashboard evidence; no invented token/EUR conversion.",
+        "Native qualification on current adapter 6f25d03c5bcce2d9e499044ce61a110af81891ac1b8f2969cdd115ce3bd35e85 supersedes the earlier Fleet UAT for the current source. Release integrator binds security to the actual independent review, native_uat to native qualification and tier_routing to its actual PASS test. Installed synchronized maker/reviewer canary follows activation."
+      ],
+      "qualification": {
+        "status": "qualified",
+        "prior_cybersecurity": "PARTIAL",
+        "training_optout": "UNVERIFIED; minimize/redact project context",
+        "native_uat": {
+          "status": "PASS",
+          "ref": "global/releases/agent-fleet-suite/0.9.62/qualification/qualification-result.json",
+          "sha256": "3c0b2b46ef4e56f7147d57f75fe02ecd0640aedc366dd2e49e325f511dc39658"
+        },
+        "security": {
+          "status": "PASS",
+          "ref": "global/releases/agent-fleet-suite/0.9.62/qualification/routing-repair-independent-review.json",
+          "sha256": "ce6ea1a3c166dba056c11684fbd3bf395c649d15c61f5cd00e0993bfcff9cfd5"
+        },
+        "fleet_uat": {
+          "status": "PASS",
+          "ref": "global/releases/agent-fleet-suite/0.9.62/qualification/qualified-fleet-pair.json",
+          "sha256": "c039c32db04f3cef775c53e587847ec4c904a3dc6f1d6736af06bf0530c63d76"
+        },
+        "tier_routing": {
+          "status": "PASS",
+          "ref": "global/releases/agent-fleet-suite/0.9.62/qualification/routing-repair-live-preflight.json",
+          "sha256": "172dc10576665876e21b761085e9c551307529657ea03076093a822d8040a642"
+        }
+      },
+      "specializations": [
+        "cybersecurity"
+      ]
+    },
+    "zcode": {
+      "office_access": "relay",
+      "adapter": "zcode",
+      "cli_provider_id": "zai",
+      "display_name": "ZCode native / GLM5.3 Coding Plan",
+      "routing_enabled": true,
+      "candidates": [
+        "C:/Program Files/nodejs/node.exe"
+      ],
+      "version_args": [
+        "C:/Program Files/ZCode/resources/glm/zcode.cjs",
+        "--version"
+      ],
+      "deep_probe_args": [
+        "C:/Program Files/ZCode/resources/glm/zcode.cjs",
+        "--version"
+      ],
+      "supported_modes": [
+        "advisory",
+        "review"
+      ],
+      "target_share": 0.9,
+      "quota_pool_id": "zai-coding-plan-weekly",
+      "quota_collection": {
+        "session_command": "Z.AI console / Usage",
+        "collector_mode": "provider-dashboard-manual",
+        "weekly_plan_points": 10000,
+        "per_run_tokens": "native-provider-export",
+        "note": "Record remaining weekly points with quota-record when the provider console is checked; do not convert model tokens into plan points."
+      },
+      "models": {
+        "low": "GLM-5.3",
+        "medium": "GLM-5.3",
+        "high": "GLM-5.3"
+      },
+      "fit": {
+        "architecture": 92,
+        "debugging": 95,
+        "docs": 84,
+        "frontend": 83,
+        "implementation": 68,
+        "large-context": 96,
+        "multimodal": 60,
+        "repeatable": 91,
+        "research": 86,
+        "review": 98
+      },
+      "notes": [
+        "Exact GLM-5.3 through pinned official native ZCode CLI0.16.9 and account:zai-individual-coding-plan; Flash/aliases not qualified.",
+        "Scoped advisory/review only; native builtin tools disabled. Two exact read MCP tools, positive file admission and mandatory cumulative limits; no shell/write/web/plugins/hooks/skills/memory/subagents.",
+        "Existing encrypted native account store is untouched; native CLI alone reads/decrypts it. Fresh HOME preserves original native KDF context in child memory, stripped broker env. No DPAPI substitution or generic API fallback.",
+        "Identity is the served model in native HTTP response, not configured model or assistant echo. Actual token usage remains subscription telemetry with no USD API estimate.",
+        "Existing Z.AI quota pool/history retained; remaining numerical allowance UNKNOWN without a verified provider balance. No Desktop/protected session wake."
+      ],
+      "zcode": {
+        "native_version": "0.16.9",
+        "cli_sha256": "fad4c35c4c36ec210d8a06d3fa0e77de23c8545e2eb6ff90aea1eb38d1e6275f",
+        "coding_plan_only": true,
+        "api_fallback": false,
+        "tools": "fleet-scoped-read-mcp",
+        "identity_evidence": "native-http-response"
+      },
+      "qualification": {
+        "status": "qualified",
+        "scope": "native scoped advisory/review, no implement qualification",
+        "native_uat": {
+          "status": "PASS",
+          "ref": "global/releases/agent-fleet-suite/0.9.65/qualification/zcode-native-stability65/long-graph-native-uat.json",
+          "sha256": "6d6870063330492480bbe47f63d282fba969d64871f357ba360d3feb3ae4ba17"
+        },
+        "security": {
+          "status": "PASS",
+          "ref": "global/releases/agent-fleet-suite/0.9.65/qualification/zcode-native-stability65/code-review.json",
+          "sha256": "437e78d73aeabbeba8421222ec2dbdefdf7f2ee33f26858981f4a4753c539b4c"
+        },
+        "fleet_uat": {
+          "status": "PASS",
+          "ref": "global/releases/agent-fleet-suite/0.9.65/qualification/zcode-native-stability65/long-graph-native-uat.json",
+          "sha256": "6d6870063330492480bbe47f63d282fba969d64871f357ba360d3feb3ae4ba17"
+        },
+        "tier_routing": {
+          "status": "PASS",
+          "ref": "global/releases/agent-fleet-suite/0.9.63/qualification/zcode-native-integration/tier-routing-proof.json",
+          "sha256": "e6ae694270ef93bde04d334f36ecfb967eaca963f8f222487ce9b15a25f634b8"
+        }
+      },
+      "execution_profile_map": {
+        "low": "zcode-glm-5-3-read",
+        "medium": "zcode-glm-5-3-read",
+        "high": "zcode-glm-5-3-read"
+      },
+      "execution_profiles": {
+        "zcode-glm-5-3-read": {
+          "model": "GLM-5.3",
+          "model_provider_id": "zai",
+          "runtime_model_id": "GLM-5.3",
+          "reasoning_level": "default",
+          "lifecycle": "LIMITED",
+          "max_risk": "medium",
+          "supported_modes": [
+            "advisory",
+            "review"
+          ],
+          "tools": [
+            "filesystem-read",
+            "independent-review"
+          ],
+          "context_window_tokens": 1000000,
+          "capabilities": {
+            "independent-review": 94,
+            "instruction-following": 92,
+            "multimodal": 60,
+            "security-review": 95,
+            "speed": 88,
+            "tool-use": 90,
+            "web": 0,
+            "write": 0
+          },
+          "efficiency_priors": {
+            "speed": 88,
+            "first_pass": 86,
+            "verifiability": 91,
+            "expected_overhead_minutes": 6,
+            "expected_repair_minutes": 12,
+            "uncertainty": 0.28
+          },
+          "premium": false,
+          "evidence_confidence": 0.9,
+          "model_tier": "K",
+          "model_class": "kierownik"
+        }
+      }
+    }
+  }
+}

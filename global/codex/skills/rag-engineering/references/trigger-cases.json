@@ -1,0 +1,19 @@
+{
+  "skill": "rag-engineering",
+  "positive": [
+    "Design a provider-neutral RAG pipeline for this versioned document corpus.",
+    "Evaluate retrieval recall, grounding and latency against this gold set.",
+    "Diagnose citation drift and define a safe reindex and rollback plan."
+  ],
+  "negative_anti_trigger": [
+    "Upload these confidential documents to a provider and build the index.",
+    "Deploy this RAG service to production automatically.",
+    "Add a vector database without a corpus authority, access model or eval set."
+  ],
+  "sensitive_actions": [
+    "uploading documents, embeddings or prompts to an external provider",
+    "reading restricted, personal or confidential corpus content",
+    "changing access controls, indexes or production retrieval behavior",
+    "deploying, scheduling reindex jobs or deleting corpus versions"
+  ]
+}

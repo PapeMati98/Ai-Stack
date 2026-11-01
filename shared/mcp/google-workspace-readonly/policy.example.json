@@ -1,0 +1,5 @@
+{
+  "account": "example-value-0123",
+  "config_root": "{{OWNED_ROOT}}/example-0124",
+  "gcloud_python_entrypoint": "{{OWNED_ROOT}}/example-0125"
+}

@@ -1,0 +1,804 @@
+{
+  "schema": "office.crosswalk-fixture/v0",
+  "claude_desktop": [
+    {
+      "local_id": "00000000-0000-4000-8000-000000000001",
+      "title": "Synthetic desktop task 01"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000002",
+      "title": "Synthetic desktop task 02"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000003",
+      "title": "Synthetic desktop task 03"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000004",
+      "title": "Synthetic desktop task 04"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000005",
+      "title": "Synthetic desktop task 05"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000006",
+      "title": "Synthetic desktop task 06"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000007",
+      "title": "Synthetic desktop task 07"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000008",
+      "title": "Synthetic desktop task 08"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000009",
+      "title": "Synthetic desktop task 09"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-00000000000a",
+      "title": "Synthetic desktop task 10"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-00000000000b",
+      "title": "Synthetic desktop task 11"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-00000000000c",
+      "title": "Synthetic desktop task 12"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-00000000000d",
+      "title": "Synthetic desktop task 13"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-00000000000e",
+      "title": "Synthetic desktop task 14"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-00000000000f",
+      "title": "Synthetic desktop task 15"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000010",
+      "title": "Synthetic desktop task 16"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000011",
+      "title": "Synthetic desktop task 17"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000012",
+      "title": "Synthetic desktop task 18"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000013",
+      "title": "Synthetic desktop task 19"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000014",
+      "title": "Synthetic desktop task 20"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000015",
+      "title": "Synthetic desktop task 21"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000016",
+      "title": "Synthetic desktop task 22"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000017",
+      "title": "Synthetic desktop task 23"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000018",
+      "title": "Synthetic desktop task 24"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000019",
+      "title": "Synthetic desktop task 25"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-00000000001a",
+      "title": "Synthetic desktop task 26"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-00000000001b",
+      "title": "Synthetic desktop task 27"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-00000000001c",
+      "title": "Synthetic desktop task 28"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-00000000001d",
+      "title": "Synthetic desktop task 29"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-00000000001e",
+      "title": "Synthetic desktop task 30"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-00000000001f",
+      "title": "Synthetic desktop task 31"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000020",
+      "title": "Synthetic desktop task 32"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000021",
+      "title": "Synthetic desktop task 33"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000022",
+      "title": "Synthetic desktop task 34"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000023",
+      "title": "Synthetic desktop task 35"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000024",
+      "title": "Synthetic desktop task 36"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000025",
+      "title": "Synthetic desktop task 37"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000026",
+      "title": "Synthetic desktop task 38"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000027",
+      "title": "Synthetic desktop task 39"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000028",
+      "title": "Synthetic desktop task 40"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-000000000029",
+      "title": "Synthetic desktop task 41"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-00000000002a",
+      "title": "Synthetic desktop task 42"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-00000000002b",
+      "title": "Synthetic desktop task 43"
+    },
+    {
+      "local_id": "00000000-0000-4000-8000-00000000002c",
+      "title": "Synthetic desktop task 44"
+    }
+  ],
+  "misaddressed_messages": [
+    {
+      "to_inbox": "unregistered-synthetic-recipient-001"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-002"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-003"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-004"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-005"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-006"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-007"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-008"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-009"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-010"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-011"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-012"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-013"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-014"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-015"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-016"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-017"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-018"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-019"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-020"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-021"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-022"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-023"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-024"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-025"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-026"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-027"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-028"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-029"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-030"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-031"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-032"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-033"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-034"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-035"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-036"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-037"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-038"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-039"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-040"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-041"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-042"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-043"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-044"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-045"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-046"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-047"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-048"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-049"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-050"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-051"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-052"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-053"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-054"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-055"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-056"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-057"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-058"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-059"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-060"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-061"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-062"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-063"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-064"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-065"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-066"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-067"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-068"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-069"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-070"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-071"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-072"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-073"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-074"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-075"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-076"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-077"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-078"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-079"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-080"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-081"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-082"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-083"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-084"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-085"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-086"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-087"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-088"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-089"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-090"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-091"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-092"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-093"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-094"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-095"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-096"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-097"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-098"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-099"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-100"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-101"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-102"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-103"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-104"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-105"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-106"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-107"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-108"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-109"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-110"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-111"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-112"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-113"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-114"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-115"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-116"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-117"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-118"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-119"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-120"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-121"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-122"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-123"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-124"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-125"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-126"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-127"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-128"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-129"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-130"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-131"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-132"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-133"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-134"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-135"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-136"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-137"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-138"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-139"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-140"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-141"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-142"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-143"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-144"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-145"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-146"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-147"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-148"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-149"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-150"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-151"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-152"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-153"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-154"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-155"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-156"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-157"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-158"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-159"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-160"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-161"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-162"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-163"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-164"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-165"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-166"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-167"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-168"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-169"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-170"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-171"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-172"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-173"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-174"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-175"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-176"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-177"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-178"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-179"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-180"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-181"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-182"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-183"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-184"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-185"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-186"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-187"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-188"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-189"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-190"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-191"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-192"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-193"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-194"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-195"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-196"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-197"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-198"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-199"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-200"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-201"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-202"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-203"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-204"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-205"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-206"
+    },
+    {
+      "to_inbox": "unregistered-synthetic-recipient-207"
+    }
+  ]
+}

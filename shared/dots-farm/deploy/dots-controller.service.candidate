@@ -1,0 +1,27 @@
+# STAGED SYNTHETIC CANDIDATE. Not installed/enabled or VM-qualified.
+[Unit]
+Description=DOTS synthetic controller tick
+
+[Service]
+Type=oneshot
+User=dots-controller
+Group=dots-controller
+WorkingDirectory=/opt/dots-farm
+ExecStart=/usr/bin/python3 -B /opt/dots-farm/dots.py --state /var/lib/dots-controller --target-state /var/lib/dots-synthetic-targets tick
+TimeoutStartSec=40
+UMask=0077
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_UNIX
+IPAddressDeny=any
+ReadWritePaths=/var/lib/dots-controller /var/lib/dots-synthetic-targets
+MemoryMax=128M
+TasksMax=16
+Environment=PYTHONDONTWRITEBYTECODE=1

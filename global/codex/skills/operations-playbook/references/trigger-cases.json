@@ -1,0 +1,19 @@
+{
+  "skill": "operations-playbook",
+  "positive": [
+    "Write a recovery runbook for this service with rollback and verification.",
+    "Turn this recurring process into an SOP and RACI.",
+    "Review this process map for missing controls, ownership and stop rules."
+  ],
+  "negative_anti_trigger": [
+    "Run the production recovery steps now without an approved change window.",
+    "Store credentials in the runbook or paste a secret into the procedure.",
+    "Create a generic checklist without a trigger, owner, evidence or acceptance gate."
+  ],
+  "sensitive_actions": [
+    "executing production, destructive or irreversible operations",
+    "handling credentials, secrets or restricted operational logs",
+    "sending external communication or escalating an incident",
+    "changing infrastructure, access, schedules or data retention"
+  ]
+}

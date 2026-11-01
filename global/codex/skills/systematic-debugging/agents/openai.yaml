@@ -1,0 +1,3 @@
+interface:
+  display_name: "Systematic Debugging"
+  short_description: "Reproduce failures, isolate root causes, and prove fixes"

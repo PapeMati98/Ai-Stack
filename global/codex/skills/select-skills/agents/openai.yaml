@@ -1,0 +1,4 @@
+interface:
+  display_name: "Select skills"
+  short_description: "Minimalny dobór lokalnych skilli do zadania"
+  default_prompt: "Użyj $select-skills do wyboru minimalnego zestawu skilli dla bieżącego zadania."

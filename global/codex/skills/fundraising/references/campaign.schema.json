@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-stack.invalid/schemas/fundraising/campaign/1",
+  "title": "Fundraising campaign manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "campaign_id", "company", "mode", "artifact_types", "owner_decisions", "provider_policy", "ledgers", "content_lineage", "design_lineage", "repair_budget", "distribution_status"],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "campaign_id": {"type": "string", "pattern": "^campaign-[a-z0-9][a-z0-9-]{2,95}$"},
+    "company": {
+      "type": "object",
+      "required": ["name", "project_slug", "continuity_status", "data_classification"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "project_slug": {"type": "string", "minLength": 1},
+        "continuity_status": {"enum": ["MISSING", "PENDING", "VERIFIED"]},
+        "data_classification": {"enum": ["D0", "D1", "D2", "D3"]}
+      }
+    },
+    "mode": {"enum": ["create", "review-repair"]},
+    "artifact_types": {"type": "array", "uniqueItems": true, "minItems": 1, "items": {"enum": ["deck", "memorandum", "one-pager"]}},
+    "owner_decisions": {"type": "object"},
+    "provider_policy": {"type": "object"},
+    "ledgers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sources", "claims", "numbers"],
+      "properties": {
+        "sources": {"const": "sources.json"},
+        "claims": {"const": "claims.json"},
+        "numbers": {"const": "numbers.json"}
+      }
+    },
+    "content_lineage": {"type": "object"},
+    "design_lineage": {"type": "object"},
+    "repair_budget": {"type": "object"},
+    "distribution_status": {"const": "not_authorized"}
+  }
+}

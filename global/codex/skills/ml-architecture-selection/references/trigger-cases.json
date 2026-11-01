@@ -1,0 +1,23 @@
+{
+  "positive": [
+    "Wybor modelu przed kosztownym treningiem.",
+    "Porownanie reguly, klasycznego ML i fine-tune dla jednego celu.",
+    "Projekt wymaga jawnych hipotez i eksperymentu falsyfikujacego."
+  ],
+  "negative": [
+    "Uruchomienie juz zatwierdzonej kampanii treningowej.",
+    "Read-only wyszukanie kandydatow bez decyzji architektonicznej.",
+    "Deploy lub promocja modelu."
+  ],
+  "anti_triggers": [
+    "Nie wybieraj rodziny modelu na podstawie mody lub samej skali.",
+    "Nie pomijaj baseline z powodu planowanego deep learningu.",
+    "Nie uzywaj final holdout do strojenia."
+  ],
+  "sensitive_actions": [
+    "training start",
+    "data access with PII",
+    "model download",
+    "promotion or deployment"
+  ]
+}

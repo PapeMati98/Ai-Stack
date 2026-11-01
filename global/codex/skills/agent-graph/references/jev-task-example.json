@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "brief": "Implement a bounded Python parser with offline regression tests. Existing contract is clear. No UI, production changes or external side effects.",
+  "mode": "implement",
+  "required_tools": ["filesystem-read", "filesystem-write"],
+  "scope": ["src/parser.py", "tests/test_parser.py"],
+  "resources": ["parser-contract"],
+  "depends_on": [],
+  "estimated_context_tokens": 5000,
+  "domain": "implementation",
+  "high_risk": false
+}

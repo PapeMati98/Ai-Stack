@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Remote Computer Use Offline Probe</title>
+  </head>
+  <body>
+    <p id="webrtc">pending</p>
+    <script>
+      try {
+        new RTCPeerConnection();
+        document.querySelector('#webrtc').textContent = 'unexpectedly available';
+      } catch {
+        document.querySelector('#webrtc').textContent = 'blocked';
+      }
+      fetch('http://127.0.0.1:38473/probe', { method: 'POST', body: 'blocked' }).catch(() => {});
+      try {
+        new WebSocket('ws://127.0.0.1:38473/probe');
+      } catch {
+        // A synchronous policy rejection is expected.
+      }
+    </script>
+  </body>
+</html>

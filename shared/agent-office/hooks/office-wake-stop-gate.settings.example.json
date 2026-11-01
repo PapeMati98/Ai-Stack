@@ -1,0 +1,17 @@
+{
+  "_comment": "INACTIVE EXAMPLE. Merge into the Claude Code settings hooks only through the owner-approved installer path. Replace <python> with the pinned absolute Python and <runtime> with the absolute Agent Office runtime; --office must be the installed office.cmd so the local or remote route is the same one Office uses.",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "<python>",
+            "args": ["-I", "<runtime>/hooks/office_wake_stop_gate.py", "--office", "<runtime>/office.cmd"],
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}

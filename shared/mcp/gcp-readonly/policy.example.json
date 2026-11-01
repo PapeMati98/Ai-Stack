@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "example": {
+      "account": "reader@example.invalid",
+      "project_id": "example-readonly-pilot",
+      "gcloud_configuration": "gcp-readonly-example",
+      "cloudsdk_config": "C:\\Example\\GCloudConfig",
+      "python_executable": "C:\\Example\\Python\\python.exe",
+      "gcloud_python_entrypoint": "C:\\Example\\GoogleCloudSDK\\gcloud.py"
+    }
+  }
+}

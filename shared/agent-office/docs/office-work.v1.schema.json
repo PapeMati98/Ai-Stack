@@ -1,0 +1,466 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agent-office.local/schemas/office-work.v1.schema.json",
+  "title": "Agent Office durable work journal record",
+  "description": "Provider-neutral, metadata-only work record. Raw transcripts, hidden reasoning, secrets, cookies and customer records are intentionally outside this schema and must be rejected before persistence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "origin",
+    "lineage",
+    "actor",
+    "provider",
+    "artifact",
+    "checkpoint",
+    "usage",
+    "blocker",
+    "evidence"
+  ],
+  "properties": {
+    "schema": {
+      "const": "office-work.v1"
+    },
+    "origin": {
+      "$ref": "#/$defs/origin"
+    },
+    "lineage": {
+      "$ref": "#/$defs/lineage"
+    },
+    "actor": {
+      "$ref": "#/$defs/actor"
+    },
+    "provider": {
+      "$ref": "#/$defs/provider"
+    },
+    "artifact": {
+      "$ref": "#/$defs/artifact"
+    },
+    "checkpoint": {
+      "$ref": "#/$defs/checkpoint"
+    },
+    "usage": {
+      "$ref": "#/$defs/usage"
+    },
+    "blocker": {
+      "$ref": "#/$defs/blocker"
+    },
+    "evidence": {
+      "type": "array",
+      "maxItems": 128,
+      "items": {
+        "$ref": "#/$defs/evidenceReference"
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/\\-]{0,199}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nullReason": {
+      "type": "string",
+      "enum": [
+        "not_null",
+        "not_applicable",
+        "not_provided",
+        "not_observed",
+        "unknown",
+        "redacted",
+        "computed_on_commit",
+        "genesis"
+      ]
+    },
+    "nullableIdentifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "null_reason"],
+      "properties": {
+        "value": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:@/\\-]{0,199}$"
+        },
+        "null_reason": {
+          "$ref": "#/$defs/nullReason"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "value": {
+                "type": "null"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "null_reason": {
+                "not": {
+                  "const": "not_null"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "value": {
+                "type": "string"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "null_reason": {
+                "const": "not_null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "nullableHash": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "null_reason"],
+      "properties": {
+        "value": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "null_reason": {
+          "$ref": "#/$defs/nullReason"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "value": {
+                "type": "null"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "null_reason": {
+                "not": {
+                  "const": "not_null"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "value": {
+                "type": "string"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "null_reason": {
+                "const": "not_null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "nullableInteger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "null_reason"],
+      "properties": {
+        "value": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "null_reason": {
+          "$ref": "#/$defs/nullReason"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "value": {
+                "type": "null"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "null_reason": {
+                "not": {
+                  "const": "not_null"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "value": {
+                "type": "integer"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "null_reason": {
+                "const": "not_null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "nullableText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "null_reason"],
+      "properties": {
+        "value": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[^\\u0000-\\u001f]+$"
+        },
+        "null_reason": {
+          "$ref": "#/$defs/nullReason"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "value": {
+                "type": "null"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "null_reason": {
+                "not": {
+                  "const": "not_null"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "value": {
+                "type": "string"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "null_reason": {
+                "const": "not_null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "epoch", "sequence"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "epoch": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["project_id", "task_id", "thread_id", "run_id"],
+      "properties": {
+        "project_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "task_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "thread_id": {
+          "$ref": "#/$defs/nullableIdentifier"
+        },
+        "run_id": {
+          "$ref": "#/$defs/nullableIdentifier"
+        }
+      }
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "strength"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "strength": {
+          "enum": ["strong", "weak", "unknown"]
+        }
+      }
+    },
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "session"],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/identifier"
+        },
+        "session": {
+          "$ref": "#/$defs/nullableIdentifier"
+        }
+      }
+    },
+    "artifactItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "sha256"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "kind": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sha256": {
+          "$ref": "#/$defs/nullableHash"
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["patch_hash", "git", "items"],
+      "properties": {
+        "patch_hash": {
+          "$ref": "#/$defs/nullableHash"
+        },
+        "git": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["commit", "state"],
+          "properties": {
+            "commit": {
+              "$ref": "#/$defs/nullableText"
+            },
+            "state": {
+              "$ref": "#/$defs/nullableText"
+            }
+          }
+        },
+        "items": {
+          "type": "array",
+          "maxItems": 128,
+          "items": {
+            "$ref": "#/$defs/artifactItem"
+          }
+        }
+      }
+    },
+    "checkpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "sequence", "predecessor_hash", "hash", "effect_state"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/nullableIdentifier"
+        },
+        "sequence": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "predecessor_hash": {
+          "$ref": "#/$defs/nullableHash"
+        },
+        "hash": {
+          "$ref": "#/$defs/nullableHash"
+        },
+        "effect_state": {
+          "enum": ["NONE", "CONFIRMED", "UNKNOWN"]
+        }
+      }
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["input_tokens", "output_tokens", "duration_ms", "cost_micros"],
+      "properties": {
+        "input_tokens": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "output_tokens": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "duration_ms": {
+          "$ref": "#/$defs/nullableInteger"
+        },
+        "cost_micros": {
+          "$ref": "#/$defs/nullableInteger"
+        }
+      }
+    },
+    "blocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "code", "evidence_ref"],
+      "properties": {
+        "state": {
+          "enum": ["none", "blocked", "unknown"]
+        },
+        "code": {
+          "$ref": "#/$defs/nullableIdentifier"
+        },
+        "evidence_ref": {
+          "$ref": "#/$defs/nullableIdentifier"
+        }
+      }
+    },
+    "evidenceReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "sha256"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "kind": {
+          "$ref": "#/$defs/identifier"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "positive": [
+    "Nowa kampania treningowa lub fine-tuning wymaga budzetu GPU.",
+    "Run ma byc wznowiony z checkpointu.",
+    "Model ma przejsc niezalezna ocene OOS przed promocja."
+  ],
+  "negative": [
+    "Wybieranie rodziny modelu przed kampania.",
+    "Read-only inventory modeli lub datasetow.",
+    "Jednorazowy test kodu bez treningu."
+  ],
+  "anti_triggers": [
+    "Nie uznawaj niskiego train loss za sukces biznesowy.",
+    "Nie stroij na final holdout.",
+    "Nie uznawaj pliku checkpoint za resume proof.",
+    "Nie promuj wyniku bez niezaleznego reviewera."
+  ],
+  "sensitive_actions": [
+    "GPU job start",
+    "data with PII or restricted terms",
+    "external download/upload",
+    "model promotion or deployment"
+  ]
+}

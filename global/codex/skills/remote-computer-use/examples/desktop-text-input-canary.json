@@ -1,0 +1,17 @@
+{
+  "schema_version": 2,
+  "task_id": "desktop-text-input-canary",
+  "mode": "desktop",
+  "headless": false,
+  "side_effects": "test-only",
+  "capability": "uat",
+  "timeout_seconds": 60,
+  "target": {"kind": "app", "app_id": "text-input-fixture"},
+  "actions": [
+    {"type": "launch", "app_id": "text-input-fixture"},
+    {"type": "text", "value": "Remote Computer Use 0.3.0 canary"},
+    {"type": "wait", "milliseconds": 1500},
+    {"type": "screenshot", "name": "text-input-canary"},
+    {"type": "close_target"}
+  ]
+}

@@ -1,0 +1,16 @@
+.local/
+governance/curator.lock
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+*.env
+.env*
+*.key
+*.pem
+*.p12
+*.pfx
+*.kdbx
+*.securestring
+credentials/
+secrets/
+Thumbs.db
+Desktop.ini

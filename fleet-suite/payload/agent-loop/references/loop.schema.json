@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-loop/loop.schema.json",
+  "title": "agent-loop loop.json (immutable-ish loop contract, V0.1)",
+  "description": "Konfiguracja pojedynczej petli. Parsowana strukturalnie i walidowana PRZED uzyciem. JSON (nie YAML) - kontrakt V0.1 wymaga structural parse+validate.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "loop_id", "goal", "non_goals", "watched_scope",
+    "cadence", "timezone", "maturity", "delegation", "limits",
+    "stop_conditions", "human_gates", "kill_switch", "retention", "write_policy"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "loop_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,63}$" },
+    "goal": { "type": "string", "minLength": 1, "maxLength": 1000 },
+    "non_goals": { "type": "array", "items": { "type": "string" } },
+    "watched_scope": {
+      "type": "array", "minItems": 1,
+      "items": { "type": "string" },
+      "description": "Globy OBSERWOWANE (relatywne do project root). Na L1 sa READ-ONLY - zapis tam = REJECT."
+    },
+    "cadence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": { "enum": ["cron", "interval", "manual"] },
+        "cron": { "type": "string" },
+        "interval_seconds": { "type": "integer", "minimum": 60 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "kind": { "const": "manual" } } },
+          "then": {
+            "not": {
+              "anyOf": [
+                { "required": ["cron"] },
+                { "required": ["interval_seconds"] }
+              ]
+            }
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "interval" } } },
+          "then": {
+            "required": ["interval_seconds"],
+            "not": { "required": ["cron"] }
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "cron" } } },
+          "then": {
+            "required": ["cron"],
+            "not": { "required": ["interval_seconds"] }
+          }
+        }
+      ]
+    },
+    "timezone": { "type": "string", "description": "IANA tz, np. Europe/Warsaw" },
+    "maturity": { "enum": ["L1", "L2", "L3"], "description": "Ten schemat jest obslugiwany przez kontroler L1. L2 uzywa osobnego kontraktu V0.2, jawnej zgody, worktree i niezaleznego checkera. L3 jest niedostepne." },
+    "delegation": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "via", "mode", "agent", "kind", "complexity", "task_file",
+        "assessment_file", "enable_web"
+      ],
+      "properties": {
+        "via": { "const": "agent-fleet", "description": "Controller NIE routuje sam - wola publiczny kontrakt Agent Fleet." },
+        "mode": { "enum": ["advisory", "review"], "description": "V0.1 L1 nie dopuszcza implement mode." },
+        "agent": { "type": "string", "minLength": 1, "description": "Zwykle auto. Agent Fleet pozostaje jedynym routerem." },
+        "kind": { "enum": ["auto", "architecture", "debugging", "frontend", "implementation", "research", "review"] },
+        "complexity": { "enum": ["low", "medium", "high"] },
+        "task_file": { "type": "string", "minLength": 1, "description": "Plik tasku wzgledem katalogu petli." },
+        "assessment_file": { "type": "string", "minLength": 1, "description": "Walidowany assessment Agent Fleet wzgledem katalogu petli." },
+        "enable_web": { "type": "boolean" }
+      }
+    },
+    "limits": {
+      "type": "object", "additionalProperties": false,
+      "required": ["max_attempts_per_run", "run_timeout_seconds", "budget"],
+      "properties": {
+        "max_attempts_per_run": { "const": 1, "description": "V0.1 nie wykonuje kosztownych automatycznych retry. Nowy trigger tworzy nowy run_id." },
+        "run_timeout_seconds": { "type": "integer", "minimum": 30 },
+        "snapshot_max_files": { "type": "integer", "minimum": 1, "maximum": 100000 },
+        "snapshot_max_bytes": { "type": "integer", "minimum": 1 },
+        "budget": {
+          "type": "object", "additionalProperties": false,
+          "required": ["runs_per_day", "tokens_per_run", "tokens_per_day", "unknown_token_policy"],
+          "properties": {
+            "runs_per_day": { "type": "integer", "minimum": 1 },
+            "tokens_per_run": { "type": ["integer", "null"], "minimum": 0, "description": "null = brak twardego limitu tokenowego; egzekwowany tylko gdy provider zwraca tokeny (inaczej unknown, patrz runs-entry)." },
+            "tokens_per_day": { "type": ["integer", "null"], "minimum": 0 },
+            "unknown_token_policy": { "enum": ["stop", "allow"], "description": "Legacy field retained for old contracts; token_policy controls enforcement for new contracts." },
+            "token_policy": { "enum": ["hard", "estimate"], "description": "Optional. Missing in old immutable contracts means legacy hard; estimate records numeric overruns and unknown telemetry as warnings without stopping." }
+          }
+        }
+      }
+    },
+    "stop_conditions": {
+      "type": "object", "additionalProperties": false,
+      "required": ["no_progress_runs", "repeated_failure_runs", "budget_stop"],
+      "properties": {
+        "no_progress_runs": { "type": "integer", "minimum": 1, "description": "Ile kolejnych runow bez zmiany progress-marker zanim breaker OPEN." },
+        "repeated_failure_runs": { "type": "integer", "minimum": 1 },
+        "budget_stop": { "type": "boolean", "description": "Czy przekroczenie budzetu OTWIERA breaker (true) czy tylko pomija run." }
+      }
+    },
+    "human_gates": {
+      "type": "array",
+      "items": { "enum": ["L2_promotion", "mutation_approval", "scope_expansion"] },
+      "description": "Bramki wymagajace jawnej zgody czlowieka. L1 report-only nie ma mutacji, wiec zwykle [\"L2_promotion\"]."
+    },
+    "kill_switch": {
+      "type": "object", "additionalProperties": false,
+      "required": ["file", "env"],
+      "properties": {
+        "file": { "type": "string", "description": "Sciezka pliku-flagi; obecnosc = STOP (sprawdzana przed runem i w recovery)." },
+        "env": { "type": "string", "description": "Nazwa zmiennej srodowiskowej-flagi, np. AGENT_LOOP_KILL." }
+      }
+    },
+    "retention": {
+      "type": "object", "additionalProperties": false,
+      "required": ["runs_keep_days", "reports_keep_days"],
+      "properties": {
+        "runs_keep_days": { "type": "integer", "minimum": 1 },
+        "reports_keep_days": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "write_policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["allowed_write_areas", "path_claims", "forbid_watched_writes"],
+      "properties": {
+        "allowed_write_areas": {
+          "type": "array", "minItems": 1, "items": { "type": "string" },
+          "description": "Jedyne sciezki, gdzie petla moze pisac. Na L1: WYLACZNIE .agents/loops/<loop_id>/ (stan operacyjny + raporty)."
+        },
+        "path_claims": {
+          "type": "array", "items": { "type": "string" },
+          "description": "Globy, ktore ta petla 'rezerwuje'; kolizja z path_claims innej aktywnej petli = odmowa startu (multi-loop lock)."
+        },
+        "forbid_watched_writes": { "const": true, "description": "L1: twardy zakaz zapisu do watched_scope - egzekwowany w kodzie, nie tylko prompt (lekcja F3/F6 z audytu)." }
+      }
+    }
+  }
+}

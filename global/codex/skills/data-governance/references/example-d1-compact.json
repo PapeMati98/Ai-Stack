@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "contract_schema_version": "1.0.0",
+  "contract_id": "data-gov-example-lookup-index",
+  "status": "DRAFT",
+  "project_slug": "example-app",
+  "tier": "D1",
+  "profile": "compact",
+  "change": {
+    "summary": "Add a compatible internal lookup index.",
+    "materiality": "low",
+    "synthetic_only": false,
+    "changed_surfaces": ["storage"]
+  },
+  "actors": {
+    "business_owner": "owner:example",
+    "data_steward": "role:data-steward",
+    "legal_dpo": {"status": "NOT_APPLICABLE"}
+  },
+  "planning_contract": {
+    "contract_id": "plan-example-app",
+    "contract_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "requirement_refs": ["REQ-001"]
+  },
+  "triggers": ["persistent-data"],
+  "sources": [
+    {
+      "source_id": "source-example-policy",
+      "kind": "internal-policy",
+      "reference": "policy:example-data-v1",
+      "version_or_commit": "v1",
+      "observed_at": "2026-08-28T00:00:00Z"
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": "asset-lookup-index",
+      "name": "lookup_index",
+      "kind": "table",
+      "owner": "owner:example",
+      "steward": "role:data-steward",
+      "system_of_record": false,
+      "classification": "internal",
+      "personal_data": false,
+      "special_category_data": false,
+      "environments": ["DEV"],
+      "consumers": []
+    }
+  ],
+  "purposes": [
+    {
+      "purpose_id": "purpose-internal-lookup",
+      "asset_refs": ["asset-lookup-index"],
+      "description": "Speed up an existing internal lookup.",
+      "allowed_uses": ["internal lookup"],
+      "prohibited_uses": ["external publication"],
+      "decision": {
+        "status": "DECIDED",
+        "owner": "owner:example",
+        "source_ref": "source-example-policy",
+        "verified_at": "2026-08-28T00:00:00Z"
+      }
+    }
+  ],
+  "lineage": {
+    "sources": ["table:existing_source"],
+    "transformations": ["copy approved lookup keys"],
+    "outputs": ["asset-lookup-index"]
+  },
+  "data_contract": {
+    "version": "1.0.0",
+    "compatibility": "backward",
+    "fields": [
+      {
+        "asset_ref": "asset-lookup-index",
+        "name": "lookup_key",
+        "type": "text",
+        "nullable": false,
+        "description": "Internal lookup key.",
+        "classification": "internal"
+      }
+    ]
+  },
+  "access_controls": [],
+  "quality_checks": [
+    {
+      "check_id": "quality-lookup-key-unique",
+      "asset_refs": ["asset-lookup-index"],
+      "dimension": "uniqueness",
+      "method": "count lookup_key equals count distinct lookup_key",
+      "threshold": "100 percent",
+      "severity": "blocking",
+      "owner": "role:data-steward",
+      "evidence_kind": "deterministic-check"
+    }
+  ],
+  "retention": {
+    "status": "DECIDED",
+    "policy": "Follow the lifecycle of the source table.",
+    "decision_owner": "owner:example",
+    "source_ref": "source-example-policy",
+    "verified_at": "2026-08-28T00:00:00Z",
+    "legal_hold_behavior": "Inherit an approved hold from the source table.",
+    "targets": [
+      {
+        "asset_ref": "asset-lookup-index",
+        "stores": ["primary"],
+        "deletion_verification": "Confirm the index row is absent after source deletion."
+      }
+    ]
+  },
+  "gates": [
+    {
+      "gate_id": "gate-data-contract",
+      "kind": "data-contract",
+      "required_before": "mutation",
+      "mandatory": true,
+      "applicability": "applicable",
+      "reviewer_policy": "independent",
+      "max_age_seconds": 86400,
+      "invalidate_on": ["schema", "source-state"],
+      "evidence_subjects": ["contract-snapshot", "schema-state"]
+    },
+    {
+      "gate_id": "gate-quality",
+      "kind": "quality-reconciliation",
+      "required_before": "close",
+      "mandatory": true,
+      "applicability": "applicable",
+      "reviewer_policy": "independent",
+      "max_age_seconds": 3600,
+      "invalidate_on": ["schema", "source-state", "code-revision"],
+      "evidence_subjects": ["dataset-state"]
+    }
+  ]
+}

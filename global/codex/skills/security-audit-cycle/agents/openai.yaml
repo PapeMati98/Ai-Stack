@@ -1,0 +1,4 @@
+interface:
+  display_name: "Security audit cycle"
+  short_description: "Regularny, lokalny audyt bezpieczeństwa aktywnego projektu"
+  default_prompt: "Sprawdź świeżość audytu bezpieczeństwa bieżącego projektu i jeśli jest wymagany, wykonaj lokalny audyt read-only oraz zapisz datowany raport."

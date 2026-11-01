@@ -1,0 +1,616 @@
+{
+  "schema_version": 1,
+  "graph_id": "graph-fullstack-module-example",
+  "revision": 1,
+  "previous_revision_hash": null,
+  "intent": "Implement and independently verify a production-bound full-stack module from an approved visual reference without deploying it.",
+  "project_root": "C:\\project\\example-app",
+  "data_classification": "internal",
+  "integration_node_id": "node-integrate-module",
+  "global_budget": {
+    "max_total_attempts": 24,
+    "max_total_tokens": 2000000,
+    "max_wall_seconds": 43200,
+    "max_amendments": 4
+  },
+  "nodes": [
+    {
+      "node_id": "node-discover-module",
+      "active": true,
+      "kind": "work",
+      "capability": "discovery",
+      "title": "Discover module boundaries and current contracts",
+      "depends_on": [],
+      "evidence_from": [],
+      "executor": "parent-local",
+      "workspace_mode": "read-only",
+      "read_scope": [
+        "frontend/",
+        "backend/",
+        "contracts/"
+      ],
+      "write_scope": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "crit-discovery-boundaries",
+          "description": "Frontend, backend, shared contracts, test commands, and production boundary are identified from repository evidence.",
+          "evidence_kind": "deterministic-check"
+        }
+      ],
+      "budget": {
+        "max_attempts": 1,
+        "max_wall_seconds": 900,
+        "max_tool_calls": 80,
+        "max_tokens": 50000
+      },
+      "repair_policy": {
+        "on_reject": "amend-graph",
+        "max_same_scope_repairs": 0,
+        "max_amendments": 2
+      },
+      "reviewer": "independent-reviewer",
+      "resource_locks": [],
+      "loop_policy": {
+        "enabled": false,
+        "max_rounds": 0,
+        "stop_condition": "Acceptance criteria pass or the node blocks."
+      },
+      "council_trigger": {
+        "required": false,
+        "reason": "No unresolved instruction conflict is declared for this example node."
+      }
+    },
+    {
+      "node_id": "node-freeze-contract",
+      "active": true,
+      "kind": "work",
+      "capability": "contract-definition",
+      "title": "Freeze the module API and data contract",
+      "depends_on": [
+        "node-discover-module"
+      ],
+      "evidence_from": [],
+      "executor": "fleet-run",
+      "workspace_mode": "detached-worktree",
+      "read_scope": [
+        "frontend/",
+        "backend/",
+        "contracts/"
+      ],
+      "write_scope": [
+        "contracts/module-api.json"
+      ],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "crit-contract-machine-readable",
+          "description": "A machine-readable API contract covers requests, responses, errors, authorization, and compatibility assumptions.",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "budget": {
+        "max_attempts": 2,
+        "max_wall_seconds": 1800,
+        "max_tool_calls": 120,
+        "max_tokens": 100000
+      },
+      "repair_policy": {
+        "on_reject": "retry-same-scope",
+        "max_same_scope_repairs": 1,
+        "max_amendments": 2
+      },
+      "reviewer": "independent-reviewer",
+      "resource_locks": [
+        "repo:freeze-contract"
+      ],
+      "loop_policy": {
+        "enabled": false,
+        "max_rounds": 0,
+        "stop_condition": "Acceptance criteria pass or the node blocks."
+      },
+      "council_trigger": {
+        "required": false,
+        "reason": "No unresolved instruction conflict is declared for this example node."
+      }
+    },
+    {
+      "node_id": "node-build-frontend",
+      "active": true,
+      "kind": "work",
+      "capability": "implementation",
+      "title": "Implement the frontend against the frozen contract",
+      "depends_on": [
+        "node-freeze-contract"
+      ],
+      "evidence_from": [],
+      "executor": "fleet-run",
+      "workspace_mode": "detached-worktree",
+      "read_scope": [
+        "contracts/module-api.json",
+        "frontend/"
+      ],
+      "write_scope": [
+        "frontend/"
+      ],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "crit-frontend-reference",
+          "description": "The frontend implements the approved states and interactions without changing the frozen API contract.",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "budget": {
+        "max_attempts": 3,
+        "max_wall_seconds": 5400,
+        "max_tool_calls": 320,
+        "max_tokens": 300000
+      },
+      "repair_policy": {
+        "on_reject": "retry-same-scope",
+        "max_same_scope_repairs": 2,
+        "max_amendments": 2
+      },
+      "reviewer": "independent-reviewer",
+      "resource_locks": [
+        "repo:build-frontend"
+      ],
+      "loop_policy": {
+        "enabled": false,
+        "max_rounds": 0,
+        "stop_condition": "Acceptance criteria pass or the node blocks."
+      },
+      "council_trigger": {
+        "required": false,
+        "reason": "No unresolved instruction conflict is declared for this example node."
+      }
+    },
+    {
+      "node_id": "node-build-backend",
+      "active": true,
+      "kind": "work",
+      "capability": "implementation",
+      "title": "Implement the backend against the frozen contract",
+      "depends_on": [
+        "node-freeze-contract"
+      ],
+      "evidence_from": [],
+      "executor": "fleet-run",
+      "workspace_mode": "detached-worktree",
+      "read_scope": [
+        "contracts/module-api.json",
+        "backend/"
+      ],
+      "write_scope": [
+        "backend/"
+      ],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "crit-backend-contract",
+          "description": "The backend implements validation, authorization, persistence, and errors defined by the frozen API contract.",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "budget": {
+        "max_attempts": 3,
+        "max_wall_seconds": 5400,
+        "max_tool_calls": 320,
+        "max_tokens": 300000
+      },
+      "repair_policy": {
+        "on_reject": "retry-same-scope",
+        "max_same_scope_repairs": 2,
+        "max_amendments": 2
+      },
+      "reviewer": "independent-reviewer",
+      "resource_locks": [
+        "repo:build-backend"
+      ],
+      "loop_policy": {
+        "enabled": false,
+        "max_rounds": 0,
+        "stop_condition": "Acceptance criteria pass or the node blocks."
+      },
+      "council_trigger": {
+        "required": false,
+        "reason": "No unresolved instruction conflict is declared for this example node."
+      }
+    },
+    {
+      "node_id": "node-integrate-module",
+      "active": true,
+      "kind": "work",
+      "capability": "integration",
+      "title": "Integrate accepted frontend and backend candidates",
+      "depends_on": [
+        "node-build-frontend",
+        "node-build-backend"
+      ],
+      "evidence_from": [],
+      "executor": "parent-local",
+      "workspace_mode": "integration-owner",
+      "read_scope": [
+        "contracts/module-api.json",
+        "frontend/",
+        "backend/"
+      ],
+      "write_scope": [
+        "frontend/",
+        "backend/"
+      ],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "crit-integration-bounded",
+          "description": "Only accepted branch artifacts are integrated and the combined diff stays inside declared project scopes.",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "budget": {
+        "max_attempts": 2,
+        "max_wall_seconds": 2400,
+        "max_tool_calls": 160,
+        "max_tokens": 100000
+      },
+      "repair_policy": {
+        "on_reject": "amend-graph",
+        "max_same_scope_repairs": 0,
+        "max_amendments": 2
+      },
+      "reviewer": "independent-reviewer",
+      "resource_locks": [
+        "repo:integrate-module"
+      ],
+      "loop_policy": {
+        "enabled": false,
+        "max_rounds": 0,
+        "stop_condition": "Acceptance criteria pass or the node blocks."
+      },
+      "council_trigger": {
+        "required": false,
+        "reason": "No unresolved instruction conflict is declared for this example node."
+      }
+    },
+    {
+      "node_id": "node-run-deterministic-tests",
+      "active": true,
+      "kind": "verify",
+      "capability": "deterministic-tests",
+      "title": "Run deterministic frontend, backend, integration, and build checks",
+      "depends_on": [
+        "node-integrate-module"
+      ],
+      "evidence_from": [],
+      "executor": "parent-local",
+      "workspace_mode": "read-only",
+      "read_scope": [
+        "frontend/",
+        "backend/",
+        "contracts/module-api.json"
+      ],
+      "write_scope": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "crit-tests-pass",
+          "description": "Required lint, typecheck, unit, integration, and build checks pass on the integrated candidate.",
+          "evidence_kind": "deterministic-check"
+        }
+      ],
+      "budget": {
+        "max_attempts": 2,
+        "max_wall_seconds": 3600,
+        "max_tool_calls": 80,
+        "max_tokens": null
+      },
+      "repair_policy": {
+        "on_reject": "amend-graph",
+        "max_same_scope_repairs": 0,
+        "max_amendments": 2
+      },
+      "reviewer": "independent-reviewer",
+      "resource_locks": [],
+      "loop_policy": {
+        "enabled": false,
+        "max_rounds": 0,
+        "stop_condition": "Acceptance criteria pass or the node blocks."
+      },
+      "council_trigger": {
+        "required": false,
+        "reason": "No unresolved instruction conflict is declared for this example node."
+      }
+    },
+    {
+      "node_id": "node-test-user-journeys",
+      "active": true,
+      "kind": "verify",
+      "capability": "user-journey-qa",
+      "title": "Exercise real user roles, responsive states, and error paths",
+      "depends_on": [
+        "node-run-deterministic-tests"
+      ],
+      "evidence_from": [],
+      "executor": "fleet-run",
+      "workspace_mode": "read-only",
+      "read_scope": [
+        "frontend/",
+        "backend/"
+      ],
+      "write_scope": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "crit-user-journeys-pass",
+          "description": "Enabled user roles complete the critical journeys on desktop and mobile with reproducible browser evidence.",
+          "evidence_kind": "browser-e2e"
+        }
+      ],
+      "budget": {
+        "max_attempts": 2,
+        "max_wall_seconds": 3600,
+        "max_tool_calls": 180,
+        "max_tokens": 150000
+      },
+      "repair_policy": {
+        "on_reject": "amend-graph",
+        "max_same_scope_repairs": 0,
+        "max_amendments": 2
+      },
+      "reviewer": "independent-reviewer",
+      "resource_locks": [],
+      "loop_policy": {
+        "enabled": false,
+        "max_rounds": 0,
+        "stop_condition": "Acceptance criteria pass or the node blocks."
+      },
+      "council_trigger": {
+        "required": false,
+        "reason": "No unresolved instruction conflict is declared for this example node."
+      }
+    },
+    {
+      "node_id": "node-review-ux",
+      "active": true,
+      "kind": "verify",
+      "capability": "ux-review",
+      "title": "Review visual fidelity, responsiveness, accessibility, and ergonomics",
+      "depends_on": [
+        "node-run-deterministic-tests"
+      ],
+      "evidence_from": [],
+      "executor": "fleet-run",
+      "workspace_mode": "read-only",
+      "read_scope": [
+        "frontend/"
+      ],
+      "write_scope": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "crit-ux-evidence",
+          "description": "Blocking UX findings include route, role, viewport, interaction, expected behavior, and visual evidence.",
+          "evidence_kind": "visual-evidence"
+        }
+      ],
+      "budget": {
+        "max_attempts": 2,
+        "max_wall_seconds": 2400,
+        "max_tool_calls": 120,
+        "max_tokens": 100000
+      },
+      "repair_policy": {
+        "on_reject": "amend-graph",
+        "max_same_scope_repairs": 0,
+        "max_amendments": 2
+      },
+      "reviewer": "independent-reviewer",
+      "resource_locks": [],
+      "loop_policy": {
+        "enabled": false,
+        "max_rounds": 0,
+        "stop_condition": "Acceptance criteria pass or the node blocks."
+      },
+      "council_trigger": {
+        "required": false,
+        "reason": "No unresolved instruction conflict is declared for this example node."
+      }
+    },
+    {
+      "node_id": "node-independent-quality",
+      "active": true,
+      "kind": "gate",
+      "capability": "independent-quality",
+      "title": "Independently accept functional and UX evidence",
+      "depends_on": [
+        "node-test-user-journeys",
+        "node-review-ux"
+      ],
+      "evidence_from": [
+        "node-build-frontend",
+        "node-build-backend",
+        "node-integrate-module",
+        "node-run-deterministic-tests",
+        "node-test-user-journeys",
+        "node-review-ux"
+      ],
+      "executor": "fleet-quality-gate",
+      "workspace_mode": "read-only",
+      "read_scope": [
+        "frontend/",
+        "backend/",
+        "contracts/module-api.json"
+      ],
+      "write_scope": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "crit-independent-quality",
+          "description": "An independent provider accepts every covered worker item and the integrated result without unresolved blocking findings.",
+          "evidence_kind": "quality-gate"
+        }
+      ],
+      "budget": {
+        "max_attempts": 2,
+        "max_wall_seconds": 2400,
+        "max_tool_calls": 100,
+        "max_tokens": 120000
+      },
+      "repair_policy": {
+        "on_reject": "amend-graph",
+        "max_same_scope_repairs": 0,
+        "max_amendments": 2
+      },
+      "reviewer": "independent-reviewer",
+      "resource_locks": [],
+      "loop_policy": {
+        "enabled": false,
+        "max_rounds": 0,
+        "stop_condition": "Acceptance criteria pass or the node blocks."
+      },
+      "council_trigger": {
+        "required": false,
+        "reason": "No unresolved instruction conflict is declared for this example node."
+      }
+    },
+    {
+      "node_id": "node-incremental-security",
+      "active": true,
+      "kind": "gate",
+      "capability": "incremental-security",
+      "title": "Run the independent incremental security gate",
+      "depends_on": [
+        "node-run-deterministic-tests"
+      ],
+      "evidence_from": [
+        "node-build-frontend",
+        "node-build-backend",
+        "node-integrate-module",
+        "node-run-deterministic-tests"
+      ],
+      "executor": "fleet-security-gate",
+      "workspace_mode": "read-only",
+      "read_scope": [
+        "frontend/",
+        "backend/",
+        "contracts/module-api.json"
+      ],
+      "write_scope": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "crit-security-gate",
+          "description": "The current incremental security capability accepts the coherent implementation batch or returns evidence-bearing repair findings.",
+          "evidence_kind": "security-gate"
+        }
+      ],
+      "budget": {
+        "max_attempts": 2,
+        "max_wall_seconds": 2400,
+        "max_tool_calls": 80,
+        "max_tokens": 120000
+      },
+      "repair_policy": {
+        "on_reject": "amend-graph",
+        "max_same_scope_repairs": 0,
+        "max_amendments": 2
+      },
+      "reviewer": "independent-reviewer",
+      "resource_locks": [],
+      "loop_policy": {
+        "enabled": false,
+        "max_rounds": 0,
+        "stop_condition": "Acceptance criteria pass or the node blocks."
+      },
+      "council_trigger": {
+        "required": false,
+        "reason": "No unresolved instruction conflict is declared for this example node."
+      }
+    },
+    {
+      "node_id": "node-final-acceptance",
+      "active": true,
+      "kind": "gate",
+      "capability": "final-acceptance",
+      "title": "Parent acceptance of the production-ready candidate",
+      "depends_on": [
+        "node-independent-quality",
+        "node-incremental-security"
+      ],
+      "evidence_from": [],
+      "executor": "parent-local",
+      "workspace_mode": "read-only",
+      "read_scope": [
+        "frontend/",
+        "backend/",
+        "contracts/module-api.json"
+      ],
+      "write_scope": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "crit-parent-acceptance",
+          "description": "The parent independently verifies current evidence, unresolved risks, scope, and rollback readiness before declaring technical completion.",
+          "evidence_kind": "parent-acceptance"
+        }
+      ],
+      "budget": {
+        "max_attempts": 1,
+        "max_wall_seconds": 1200,
+        "max_tool_calls": 60,
+        "max_tokens": 50000
+      },
+      "repair_policy": {
+        "on_reject": "amend-graph",
+        "max_same_scope_repairs": 0,
+        "max_amendments": 1
+      },
+      "reviewer": "independent-reviewer",
+      "resource_locks": [],
+      "loop_policy": {
+        "enabled": false,
+        "max_rounds": 0,
+        "stop_condition": "Acceptance criteria pass or the node blocks."
+      },
+      "council_trigger": {
+        "required": false,
+        "reason": "No unresolved instruction conflict is declared for this example node."
+      }
+    },
+    {
+      "node_id": "node-production-approval",
+      "active": true,
+      "kind": "human",
+      "capability": "production-approval",
+      "title": "Owner decision whether to deploy the accepted candidate",
+      "depends_on": [
+        "node-final-acceptance"
+      ],
+      "evidence_from": [],
+      "executor": "human",
+      "workspace_mode": "none",
+      "read_scope": [],
+      "write_scope": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "crit-owner-production-decision",
+          "description": "The owner explicitly approves or declines the exact production action after reviewing the accepted candidate and rollback plan.",
+          "evidence_kind": "human-approval"
+        }
+      ],
+      "budget": {
+        "max_attempts": 1,
+        "max_wall_seconds": 86400,
+        "max_tool_calls": 0,
+        "max_tokens": null
+      },
+      "repair_policy": {
+        "on_reject": "block",
+        "max_same_scope_repairs": 0,
+        "max_amendments": 1
+      },
+      "expires_after_seconds": 86400,
+      "reviewer": "independent-reviewer",
+      "resource_locks": [],
+      "loop_policy": {
+        "enabled": false,
+        "max_rounds": 0,
+        "stop_condition": "Acceptance criteria pass or the node blocks."
+      },
+      "council_trigger": {
+        "required": false,
+        "reason": "No unresolved instruction conflict is declared for this example node."
+      }
+    }
+  ]
+}

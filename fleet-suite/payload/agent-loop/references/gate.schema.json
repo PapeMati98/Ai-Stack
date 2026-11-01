@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-loop/gate.schema.json",
+  "title": "agent-loop gate.json (verifier + human gates, REJECT-default)",
+  "description": "Kontrakt weryfikacji. Domyslny werdykt verifiera = REJECT dopoki kryteria nie zostana JAWNIE spelnione (maker/checker split).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "loop_id", "verifier_default", "criteria", "gates"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "loop_id": { "type": "string" },
+    "verifier_default": { "const": "REJECT", "description": "Twardy default. Wynik przechodzi tylko gdy KAZDE required-kryterium jawnie PASS." },
+    "criteria": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "description", "check_kind", "required"],
+        "properties": {
+          "id": { "type": "string" },
+          "description": { "type": "string", "minLength": 1 },
+          "check_kind": { "enum": ["deterministic", "test-suite", "parent-review"], "description": "Preferuj deterministic/test-suite; parent-review = ostateczna niezalezna ocena rodzica (nie samoocena wykonawcy)." },
+          "required": { "type": "boolean" }
+        }
+      }
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "kind", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "kind": { "enum": ["human", "automated"] },
+          "status": { "enum": ["pending", "approved", "rejected", "not-applicable"] },
+          "approver": { "type": ["string", "null"] },
+          "decided_at": { "type": ["string", "null"], "format": "date-time" },
+          "note": { "type": ["string", "null"] }
+        }
+      },
+      "description": "L1 report-only: bramka mutacji ma status not-applicable (brak mutacji). Promocja L1->L2 wymaga gate 'approved' przez Mateusza."
+    }
+  }
+}

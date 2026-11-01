@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Graph"
+  short_description: "Plan and verify bounded multi-agent delivery"
+  default_prompt: "Use $agent-graph to decompose this substantial delivery into a bounded execution graph with independent verification."

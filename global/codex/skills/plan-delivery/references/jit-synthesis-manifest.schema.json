@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-stack.invalid/schemas/jit-synthesis-manifest/0.1",
+  "title": "Frozen Stage A JIT synthesis manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "manifest_id", "planning_contract_sha256",
+    "static_topology_id", "pilot_mode", "control_veto", "signals",
+    "requirements", "authority_ceilings", "global_budget"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "manifest_id": {"type": "string", "pattern": "^[a-z][a-z0-9-]{2,100}$"},
+    "planning_contract_sha256": {"$ref": "#/$defs/sha256"},
+    "static_topology_id": {"type": "string", "minLength": 3, "maxLength": 120},
+    "pilot_mode": {"const": "shadow-only"},
+    "control_veto": {"type": "boolean"},
+    "signals": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "high_complexity", "bounded_ambiguity", "multi_system_context",
+        "parallel_streams", "multiple_gates", "repair_history"
+      ],
+      "properties": {
+        "high_complexity": {"type": "boolean"},
+        "bounded_ambiguity": {"type": "boolean"},
+        "multi_system_context": {"type": "boolean"},
+        "parallel_streams": {"type": "boolean"},
+        "multiple_gates": {"type": "boolean"},
+        "repair_history": {"type": "boolean"}
+      }
+    },
+    "requirements": {
+      "type": "array", "minItems": 1, "maxItems": 256, "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^REQ-[0-9]{3,}$"}
+    },
+    "authority_ceilings": {
+      "type": "array", "minItems": 1, "maxItems": 128,
+      "items": {"$ref": "#/$defs/authority"}
+    },
+    "global_budget": {
+      "type": "object", "additionalProperties": false,
+      "required": ["max_tasks", "max_parallel_streams", "max_review_gates", "max_coordination_steps"],
+      "properties": {
+        "max_tasks": {"type": "integer", "minimum": 1, "maximum": 128},
+        "max_parallel_streams": {"type": "integer", "minimum": 1, "maximum": 32},
+        "max_review_gates": {"type": "integer", "minimum": 1, "maximum": 128},
+        "max_coordination_steps": {"type": "integer", "minimum": 1, "maximum": 512}
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "context": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "sha256", "purpose"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1, "maxLength": 500},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "purpose": {"type": "string", "minLength": 3, "maxLength": 300}
+      }
+    },
+    "stringList": {
+      "type": "array", "maxItems": 128, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1, "maxLength": 500}
+    },
+    "authority": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "authority_ceiling_ref", "requirement_refs", "capability",
+        "required_context_refs", "allowed_context_refs", "skill_allowlist",
+        "tool_allowlist", "read_scope", "write_scope", "budget",
+        "required_stop_conditions", "required_evidence_refs",
+        "required_criterion_refs", "required_reviewer_capabilities",
+        "repair_ceiling"
+      ],
+      "properties": {
+        "authority_ceiling_ref": {"type": "string", "minLength": 3, "maxLength": 160},
+        "requirement_refs": {"type": "array", "minItems": 1, "maxItems": 64, "uniqueItems": true, "items": {"type": "string", "pattern": "^REQ-[0-9]{3,}$"}},
+        "capability": {"type": "string", "minLength": 3, "maxLength": 100},
+        "required_context_refs": {"type": "array", "maxItems": 64, "items": {"$ref": "#/$defs/context"}},
+        "allowed_context_refs": {"type": "array", "maxItems": 64, "items": {"$ref": "#/$defs/context"}},
+        "skill_allowlist": {"type": "array", "maxItems": 32, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,63}$"}},
+        "tool_allowlist": {"$ref": "#/$defs/stringList"},
+        "read_scope": {"$ref": "#/$defs/stringList"},
+        "write_scope": {"$ref": "#/$defs/stringList"},
+        "budget": {
+          "type": "object", "additionalProperties": false,
+          "required": ["max_wall_seconds", "max_tool_calls", "max_tokens", "max_attempts", "max_repairs"],
+          "properties": {
+            "max_wall_seconds": {"type": "integer", "minimum": 1},
+            "max_tool_calls": {"type": "integer", "minimum": 1},
+            "max_tokens": {"type": "integer", "minimum": 1},
+            "max_attempts": {"type": "integer", "minimum": 1, "maximum": 3},
+            "max_repairs": {"type": "integer", "minimum": 0, "maximum": 2}
+          }
+        },
+        "required_stop_conditions": {"$ref": "#/$defs/stringList"},
+        "required_evidence_refs": {"$ref": "#/$defs/stringList"},
+        "required_criterion_refs": {"type": "array", "minItems": 1, "maxItems": 64, "uniqueItems": true, "items": {"type": "string", "pattern": "^crit-[a-z0-9][a-z0-9-]{2,100}$"}},
+        "required_reviewer_capabilities": {"type": "array", "minItems": 1, "maxItems": 16, "uniqueItems": true, "items": {"type": "string", "minLength": 2, "maxLength": 100}},
+        "repair_ceiling": {
+          "type": "object", "additionalProperties": false,
+          "required": ["on_reject", "max_repairs"],
+          "properties": {
+            "on_reject": {"enum": ["bounded-repair", "block"]},
+            "max_repairs": {"type": "integer", "minimum": 0, "maximum": 2}
+          }
+        }
+      }
+    }
+  }
+}

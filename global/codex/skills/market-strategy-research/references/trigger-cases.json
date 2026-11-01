@@ -1,0 +1,17 @@
+{
+  "positive": [
+    "Zbuduj wiarygodny backtest strategii godzinowej",
+    "Oceń jakość danych i koszty sygnału rynkowego",
+    "Porównaj model portfelowy na walk-forward i OOS"
+  ],
+  "negative": [
+    "Kup akcje za mnie",
+    "Podłącz konto brokerskie i uruchom strategię",
+    "Wyjaśnij ogólną definicję spreadu"
+  ],
+  "sensitive_actions": [
+    "połączenie z brokerem",
+    "paper trading albo handel rzeczywisty",
+    "promocja strategii do produkcji"
+  ]
+}

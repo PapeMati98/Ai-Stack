@@ -1,0 +1,262 @@
+{
+  "configs": {
+    "agent": {
+      "row_count": 34,
+      "status": "fetched"
+    }
+  },
+  "fetch_warnings": [
+    "Hugging Face Dataset Server returned HTTP 429 during automated refresh; this snapshot contains the current Agent Arena table published by the official dataset viewer. Other configured Arena subsets remain unavailable until the next refresh."
+  ],
+  "generated_at": "2026-07-21T20:28:35.8201479Z",
+  "models": {
+    "antigravity@Gemini 3.1 Pro (High)": {
+      "alias_confidence": "verified",
+      "arena_ids": [
+        "Gemini 3.1 Pro Preview",
+        "gemini-3.1-pro"
+      ],
+      "benchmarks": {
+        "agent": {
+          "arena_model_id": "Gemini 3.1 Pro Preview",
+          "category": "overall",
+          "leaderboard_publish_date": "2026-07-13",
+          "lower": -0.013887,
+          "percentile": 48.485,
+          "rank": 18,
+          "rating_or_score": -0.007029,
+          "sessions": 61459,
+          "status": "matched",
+          "upper": -0.000171,
+          "votes_or_observations": 1650996
+        }
+      },
+      "model": "Gemini 3.1 Pro (High)",
+      "profile": "antigravity"
+    },
+    "antigravity@Gemini 3.5 Flash (High)": {
+      "alias_confidence": "verified",
+      "arena_ids": [
+        "Gemini 3.5 Flash (High)",
+        "gemini-3.5-flash"
+      ],
+      "benchmarks": {
+        "agent": {
+          "arena_model_id": "Gemini 3.5 Flash (High)",
+          "category": "overall",
+          "leaderboard_publish_date": "2026-07-13",
+          "lower": -0.018899,
+          "percentile": 36.364,
+          "rank": 22,
+          "rating_or_score": -0.011193,
+          "sessions": 45991,
+          "status": "matched",
+          "upper": -0.003487,
+          "votes_or_observations": 1629463
+        }
+      },
+      "model": "Gemini 3.5 Flash (High)",
+      "profile": "antigravity"
+    },
+    "antigravity@Gemini 3.5 Flash (Low)": {
+      "alias_confidence": "verified",
+      "arena_ids": [
+        "Gemini 3.5 Flash (High)",
+        "gemini-3.5-flash"
+      ],
+      "benchmarks": {
+        "agent": {
+          "arena_model_id": "Gemini 3.5 Flash (High)",
+          "category": "overall",
+          "leaderboard_publish_date": "2026-07-13",
+          "lower": -0.018899,
+          "percentile": 36.364,
+          "rank": 22,
+          "rating_or_score": -0.011193,
+          "sessions": 45991,
+          "status": "matched",
+          "upper": -0.003487,
+          "votes_or_observations": 1629463
+        }
+      },
+      "model": "Gemini 3.5 Flash (Low)",
+      "profile": "antigravity"
+    },
+    "claude@fable": {
+      "alias_confidence": "verified",
+      "arena_ids": [
+        "Claude Fable 5 (High)",
+        "claude-fable-5"
+      ],
+      "benchmarks": {
+        "agent": {
+          "arena_model_id": "Claude Fable 5 (High)",
+          "category": "overall",
+          "leaderboard_publish_date": "2026-07-13",
+          "lower": 0.12386,
+          "percentile": 100.0,
+          "rank": 1,
+          "rating_or_score": 0.139412,
+          "sessions": 16059,
+          "status": "matched",
+          "upper": 0.154964,
+          "votes_or_observations": 456112
+        }
+      },
+      "model": "fable",
+      "profile": "claude"
+    },
+    "claude@sonnet": {
+      "alias_confidence": "verified",
+      "arena_ids": [
+        "Claude Sonnet 5 (High)",
+        "claude-sonnet-5"
+      ],
+      "benchmarks": {
+        "agent": {
+          "arena_model_id": "Claude Sonnet 5 (High)",
+          "category": "overall",
+          "leaderboard_publish_date": "2026-07-13",
+          "lower": 0.062841,
+          "percentile": 87.879,
+          "rank": 5,
+          "rating_or_score": 0.079961,
+          "sessions": 23640,
+          "status": "matched",
+          "upper": 0.097082,
+          "votes_or_observations": 1954629
+        }
+      },
+      "model": "sonnet",
+      "profile": "claude"
+    },
+    "codex@gpt-5.6-luna": {
+      "alias_confidence": "candidate",
+      "arena_ids": [
+        "gpt-5.6-luna"
+      ],
+      "benchmarks": {
+        "agent": {
+          "arena_model_id": null,
+          "status": "missing"
+        }
+      },
+      "model": "gpt-5.6-luna",
+      "profile": "codex"
+    },
+    "codex@gpt-5.6-sol": {
+      "alias_confidence": "verified",
+      "arena_ids": [
+        "GPT 5.6 Sol (xHigh)",
+        "gpt-5.6-sol"
+      ],
+      "benchmarks": {
+        "agent": {
+          "arena_model_id": "GPT 5.6 Sol (xHigh)",
+          "category": "overall",
+          "leaderboard_publish_date": "2026-07-13",
+          "lower": 0.071832,
+          "percentile": 96.97,
+          "rank": 2,
+          "rating_or_score": 0.109384,
+          "sessions": 7881,
+          "status": "matched",
+          "upper": 0.146935,
+          "votes_or_observations": 476633
+        }
+      },
+      "model": "gpt-5.6-sol",
+      "profile": "codex"
+    },
+    "codex@gpt-5.6-terra": {
+      "alias_confidence": "candidate",
+      "arena_ids": [
+        "gpt-5.6-terra"
+      ],
+      "benchmarks": {
+        "agent": {
+          "arena_model_id": null,
+          "status": "missing"
+        }
+      },
+      "model": "gpt-5.6-terra",
+      "profile": "codex"
+    },
+    "grok@grok-4.5": {
+      "alias_confidence": "verified",
+      "arena_ids": [
+        "Grok 4.5",
+        "grok-4.5"
+      ],
+      "benchmarks": {
+        "agent": {
+          "arena_model_id": "Grok 4.5",
+          "category": "overall",
+          "leaderboard_publish_date": "2026-07-13",
+          "lower": 0.03123,
+          "percentile": 63.636,
+          "rank": 13,
+          "rating_or_score": 0.04991,
+          "sessions": 9851,
+          "status": "matched",
+          "upper": 0.06859,
+          "votes_or_observations": 411378
+        }
+      },
+      "model": "grok-4.5",
+      "profile": "grok"
+    },
+    "kimi@k3": {
+      "alias_confidence": "candidate",
+      "arena_ids": [
+        "kimi-k3-max",
+        "kimi-k3"
+      ],
+      "benchmarks": {
+        "agent": {
+          "arena_model_id": null,
+          "status": "missing"
+        }
+      },
+      "model": "k3",
+      "profile": "kimi"
+    },
+    "qwen@qwen3.8-max-0902": {
+      "alias_confidence": "candidate",
+      "arena_ids": [
+        "qwen3.8-max-0902",
+        "qwen-3.8-max-0902"
+      ],
+      "benchmarks": {
+        "agent": {
+          "arena_model_id": null,
+          "status": "missing"
+        }
+      },
+      "model": "qwen3.8-max-0902",
+      "profile": "qwen"
+    },
+    "muse@muse-spark-1.3": {
+      "alias_confidence": "candidate",
+      "arena_ids": [
+        "muse-spark-1.3"
+      ],
+      "benchmarks": {
+        "agent": {
+          "arena_model_id": null,
+          "status": "missing"
+        }
+      },
+      "model": "muse-spark-1.3",
+      "profile": "muse"
+    }
+  },
+  "schema_version": 1,
+  "source": {
+    "dataset": "lmarena-ai/leaderboard-dataset",
+    "dataset_url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset",
+    "rows_api": "https://datasets-server.huggingface.co/rows",
+    "split": "latest"
+  },
+  "valid_for_days": 7
+}

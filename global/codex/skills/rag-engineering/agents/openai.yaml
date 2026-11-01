@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rag Engineering"
+  short_description: "Design and evaluate grounded, provider-neutral RAG systems"

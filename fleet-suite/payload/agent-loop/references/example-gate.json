@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "loop_id": "weekly-project-health",
+  "verifier_default": "REJECT",
+  "criteria": [
+    {
+      "id": "scope",
+      "description": "The report stays inside the approved review scope.",
+      "check_kind": "parent-review",
+      "required": true
+    },
+    {
+      "id": "tests",
+      "description": "Every claimed verification has inspectable evidence.",
+      "check_kind": "deterministic",
+      "required": true
+    },
+    {
+      "id": "no-writes",
+      "description": "No watched project file changed during the L1 run.",
+      "check_kind": "deterministic",
+      "required": true
+    }
+  ],
+  "gates": [
+    {
+      "id": "L2_promotion",
+      "kind": "human",
+      "status": "pending",
+      "approver": null,
+      "decided_at": null,
+      "note": null
+    }
+  ]
+}

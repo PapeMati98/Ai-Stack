@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "name": "Mateusz Shared Agent Knowledge",
+  "default_language": "pl",
+  "write_model": "append-only-proposals-single-curator",
+  "curation_scope": "designated-machine-only",
+  "curator_machine": "",
+  "auto_checkpoint_intake": true,
+  "checkpoint_mode": "local-commit-only",
+  "remote_allowed_classifications": [
+    "public",
+    "internal"
+  ],
+  "curator_lock_minutes": 30
+}

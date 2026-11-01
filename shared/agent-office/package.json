@@ -1,0 +1,342 @@
+{
+  "package_id": "agent-office",
+  "package_version": "0.1.9",
+  "runtime": [
+    {
+      "bytes": 63,
+      "sha256": "17cdad629de632e4fcc5d2c3f2ac7aa5a31f0b1cec6ad64128d4efd8de54afe7",
+      "source": "coord.cmd",
+      "target": "coord.cmd"
+    },
+    {
+      "bytes": 658,
+      "sha256": "043df5a750675c493ebc597bdab7ff71e12c4e3ae5d263fa9dc215f9320d35d4",
+      "source": "coord.py",
+      "target": "coord.py"
+    },
+    {
+      "bytes": 608,
+      "sha256": "d7f6f1ea894af060cf42a986624312df259c925302076488d66bf055a2fc0c65",
+      "source": "office.py",
+      "target": "office.py"
+    },
+    {
+      "bytes": 382,
+      "sha256": "f0787bd809c63147ddba78f472a61bb7fa5f1a62ce36633ecd5854a34d280d45",
+      "source": "office_ssh_gate.py",
+      "target": "office_ssh_gate.py"
+    },
+    {
+      "bytes": 18234,
+      "sha256": "388b27460aa93efa0222fb13738b8d70c09ffb911d3913f660eee215cf3b156e",
+      "source": "office_store_snapshot.py",
+      "target": "office_store_snapshot.py"
+    },
+    {
+      "bytes": 21153,
+      "sha256": "82792b0414f01a990332d176c68eec34d32c03e0a72f0b88008ca697f7101177",
+      "source": "office_cli_host.py",
+      "target": "office_cli_host.py"
+    },
+    {
+      "bytes": 35906,
+      "sha256": "59ff47605593344c02e70331ea53631322642bee3038db31b6c767297ff1726c",
+      "source": "coordfs/cli_dispatch.py",
+      "target": "coordfs/cli_dispatch.py"
+    },
+    {
+      "bytes": 35843,
+      "sha256": "3fc7f22b8e9590f31968e42325f82c947ca6838086868d4fd4c5b7c3835792c2",
+      "source": "coordfs/cli_host.py",
+      "target": "coordfs/cli_host.py"
+    },
+    {
+      "bytes": 5724,
+      "sha256": "3a3851278f78b1731fdcdd7e0706f67003e5c4dd27bf690f85a3c8e45aaab2a9",
+      "source": "coordfs/worker_profile.py",
+      "target": "coordfs/worker_profile.py"
+    },
+    {
+      "bytes": 14074,
+      "sha256": "407dd1327ba86ffe23fcb2c67e15034037f5eaac154afea453a279f50d12efe6",
+      "source": "coordfs/native_model_evidence.py",
+      "target": "coordfs/native_model_evidence.py"
+    },
+    {
+      "bytes": 10275,
+      "sha256": "4326c944dea147d148bf53dab050bd2d2daf8302794eeadbc821106bdf8c6b74",
+      "source": "coordfs/native_process_snapshot.py",
+      "target": "coordfs/native_process_snapshot.py"
+    },
+    {
+      "bytes": 390,
+      "sha256": "fcd0167f490a76c9cef795f4f2d1e9058d5223d3f6419bf3dc48e7854ce702ce",
+      "source": "coordfs/__init__.py",
+      "target": "coordfs/__init__.py"
+    },
+    {
+      "bytes": 83,
+      "sha256": "d220d88dd9a25cd0629c5176dd6532a2db1da40eb014a8e80796b0ddeb134918",
+      "source": "coordfs/__main__.py",
+      "target": "coordfs/__main__.py"
+    },
+    {
+      "bytes": 6490,
+      "sha256": "960d6cfc11f39dd336d347c0c46ad94ee83a7cf2f8d1fdf1f5d3a21783b61b2e",
+      "source": "coordfs/atomic.py",
+      "target": "coordfs/atomic.py"
+    },
+    {
+      "bytes": 9822,
+      "sha256": "2de2adfb65d07986b93424039adf894e31b4cff7948aa20a68e734162ff9c7e3",
+      "source": "coordfs/cli.py",
+      "target": "coordfs/cli.py"
+    },
+    {
+      "bytes": 8553,
+      "sha256": "e9164a93244734092847619d85c0d31f6c2b16eefca2dd118a07678fb5e1a5c7",
+      "source": "coordfs/conflicts.py",
+      "target": "coordfs/conflicts.py"
+    },
+    {
+      "bytes": 613,
+      "sha256": "675b436210765963715c3aa167818905bb05913c4f86b1a6be27f152d20c38c2",
+      "source": "coordfs/constants.py",
+      "target": "coordfs/constants.py"
+    },
+    {
+      "bytes": 4452,
+      "sha256": "360b677d5f9c9eb39dec84d03a51c548da659660296e53aabb8e15a8dbd85125",
+      "source": "coordfs/doctor.py",
+      "target": "coordfs/doctor.py"
+    },
+    {
+      "bytes": 419,
+      "sha256": "a627b9d5ae37ed5f882f8aa69e430a717c262269acdd37c90411b2d2b46cfb88",
+      "source": "coordfs/errors.py",
+      "target": "coordfs/errors.py"
+    },
+    {
+      "bytes": 6138,
+      "sha256": "f6b218d89a204d208695a6fd6be212483714f0bc3c4f1c98929b8db1f4a26b8c",
+      "source": "coordfs/events.py",
+      "target": "coordfs/events.py"
+    },
+    {
+      "bytes": 2514,
+      "sha256": "bec24b5a2d17efc53403e7badc541e73db579e13a11eac119c4f0668aa54a07f",
+      "source": "coordfs/hashing.py",
+      "target": "coordfs/hashing.py"
+    },
+    {
+      "bytes": 9961,
+      "sha256": "c360fa7969b0cad86d736e9f7793c7e221585d31b044ac2e9a2420c8e197ec4c",
+      "source": "coordfs/identity.py",
+      "target": "coordfs/identity.py"
+    },
+    {
+      "bytes": 4871,
+      "sha256": "634b742a624aeb390594e96e4b9f971fd33be3f34a566fd0aacbd925cbc42632",
+      "source": "coordfs/checkout_claims.py",
+      "target": "coordfs/checkout_claims.py"
+    },
+    {
+      "bytes": 65284,
+      "sha256": "4e31af965cf220aefc006500926a47fc17601872c0992ec13997a8d1b743a27f",
+      "source": "coordfs/journal_bridge.py",
+      "target": "coordfs/journal_bridge.py"
+    },
+    {
+      "bytes": 19285,
+      "sha256": "a8ecbea13d2eec86a8d9180c9d91bc39995c762ef4ca0f54b4197564c06fc718",
+      "source": "coordfs/knowledge_bridge.py",
+      "target": "coordfs/knowledge_bridge.py"
+    },
+    {
+      "bytes": 17170,
+      "sha256": "cc0eb0fccd27214ab7d18b2ab3b043e184f137d5fade477a339a9807044e2db8",
+      "source": "coordfs/antigravity_transport.py",
+      "target": "coordfs/antigravity_transport.py"
+    },
+    {
+      "bytes": 10475,
+      "sha256": "ede2865e8042f390e100d6e5405164bceaf97e8b7687c1bc840fbb222176dedc",
+      "source": "coordfs/antigravity_relay.py",
+      "target": "coordfs/antigravity_relay.py"
+    },
+    {
+      "bytes": 313291,
+      "sha256": "a5b1c1ec8cddb4d105433d21467c98ae9e760b54acdee360ccae948c368953e3",
+      "source": "coordfs/wake.py",
+      "target": "coordfs/wake.py"
+    },
+    {
+      "bytes": 35748,
+      "sha256": "56c1b1dfa87fb21199f3ad66f5daaeba326a8597e4e87d9cd88d78d7f90904c4",
+      "source": "coordfs/wake_correlation.py",
+      "target": "coordfs/wake_correlation.py"
+    },
+    {
+      "bytes": 6058,
+      "sha256": "6dc22e5895953ec7fcdc18b51921e508efb1202ff942e9d3cb7610f829052734",
+      "source": "coordfs/codex_ack.py",
+      "target": "coordfs/codex_ack.py"
+    },
+    {
+      "bytes": 38228,
+      "sha256": "fc4d8f4268ad29f9b57c9f3e13f55acc1796d6fa628ed3b585ec14c7df9acd78",
+      "source": "coordfs/codex_desktop_tool_host.py",
+      "target": "coordfs/codex_desktop_tool_host.py"
+    },
+    {
+      "bytes": 56011,
+      "sha256": "0701db692a537f51521018d727d9e6934a3c5bb13635ce4924b67b628cf6a7d8",
+      "source": "coordfs/codex_relay_cycle.py",
+      "target": "coordfs/codex_relay_cycle.py"
+    },
+    {
+      "bytes": 4795,
+      "sha256": "50e42b32ee821a512d9b4b15810e1d3467c533fa017372919d96de6299fc66cc",
+      "source": "codex-relay-cycle.ps1",
+      "target": "codex-relay-cycle.ps1"
+    },
+    {
+      "bytes": 7758,
+      "sha256": "1bc4895c01dc278fede5cce87e499a9f046f71a68ce7512af3bfb306e96808a1",
+      "source": "coordfs/desktop_adapters.py",
+      "target": "coordfs/desktop_adapters.py"
+    },
+    {
+      "bytes": 46798,
+      "sha256": "7e7d18c8a1b2fa21f5aba14a4540ad082d52657cf51cbf98a8b156f84d26d52c",
+      "source": "coordfs/zcode_desktop_tool_host.py",
+      "target": "coordfs/zcode_desktop_tool_host.py"
+    },
+    {
+      "bytes": 38946,
+      "sha256": "978fe54d3473efc8182a212764ab6eae116385ae0f4d2a5ea19c17fad70f1143",
+      "source": "coordfs/leases.py",
+      "target": "coordfs/leases.py"
+    },
+    {
+      "bytes": 76797,
+      "sha256": "e2d3ddc035cd0c6d8d5c4877f730b0960353967375a8201d33a3cb5dfea860f5",
+      "source": "coordfs/office_cli.py",
+      "target": "coordfs/office_cli.py"
+    },
+    {
+      "bytes": 133652,
+      "sha256": "05ab36c9d8683ca892527c14dc82424ff3188077ecd2b1dea47326c40914e790",
+      "source": "coordfs/office_mcp.py",
+      "target": "coordfs/office_mcp.py"
+    },
+    {
+      "bytes": 8139,
+      "sha256": "f477375419d4ac142814a5f03dc746a6e3bd74cffcd5766dc6769506bb6d1c50",
+      "source": "coordfs/native_mcp_identity.py",
+      "target": "coordfs/native_mcp_identity.py"
+    },
+    {
+      "bytes": 17228,
+      "sha256": "eb12e4a117e36ba0b63892a44719ffa4c2fb8e6492799b8f653ce5d15f708758",
+      "source": "coordfs/office_pipe.py",
+      "target": "coordfs/office_pipe.py"
+    },
+    {
+      "bytes": 20627,
+      "sha256": "67a317f94447e25567cc953bba1f45f419723909950a75302864556baed499a2",
+      "source": "coordfs/office_remote.py",
+      "target": "coordfs/office_remote.py"
+    },
+    {
+      "bytes": 33038,
+      "sha256": "0adb0cecc39819d4d64c87e7771dd8e5e7842693a7a3180eec8be410bc3becd9",
+      "source": "coordfs/office_cli_remote.py",
+      "target": "coordfs/office_cli_remote.py"
+    },
+    {
+      "bytes": 32970,
+      "sha256": "23627f61772682a886165dd50384e0a89a5dbcfe0738689579d5f1e388fe7f2f",
+      "source": "coordfs/office_ssh_gate.py",
+      "target": "coordfs/office_ssh_gate.py"
+    },
+    {
+      "bytes": 210810,
+      "sha256": "a2fbfa27a71fad754636d540abaf46858fec1a5cd040bb767cc5a66f9c92b37c",
+      "source": "coordfs/office.py",
+      "target": "coordfs/office.py"
+    },
+    {
+      "bytes": 38289,
+      "sha256": "feca2fd4e35e99722a11d636a285445d96a67e64b2cf3367caea8200dbc04d1f",
+      "source": "coordfs/thread_registry.py",
+      "target": "coordfs/thread_registry.py"
+    },
+    {
+      "bytes": 20699,
+      "sha256": "3dc4f42dc3075745e2dfc8e2b499f02ec6916e5eb0886b6c47a26f6d4916de69",
+      "source": "coordfs/project_registry_view.py",
+      "target": "coordfs/project_registry_view.py"
+    },
+    {
+      "bytes": 13369,
+      "sha256": "4f61d10d1f0ac7987a59c84998786a3d06df9bc95aa21b90dac9f47fd401f755",
+      "source": "coordfs/project_goals.py",
+      "target": "coordfs/project_goals.py"
+    },
+    {
+      "bytes": 20792,
+      "sha256": "a93236e94f62a01c2a8a24a868191d502fe3914cf6e34e336ecb1647f771a515",
+      "source": "coordfs/projection.py",
+      "target": "coordfs/projection.py"
+    },
+    {
+      "bytes": 120074,
+      "sha256": "4eac682fe457b8a63274ace5375accd97e8fadb3338161e6af4e6197af85a629",
+      "source": "coordfs/projects.py",
+      "target": "coordfs/projects.py"
+    },
+    {
+      "bytes": 9894,
+      "sha256": "1cff407fe73e7083fa183df252c2aad132e3dc51b7c44bf650b6fb9304e2044f",
+      "source": "coordfs/relay_verify.py",
+      "target": "coordfs/relay_verify.py"
+    },
+    {
+      "bytes": 2774,
+      "sha256": "09381010b18859b4b96f4c3f6d0b070d537d8cf5fa8e68fa6ca46b0ceac43cb6",
+      "source": "coordfs/store.py",
+      "target": "coordfs/store.py"
+    },
+    {
+      "bytes": 36590,
+      "sha256": "19b36f11fabd7703e36690855f3a2c609d65db757cf27cb1794a9765964af70d",
+      "source": "coordfs/work.py",
+      "target": "coordfs/work.py"
+    },
+    {
+      "bytes": 8233,
+      "sha256": "6c8ae56930c381943cebc59d04083346c4a5a84b9a1a450e5584922815e87f6a",
+      "source": "hooks/office_wake_stop_gate.py",
+      "target": "hooks/office_wake_stop_gate.py"
+    },
+    {
+      "bytes": 12887,
+      "sha256": "60981777eb4b8295b2db0af305db8d38b634abc7ddfbc1158059d85134f7ddbd",
+      "source": "host/codex_app_transport.js",
+      "target": "host/codex_app_transport.js"
+    }
+  ],
+  "runtime_fingerprint": "b171371820afb897cbaee81560e2ec6f6d153b825e3922fb2bc31c6ed8dd8a8b",
+  "runtime_version": "0.2.0",
+  "schema_version": 1,
+  "skill": [
+    {
+      "bytes": 15236,
+      "sha256": "20ae5eac413a88a8935d294bf13fa9dd46969241b0d15d974de459ab9d4eb8a8",
+      "source": "skill/agent-office/SKILL.md",
+      "target": "SKILL.md"
+    }
+  ],
+  "skill_fingerprint": "f8c6e4f4e12f3f8d34319af298506d6080ba7caa54b037aa6863ed7df327e475"
+}

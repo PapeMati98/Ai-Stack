@@ -1,0 +1,724 @@
+{
+  "schema_version": 1,
+  "matrix_version": "1.0.0",
+  "updated": "2026-09-09",
+  "verification_scope": "Source-backed static capability ledger. It does not attest a live provider client, a current installation, native discovery, provider-session resumption, or an ended-turn wake.",
+  "office": {
+    "shared_home_template": "%USERPROFILE%\\.agents\\coord\\office",
+    "installed_cli_path_template": "%USERPROFILE%\\.agents\\runtime\\agent-office\\office.cmd",
+    "source_cli_entrypoint": "python -I office.py --harness <runtime> <command>",
+    "stdio_mcp_entrypoint": "%USERPROFILE%\\.agents\\runtime\\agent-office\\office.cmd --harness <runtime> mcp",
+    "transport": "local filesystem plus owner-only Windows named-pipe wake; no network listener, port, tunnel, or remote transport"
+  },
+  "status_values": [
+    "verified",
+    "unverified",
+    "unsupported",
+    "unknown",
+    "deferred"
+  ],
+  "capability_categories": [
+    "discovery",
+    "send_read",
+    "pending_wait",
+    "progress_cancel",
+    "provider_session_resume",
+    "new_turn",
+    "action_event_capture",
+    "ended_turn_wake"
+  ],
+  "proof_rules": {
+    "copied_skill_is_not_native_discovery_evidence": true,
+    "transport_delivery_is_not_provider_session_resume_evidence": true,
+    "source_test_is_not_a_live_provider_client_receipt": true,
+    "unverified_must_not_be_reported_as_available": true
+  },
+  "evidence_catalog": {
+    "E-TEST-STDIO-TOOLS": {
+      "kind": "source_test",
+      "path": "tests/test_office_mcp.py",
+      "case": "McpProtocolTests.test_initialize_tools_list_and_ping",
+      "scope": "Agent Office stdio server tool listing only; not native client discovery."
+    },
+    "E-TEST-INSTALLER-STDIO": {
+      "kind": "source_test",
+      "path": "tests/test_installer.py",
+      "case": "InstalledEntrypointBytecodeRegressionTests.test_installed_mcp_registration_initializes_and_exits_cleanly_on_eof",
+      "scope": "Synthetic installed MCP registration starts the local server; not a live Codex or Claude discovery receipt."
+    },
+    "E-TEST-STDIO-EXCHANGE": {
+      "kind": "source_test",
+      "path": "tests/test_office_two_processes.py",
+      "case": "TwoProcessExchangeTests.test_two_mcp_servers_exchange_messages_both_ways",
+      "scope": "Two synthetic local stdio MCP servers exchange messages and wake waits; not provider-session resumption."
+    },
+    "E-TEST-LOCAL-WAIT": {
+      "kind": "source_test",
+      "path": "tests/test_office_wait.py",
+      "case": "WaitTests.test_wakes_under_one_second_after_send",
+      "scope": "Local Office wait implementation only."
+    },
+    "E-TEST-NO-NETWORK": {
+      "kind": "source_test",
+      "path": "tests/test_office_no_network.py",
+      "case": "NoNetworkTests.test_full_session_under_socket_denying_audit_hook",
+      "scope": "Local Office transport owns no network socket."
+    },
+    "E-EVIDENCE-NO-NETWORK-R9": {
+      "kind": "external_receipt",
+      "path": "docs/agent-office-vision-20260909/office-security-windows-evidence-r9.json",
+      "section": "process_probe and socket_probe",
+      "scope": "Fresh committed-origin receipt binds child-side python -I isolation, probe hash, live MCP child PIDs and netstat sampling; it is not provider-client discovery evidence."
+    },
+    "E-INSTALLER-NATIVE-CANDIDATES": {
+      "kind": "source_contract",
+      "path": "install_agent_office.py",
+      "case": "claude_server and codex_server registrations",
+      "scope": "Installer configuration candidates for Claude and Codex only; neither configuration nor a copied skill proves native discovery."
+    },
+    "E-INSTALLER-SKILL-TARGETS": {
+      "kind": "distribution_metadata",
+      "path": "install_agent_office.py",
+      "case": "SKILL_TARGETS",
+      "scope": "Instruction distribution target only. It is expressly insufficient to prove native MCP discovery or a successful client call."
+    },
+    "E-README-LOCAL-CLI": {
+      "kind": "source_contract",
+      "path": "README.md",
+      "section": "Agent Office and dedicated local installer",
+      "scope": "Documents the local Office home, wrapper, CLI, and stdio MCP entrypoint."
+    },
+    "E-README-QWEN-CLI-FALLBACK": {
+      "kind": "source_contract",
+      "path": "README.md",
+      "section": "Capability matrix and runtime boundaries",
+      "scope": "Documents the bounded CLI wait fallback for headless Qwen Code; no Qwen session test is claimed."
+    },
+    "E-README-PROGRESS-CANCEL": {
+      "kind": "source_contract",
+      "path": "README.md",
+      "section": "Local named-pipe wake transport",
+      "scope": "Documents local MCP progress and cancellation dispatch only; it does not prove a provider client consumes either feature."
+    },
+    "E-README-ENDED-TURN": {
+      "kind": "source_contract",
+      "path": "README.md",
+      "section": "Capability matrix and runtime boundaries",
+      "scope": "Explicitly excludes provider-session resume, automatic new turns, and ended-turn self-wake."
+    },
+    "E-README-NO-HOOK": {
+      "kind": "source_contract",
+      "path": "README.md",
+      "section": "Dedicated local installer",
+      "scope": "No Office hook is activated and no native action-event capture is claimed."
+    },
+    "E-README-IDENTITY": {
+      "kind": "source_contract",
+      "path": "README.md",
+      "section": "Known limitations of phase 1",
+      "scope": "One local Windows user is a warning-only trust assumption; there is no local authentication of agent identity."
+    },
+    "E-README-REMOTE-HERMES": {
+      "kind": "source_contract",
+      "path": "README.md",
+      "section": "Capability matrix and runtime boundaries",
+      "scope": "Remote Hermes remains uncontacted and is not installed, configured, inferred, or activated."
+    },
+    "E-RUNTIME-NO-LIVE-RECEIPT": {
+      "kind": "matrix_scope",
+      "path": "capability-matrix.json",
+      "section": "verification_scope",
+      "scope": "No runtime-specific live client receipt is present in this matrix."
+    }
+  },
+  "transport_capabilities": {
+    "discovery": {
+      "status": "verified",
+      "evidence": [
+        "E-TEST-STDIO-TOOLS",
+        "E-TEST-INSTALLER-STDIO"
+      ],
+      "basis": "The local stdio server can list its tools after it has been started. This is not native discovery by a provider runtime."
+    },
+    "send_read": {
+      "status": "verified",
+      "evidence": [
+        "E-TEST-STDIO-EXCHANGE"
+      ],
+      "basis": "Synthetic local stdio MCP servers exchange durable Office messages in both directions."
+    },
+    "pending_wait": {
+      "status": "verified",
+      "evidence": [
+        "E-TEST-STDIO-EXCHANGE",
+        "E-TEST-LOCAL-WAIT"
+      ],
+      "basis": "A pending local Office wait wakes after an Office message."
+    },
+    "progress_cancel": {
+      "status": "unverified",
+      "evidence": [
+        "E-README-PROGRESS-CANCEL"
+      ],
+      "basis": "The local server documents progress and cancellation dispatch, but this ledger has no independent provider-client consumption receipt."
+    },
+    "provider_session_resume": {
+      "status": "unsupported",
+      "evidence": [
+        "E-README-ENDED-TURN"
+      ],
+      "basis": "Office messaging does not resume a provider session."
+    },
+    "new_turn": {
+      "status": "unsupported",
+      "evidence": [
+        "E-README-ENDED-TURN"
+      ],
+      "basis": "Office has no scheduler or automatic provider-turn launcher."
+    },
+    "action_event_capture": {
+      "status": "unsupported",
+      "evidence": [
+        "E-README-NO-HOOK"
+      ],
+      "basis": "Office does not activate a native hook or consume provider action events."
+    },
+    "ended_turn_wake": {
+      "status": "unsupported",
+      "evidence": [
+        "E-README-ENDED-TURN"
+      ],
+      "basis": "A completed model turn cannot wake itself through Office."
+    }
+  },
+  "participants": [
+    {
+      "id": "codex",
+      "kind": "runtime",
+      "connection_basis": "local native MCP registration candidate",
+      "capabilities": {
+        "discovery": {
+          "status": "unverified",
+          "evidence": ["E-INSTALLER-NATIVE-CANDIDATES", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "A source-side Codex registration candidate is not a native discovery receipt."
+        },
+        "send_read": {
+          "status": "unverified",
+          "evidence": ["E-TEST-STDIO-EXCHANGE", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local transport is source-tested, but no Codex client delivery receipt is recorded."
+        },
+        "pending_wait": {
+          "status": "unverified",
+          "evidence": ["E-TEST-LOCAL-WAIT", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local wait exists, but no Codex pending-wait invocation is recorded."
+        },
+        "progress_cancel": {
+          "status": "unverified",
+          "evidence": ["E-README-PROGRESS-CANCEL", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "Provider-client progress and cancellation handling is not verified."
+        },
+        "provider_session_resume": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not resume provider sessions."
+        },
+        "new_turn": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not create a new provider turn."
+        },
+        "action_event_capture": {
+          "status": "unsupported",
+          "evidence": ["E-README-NO-HOOK"],
+          "basis": "No native action-event capture is activated."
+        },
+        "ended_turn_wake": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "An ended Codex turn cannot wake itself."
+        }
+      }
+    },
+    {
+      "id": "claude-code",
+      "kind": "runtime",
+      "connection_basis": "local native MCP registration candidate",
+      "capabilities": {
+        "discovery": {
+          "status": "unverified",
+          "evidence": ["E-INSTALLER-NATIVE-CANDIDATES", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "A source-side Claude registration candidate is not a native discovery receipt."
+        },
+        "send_read": {
+          "status": "unverified",
+          "evidence": ["E-TEST-STDIO-EXCHANGE", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local transport is source-tested, but no Claude client delivery receipt is recorded."
+        },
+        "pending_wait": {
+          "status": "unverified",
+          "evidence": ["E-TEST-LOCAL-WAIT", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local wait exists, but no Claude pending-wait invocation is recorded."
+        },
+        "progress_cancel": {
+          "status": "unverified",
+          "evidence": ["E-README-PROGRESS-CANCEL", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "Provider-client progress and cancellation handling is not verified."
+        },
+        "provider_session_resume": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not resume provider sessions."
+        },
+        "new_turn": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not create a new provider turn."
+        },
+        "action_event_capture": {
+          "status": "unsupported",
+          "evidence": ["E-README-NO-HOOK"],
+          "basis": "No native action-event capture is activated."
+        },
+        "ended_turn_wake": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "An ended Claude turn cannot wake itself."
+        }
+      }
+    },
+    {
+      "id": "kimi-code",
+      "kind": "runtime",
+      "connection_basis": "local instruction-only CLI candidate",
+      "capabilities": {
+        "discovery": {
+          "status": "unverified",
+          "evidence": ["E-INSTALLER-SKILL-TARGETS", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "A copied skill target is not native discovery evidence."
+        },
+        "send_read": {
+          "status": "unverified",
+          "evidence": ["E-TEST-STDIO-EXCHANGE", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local transport is source-tested, but no Kimi Code client delivery receipt is recorded."
+        },
+        "pending_wait": {
+          "status": "unverified",
+          "evidence": ["E-TEST-LOCAL-WAIT", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local wait exists, but no Kimi Code pending-wait invocation is recorded."
+        },
+        "progress_cancel": {
+          "status": "unverified",
+          "evidence": ["E-README-PROGRESS-CANCEL", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "Provider-client progress and cancellation handling is not verified."
+        },
+        "provider_session_resume": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not resume provider sessions."
+        },
+        "new_turn": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not create a new provider turn."
+        },
+        "action_event_capture": {
+          "status": "unsupported",
+          "evidence": ["E-README-NO-HOOK"],
+          "basis": "No native action-event capture is activated."
+        },
+        "ended_turn_wake": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "An ended Kimi Code turn cannot wake itself."
+        }
+      }
+    },
+    {
+      "id": "opencode",
+      "kind": "runtime",
+      "connection_basis": "local instruction-only CLI candidate",
+      "capabilities": {
+        "discovery": {
+          "status": "unverified",
+          "evidence": ["E-INSTALLER-SKILL-TARGETS", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "A copied skill target is not native discovery evidence."
+        },
+        "send_read": {
+          "status": "unverified",
+          "evidence": ["E-TEST-STDIO-EXCHANGE", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local transport is source-tested, but no OpenCode client delivery receipt is recorded."
+        },
+        "pending_wait": {
+          "status": "unverified",
+          "evidence": ["E-TEST-LOCAL-WAIT", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local wait exists, but no OpenCode pending-wait invocation is recorded."
+        },
+        "progress_cancel": {
+          "status": "unverified",
+          "evidence": ["E-README-PROGRESS-CANCEL", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "Provider-client progress and cancellation handling is not verified."
+        },
+        "provider_session_resume": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not resume provider sessions."
+        },
+        "new_turn": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not create a new provider turn."
+        },
+        "action_event_capture": {
+          "status": "unsupported",
+          "evidence": ["E-README-NO-HOOK"],
+          "basis": "No native action-event capture is activated."
+        },
+        "ended_turn_wake": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "An ended OpenCode turn cannot wake itself."
+        }
+      }
+    },
+    {
+      "id": "zcode",
+      "kind": "runtime",
+      "connection_basis": "local instruction-only CLI candidate",
+      "capabilities": {
+        "discovery": {
+          "status": "unverified",
+          "evidence": ["E-INSTALLER-SKILL-TARGETS", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "A copied skill target is not native discovery evidence."
+        },
+        "send_read": {
+          "status": "unverified",
+          "evidence": ["E-TEST-STDIO-EXCHANGE", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local transport is source-tested, but no ZCode client delivery receipt is recorded."
+        },
+        "pending_wait": {
+          "status": "unverified",
+          "evidence": ["E-TEST-LOCAL-WAIT", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local wait exists, but no ZCode pending-wait invocation is recorded."
+        },
+        "progress_cancel": {
+          "status": "unverified",
+          "evidence": ["E-README-PROGRESS-CANCEL", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "Provider-client progress and cancellation handling is not verified."
+        },
+        "provider_session_resume": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not resume provider sessions."
+        },
+        "new_turn": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not create a new provider turn."
+        },
+        "action_event_capture": {
+          "status": "unsupported",
+          "evidence": ["E-README-NO-HOOK"],
+          "basis": "No native action-event capture is activated."
+        },
+        "ended_turn_wake": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "An ended ZCode turn cannot wake itself."
+        }
+      }
+    },
+    {
+      "id": "minimax-code",
+      "kind": "runtime",
+      "connection_basis": "local instruction-only CLI candidate",
+      "capabilities": {
+        "discovery": {
+          "status": "unverified",
+          "evidence": ["E-INSTALLER-SKILL-TARGETS", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "A copied skill target is not native discovery evidence."
+        },
+        "send_read": {
+          "status": "unverified",
+          "evidence": ["E-TEST-STDIO-EXCHANGE", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local transport is source-tested, but no MiniMax client delivery receipt is recorded."
+        },
+        "pending_wait": {
+          "status": "unverified",
+          "evidence": ["E-TEST-LOCAL-WAIT", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local wait exists, but no MiniMax pending-wait invocation is recorded."
+        },
+        "progress_cancel": {
+          "status": "unverified",
+          "evidence": ["E-README-PROGRESS-CANCEL", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "Provider-client progress and cancellation handling is not verified."
+        },
+        "provider_session_resume": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not resume provider sessions."
+        },
+        "new_turn": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not create a new provider turn."
+        },
+        "action_event_capture": {
+          "status": "unsupported",
+          "evidence": ["E-README-NO-HOOK"],
+          "basis": "No native action-event capture is activated."
+        },
+        "ended_turn_wake": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "An ended MiniMax turn cannot wake itself."
+        }
+      }
+    },
+    {
+      "id": "antigravity",
+      "kind": "runtime",
+      "connection_basis": "local instruction-only CLI candidate",
+      "capabilities": {
+        "discovery": {
+          "status": "unverified",
+          "evidence": ["E-INSTALLER-SKILL-TARGETS", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "A copied skill target is not native discovery evidence."
+        },
+        "send_read": {
+          "status": "unverified",
+          "evidence": ["E-TEST-STDIO-EXCHANGE", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local transport is source-tested, but no Antigravity client delivery receipt is recorded."
+        },
+        "pending_wait": {
+          "status": "unverified",
+          "evidence": ["E-TEST-LOCAL-WAIT", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local wait exists, but no Antigravity pending-wait invocation is recorded."
+        },
+        "progress_cancel": {
+          "status": "unverified",
+          "evidence": ["E-README-PROGRESS-CANCEL", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "Provider-client progress and cancellation handling is not verified."
+        },
+        "provider_session_resume": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not resume provider sessions."
+        },
+        "new_turn": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not create a new provider turn."
+        },
+        "action_event_capture": {
+          "status": "unsupported",
+          "evidence": ["E-README-NO-HOOK"],
+          "basis": "No native action-event capture is activated."
+        },
+        "ended_turn_wake": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "An ended Antigravity turn cannot wake itself."
+        }
+      }
+    },
+    {
+      "id": "grok-cli",
+      "kind": "runtime",
+      "connection_basis": "local instruction-only CLI candidate",
+      "capabilities": {
+        "discovery": {
+          "status": "unverified",
+          "evidence": ["E-INSTALLER-SKILL-TARGETS", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "A copied skill target is not native discovery evidence."
+        },
+        "send_read": {
+          "status": "unverified",
+          "evidence": ["E-TEST-STDIO-EXCHANGE", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local transport is source-tested, but no Grok CLI client delivery receipt is recorded."
+        },
+        "pending_wait": {
+          "status": "unverified",
+          "evidence": ["E-TEST-LOCAL-WAIT", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local wait exists, but no Grok CLI pending-wait invocation is recorded."
+        },
+        "progress_cancel": {
+          "status": "unverified",
+          "evidence": ["E-README-PROGRESS-CANCEL", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "Provider-client progress and cancellation handling is not verified."
+        },
+        "provider_session_resume": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not resume provider sessions."
+        },
+        "new_turn": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not create a new provider turn."
+        },
+        "action_event_capture": {
+          "status": "unsupported",
+          "evidence": ["E-README-NO-HOOK"],
+          "basis": "No native action-event capture is activated."
+        },
+        "ended_turn_wake": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "An ended Grok CLI turn cannot wake itself."
+        }
+      }
+    },
+    {
+      "id": "qwen-code",
+      "kind": "runtime",
+      "connection_basis": "local instruction-only CLI candidate",
+      "capabilities": {
+        "discovery": {
+          "status": "unverified",
+          "evidence": ["E-INSTALLER-SKILL-TARGETS", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "A copied skill target is not native discovery evidence."
+        },
+        "send_read": {
+          "status": "unverified",
+          "evidence": ["E-TEST-STDIO-EXCHANGE", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local transport is source-tested, but no Qwen Code client delivery receipt is recorded."
+        },
+        "pending_wait": {
+          "status": "unverified",
+          "evidence": ["E-README-QWEN-CLI-FALLBACK", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "Headless Qwen Code may use the bounded local CLI wait fallback; no Qwen session test is recorded."
+        },
+        "progress_cancel": {
+          "status": "unverified",
+          "evidence": ["E-README-PROGRESS-CANCEL", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "Provider-client progress and cancellation handling is not verified."
+        },
+        "provider_session_resume": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not resume provider sessions."
+        },
+        "new_turn": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not create a new provider turn."
+        },
+        "action_event_capture": {
+          "status": "unsupported",
+          "evidence": ["E-README-NO-HOOK"],
+          "basis": "No native action-event capture is activated."
+        },
+        "ended_turn_wake": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "An ended Qwen Code turn cannot wake itself."
+        }
+      }
+    },
+    {
+      "id": "human-mateusz",
+      "kind": "human",
+      "connection_basis": "human participant with optional local CLI use",
+      "capabilities": {
+        "discovery": {
+          "status": "unsupported",
+          "evidence": ["E-README-LOCAL-CLI"],
+          "basis": "A human has no native MCP discovery surface."
+        },
+        "send_read": {
+          "status": "unverified",
+          "evidence": ["E-README-LOCAL-CLI", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local CLI is documented, but this matrix records no human command receipt."
+        },
+        "pending_wait": {
+          "status": "unverified",
+          "evidence": ["E-TEST-LOCAL-WAIT", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "The local wait is source-tested, but no human CLI wait receipt is recorded."
+        },
+        "progress_cancel": {
+          "status": "unverified",
+          "evidence": ["E-README-PROGRESS-CANCEL", "E-RUNTIME-NO-LIVE-RECEIPT"],
+          "basis": "No human client interaction with MCP progress or cancellation is recorded."
+        },
+        "provider_session_resume": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not resume provider sessions for a human participant."
+        },
+        "new_turn": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "Office does not create a provider turn for a human participant."
+        },
+        "action_event_capture": {
+          "status": "unsupported",
+          "evidence": ["E-README-NO-HOOK"],
+          "basis": "No native action-event capture is activated."
+        },
+        "ended_turn_wake": {
+          "status": "unsupported",
+          "evidence": ["E-README-ENDED-TURN"],
+          "basis": "A human participant has no ended provider turn for Office to wake."
+        }
+      }
+    }
+  ],
+  "deferred_boundaries": [
+    {
+      "id": "remote-hermes",
+      "status": "deferred",
+      "activated": false,
+      "claimed_available": false,
+      "evidence": ["E-README-REMOTE-HERMES"],
+      "basis": "Existing remote Hermes remains uncontacted; Agent Office does not install, configure, infer, or activate it."
+    },
+    {
+      "id": "scheduler",
+      "status": "deferred",
+      "activated": false,
+      "claimed_available": false,
+      "evidence": ["E-README-ENDED-TURN"],
+      "basis": "No scheduler or automatic new-turn launcher is part of this scope."
+    },
+    {
+      "id": "voice",
+      "status": "deferred",
+      "activated": false,
+      "claimed_available": false,
+      "evidence": ["E-README-ENDED-TURN"],
+      "basis": "Voice is outside Agent Office scope."
+    },
+    {
+      "id": "phone",
+      "status": "deferred",
+      "activated": false,
+      "claimed_available": false,
+      "evidence": ["E-README-ENDED-TURN"],
+      "basis": "Phone capability is outside Agent Office scope."
+    },
+    {
+      "id": "real-mail",
+      "status": "deferred",
+      "activated": false,
+      "claimed_available": false,
+      "evidence": ["E-README-ENDED-TURN"],
+      "basis": "Real-mail integration is outside Agent Office scope."
+    },
+    {
+      "id": "customer-data",
+      "status": "deferred",
+      "activated": false,
+      "claimed_available": false,
+      "evidence": ["E-README-ENDED-TURN"],
+      "basis": "No customer data is read, stored, or sent by this capability matrix work."
+    },
+    {
+      "id": "network-exposure",
+      "status": "deferred",
+      "activated": false,
+      "claimed_available": false,
+      "evidence": ["E-TEST-NO-NETWORK", "E-EVIDENCE-NO-NETWORK-R9"],
+      "basis": "No network listener, tunnel, port, or public exposure is activated or claimed."
+    }
+  ]
+}

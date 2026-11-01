@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Local adversarial target registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "targets"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "target_class", "synthetic_data", "active_attack_allowed"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "target_class": {"enum": ["STAGING", "isolated_candidate"]},
+          "synthetic_data": {"const": true},
+          "active_attack_allowed": {"const": true}
+        }
+      }
+    }
+  }
+}

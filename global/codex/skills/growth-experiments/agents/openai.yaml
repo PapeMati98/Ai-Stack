@@ -1,0 +1,3 @@
+interface:
+  display_name: "Growth Experiments"
+  short_description: "Design bounded growth tests with metrics and stop rules"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Simulate attack"
+  short_description: "Bounded, read-only adversarial audit for the existing 14-day security gate."
+  default_prompt: "Sprawdz wyzwalacz audytu 14-dniowego i uruchom kontrolowany, read-only red team z limitem iteracji i tokenow z execution pool. Raport zapisz pod ~/.agents/security-audits i zredaguj wszystkie sekrety."

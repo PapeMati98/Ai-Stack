@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review investor materials"
+  short_description: "Niezaleznie odbiera tresc, liczby, design i eksport"
+  default_prompt: "Odbierz material inwestycyjny na aktualnych dowodach i zwroc ACCEPTED albo NOT_ACCEPTED."

@@ -1,0 +1,63 @@
+{
+  "enabled": false,
+  "authority_db": "example-value-0126",
+  "unknown_alarm_after": 120,
+  "owner": {
+    "user_ids": [],
+    "chat_id": 0,
+    "bot_id": 0
+  },
+  "telegram": {
+    "enabled": false,
+    "long_poll_timeout": 25,
+    "host": "example-value-0127"
+  },
+  "targets": [
+    {
+      "id": "example-value-0128",
+      "label": "example-value-0129",
+      "provider": "example-value-0130",
+      "native_thread": "example-value-0126",
+      "task_id": "example-value-0126",
+      "generation": 0,
+      "enabled": false,
+      "verified": false,
+      "rollout_path": "example-value-0126"
+    },
+    {
+      "id": "example-value-0131",
+      "label": "example-value-0132",
+      "provider": "example-value-0133",
+      "native_thread": "example-value-0126",
+      "task_id": "example-value-0126",
+      "generation": 0,
+      "enabled": false,
+      "verified": false,
+      "rollout_path": "example-value-0126"
+    }
+  ],
+  "adapters": {
+    "codex-desktop": {
+      "enabled": false,
+      "node_path": "example-value-0126",
+      "plugin_path": "example-value-0126",
+      "plugin_sha256": "example-value-0126",
+      "pipe_path": "example-value-0126",
+      "caller_thread": "example-value-0126",
+      "sessions_root": "example-value-0126",
+      "pid": 0,
+      "threads": {}
+    },
+    "claude-desktop": {
+      "enabled": false,
+      "verified": false
+    }
+  },
+  "supervision": {
+    "auto_resume": false,
+    "max_no_progress_attempts": 2
+  },
+  "helpdesk": {
+    "enabled": false
+  }
+}

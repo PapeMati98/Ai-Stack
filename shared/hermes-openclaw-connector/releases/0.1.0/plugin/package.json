@@ -1,0 +1,1 @@
+{"name": "hermes-connector", "private": true, "type": "module", "version": "0.1.0", "description": "Hermes ask tool plugin (candidate, NOT activated)", "openclaw": {"extensions": ["./index.mjs"]}}

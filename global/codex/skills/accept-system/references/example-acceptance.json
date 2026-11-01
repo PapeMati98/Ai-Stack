@@ -1,0 +1,393 @@
+{
+  "schema_version": 1,
+  "acceptance_id": "accept-example-system-v1",
+  "project_slug": "example-system",
+  "status": "READY",
+  "planning_contract": {
+    "contract_id": "plan-example-system-v1",
+    "contract_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "graph": {
+    "graph_id": "graph-example-system-v1",
+    "graph_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "environment": {
+    "name": "DEV",
+    "target": "http://example.invalid",
+    "synthetic_data": true,
+    "recipient_policy": "synthetic-only",
+    "external_side_effects": "blocked",
+    "allowed_destinations": [],
+    "denied_effects": [
+      "email",
+      "payment",
+      "calendar",
+      "crm",
+      "public-integration"
+    ],
+    "enforcement_scope": [
+      {
+        "scope": "browser-context",
+        "mechanism": "Playwright routing allows the fixture origin only",
+        "evidence_ref": "policy:browser-fixture"
+      },
+      {
+        "scope": "application",
+        "mechanism": "Fake adapters reject every non-synthetic recipient",
+        "evidence_ref": "policy:application-fixture"
+      }
+    ],
+    "owner_approval": null
+  },
+  "maker": {
+    "id": "maker-example",
+    "lineage": "implementation-lineage",
+    "role": "implementer"
+  },
+  "max_generations": 3,
+  "criteria": [
+    {
+      "criterion_id": "accept-business-total",
+      "title": "Total follows the owner-approved formula",
+      "requirement_refs": [
+        "REQ-001"
+      ],
+      "mandatory": true,
+      "applicability": "applicable",
+      "domain": "business",
+      "oracle_kind": "business-oracle",
+      "oracle": {
+        "expected": "total equals quantity multiplied by approved unit price",
+        "method": "compare deterministic fixtures with the owner-approved formula",
+        "source_ref": "intake:REQ-001"
+      },
+      "evidence_kinds": [
+        "deterministic-check"
+      ],
+      "max_age_seconds": 3600,
+      "reviewer_independence": {
+        "not_same_actor": true,
+        "not_same_lineage": true,
+        "allowed_roles": [
+          "independent-reviewer"
+        ]
+      },
+      "n_a_authority": null,
+      "required_enforcement_scopes": []
+    },
+    {
+      "criterion_id": "accept-user-order-journey",
+      "title": "A user can create and inspect a synthetic order",
+      "requirement_refs": [
+        "REQ-002"
+      ],
+      "mandatory": true,
+      "applicability": "applicable",
+      "domain": "ui-functional",
+      "oracle_kind": "user-journey-evidence",
+      "oracle": {
+        "expected": "the user sees the saved synthetic order and confirmation",
+        "method": "run the role-based journey in an isolated browser",
+        "source_ref": "intake:REQ-002"
+      },
+      "evidence_kinds": [
+        "browser-e2e",
+        "visual-evidence"
+      ],
+      "max_age_seconds": 3600,
+      "reviewer_independence": {
+        "not_same_actor": true,
+        "not_same_lineage": true,
+        "allowed_roles": [
+          "independent-reviewer"
+        ]
+      },
+      "n_a_authority": null,
+      "required_enforcement_scopes": []
+    },
+    {
+      "criterion_id": "accept-dev-side-effects",
+      "title": "DEV cannot reach a real external destination",
+      "requirement_refs": [
+        "REQ-003"
+      ],
+      "mandatory": true,
+      "applicability": "applicable",
+      "domain": "side-effect",
+      "oracle_kind": "side-effect-safety",
+      "oracle": {
+        "expected": "every real external destination is blocked",
+        "method": "verify browser and application enforcement artifacts",
+        "source_ref": "global-policy:dev-side-effects"
+      },
+      "evidence_kinds": [
+        "deterministic-check"
+      ],
+      "max_age_seconds": 3600,
+      "reviewer_independence": {
+        "not_same_actor": true,
+        "not_same_lineage": true,
+        "allowed_roles": [
+          "independent-reviewer"
+        ]
+      },
+      "n_a_authority": null,
+      "required_enforcement_scopes": [
+        "browser-context",
+        "application"
+      ]
+    },
+    {
+      "criterion_id": "accept-na-accessibility",
+      "title": "Accessibility is explicitly not applicable",
+      "requirement_refs": ["REQ-001"],
+      "mandatory": true,
+      "applicability": "not-applicable",
+      "domain": "accessibility",
+      "oracle_kind": "user-journey-evidence",
+      "oracle": {
+        "expected": "accessibility boundary is absent from the discovered scope",
+        "method": "verify the trusted discovery record before execution",
+        "source_ref": "discovery:example-accessibility"
+      },
+      "evidence_kinds": ["browser-e2e"],
+      "max_age_seconds": 3600,
+      "reviewer_independence": {
+        "not_same_actor": true,
+        "not_same_lineage": true,
+        "allowed_roles": ["independent-reviewer"]
+      },
+      "n_a_authority": {
+        "kind": "trusted-discovery",
+        "actor_id": "discovery-example",
+        "actor_role": "discovery-gate",
+        "evidence_ref": "discovery:example-accessibility"
+      },
+      "required_enforcement_scopes": []
+    },
+    {
+      "criterion_id": "accept-na-backend",
+      "title": "Backend is explicitly not applicable",
+      "requirement_refs": ["REQ-001"],
+      "mandatory": true,
+      "applicability": "not-applicable",
+      "domain": "backend",
+      "oracle_kind": "business-oracle",
+      "oracle": {
+        "expected": "backend boundary is absent from the discovered scope",
+        "method": "verify the trusted discovery record before execution",
+        "source_ref": "discovery:example-backend"
+      },
+      "evidence_kinds": ["deterministic-check"],
+      "max_age_seconds": 3600,
+      "reviewer_independence": {
+        "not_same_actor": true,
+        "not_same_lineage": true,
+        "allowed_roles": ["independent-reviewer"]
+      },
+      "n_a_authority": {
+        "kind": "trusted-discovery",
+        "actor_id": "discovery-example",
+        "actor_role": "discovery-gate",
+        "evidence_ref": "discovery:example-backend"
+      },
+      "required_enforcement_scopes": []
+    },
+    {
+      "criterion_id": "accept-na-data",
+      "title": "Data is explicitly not applicable",
+      "requirement_refs": ["REQ-001"],
+      "mandatory": true,
+      "applicability": "not-applicable",
+      "domain": "data",
+      "oracle_kind": "business-oracle",
+      "oracle": {
+        "expected": "data boundary is absent from the discovered scope",
+        "method": "verify the trusted discovery record before execution",
+        "source_ref": "discovery:example-data"
+      },
+      "evidence_kinds": ["deterministic-check"],
+      "max_age_seconds": 3600,
+      "reviewer_independence": {
+        "not_same_actor": true,
+        "not_same_lineage": true,
+        "allowed_roles": ["independent-reviewer"]
+      },
+      "n_a_authority": {
+        "kind": "trusted-discovery",
+        "actor_id": "discovery-example",
+        "actor_role": "discovery-gate",
+        "evidence_ref": "discovery:example-data"
+      },
+      "required_enforcement_scopes": []
+    },
+    {
+      "criterion_id": "accept-na-integration",
+      "title": "Integration is explicitly not applicable",
+      "requirement_refs": ["REQ-001"],
+      "mandatory": true,
+      "applicability": "not-applicable",
+      "domain": "integration",
+      "oracle_kind": "business-oracle",
+      "oracle": {
+        "expected": "integration boundary is absent from the discovered scope",
+        "method": "verify the trusted discovery record before execution",
+        "source_ref": "discovery:example-integration"
+      },
+      "evidence_kinds": ["deterministic-check"],
+      "max_age_seconds": 3600,
+      "reviewer_independence": {
+        "not_same_actor": true,
+        "not_same_lineage": true,
+        "allowed_roles": ["independent-reviewer"]
+      },
+      "n_a_authority": {
+        "kind": "trusted-discovery",
+        "actor_id": "discovery-example",
+        "actor_role": "discovery-gate",
+        "evidence_ref": "discovery:example-integration"
+      },
+      "required_enforcement_scopes": []
+    },
+    {
+      "criterion_id": "accept-na-performance",
+      "title": "Performance is explicitly not applicable",
+      "requirement_refs": ["REQ-001"],
+      "mandatory": true,
+      "applicability": "not-applicable",
+      "domain": "performance",
+      "oracle_kind": "business-oracle",
+      "oracle": {
+        "expected": "performance boundary is absent from the discovered scope",
+        "method": "verify the trusted discovery record before execution",
+        "source_ref": "discovery:example-performance"
+      },
+      "evidence_kinds": ["deterministic-check"],
+      "max_age_seconds": 3600,
+      "reviewer_independence": {
+        "not_same_actor": true,
+        "not_same_lineage": true,
+        "allowed_roles": ["independent-reviewer"]
+      },
+      "n_a_authority": {
+        "kind": "trusted-discovery",
+        "actor_id": "discovery-example",
+        "actor_role": "discovery-gate",
+        "evidence_ref": "discovery:example-performance"
+      },
+      "required_enforcement_scopes": []
+    },
+    {
+      "criterion_id": "accept-na-reliability",
+      "title": "Reliability is explicitly not applicable",
+      "requirement_refs": ["REQ-001"],
+      "mandatory": true,
+      "applicability": "not-applicable",
+      "domain": "reliability",
+      "oracle_kind": "business-oracle",
+      "oracle": {
+        "expected": "reliability boundary is absent from the discovered scope",
+        "method": "verify the trusted discovery record before execution",
+        "source_ref": "discovery:example-reliability"
+      },
+      "evidence_kinds": ["deterministic-check"],
+      "max_age_seconds": 3600,
+      "reviewer_independence": {
+        "not_same_actor": true,
+        "not_same_lineage": true,
+        "allowed_roles": ["independent-reviewer"]
+      },
+      "n_a_authority": {
+        "kind": "trusted-discovery",
+        "actor_id": "discovery-example",
+        "actor_role": "discovery-gate",
+        "evidence_ref": "discovery:example-reliability"
+      },
+      "required_enforcement_scopes": []
+    },
+    {
+      "criterion_id": "accept-na-responsive",
+      "title": "Responsive behavior is explicitly not applicable",
+      "requirement_refs": ["REQ-001"],
+      "mandatory": true,
+      "applicability": "not-applicable",
+      "domain": "responsive",
+      "oracle_kind": "user-journey-evidence",
+      "oracle": {
+        "expected": "responsive boundary is absent from the discovered scope",
+        "method": "verify the trusted discovery record before execution",
+        "source_ref": "discovery:example-responsive"
+      },
+      "evidence_kinds": ["browser-e2e"],
+      "max_age_seconds": 3600,
+      "reviewer_independence": {
+        "not_same_actor": true,
+        "not_same_lineage": true,
+        "allowed_roles": ["independent-reviewer"]
+      },
+      "n_a_authority": {
+        "kind": "trusted-discovery",
+        "actor_id": "discovery-example",
+        "actor_role": "discovery-gate",
+        "evidence_ref": "discovery:example-responsive"
+      },
+      "required_enforcement_scopes": []
+    },
+    {
+      "criterion_id": "accept-na-security",
+      "title": "Security is explicitly not applicable",
+      "requirement_refs": ["REQ-001"],
+      "mandatory": true,
+      "applicability": "not-applicable",
+      "domain": "security",
+      "oracle_kind": "business-oracle",
+      "oracle": {
+        "expected": "security boundary is absent from the discovered scope",
+        "method": "verify the trusted discovery record before execution",
+        "source_ref": "discovery:example-security"
+      },
+      "evidence_kinds": ["deterministic-check"],
+      "max_age_seconds": 3600,
+      "reviewer_independence": {
+        "not_same_actor": true,
+        "not_same_lineage": true,
+        "allowed_roles": ["independent-reviewer"]
+      },
+      "n_a_authority": {
+        "kind": "trusted-discovery",
+        "actor_id": "discovery-example",
+        "actor_role": "discovery-gate",
+        "evidence_ref": "discovery:example-security"
+      },
+      "required_enforcement_scopes": []
+    },
+    {
+      "criterion_id": "accept-na-ux",
+      "title": "UX is explicitly not applicable",
+      "requirement_refs": ["REQ-001"],
+      "mandatory": true,
+      "applicability": "not-applicable",
+      "domain": "ux",
+      "oracle_kind": "user-journey-evidence",
+      "oracle": {
+        "expected": "ux boundary is absent from the discovered scope",
+        "method": "verify the trusted discovery record before execution",
+        "source_ref": "discovery:example-ux"
+      },
+      "evidence_kinds": ["browser-e2e"],
+      "max_age_seconds": 3600,
+      "reviewer_independence": {
+        "not_same_actor": true,
+        "not_same_lineage": true,
+        "allowed_roles": ["independent-reviewer"]
+      },
+      "n_a_authority": {
+        "kind": "trusted-discovery",
+        "actor_id": "discovery-example",
+        "actor_role": "discovery-gate",
+        "evidence_ref": "discovery:example-ux"
+      },
+      "required_enforcement_scopes": []
+    }
+  ]
+}

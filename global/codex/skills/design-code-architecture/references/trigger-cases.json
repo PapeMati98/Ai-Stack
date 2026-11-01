@@ -1,0 +1,19 @@
+{
+  "positive": [
+    "Zaprojektuj moduł rozliczeń przecinający API i bazę",
+    "Podziel odpowiedzialności w rosnącym monolicie",
+    "Zaplanuj bezpieczną migrację publicznego kontraktu",
+    "Usuń moduł transportu i prześledź jego callerów, zależności, przepływ danych, konsumentów oraz testy regresji"
+  ],
+  "negative": [
+    "Zmień etykietę przycisku",
+    "Napraw pojedynczy literówkowy błąd",
+    "Wyjaśnij istniejącą funkcję bez zmian",
+    "Popraw prywatną funkcję w jednym module bez zmiany granic ani kontraktu"
+  ],
+  "sensitive_actions": [
+    "destrukcyjna migracja danych",
+    "zerwanie publicznego API bez planu przejścia",
+    "przebudowa produkcji bez rollbacku"
+  ]
+}

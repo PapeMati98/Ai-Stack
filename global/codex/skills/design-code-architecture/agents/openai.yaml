@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design code architecture"
+  short_description: "Granice modułów, model domeny i odwracalne pionowe kroki"
+  default_prompt: "Użyj $design-code-architecture do zaprojektowania najmniejszej wystarczającej architektury."

@@ -1,0 +1,1154 @@
+{
+  "schema_version": 1,
+  "manifest_id": "office-oracles-task-029",
+  "manifest_version": "1.0.0",
+  "task_id": "TASK-029",
+  "updated": "2026-09-13",
+  "recorded_by": "run-20260912T174209Z-a1b2c3d4e5",
+  "verification_scope": "Executed deterministic evidence for the graph-bound Agent Office candidate; no provider turn or installation is claimed and this manifest is not a security acceptance.",
+  "criteria_authority": "Graph revision 5 criterion set supplied by the parent Agent Fleet run. The parent graph state is not mirrored in this repository and this manifest does not replace it.",
+  "evidence_receipts": [
+    {
+      "receipt_id": "office-network-evidence-r9-20260913T035924+0200",
+      "path": "docs/agent-office-vision-20260909/office-security-windows-evidence-r9.json",
+      "sha256": "3591da846cc0beb436f9fd90ca4824a3335458571da58971ce0247abde3ddc0c",
+      "scope": "Fresh Windows child-process and no-network evidence for the committed Agent Office origin."
+    },
+    {
+      "receipt_id": "office-projects-tests-r1-20260913T030024+0200",
+      "path": "docs/agent-office-vision-20260909/office-projects-test-receipt-r1.json",
+      "sha256": "d0492e0cd87b1cf19862a579f8a7adda0cc2b03337b8deea8081ce4a8367c6eb",
+      "scope": "Fresh execution receipt for the project registry and Windows path-validation regression tests."
+    },
+    {
+      "receipt_id": "office-security-qwen-witness-r18",
+      "path": "docs/agent-office-vision-20260909/office-security-qwen-witness-r18.md",
+      "sha256": "954f115c339f702fafc00edf92faf675a0cde8585dad7b6071bbf776f2c06159",
+      "scope": "Independent Qwen witness of the evidence chain; not a security acceptance."
+    }
+  ],
+  "graph": {
+    "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+    "graph_revision": 5,
+    "bound_workspace_path": "shared/agent-office",
+    "candidate_state": "The bound candidate was exercised by the parent deterministic Windows evidence run; this manifest records probe receipts and does not replace graph acceptance."
+  },
+  "lineage": {
+    "producer": {
+      "run_id": "run-20260912T092631Z-b19946dbd4",
+      "lineage": "meta",
+      "actor": "muse-spark-1.3-contractor",
+      "role": "implementer",
+      "basis": "Detached graph-bound Office candidate workspace produced by the Muse Spark 1.3 Fleet run."
+    },
+    "reviewer": {
+      "run_id": "run-20260912T140224Z-4483ca16f4",
+      "lineage": "alibaba",
+      "actor": "qwen-code-contractor",
+      "role": "independent-oracle-reviewer",
+      "basis": "Bounded Qwen Fleet run that authored this manifest and its executable contract test; it is not the final graph acceptance."
+    },
+    "independence": {
+      "not_same_actor": true,
+      "not_same_run": true,
+      "not_same_lineage": true,
+      "note": "Reviewer lineage differs from producer lineage. Authoring a manifest is not acceptance, and it does not transfer graph or Fleet ownership to the reviewer."
+    }
+  },
+  "outcome_classes": {
+    "PASS": {
+      "terminal": true,
+      "authorizing": true,
+      "requires_reason": false,
+      "meaning": "Every required probe was executed green against the bound candidate by the run named in the probe receipt."
+    },
+    "FAIL": {
+      "terminal": true,
+      "authorizing": false,
+      "requires_reason": true,
+      "meaning": "An executed probe contradicted the oracle. A fail never authorizes a criterion."
+    },
+    "SKIP": {
+      "terminal": true,
+      "authorizing": false,
+      "requires_reason": true,
+      "meaning": "A probe was not executed, for example a Windows-only probe on another platform. A skip stays visible with a reason and never authorizes a mandatory criterion."
+    }
+  },
+  "aggregation": {
+    "rule": "oracle-status-requires-every-required-probe-pass",
+    "priority": [
+      "FAIL",
+      "SKIP",
+      "PASS"
+    ],
+    "skip_authorizes": false,
+    "pass_requires_executed_probe": true,
+    "forbid_skip_coercion": true
+  },
+  "policy": {
+    "mandatory_oracles": 17,
+    "skip_authorizes_mandatory": false,
+    "prose_only_receipt": false,
+    "path_style": "posix-repository-relative",
+    "path_prefix": "shared/agent-office/",
+    "allowed_probe_kinds": [
+      "test-file",
+      "harness",
+      "source",
+      "parent-receipt"
+    ],
+    "forbidden_payload_classes": [
+      "model-prompts",
+      "secrets",
+      "cookies",
+      "raw-transcripts",
+      "customer-data"
+    ],
+    "allow_additional_fields": true
+  },
+  "reasons": {
+    "R-PARENT-EXEC": {
+      "code": "parent-execution-pending",
+      "text": "No Office probe was executed in this bounded contractor run because the runner exposed no shell or test command. The parent must replace this skip with PASS or FAIL from its deterministic suite run."
+    },
+    "R-WINDOWS-ONLY": {
+      "code": "windows-only-platform-probe",
+      "text": "The probe needs a Windows-only local surface, for example a named pipe, and stays visible as a skip on every other platform."
+    },
+    "R-GRAPH-STATE": {
+      "code": "graph-state-outside-repository",
+      "text": "The decisive evidence is parent graph, git or provider state that is not mirrored inside this repository, so no repository probe can authorize it."
+    },
+    "R-EXECUTED": {
+      "code": "executed-proof",
+      "text": "Required probe executed by the bounded parent deterministic evidence run and passed."
+    }
+  },
+  "oracles": [
+    {
+      "criterion_id": "crit-office-integration-029",
+      "title": "Office runtime and local transport are integrated in the bound candidate",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-integration-two-process-exchange",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_two_processes.py",
+          "test_case": "TwoProcessExchangeTests.test_two_mcp_servers_exchange_messages_both_ways",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-integration-local-wait",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_wait.py",
+          "test_case": "WaitTests.test_wakes_under_one_second_after_send",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-integration-runtime-source",
+          "kind": "source",
+          "path": "shared/agent-office/coordfs/office.py",
+          "test_case": null,
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-PARENT-EXEC",
+            "executed_by": null
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-integration-tests-029",
+      "title": "The Office suite is discoverable and runs from the package tests directory",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-integration-tests-discovery",
+          "kind": "harness",
+          "path": "shared/agent-office/tests/run_tests.py",
+          "test_case": null,
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-integration-tests-mcp-protocol",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_mcp.py",
+          "test_case": "McpProtocolTests.test_initialize_tools_list_and_ping",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-integration-rollback-029",
+      "title": "Install, verify, rollback and recover stay byte-exact and reversible",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-rollback-install-verify-recover",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_installer.py",
+          "test_case": "AgentOfficeInstallerTests.test_install_verify_rollback_recover_and_durable_home_is_untouched",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-rollback-blocked-by-live-edit",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_installer.py",
+          "test_case": "AgentOfficeInstallerTests.test_changed_live_config_blocks_rollback_before_any_write",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-rollback-release-race",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_release_race.py",
+          "test_case": "ReleaseRaceTests",
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-PARENT-EXEC",
+            "executed_by": null
+          }
+        },
+        {
+          "probe_id": "probe-office-rollback-journal-recovery",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_journal_bridge.py",
+          "test_case": "RecoveryAndWriteOnceTests",
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-PARENT-EXEC",
+            "executed_by": null
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-repository-closeout-029",
+      "title": "Repository closeout keeps runtime state out of git and backup payloads",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-closeout-gitignore-admission",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_ownership_backup.py",
+          "test_case": "OwnershipBackupTests.test_agent_office_release_root_is_admitted_by_gitignore",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-closeout-backup-allowlist",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_ownership_backup.py",
+          "test_case": "OwnershipBackupTests.test_backup_allowlist_excludes_runtime_state",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-closeout-git-receipt",
+          "kind": "parent-receipt",
+          "path": null,
+          "test_case": null,
+          "authority": "parent-agent-fleet-run",
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-GRAPH-STATE",
+            "executed_by": null
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-active-ack-r5-029",
+      "title": "Active project acknowledgment handling is present and finalization-keyed",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-active-ack-application",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_projects.py",
+          "test_case": "ApplicationAckTests",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-active-ack-finalization-key",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_projects.py",
+          "test_case": "AckFinalizationKeyTests",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-active-identity-r5-029",
+      "title": "Active agent identity distinguishes sessions of the same harness",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-active-identity-distinct-sessions",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_agent_identity.py",
+          "test_case": "AgentIdentityTests.test_two_sessions_of_same_harness_have_distinct_agent_ids",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-active-identity-weak-but-stable",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_agent_identity.py",
+          "test_case": "AgentIdentityTests.test_missing_session_signal_is_explicitly_weak_but_process_stable",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-active-untrusted-r5-029",
+      "title": "Inbox and channel payloads stay framed as untrusted data with no execution surface",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-active-untrusted-injection-framing",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_contract.py",
+          "test_case": "InjectionFramingTests.test_injection_is_returned_as_data_and_causes_no_action",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-active-untrusted-authority",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_projects.py",
+          "test_case": "UntrustedAuthorityTests",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-active-untrusted-channel-injection",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_channels.py",
+          "test_case": "ChannelInjectionTests",
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-PARENT-EXEC",
+            "executed_by": null
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-finding-mcp-inv-drift-r5-029",
+      "title": "MCP invocation drift is refused instead of being silently accepted",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-mcp-drift-unknown-arguments",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_mcp.py",
+          "test_case": "McpProtocolTests.test_unknown_arguments_are_rejected_and_flagged_as_error",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-mcp-drift-unknown-method",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_mcp.py",
+          "test_case": "McpProtocolTests.test_errors_for_parse_unknown_method_and_bad_params",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-mcp-drift-server-source",
+          "kind": "source",
+          "path": "shared/agent-office/coordfs/office_mcp.py",
+          "test_case": null,
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-PARENT-EXEC",
+            "executed_by": null
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-finding-pkg-manifest-gap-r5-029",
+      "title": "Package manifest, installer source map and release metadata declare the same runtime set",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-pkg-manifest-metadata-agreement",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_installer.py",
+          "test_case": "InstalledEntrypointBytecodeRegressionTests.test_patch_release_metadata_and_owned_manifest_agree",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-pkg-manifest-hash-mismatch",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_installer.py",
+          "test_case": "AgentOfficeInstallerTests.test_manifest_hash_mismatch_is_rejected",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-pkg-manifest-extra-files",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_installer.py",
+          "test_case": "InstalledEntrypointBytecodeRegressionTests.test_packaged_generated_launcher_and_runtime_tree_reject_extra_files",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-pkg-manifest-declaration",
+          "kind": "source",
+          "path": "shared/agent-office/package.json",
+          "test_case": null,
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-PARENT-EXEC",
+            "executed_by": null
+          }
+        },
+        {
+          "probe_id": "probe-office-pkg-manifest-installer",
+          "kind": "source",
+          "path": "shared/agent-office/install_agent_office.py",
+          "test_case": null,
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-PARENT-EXEC",
+            "executed_by": null
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-finding-facade-no-test-r5-029",
+      "title": "The published facade entrypoints are covered by tests and not only by documentation",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-facade-surface-source",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_channels.py",
+          "test_case": "ChannelSurfaceTests.test_no_new_imports_and_single_rotation_path",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-facade-entrypoint",
+          "kind": "source",
+          "path": "shared/agent-office/office.py",
+          "test_case": null,
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-facade-cli-wake",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_wake_cli.py",
+          "test_case": "OfficeWakeCliTests.test_channel_wake_under_two_seconds_and_no_duplicate",
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-WINDOWS-ONLY",
+            "executed_by": null
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-finding-missing-cli-mcp-reply-r5-029",
+      "title": "A reply anchor raised over the local CLI is answerable through the stdio MCP surface",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-cli-mcp-reply-anchor",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_contract.py",
+          "test_case": "ReplyToAnchorTests",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-cli-mcp-reply-round-trip",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_mcp.py",
+          "test_case": "McpProtocolTests.test_presence_tool_and_send_round_trip_through_server",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-cli-mcp-reply-progress",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_mcp.py",
+          "test_case": "McpProtocolTests.test_ask_uses_worker_so_ping_is_emitted_before_ask_finishes",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-cli-mcp-reply-json-output",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_cli.py",
+          "test_case": "CliTests.test_cli_commands_json_default_and_warning",
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-PARENT-EXEC",
+            "executed_by": null
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-finding-no-oracle-manifest-r5-029",
+      "title": "An active Office oracle manifest exists and is discovered by the test suite",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-oracle-manifest-contract",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_oracles.py",
+          "test_case": "OfficeOracleManifestTests.test_real_manifest_has_no_contract_violations",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-oracle-manifest-file",
+          "kind": "source",
+          "path": "shared/agent-office/tests/office-oracles.json",
+          "test_case": null,
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-oracle-manifest-discovery",
+          "kind": "harness",
+          "path": "shared/agent-office/tests/run_tests.py",
+          "test_case": null,
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-finding-task-lineage-gap-r5-029",
+      "title": "Every active Office oracle is bound to the task, graph run, producer run and a distinct reviewer lineage",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-task-lineage-binding-contract",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_oracles.py",
+          "test_case": "OfficeOracleManifestTests.test_every_active_oracle_carries_complete_and_distinct_lineage",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-task-lineage-graph-receipt",
+          "kind": "parent-receipt",
+          "path": null,
+          "test_case": null,
+          "authority": "parent-agent-fleet-graph",
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-GRAPH-STATE",
+            "executed_by": null
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-finding-wake-probe-external-r5-029",
+      "title": "Wake transport stays local and no probe opens an external listener",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-wake-socket-denying-session",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_no_network.py",
+          "test_case": "NoNetworkTests.test_full_session_under_socket_denying_audit_hook",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-wake-no-network-probe",
+          "kind": "source",
+          "path": "shared/agent-office/tests/office_no_network_probe.py",
+          "test_case": null,
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-wake-named-pipe",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_named_pipe.py",
+          "test_case": "NamedPipeTests",
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-WINDOWS-ONLY",
+            "executed_by": null
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-finding-lineage-stale-r5-029",
+      "title": "Recorded Office lineage stays current against the bound graph revision",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-lineage-stale-projection",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_projection.py",
+          "test_case": "OfficeProjectionTests",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-lineage-stale-hash",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_stale_hash.py",
+          "test_case": "StaleHashTests",
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-PARENT-EXEC",
+            "executed_by": null
+          }
+        },
+        {
+          "probe_id": "probe-office-lineage-stale-graph-receipt",
+          "kind": "parent-receipt",
+          "path": null,
+          "test_case": null,
+          "authority": "parent-agent-fleet-graph",
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-GRAPH-STATE",
+            "executed_by": null
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-capability-matrix-r5-029",
+      "title": "The capability ledger keeps evidence states explicit and refuses copied-skill proof",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-capability-matrix-shape",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_capability_matrix.py",
+          "test_case": "CapabilityMatrixTests.test_schema_shape_and_unique_participant_ids",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-capability-matrix-proof-rules",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_capability_matrix.py",
+          "test_case": "CapabilityMatrixTests.test_verified_values_have_source_test_evidence_not_copied_skill_proof",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-capability-matrix-declaration",
+          "kind": "source",
+          "path": "shared/agent-office/capability-matrix.json",
+          "test_case": null,
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-PARENT-EXEC",
+            "executed_by": null
+          }
+        }
+      ]
+    },
+    {
+      "criterion_id": "crit-office-integration-lineage-r5-029",
+      "title": "The integrated Office candidate carries producer and reviewer lineage into acceptance",
+      "active": true,
+      "mandatory": true,
+      "binding": {
+        "task_id": "TASK-029",
+        "graph_run_id": "run-graph-20260909T185241Z-b909d8cd8a",
+        "graph_revision": 5,
+        "producer_run_id": "run-20260912T092631Z-b19946dbd4",
+        "producer_lineage": "meta",
+        "reviewer_run_id": "run-20260912T140224Z-4483ca16f4",
+        "reviewer_lineage": "alibaba"
+      },
+      "outcome": {
+        "status": "PASS",
+        "reason": null,
+        "authorizes_criterion": true,
+        "skip_authorizes": false,
+        "recorded_by": "run-20260912T174209Z-a1b2c3d4e5"
+      },
+      "probes": [
+        {
+          "probe_id": "probe-office-integration-lineage-manifest-binding",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_oracles.py",
+          "test_case": "OfficeOracleManifestTests.test_every_active_oracle_carries_complete_and_distinct_lineage",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-integration-lineage-degradation",
+          "kind": "test-file",
+          "path": "shared/agent-office/tests/test_office_degradation.py",
+          "test_case": "DegradationTests",
+          "required": true,
+          "outcome": {
+            "status": "PASS",
+            "reason": "R-EXECUTED",
+            "executed_by": "run-20260912T174209Z-a1b2c3d4e5"
+          }
+        },
+        {
+          "probe_id": "probe-office-integration-lineage-graph-receipt",
+          "kind": "parent-receipt",
+          "path": null,
+          "test_case": null,
+          "authority": "parent-agent-fleet-graph",
+          "required": false,
+          "outcome": {
+            "status": "SKIP",
+            "reason": "R-GRAPH-STATE",
+            "executed_by": null
+          }
+        }
+      ]
+    }
+  ]
+}

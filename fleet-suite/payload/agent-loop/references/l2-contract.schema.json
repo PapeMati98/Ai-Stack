@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-loop-l2/contract.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "loop_id", "goal", "non_goals", "project", "base_ref",
+    "scope", "executor", "implementer", "validator", "verification", "limits",
+    "network_allowed", "kill_switch"
+  ],
+  "properties": {
+    "schema_version": {"const": 2},
+    "loop_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,63}$"},
+    "goal": {"type": "string", "minLength": 1, "maxLength": 4000},
+    "non_goals": {"type": "array", "items": {"type": "string"}},
+    "project": {"type": "string", "minLength": 1},
+    "base_ref": {"const": "HEAD"},
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed_paths", "protected_paths"],
+      "properties": {
+        "allowed_paths": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "protected_paths": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "executor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtime_profile", "knowledge_mode", "max_prompt_bytes",
+        "max_model_tool_calls", "max_task_bytes", "max_repository_files",
+        "max_repository_bytes"
+      ],
+      "properties": {
+        "runtime_profile": {"const": "l2-thin"},
+        "knowledge_mode": {"const": "none"},
+        "max_prompt_bytes": {"type": "integer", "minimum": 1024, "maximum": 100000},
+        "max_model_tool_calls": {"type": "integer", "minimum": 1, "maximum": 12},
+        "max_task_bytes": {"type": "integer", "minimum": 256, "maximum": 100000},
+        "max_repository_files": {"type": "integer", "minimum": 1, "maximum": 10000},
+        "max_repository_bytes": {"type": "integer", "minimum": 1, "maximum": 100000000}
+      }
+    },
+    "implementer": {"$ref": "#/$defs/actor"},
+    "validator": {"$ref": "#/$defs/actor"},
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["trusted_runner", "trusted_runner_sha256", "timeout_seconds"],
+      "properties": {
+        "trusted_runner": {"type": "string"},
+        "trusted_runner_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "timeout_seconds": {"type": "integer", "minimum": 5, "maximum": 600}
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_repairs", "max_wall_seconds", "max_total_tokens",
+        "max_fresh_input_tokens", "max_cache_read_tokens",
+        "max_cache_write_tokens", "max_output_tokens", "max_reasoning_tokens",
+        "unknown_token_policy", "max_changed_files", "max_diff_bytes"
+      ],
+      "properties": {
+        "max_repairs": {"enum": [0, 1]},
+        "max_wall_seconds": {"type": "integer", "minimum": 60, "maximum": 3600},
+        "max_total_tokens": {"type": ["integer", "null"], "minimum": 1},
+        "max_fresh_input_tokens": {"type": ["integer", "null"], "minimum": 1},
+        "max_cache_read_tokens": {"type": ["integer", "null"], "minimum": 1},
+        "max_cache_write_tokens": {"type": ["integer", "null"], "minimum": 1},
+        "max_output_tokens": {"type": ["integer", "null"], "minimum": 1},
+        "max_reasoning_tokens": {"type": ["integer", "null"], "minimum": 1},
+        "unknown_token_policy": {"enum": ["allow", "stop"]},
+        "token_policy": {"enum": ["hard", "estimate"], "description": "Optional. Missing in old immutable contracts means legacy hard; estimate records token overruns and unknown telemetry as warnings without stopping."},
+        "max_changed_files": {"type": "integer", "minimum": 1, "maximum": 100},
+        "max_diff_bytes": {"type": "integer", "minimum": 1, "maximum": 5000000}
+      }
+    },
+    "network_allowed": {"const": false},
+    "kill_switch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "env"],
+      "properties": {
+        "file": {"const": "STOP"},
+        "env": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"}
+      }
+    }
+  },
+  "$defs": {
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agent", "model", "execution_profile", "assessment_file", "timeout_seconds"],
+      "properties": {
+        "agent": {"type": "string", "minLength": 1},
+        "model": {"type": ["string", "null"]},
+        "execution_profile": {"type": ["string", "null"]},
+        "assessment_file": {"type": "string", "minLength": 1},
+        "timeout_seconds": {"type": "integer", "minimum": 30, "maximum": 1800}
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cloud Organization Operator"
+  short_description: "Fail-closed wybór organizacji dla Microsoft i Google"
+  default_prompt: "Użyj $cloud-org-operator do wyboru organizacji i przygotowania read-only preflightu chmurowego."

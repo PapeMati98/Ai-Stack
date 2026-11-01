@@ -1,0 +1,4 @@
+interface:
+  display_name: "RSI Helpdesk"
+  short_description: "Zgłoś usterkę AI stacku i wróć do zadania; naprawa w tle"
+  default_prompt: "Użyj $rsi-helpdesk, aby zgłosić usterkę stacku albo obsłużyć otwarte zgłoszenie jako sesja naprawcza."

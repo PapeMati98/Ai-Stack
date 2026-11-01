@@ -1,0 +1,15 @@
+{
+  "example-project": {
+    "refs": [
+      "op://Agents/ExampleService/api_key"
+    ],
+    "require_script_sha256": true,
+    "commands": [
+      "python",
+      "scripts/example_client.py"
+    ],
+    "command_sha256": {
+      "scripts/example_client.py": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  }
+}

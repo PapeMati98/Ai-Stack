@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-stack.invalid/schemas/agent-graph/0.2/graph.schema.json",
+  "title": "Agent Graph 0.2 plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "graph_id",
+    "revision",
+    "previous_revision_hash",
+    "intent",
+    "project_root",
+    "data_classification",
+    "integration_node_id",
+    "global_budget",
+    "nodes"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "graph_id": {
+      "type": "string",
+      "pattern": "^graph-[a-z0-9][a-z0-9-]{2,63}$"
+    },
+    "revision": {"type": "integer", "minimum": 1},
+    "previous_revision_hash": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      ]
+    },
+    "intent": {"type": "string", "minLength": 10, "maxLength": 2000},
+    "project_root": {"type": "string", "minLength": 1, "maxLength": 1024},
+    "data_classification": {
+      "enum": ["public", "internal", "confidential", "restricted"]
+    },
+    "integration_node_id": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/nodeId"}
+      ]
+    },
+    "global_budget": {"$ref": "#/$defs/globalBudget"},
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 128,
+      "items": {"$ref": "#/$defs/node"}
+    }
+  },
+  "$defs": {
+    "nodeId": {
+      "type": "string",
+      "pattern": "^node-[a-z0-9][a-z0-9-]{2,63}$"
+    },
+    "relativeScope": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)(?:\\.|\\.\\.)(?:/|$))(?!.*[\\\\*?\"<>|])[^/]+(?:/[^/]+)*/?$"
+    },
+    "criterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["criterion_id", "description", "evidence_kind"],
+      "properties": {
+        "criterion_id": {
+          "type": "string",
+          "pattern": "^crit-[a-z0-9][a-z0-9-]{2,63}$"
+        },
+        "description": {"type": "string", "minLength": 8, "maxLength": 1000},
+        "evidence_kind": {
+          "enum": [
+            "artifact",
+            "deterministic-check",
+            "fleet-handoff",
+            "quality-gate",
+            "security-gate",
+            "browser-e2e",
+            "visual-evidence",
+            "human-approval",
+            "parent-acceptance"
+          ]
+        }
+      }
+    },
+    "nodeBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_attempts", "max_wall_seconds", "max_tool_calls", "max_tokens"],
+      "properties": {
+        "token_policy": {"enum": ["hard", "estimate"], "default": "estimate"},
+        "tool_policy": {"enum": ["hard", "estimate"], "default": "estimate"},
+        "max_attempts": {"type": "integer", "minimum": 1, "maximum": 10},
+        "max_wall_seconds": {"type": "integer", "minimum": 30, "maximum": 86400},
+        "max_tool_calls": {"type": "integer", "minimum": 0, "maximum": 2048},
+        "max_tokens": {
+          "oneOf": [
+            {"type": "null"},
+            {"type": "integer", "minimum": 1, "maximum": 10000000}
+          ]
+        }
+      }
+    },
+    "globalBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_total_attempts", "max_total_tokens", "max_wall_seconds", "max_amendments"],
+      "properties": {
+        "token_policy": {"enum": ["hard", "estimate"], "default": "estimate"},
+        "time_policy": {"enum": ["hard", "estimate"], "default": "estimate"},
+        "clock": {"enum": ["elapsed", "active"]},
+        "max_total_attempts": {"type": "integer", "minimum": 1, "maximum": 512},
+        "max_total_tokens": {
+          "oneOf": [
+            {"type": "null"},
+            {"type": "integer", "minimum": 1, "maximum": 100000000}
+          ]
+        },
+        "max_wall_seconds": {"type": "integer", "minimum": 60, "maximum": 604800},
+        "max_amendments": {"type": "integer", "minimum": 0, "maximum": 32}
+      }
+    },
+    "repairPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["on_reject", "max_same_scope_repairs", "max_amendments"],
+      "properties": {
+        "on_reject": {"enum": ["retry-same-scope", "amend-graph", "block", "human-gate"]},
+        "max_same_scope_repairs": {"type": "integer", "minimum": 0, "maximum": 5},
+        "max_amendments": {"type": "integer", "minimum": 0, "maximum": 10}
+      }
+    },
+    "loopPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled", "max_rounds", "stop_condition"],
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "max_rounds": {"type": "integer", "minimum": 0, "maximum": 10},
+        "stop_condition": {"type": "string", "minLength": 3, "maxLength": 1000}
+      }
+    },
+    "councilTrigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "reason"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "reason": {"type": "string", "minLength": 3, "maxLength": 1000}
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_id",
+        "active",
+        "kind",
+        "capability",
+        "title",
+        "depends_on",
+        "evidence_from",
+        "executor",
+        "reviewer",
+        "workspace_mode",
+        "read_scope",
+        "write_scope",
+        "resource_locks",
+        "acceptance_criteria",
+        "budget",
+        "repair_policy",
+        "loop_policy",
+        "council_trigger"
+      ],
+      "properties": {
+        "node_id": {"$ref": "#/$defs/nodeId"},
+        "active": {"type": "boolean"},
+        "kind": {"enum": ["work", "verify", "gate", "human"]},
+        "capability": {
+          "enum": [
+            "discovery",
+            "contract-definition",
+            "implementation",
+            "integration",
+            "deterministic-tests",
+            "user-journey-qa",
+            "visual-qa",
+            "ux-review",
+            "accessibility-review",
+            "independent-quality",
+            "incremental-security",
+            "deep-security-approval",
+            "production-approval",
+            "final-acceptance"
+          ]
+        },
+        "title": {"type": "string", "minLength": 4, "maxLength": 200},
+        "depends_on": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 32,
+          "items": {"$ref": "#/$defs/nodeId"}
+        },
+        "evidence_from": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 32,
+          "items": {"$ref": "#/$defs/nodeId"}
+        },
+        "executor": {
+          "enum": [
+            "fleet-run",
+            "agent-loop-l2",
+            "fleet-quality-gate",
+            "fleet-security-gate",
+            "parent-local",
+            "human"
+          ]
+        },
+        "reviewer": {"type": "string", "minLength": 3, "maxLength": 200},
+        "maker_lineage": {"type": "string", "minLength": 2, "maxLength": 100},
+        "reviewer_lineage": {"type": "string", "minLength": 2, "maxLength": 100},
+        "workspace_mode": {
+          "enum": ["read-only", "detached-worktree", "integration-owner", "none"]
+        },
+        "read_scope": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 128,
+          "items": {"$ref": "#/$defs/relativeScope"}
+        },
+        "write_scope": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 128,
+          "items": {"$ref": "#/$defs/relativeScope"}
+        },
+        "resource_locks": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 128,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9:./_-]{1,255}$"
+          }
+        },
+        "acceptance_criteria": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "items": {"$ref": "#/$defs/criterion"}
+        },
+        "budget": {"$ref": "#/$defs/nodeBudget"},
+        "repair_policy": {"$ref": "#/$defs/repairPolicy"},
+        "loop_policy": {"$ref": "#/$defs/loopPolicy"},
+        "council_trigger": {"$ref": "#/$defs/councilTrigger"},
+        "expires_after_seconds": {
+          "oneOf": [
+            {"type": "null"},
+            {"type": "integer", "minimum": 60, "maximum": 2592000}
+          ]
+        }
+      }
+    }
+  }
+}

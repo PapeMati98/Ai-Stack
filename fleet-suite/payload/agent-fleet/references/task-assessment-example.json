@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "task_summary": "Implement and independently review a bounded multi-file feature.",
+  "substantive": true,
+  "delegation_value": 75,
+  "delegation_mode": "COUNCIL",
+  "complexity": "high",
+  "risk": "medium",
+  "data_handling": {
+    "classification": "internal",
+    "anthropic_zdr_authorization": null
+  },
+  "workload_weights": {
+    "debugging": 20,
+    "implementation": 60,
+    "review": 20
+  },
+  "required_capabilities": [
+    "independent-review",
+    "write"
+  ],
+  "required_tools": [
+    "filesystem-read",
+    "write"
+  ],
+  "red_team_intent": null,
+  "model_scores": {
+    "antigravity": {
+      "score": 95,
+      "reason": "Fast high-volume code analysis with strong context handling."
+    },
+    "claude": {
+      "score": 90,
+      "reason": "Strong independent reasoning and review, with higher execution cost."
+    },
+    "codex": {
+      "score": 100,
+      "reason": "Best direct implementation and debugging fit for this bounded code task."
+    },
+    "grok": {
+      "score": 95,
+      "reason": "Strong fast implementation and adversarial code review fit."
+    },
+    "kimi": {
+      "score": 95,
+      "reason": "Strong implementation and large-context fit, especially for frontend slices."
+    },
+    "minimax": {
+      "score": 80,
+      "reason": "Long-context multimodal implementation and review capacity with provisional local quality evidence."
+    },
+    "muse": {
+      "score": 80,
+      "reason": "Fast long-context coding contractor pinned to Muse Spark 1.3; Contributor is categorically prohibited."
+    },
+    "opencode": {
+      "score": 95,
+      "reason": "GLM-5.3-Flash provides a bounded read-only security review after implementation."
+    },
+    "qwen": {
+      "score": 90,
+      "reason": "Promising implementation fit, currently blocked by entitlement readiness."
+    },
+    "qwen-local": {
+      "score": 80,
+      "reason": "Red-team-only local advisory/review alias; excluded because this assessment has no explicit red-team intent."
+    },
+    "qwen-local-5070ti": {
+      "score": 60,
+      "reason": "Red-team-only local canary alias; excluded because this assessment has no explicit red-team intent."
+    }
+  },
+  "preflight": {
+    "skill": "new-task",
+    "status": "applied",
+    "reason": "This is a substantive application implementation task."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "positive": [
+    "burza mozgow nad hipotezami i alternatywami",
+    "niezalezna dywergencja, potem krytyka anonimowych pomyslow",
+    "zachowaj spory i testy rozstrzygajace przed synteza"
+  ],
+  "negative": [
+    "zwykly review planu i werdykt GO-NO-GO",
+    "glosowanie modeli nad najlepsza odpowiedzia",
+    "publikacja, deploy albo decyzja produkcyjna"
+  ],
+  "anti_trigger": "Nie uruchamiaj brainstormingu, gdy uzytkownik chce tylko domyslny review; -Brainstorm musi byc jawny.",
+  "sensitive_actions": [
+    "wyslanie poufnych danych lub sekretow do zewnetrznych modeli",
+    "wykonanie publikacji, deployu albo mutacji produkcyjnej na podstawie rady",
+    "automatyczne zatwierdzenie decyzji wysokiego ryzyka bez weryfikacji rodzica"
+  ]
+}

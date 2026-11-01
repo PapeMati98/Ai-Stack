@@ -1,0 +1,31 @@
+{
+  "positive": [
+    "Sprawdź zasoby Azure dla wskazanej firmy",
+    "Wykonaj zapytanie Microsoft Graph w prawidłowym tenancie",
+    "Wybierz projekt GCP albo konto Google Workspace przed pracą",
+    "Odczytaj listę SharePoint w dokładnej witrynie wskazanej organizacji przez nazwane połączenie m365",
+    "Zweryfikuj app-only tenant i witrynę przed operacją Microsoft 365"
+  ],
+  "negative": [
+    "Wyjaśnij ogólną usługę chmurową bez pracy na koncie",
+    "Zbuduj lokalną aplikację bez integracji chmurowej",
+    "Wybierz konto na podstawie aktualnego loginu",
+    "Zgadnij host SharePointa z nazwy firmy albo domeny pocztowej"
+  ],
+  "sensitive_actions": [
+    "logowanie lub zmiana aktywnego konta",
+    "mutacja zasobów albo uprawnień",
+    "deploy, usunięcie lub operacja produkcyjna",
+    "sharepoint_upload_file, sharepoint_move_item albo sharepoint_delete_item przez konektor MCP",
+    "outlook_send_mail przez konektor przypięty do innej lub nieznanej dzierżawy"
+  ],
+  "deny_cases": [
+    "Poprawny tenant Microsoft 365, ale inny host lub site_path SharePointa",
+    "Brak auth_mode albo jednoczesne account i application_id",
+    "Mutacja przez konektor MCP nieopisany w lokalnym rejestrze",
+    "Konektor MCP zwraca get_me lub organization z innej dzierżawy niż cel",
+    "Connector_id istnieje w rejestrze, ale należy do innej organizacji niż wskazany cel",
+    "Site_path zawiera metaznak powłoki, zagnieżdżone kodowanie procentowe albo segment kropkowy",
+    "Aktywne nazwane połączenie m365 ma inny tenant_id niż wpis organizacji"
+  ]
+}

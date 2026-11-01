@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Fleet Chrome Relay",
+  "version": "1.2.0",
+  "description": "Profile-scoped semantic browser actions. Fixed DOM functions only; no caller JavaScript or CDP.",
+  "permissions": [
+    "alarms",
+    "scripting",
+    "storage",
+    "tabs",
+    "debugger"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1/*",
+    "http://localhost/*"
+  ],
+  "optional_host_permissions": [
+    "https://*/*"
+  ],
+  "incognito": "not_allowed",
+  "background": {
+    "service_worker": "sw.js"
+  },
+  "action": {
+    "default_title": "Fleet Chrome Relay"
+  }
+}

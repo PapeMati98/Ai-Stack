@@ -1,0 +1,22 @@
+{
+  "listen_host": "127.0.0.1",
+  "listen_port": 8042,
+  "path_prefix": "{{OWNED_ROOT}}/example-0108",
+  "office_runtime": "{{OWNED_ROOT}}/example-0109",
+  "office_home": "{{OWNED_ROOT}}/example-0110",
+  "agent_id": "example-value-0111",
+  "transport_principal": "example-value-0112",
+  "token_sha256_file": "{{OWNED_ROOT}}/example-0113",
+  "channel": "example-value-0112",
+  "targets": {
+    "agent-office-thread": "example-value-0114"
+  },
+  "allowed_kinds": [
+    "example-value-0115",
+    "example-value-0116"
+  ],
+  "max_body_bytes": 8192,
+  "max_read_limit": 20,
+  "rate_limit_requests": 120,
+  "rate_limit_window_s": 600
+}

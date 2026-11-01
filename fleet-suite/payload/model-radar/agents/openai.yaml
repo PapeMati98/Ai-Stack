@@ -1,0 +1,4 @@
+interface:
+  display_name: "Model Radar"
+  short_description: "Refresh CLI models and weekly Arena evidence"
+  default_prompt: "Use $model-radar to check the seven-day model-market audit and official Arena snapshot, refresh only stale components from primary sources, preserve exact model aliases and uncertainty, and return routing-ready evidence to Agent Fleet."

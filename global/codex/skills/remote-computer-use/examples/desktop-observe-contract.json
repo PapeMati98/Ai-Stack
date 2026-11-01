@@ -1,0 +1,13 @@
+{
+  "schema_version": 2,
+  "task_id": "desktop-observe-pilot",
+  "mode": "desktop",
+  "headless": false,
+  "side_effects": "none",
+  "capability": "observe",
+  "timeout_seconds": 30,
+  "target": {"kind": "desktop", "app_id": "desktop"},
+  "actions": [
+    {"type": "screenshot", "name": "desktop-observe"}
+  ]
+}

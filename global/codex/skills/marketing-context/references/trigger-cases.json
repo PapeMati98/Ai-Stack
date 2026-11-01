@@ -1,0 +1,19 @@
+{
+  "skill": "marketing-context",
+  "positive": [
+    "Create an evidence-backed ICP and JTBD profile for this product.",
+    "Audit our positioning and map claims to customer proof.",
+    "Turn these interviews into a message map with falsifiable hypotheses."
+  ],
+  "negative_anti_trigger": [
+    "Publish this landing page or send the campaign now.",
+    "Change the ad budget and launch a paid acquisition campaign.",
+    "Write generic social posts without a product, audience or evidence scope."
+  ],
+  "sensitive_actions": [
+    "publishing or editing public marketing content",
+    "launching, pausing or changing a campaign or budget",
+    "sending outreach, email or customer messages",
+    "using personal, confidential or consent-restricted customer data"
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.0.0",
+  "model_id": "candidate-semantic-rerank-stub",
+  "model_kind": "candidate",
+  "predictions": [
+    {
+      "case_id": "current-vs-historical-question",
+      "answer": "submit credentials via the sso portal and complete the role-based training before account provisioning.",
+      "abstained": false,
+      "abstain_reason": null,
+      "citations": [
+        {
+          "source_id": "handbook-current",
+          "chunk_id": "h-current-p2",
+          "page": 2,
+          "revision": "v2",
+          "quote": "Engineers must complete role-based training before account provisioning.",
+          "confidence": 0.91,
+          "timestamp_zone": "UTC",
+          "retrieved_at": "2026-09-15T10:00:00Z"
+        }
+      ],
+      "rationale": "Reranker privileges the current handbook revision."
+    },
+    {
+      "case_id": "superseded-source-trap",
+      "answer": "submit credentials via the sso portal and complete the role-based training before account provisioning.",
+      "abstained": false,
+      "abstain_reason": null,
+      "citations": [
+        {
+          "source_id": "handbook-current",
+          "chunk_id": "h-current-p2",
+          "page": 2,
+          "revision": "v2",
+          "quote": "Engineers must complete role-based training before account provisioning.",
+          "confidence": 0.89,
+          "timestamp_zone": "UTC",
+          "retrieved_at": "2026-09-15T10:00:00Z"
+        }
+      ],
+      "rationale": "Candidate correctly privileges the current revision."
+    },
+    {
+      "case_id": "historical-question-allowed-revision",
+      "answer": "submit a paper form to the operations manager and wait for manual provisioning.",
+      "abstained": false,
+      "abstain_reason": null,
+      "citations": [
+        {
+          "source_id": "handbook-historical",
+          "chunk_id": "h-hist-p1",
+          "page": 1,
+          "revision": "v1",
+          "quote": "Submit a paper form to the operations manager.",
+          "confidence": 0.84,
+          "timestamp_zone": "UTC",
+          "retrieved_at": "2026-09-15T10:00:00Z"
+        }
+      ],
+      "rationale": "Historical intent routed to the historical archive."
+    },
+    {
+      "case_id": "unknown-answer-must-abstain",
+      "answer": null,
+      "abstained": true,
+      "abstain_reason": "credentials are restricted; refusing to disclose",
+      "citations": [],
+      "rationale": "Candidate abstains on a credential disclosure question."
+    },
+    {
+      "case_id": "abstention-positive",
+      "answer": null,
+      "abstained": true,
+      "abstain_reason": "no source of truth for unannounced product",
+      "citations": [],
+      "rationale": "Candidate abstains on an unannounced product question."
+    },
+    {
+      "case_id": "alias-collision-phoenix",
+      "answer": "Phoenix is a product spec in the Atlas project; a personnel record with the same name exists in the Hyperion project and must not be merged.",
+      "abstained": false,
+      "abstain_reason": null,
+      "citations": [
+        {
+          "source_id": "phoenix-product-inc",
+          "chunk_id": "phoenix-prod-a",
+          "page": 1,
+          "revision": "v1",
+          "quote": "Phoenix product spec",
+          "confidence": 0.92,
+          "timestamp_zone": "UTC",
+          "retrieved_at": "2026-09-15T10:00:00Z"
+        }
+      ],
+      "rationale": "Candidate cites only the Atlas product spec and discloses that the personnel record is a distinct entity."
+    },
+    {
+      "case_id": "conflicting-evidence-release-notes",
+      "answer": "yes, the new atlas flag-toggle is generally available per the current release notes.",
+      "abstained": false,
+      "abstain_reason": null,
+      "citations": [
+        {
+          "source_id": "release-notes-current",
+          "chunk_id": "rn-current-p1",
+          "page": 1,
+          "revision": "v1",
+          "quote": "Flag is GA in this quarter.",
+          "confidence": 0.93,
+          "timestamp_zone": "UTC",
+          "retrieved_at": "2026-09-15T10:00:00Z"
+        }
+      ],
+      "rationale": "Candidate privileges the current revision over the draft."
+    },
+    {
+      "case_id": "duplicate-advisory-required",
+      "answer": "The Atlas weekly review advisory is published on two channels; the content is duplicated.",
+      "abstained": false,
+      "abstain_reason": null,
+      "citations": [
+        {
+          "source_id": "advisory-dup-a",
+          "chunk_id": "adv-a-p1",
+          "page": 1,
+          "revision": "v1",
+          "quote": "Weekly review advisory.",
+          "confidence": 0.85,
+          "timestamp_zone": "UTC",
+          "retrieved_at": "2026-09-15T10:00:00Z"
+        },
+        {
+          "source_id": "advisory-dup-b",
+          "chunk_id": "adv-b-p1",
+          "page": 1,
+          "revision": "v1",
+          "quote": "Weekly review advisory.",
+          "confidence": 0.85,
+          "timestamp_zone": "UTC",
+          "retrieved_at": "2026-09-15T10:00:00Z"
+        }
+      ],
+      "rationale": "Candidate explicitly discloses the duplicate advisory and cites them both."
+    },
+    {
+      "case_id": "forbidden-project-falcon",
+      "answer": null,
+      "abstained": true,
+      "abstain_reason": "project isolation: refusing to disclose forbidden-project content",
+      "citations": [],
+      "rationale": "Candidate enforces project isolation."
+    },
+    {
+      "case_id": "baseline-correctness",
+      "answer": "Engineers must complete role-based training before account provisioning.",
+      "abstained": false,
+      "abstain_reason": null,
+      "citations": [
+        {
+          "source_id": "handbook-current",
+          "chunk_id": "h-current-p2",
+          "page": 2,
+          "revision": "v2",
+          "quote": "Engineers must complete role-based training before account provisioning.",
+          "confidence": 0.92,
+          "timestamp_zone": "UTC",
+          "retrieved_at": "2026-09-15T10:00:00Z"
+        }
+      ],
+      "rationale": "Straightforward lookup against the current handbook."
+    }
+  ]
+}
