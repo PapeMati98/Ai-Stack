@@ -16,6 +16,8 @@ agent-to-agent messaging and shared memory.
 
 From the team at [Synaptivo](https://synaptivo.eu).
 
+<img src="docs/assets/ai-stack-demo.gif" alt="Animated illustration: a task splits into two maker/reviewer branches; one reviewer from a different model lineage requests a repair, the maker fixes it, both branches are accepted, then Agent Office hands off and Knowledge Hub records the session" width="100%">
+
 </div>
 
 ## Why it exists
